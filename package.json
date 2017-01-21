@@ -1,0 +1,59 @@
+{
+  "name": "react-bs-datatable",
+  "version": "0.0.2",
+  "description": "React Bootstrap Datatable with sorting, filter, and pagination",
+  "main": "dist/react-bs-datatable.min.js",
+  "scripts": {
+    "test": "jest",
+    "build": "NODE_ENV=production webpack",
+    "wds": "webpack-dev-server",
+    "analyze": "webpack --json | webpack-bundle-size-analyzer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imballinst/react-bs-datatable.git"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "react-bootstrap",
+    "datatable"
+  ],
+  "author": "Try Ajitiono",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Imballinst/react-bs-datatable/issues"
+  },
+  "homepage": "https://github.com/Imballinst/react-bs-datatable#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^17.0.2",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-2": "^6.11.0",
+    "babel-register": "^6.14.0",
+    "enzyme": "^2.7.0",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
+    "expect": "^1.20.2",
+    "jest": "^17.0.3",
+    "lodash": "^4.17.4",
+    "pre-commit": "^1.2.2",
+    "sinon": "^1.17.5",
+    "webpack": "^2.2.0-rc.3"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-bootstrap": "^0.30.6",
+    "react-dom": "^15.4.1"
+  }
+}
