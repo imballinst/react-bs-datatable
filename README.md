@@ -71,7 +71,7 @@ render(
     rowsPerPageOption={[5, 10, 15, 20]}
     sortable
     filterable
-    initialSort={{sortedProp: userID, isAscending: true}}
+    initialSort={{prop: "userID", isAscending: true}}
   />,
   document.getElementById('test-datatable')
 );
