@@ -15,20 +15,18 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## Props
 
-* tableHeader **(Required)**: Array of objects, each consists of `title` and `prop`. Title is used to render text inside `th` and prop is used to match the body column with the header column.
+* tableHeader **(Required)**: Array of objects, each consists of `title` and `prop`. Title is the text inside `th` and prop is used to match the body column with the header column.
 * tableBody **(Required)**: Array of objects, each consists of `props` and `their value`. Each object will be rendered to the matching column.
-* keyName **(Required)**: String. Required to label the key of children elements inside the component.
+* keyName **(Required)**: String. It is used to prepend the key property of children elements.
 * rowsPerPage: Integer. Initial rows per page. Default: `5`.
 * rowsPerPageOption: Array of integer, consists of pagination options. Default: `[5]`.
-* sortable: Boolean. Will determine whether the table will be sortable or not. Default: `false`.
-* filterable: Boolean. Will determine whether the table will be filterable or not. Default: `false`.
-* initialSort: Object, consists of `sortedProp` and `isAscending`. Default: `undefined`.
+* sortable: Boolean. It determines whether the table will be sortable or not. Default: `false`.
+* filterable: Boolean. It determines whether the table will be filterable or not. Default: `false`.
+* initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
 
 ## Styling
 
-This package doesn't include Bootstrap stylesheets. If you want to include it, you could do so by importing its CSS in your HTML **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass) in your SCSS.
-
-To style the header color on hover, you could do so by defining them in your SCSS.
+This package doesn't include Bootstrap stylesheets. If you want to include it, you could do so by importing its CSS in your HTML **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass) in your SCSS. You can also style the table by defining them in your SCSS.
 
 ```
 .table-custom {
@@ -79,7 +77,7 @@ render(
 
 ## Next features/improvements
 
-- [ ] Sortable props for each column (in some cases, some columns can't/shouldn't be sorted)
+- [ ] Sortable props for each column instead of globally for every header
 - [ ] Checkbox for each row
 - [ ] Language diversity
 - [ ] Custom table classes (now, it's fixed to striped, responsive, and hover)
