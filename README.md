@@ -77,29 +77,14 @@ render(
 
 ## Next features/improvements
 
-- [ ] Sortable props for each column instead of globally for every header
-- [ ] Checkbox for each row
+- [ ] Sortable props for each column instead of globally
+- [ ] Filterable props for each column instead of globally
+- [ ] Checkbox for each row (for bulk action)
 - [ ] Language diversity
-- [ ] Custom table classes (now, it's fixed to striped, responsive, and hover)
+- [ ] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
 - [ ] More extensive unit testing
+- [ ] Custom position for filter input field, pagination options, and page navigation
 
 ## Contributing
 
 Feel free to contribute by creating issues and/or pull requests. I will do my best to address them as fast as I can.
-
-## License
-
-Copyright (C) 2017 Try Ajitiono
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
