@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import SelectFilter from './utils/SelectFilter';
 import FontAwesome from './utils/FontAwesome';
 
-class CustomTable extends React.Component {
+class Datatable extends React.Component {
   constructor(props) {
     super(props);
 
@@ -176,7 +176,8 @@ class CustomTable extends React.Component {
     if (this.state.currentPage === 1) {
       startNumber = 1;
       hasPrev = false;
-    } else if (this.state.currentPage === numberOfPages) {
+      hasNext = (numberOfPages > 1);
+    } else if (this.state.currentPage === numberOfPages && numberOfPages !== 1) {
       startNumber = (numberOfPages - 2 > 0) ? this.state.currentPage - 2 : 1;
       hasNext = false;
     } else {
@@ -394,7 +395,7 @@ class CustomTable extends React.Component {
   }
 }
 
-CustomTable.propTypes = {
+Datatable.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   rowsPerPage: PropTypes.number,
@@ -405,4 +406,4 @@ CustomTable.propTypes = {
   keyName: PropTypes.string.isRequired
 };
 
-export default CustomTable;
+export default Datatable;
