@@ -126,10 +126,7 @@ class Datatable extends React.Component {
     buttons.push(
       <Button {...firstPageProps}>
         {"<<"}
-      </Button>
-    );
-
-    buttons.push(
+      </Button>,
       <Button {...prevPageProps}>
         {"<"}
       </Button>
@@ -154,10 +151,7 @@ class Datatable extends React.Component {
     buttons.push(
       <Button {...nextPageProps}>
         {">"}
-      </Button>
-    );
-
-    buttons.push(
+      </Button>,
       <Button {...lastPageProps}>
         {">>"}
       </Button>
