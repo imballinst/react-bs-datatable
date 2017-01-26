@@ -26,7 +26,7 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## Styling
 
-This package doesn't include Bootstrap stylesheets. If you want to include it, you could do so by importing its CSS in your HTML **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass) in your SCSS. You can also style the table by defining them in your SCSS.
+This package doesn't include Bootstrap stylesheets. If you want to include it, you could do so by importing its CSS in your HTML **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass) in your SCSS. You can also style the table by defining it in your SCSS.
 
 ```
 .table-custom {
