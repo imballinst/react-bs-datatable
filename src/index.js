@@ -23,7 +23,8 @@ class CustomTable extends React.Component {
 
   onChangeFilter = (text) => {
     this.setState({
-      filterText: text
+      filterText: text,
+      currentPage: 1
     });
   }
 
@@ -323,10 +324,20 @@ class CustomTable extends React.Component {
   renderTableBody(filteredData) {
     let body = [];
 
-    for (let i = 0; i < filteredData.length; i++) {
+    if (filteredData.length !== 0) {
+      for (let i = 0; i < filteredData.length; i++) {
+        body.push(
+          <tr key={this.props.keyName + "-row-" + i}>
+            {this.renderSingleRow(filteredData, i)}
+          </tr>
+        );
+      }
+    } else {
       body.push(
-        <tr key={this.props.keyName + "-row-" + i}>
-          {this.renderSingleRow(filteredData, i)}
+        <tr key={this.props.keyName + "-row-zero-length"}>
+          <td colspan={this.props.tableHeader.length}>
+            No results to be shown.
+          </td>
         </tr>
       );
     }
