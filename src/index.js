@@ -336,7 +336,7 @@ class Datatable extends React.Component {
     } else {
       body.push(
         <tr key={this.props.keyName + "-row-zero-length"}>
-          <td colspan={this.props.tableHeader.length}>
+          <td colSpan={this.props.tableHeader.length}>
             No results to be shown.
           </td>
         </tr>
