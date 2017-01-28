@@ -15,14 +15,12 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## Props
 
-* tableHeader **(Required)**: Array of objects, each consists of `title` and `prop`. Title is the text inside `th` and prop is used to match the body column with the header column.
-* tableBody **(Required)**: Array of objects, each consists of `props` and `their value`. Each object will be rendered to the matching column.
+* tableHeader **(Required)**: Array of objects, each consists of `title`, `prop`, `filterable`, and `sortable`. Title is the text inside `th` and prop is used to match the body column with the header column.
+* tableBody **(Required)**: Array of objects, each consists of `props`, `props value`, `filterable`, and `sortable`. Each object will be rendered to the matching column.
 * keyName **(Required)**: String. It is used to prepend the key property of children elements.
 * rowsPerPage: Integer. Initial rows per page. Default: `5`.
-* rowsPerPageOption: Array of integer, consists of pagination options. Default: `[5]`.
-* sortable: Boolean. It determines whether the table will be sortable or not. Default: `false`.
-* filterable: Boolean. It determines whether the table will be filterable or not. Default: `false`.
-* initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
+* rowsPerPageOption: Array of integer, each consists of pagination options. Default: `[5]`.
+* initialSort: Object, each consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
 
 ## Styling
 
@@ -46,44 +44,74 @@ This package doesn't include Bootstrap stylesheets. If you want to include it, y
 ## How to use
 
 ```
+import 'babel-polyfill';
+
 import React from 'react'; // Import React
 import { render } from 'react-dom'; // Import render method
+import { Grid, Row, Col } from 'react-bootstrap'; // Import react-bootstrap scripts
 import Datatable from 'react-bs-datatable'; // Import this package
+import faker from 'faker'; // Import faker to mock datas
 
-const tableHeader = [
-  { title: 'Username', prop: 'userID'  },
-  { title: 'Person Name', prop: 'name' },
+import 'style.scss'; // For Webpack users
+
+function getSlug(string) {
+  return string.toLowerCase()
+    .replace(/ +/g,'-')
+    .replace(/\.+/g,'');
+}
+
+const header = [
+  { title: 'Username', prop: 'username', sortable: true, filterable: true },
+  { title: 'Name', prop: 'realname', sortable: true },
+  { title: 'Location', prop: 'location' }
 ];
 
-const tableBody = [
-  { userID: "i-am-tyler", name: "Tyler Olfson" },
-  { userID: "sir-bobby", name: "Bobby Charly" }
-];
+let body = [];
+
+for (let i = 0; i < 100; i++) {
+  const name = faker.name.findName();
+
+  body.push(
+    {
+      username: getSlug(name),
+      realname: name,
+      location: faker.address.streetAddress()
+    }
+  );
+}
 
 render(
   <Datatable
-    tableHeader={tableHeader}
-    tableBody={tableBody}
+    tableHeader={header}
+    tableBody={body}
     keyName="userTable"
     rowsPerPage={5}
     rowsPerPageOption={[5, 10, 15, 20]}
-    sortable
-    filterable
-    initialSort={{prop: "userID", isAscending: true}}
+    initialSort={{prop: "username", isAscending: true}}
   />,
-  document.getElementById('test-datatable')
+  document.getElementById('react-test')
 );
 ```
 
 ## Next features/improvements
 
-- [ ] Sortable props for each column instead of globally
-- [ ] Filterable props for each column instead of globally
+- [x] Sortable props for each column instead of globally
+- [x] Filterable props for each column instead of globally
 - [ ] Checkbox for each row (for bulk action)
 - [ ] Language diversity
 - [ ] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
 - [ ] More extensive unit testing
 - [ ] Custom position for filter input field, pagination options, and page navigation
+- [ ] Lazy loading for big data
+
+## Changelog
+
+* 1.0.0
+  * Removed global sortable prop, added sortable prop to each header object
+  * Removed global filterable prop, added filterable prop to each header object
+  * Fixed pagination bug when viewing on page 2 or more
+  * Improved pagination button, instead of arrows, now text
+  * Added validation of initialSort prop on the columns that isn't sortable
 
 ## Contributing
 

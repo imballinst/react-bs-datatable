@@ -11,7 +11,23 @@ class Datatable extends React.Component {
     super(props);
 
     const defaultRowsPerPage = props.rowsPerPage !== undefined ? props.rowsPerPage : 5;
-    const defaultSort = props.initialSort !== undefined ? props.initialSort : {};
+    let defaultSort = {};
+
+    if (props.initialSort !== undefined) {
+      let found = false, i = 0;
+
+      while (!found && i < props.tableHeader.length) {
+        if (props.tableHeader[i].prop === props.initialSort.prop) {
+          found = true;
+
+          if (props.tableHeader[i].sortable === true) {
+            defaultSort = props.initialSort;
+          }
+        }
+
+        i++;
+      }
+    }
 
     this.state = {
       sortedProp: defaultSort,
@@ -36,7 +52,8 @@ class Datatable extends React.Component {
 
   onRowsPerPageChange = () => (e) => {
     this.setState({
-      rowsPerPage: e.target.value
+      rowsPerPage: e.target.value,
+      currentPage: 1
     });
   }
 
@@ -55,10 +72,28 @@ class Datatable extends React.Component {
     });
   }
 
+  isPropFilterable(prop) {
+    let i = 0, found = false, isFilterable = false;
+
+    while (!found && i < this.props.tableHeader.length) {
+      if (this.props.tableHeader[i].prop === prop) {
+        found = true;
+
+        if (this.props.tableHeader[i].filterable === true) {
+          isFilterable = true;
+        }
+      }
+
+      i++;
+    }
+
+    return isFilterable;
+  }
+
   sortInitialData() {
     let data = this.props.tableBody;
 
-    if (this.state.sortedProp !== {} && this.props.sortable === true) {
+    if (this.state.sortedProp !== {}) {
       const sortedProp = this.state.sortedProp.prop;
       const descendingMultiplier = (this.state.sortedProp.isAscending) ? 1 : -1;
 
@@ -86,7 +121,8 @@ class Datatable extends React.Component {
         const elementPropLength = Object.keys(element).length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
-          if (element[Object.keys(element)[i]].includes(this.state.filterText)) {
+          if (this.isPropFilterable(Object.keys(element)[i]) &&
+              element[Object.keys(element)[i]].includes(this.state.filterText)) {
             isElementIncluded = true;
           }
 
@@ -125,10 +161,10 @@ class Datatable extends React.Component {
 
     buttons.push(
       <Button {...firstPageProps}>
-        {"<<"}
+        {"First"}
       </Button>,
       <Button {...prevPageProps}>
-        {"<"}
+        {"Previous"}
       </Button>
     );
 
@@ -150,10 +186,10 @@ class Datatable extends React.Component {
 
     buttons.push(
       <Button {...nextPageProps}>
-        {">"}
+        {"Next"}
       </Button>,
       <Button {...lastPageProps}>
-        {">>"}
+        {"Last"}
       </Button>
     );
 
@@ -207,9 +243,17 @@ class Datatable extends React.Component {
   }
 
   renderFilterOption() {
-    let filterRender = null;
+    let filterRender = null, i = 0, filterable = false;
 
-    if (this.props.filterable !== undefined && this.props.filterable !== false) {
+    while (!filterable && i < this.props.tableHeader.length) {
+      if (this.props.tableHeader[i].filterable === true) {
+        filterable = true;
+      }
+
+      i++;
+    }
+
+    if (filterable) {
       filterRender = (
         <SelectFilter
           onChangeFilter={this.onChangeFilter}
@@ -283,15 +327,16 @@ class Datatable extends React.Component {
       let sortIcon = 'sort', sortIconRender = null;
       const thClass = classNames({
         'table-custom-thead-col': true,
-        'sortable': this.props.sortable === true
+        'sortable': this.props.tableHeader[i].sortable === true
       });
       const thProps = {
         key: this.props.keyName + "-th-" + i,
-        onClick: this.onSortChange(this.props.tableHeader[i].prop),
+        onClick: this.props.tableHeader[i].sortable === true ?
+                 this.onSortChange(this.props.tableHeader[i].prop) : undefined,
         className: thClass
       };
 
-      if (this.props.sortable === true) {
+      if (this.props.tableHeader[i].sortable === true) {
         if (this.state.sortedProp !== {} && this.state.sortedProp.prop === this.props.tableHeader[i].prop) {
           if (this.state.sortedProp.isAscending) {
             sortIcon = 'sort-asc';
@@ -394,8 +439,6 @@ Datatable.propTypes = {
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   rowsPerPage: PropTypes.number,
   rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
-  sortable: PropTypes.bool,
-  filterable: PropTypes.bool,
   initialSort: PropTypes.object,
   keyName: PropTypes.string.isRequired
 };
