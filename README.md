@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Imballinst/react-bs-datatable.svg?branch=master)](https://travis-ci.org/Imballinst/react-bs-datatable)
 [![npm version](https://badge.fury.io/js/react-bs-datatable.svg)](https://badge.fury.io/js/react-bs-datatable)
 
-[![NPM](https://nodei.co/npm/react-bs-datatable.png)](https://nodei.co/npm/react-bs-datatable/)
+[![NPM](https://nodei.co/npm/react-bs-datatable.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-bs-datatable/)
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
@@ -15,8 +15,13 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## Props
 
-* tableHeader **(Required)**: Array of objects, each consists of `title`, `prop`, `filterable`, and `sortable`. Title is the text inside `th` and prop is used to match the body column with the header column.
-* tableBody **(Required)**: Array of objects, each consists of `props`, `props value`, `filterable`, and `sortable`. Each object will be rendered to the matching column.
+* tableHeader **(Required)**: Array of objects, each consists of: 
+    * `title`: String. Text for the header column.
+    * `prop` **(Required)**: String. Column name for the table body.
+    * `filterable`: Boolean. Enable/disable filtering on the column.
+    * `sortable`: Boolean. Enable/disable sorting on the column.
+* tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
+* tableClass: String. Classes used in <table> element tag.
 * keyName **(Required)**: String. It is used to prepend the key property of children elements.
 * rowsPerPage: Integer. Initial rows per page. Default: `5`.
 * rowsPerPageOption: Array of integer, each consists of pagination options. Default: `[5]`.
@@ -27,38 +32,37 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 This package doesn't include Bootstrap stylesheets. If you want to include it, you could do so by importing its CSS in your HTML **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass) in your SCSS. You can also style the table by defining it in your SCSS.
 
 ```
-.table-custom {
-  .table-custom-thead {
-    .table-custom-thead-col {
-      &.sortable { // If and only if sortable is true
-        &:hover {
-          background: #000; // Your color of choice
-          cursor: pointer; // Changes the cursor into a pointer on hover
+.table-datatable {
+  .thead-default {
+    .thead-tr-default {
+      .thead-th-default {
+        &.sortable { // If and only if a column is sortable
+          &:hover {
+            background: #000; // Your color of choice
+            cursor: pointer; // Changes the cursor into a pointer on hover
+          }
         }
+      }
+    }
+  }
+
+  .tbody-default {
+    .tbody-tr-default {
+      .tbody-td-default {
+        // do what you want
       }
     }
   }
 }
 ```
 
-## How to use
+## Example usage
 
 ```
-import 'babel-polyfill';
-
 import React from 'react'; // Import React
 import { render } from 'react-dom'; // Import render method
 import { Grid, Row, Col } from 'react-bootstrap'; // Import react-bootstrap scripts
 import Datatable from 'react-bs-datatable'; // Import this package
-import faker from 'faker'; // Import faker to mock datas
-
-import 'style.scss'; // For Webpack users
-
-function getSlug(string) {
-  return string.toLowerCase()
-    .replace(/ +/g,'-')
-    .replace(/\.+/g,'');
-}
 
 const header = [
   { title: 'Username', prop: 'username', sortable: true, filterable: true },
@@ -66,25 +70,17 @@ const header = [
   { title: 'Location', prop: 'location' }
 ];
 
-let body = [];
-
-for (let i = 0; i < 100; i++) {
-  const name = faker.name.findName();
-
-  body.push(
-    {
-      username: getSlug(name),
-      realname: name,
-      location: faker.address.streetAddress()
-    }
-  );
-}
+let body = [
+  { username: 'i-am-billy', realname: 'Billy', location: 'Mars' },
+  { username: 'john-nhoj', realname: 'John', location: 'Saturn' }
+];
 
 render(
   <Datatable
     tableHeader={header}
     tableBody={body}
     keyName="userTable"
+    tableClass="striped hover responsive"
     rowsPerPage={5}
     rowsPerPageOption={[5, 10, 15, 20]}
     initialSort={{prop: "username", isAscending: true}}
@@ -99,13 +95,18 @@ render(
 - [x] Filterable props for each column instead of globally
 - [ ] Checkbox for each row (for bulk action)
 - [ ] Language diversity
-- [ ] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
+- [x] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
 - [ ] More extensive unit testing
 - [ ] Custom position for filter input field, pagination options, and page navigation
 - [ ] Lazy loading for big data
 
 ## Changelog
 
+* 1.1.0
+  * Updated README.md
+  * Renamed table, thead (incl. its tr+th), tbody (incl. its tr+th) default className
+  * Added customizable table class
+  
 * 1.0.0
   * Removed global sortable prop, added sortable prop to each header object
   * Removed global filterable prop, added filterable prop to each header object

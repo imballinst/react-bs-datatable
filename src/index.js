@@ -326,7 +326,7 @@ class Datatable extends React.Component {
     for (let i = 0; i < this.props.tableHeader.length; i++) {
       let sortIcon = 'sort', sortIconRender = null;
       const thClass = classNames({
-        'table-custom-thead-col': true,
+        'thead-th-default': true,
         'sortable': this.props.tableHeader[i].sortable === true
       });
       const thProps = {
@@ -367,15 +367,15 @@ class Datatable extends React.Component {
     if (filteredData.length !== 0) {
       for (let i = 0; i < filteredData.length; i++) {
         body.push(
-          <tr key={this.props.keyName + "-row-" + i}>
+          <tr key={this.props.keyName + "-row-" + i} className="tbody-tr-default" >
             {this.renderSingleRow(filteredData, i)}
           </tr>
         );
       }
     } else {
       body.push(
-        <tr key={this.props.keyName + "-row-zero-length"}>
-          <td colSpan={this.props.tableHeader.length}>
+        <tr key={this.props.keyName + "-row-zero-length"} className="tbody-tr-default">
+          <td className="tbody-td-default" colSpan={this.props.tableHeader.length}>
             No results to be shown.
           </td>
         </tr>
@@ -390,7 +390,7 @@ class Datatable extends React.Component {
 
     for (let i = 0; i < this.props.tableHeader.length; i++) {
       row.push(
-        <td key={this.props.keyName + "-col-" + rowIdx + i}>
+        <td key={this.props.keyName + "-col-" + rowIdx + i} className="tbody-td-default">
           {data[rowIdx][this.props.tableHeader[i].prop]}
         </td>
       );
@@ -403,8 +403,13 @@ class Datatable extends React.Component {
     const data = this.sortInitialData();
     const filteredData = this.filterSortedData(data);
     const paginatedData = this.paginateFilteredData(filteredData);
-
     const pagination = this.renderPagination(filteredData);
+
+    const customClass = this.props.tableClass || '';
+    const tableClass = classNames({
+      'table-datatable': true,
+      [`${customClass}`]: true
+    });
 
     return (
       <Row>
@@ -418,13 +423,13 @@ class Datatable extends React.Component {
           {pagination}
         </Col>
         <Col xs={12}>
-          <Table className="table-custom" striped hover responsive>
-            <thead className="table-custom-thead">
-              <tr>
+          <Table className={tableClass}>
+            <thead className="thead-default">
+              <tr className="thead-tr-default">
                 {this.renderTableHeader()}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="tbody-default">
               {this.renderTableBody(paginatedData)}
             </tbody>
           </Table>
@@ -437,6 +442,7 @@ class Datatable extends React.Component {
 Datatable.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tableClass: PropTypes.string,
   rowsPerPage: PropTypes.number,
   rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
   initialSort: PropTypes.object,
