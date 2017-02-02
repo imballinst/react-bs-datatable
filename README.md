@@ -61,7 +61,6 @@ This package doesn't include Bootstrap stylesheets. If you want to include it, y
 ```
 import React from 'react'; // Import React
 import { render } from 'react-dom'; // Import render method
-import { Grid, Row, Col } from 'react-bootstrap'; // Import react-bootstrap scripts
 import Datatable from 'react-bs-datatable'; // Import this package
 
 const header = [
@@ -101,6 +100,9 @@ render(
 - [ ] Lazy loading for big data
 
 ## Changelog
+
+* 1.1.1
+  * Updated README.md
 
 * 1.1.0
   * Updated README.md
