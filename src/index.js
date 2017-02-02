@@ -90,14 +90,14 @@ class Datatable extends React.Component {
     return isFilterable;
   }
 
-  sortInitialData() {
-    let data = this.props.tableBody;
+  sortData(data) {
+    let sortedData = data;
 
     if (this.state.sortedProp !== {}) {
       const sortedProp = this.state.sortedProp.prop;
       const descendingMultiplier = (this.state.sortedProp.isAscending) ? 1 : -1;
 
-      data.sort((a, b) => {
+      sortedData.sort((a, b) => {
         if (a[sortedProp] < b[sortedProp]) {
           return -1 * descendingMultiplier;
         } else if (a[sortedProp] > b[sortedProp]) {
@@ -108,10 +108,10 @@ class Datatable extends React.Component {
       });
     }
 
-    return data;
+    return sortedData;
   }
 
-  filterSortedData(data) {
+  filterData(data) {
     let filteredData = data;
 
     if (this.state.filterText !== '') {
@@ -121,8 +121,10 @@ class Datatable extends React.Component {
         const elementPropLength = Object.keys(element).length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
-          if (this.isPropFilterable(Object.keys(element)[i]) &&
-              element[Object.keys(element)[i]].includes(this.state.filterText)) {
+          const columnValue = (typeof element[Object.keys(element)[i]] === 'number') ?
+            element[Object.keys(element)[i]].toString() : element[Object.keys(element)[i]];
+
+          if (this.isPropFilterable(Object.keys(element)[i]) && columnValue.includes(this.state.filterText)) {
             isElementIncluded = true;
           }
 
@@ -136,8 +138,8 @@ class Datatable extends React.Component {
     return filteredData;
   }
 
-  paginateFilteredData(filteredData) {
-    let paginatedData = filteredData;
+  paginateFilteredData(data) {
+    let paginatedData = data;
     const startRow = (this.state.currentPage - 1) * this.state.rowsPerPage,
           endRow = this.state.currentPage * this.state.rowsPerPage;
 
@@ -400,9 +402,9 @@ class Datatable extends React.Component {
   }
 
   render() {
-    const data = this.sortInitialData();
-    const filteredData = this.filterSortedData(data);
-    const paginatedData = this.paginateFilteredData(filteredData);
+    const filteredData = this.filterData(this.props.tableBody);
+    const sortedData = this.sortData(filteredData);
+    const paginatedData = this.paginateFilteredData(sortedData);
     const pagination = this.renderPagination(filteredData);
 
     const customClass = this.props.tableClass || '';
