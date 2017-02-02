@@ -101,6 +101,9 @@ render(
 
 ## Changelog
 
+* 1.1.2
+  * Fixed table filtering with number value
+
 * 1.1.1
   * Updated README.md
 
