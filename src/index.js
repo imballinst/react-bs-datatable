@@ -3,6 +3,12 @@ import { Row, Col, Table, ButtonGroup, Button, FormGroup, FormControl, ControlLa
          Form } from 'react-bootstrap';
 import classNames from 'classnames/bind';
 
+import lodashFilter from 'lodash/filter';
+import lodashIncludes from 'lodash/includes';
+import lodashOrderBy from 'lodash/orderBy';
+import lodashForEach from 'lodash/forEach';
+import lodashKeys from 'lodash/keys';
+
 import SelectFilter from './utils/SelectFilter';
 import FontAwesome from './utils/FontAwesome';
 
@@ -95,17 +101,9 @@ class Datatable extends React.Component {
 
     if (this.state.sortedProp !== {}) {
       const sortedProp = this.state.sortedProp.prop;
-      const descendingMultiplier = (this.state.sortedProp.isAscending) ? 1 : -1;
+      const sortMultiplier = (this.state.sortedProp.isAscending) ? 'asc' : 'desc';
 
-      sortedData.sort((a, b) => {
-        if (a[sortedProp] < b[sortedProp]) {
-          return -1 * descendingMultiplier;
-        } else if (a[sortedProp] > b[sortedProp]) {
-          return 1 * descendingMultiplier;
-        } else {
-          return 0;
-        }
-      });
+      sortedData = lodashOrderBy(sortedData, sortedProp, sortMultiplier);
     }
 
     return sortedData;
@@ -115,16 +113,18 @@ class Datatable extends React.Component {
     let filteredData = data;
 
     if (this.state.filterText !== '') {
-      filteredData = data.filter((element) => {
+      filteredData = lodashFilter(filteredData, (element) => {
         let isElementIncluded = false;
         let i = 0;
-        const elementPropLength = Object.keys(element).length;
+
+        const elementProps = lodashKeys(element);
+        const elementPropLength = elementProps.length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
-          const columnValue = (typeof element[Object.keys(element)[i]] === 'number') ?
-            element[Object.keys(element)[i]].toString() : element[Object.keys(element)[i]];
+          const elementValue = element[elementProps[i]];
+          const columnValue = (typeof elementValue === 'number') ? elementValue.toString() : elementValue;
 
-          if (this.isPropFilterable(Object.keys(element)[i]) && columnValue.includes(this.state.filterText)) {
+          if (this.isPropFilterable(elementProps[i]) && lodashIncludes(columnValue, this.state.filterText)) {
             isElementIncluded = true;
           }
 
@@ -138,7 +138,7 @@ class Datatable extends React.Component {
     return filteredData;
   }
 
-  paginateFilteredData(data) {
+  paginateData(data) {
     let paginatedData = data;
     const startRow = (this.state.currentPage - 1) * this.state.rowsPerPage,
           endRow = this.state.currentPage * this.state.rowsPerPage;
@@ -166,7 +166,7 @@ class Datatable extends React.Component {
         {"First"}
       </Button>,
       <Button {...prevPageProps}>
-        {"Previous"}
+        {"Prev"}
       </Button>
     );
 
@@ -198,8 +198,8 @@ class Datatable extends React.Component {
     return buttons;
   }
 
-  renderPagination(filteredData) {
-    const dataLength = filteredData.length;
+  renderPagination(data) {
+    const dataLength = data.length;
     const numberOfPages = Math.ceil(dataLength / this.state.rowsPerPage);
 
     let startNumber, i = 0;
@@ -276,24 +276,16 @@ class Datatable extends React.Component {
 
     // Make sure there are no duplicates being pushed
     if (this.props.rowsPerPageOption !== undefined) {
-      this.props.rowsPerPageOption.forEach((opt) => {
-        if (!arrayOfOptions.includes(opt)) {
+      lodashForEach(this.props.rowsPerPageOption, (opt) => {
+        if (!lodashIncludes(arrayOfOptions, opt) && typeof(opt) === 'number') {
           arrayOfOptions.push(opt);
         }
       });
 
-      arrayOfOptions = arrayOfOptions.sort((a, b) => {
-        if (a < b) {
-          return -1;
-        } else if (a > b) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      arrayOfOptions = lodashOrderBy(arrayOfOptions, undefined, 'asc');
     }
 
-    arrayOfOptions.forEach((option) => {
+    lodashForEach(arrayOfOptions, (option) => {
       const optionProps = {
         key: this.props.keyName + "-page-opt-" + option,
         value: option
@@ -404,8 +396,9 @@ class Datatable extends React.Component {
   render() {
     const filteredData = this.filterData(this.props.tableBody);
     const sortedData = this.sortData(filteredData);
-    const paginatedData = this.paginateFilteredData(sortedData);
-    const pagination = this.renderPagination(filteredData);
+
+    const paginatedData = this.paginateData(sortedData);
+    const pagination = this.renderPagination(sortedData);
 
     const customClass = this.props.tableClass || '';
     const tableClass = classNames({

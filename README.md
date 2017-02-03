@@ -99,25 +99,14 @@ render(
 - [ ] Custom position for filter input field, pagination options, and page navigation
 - [ ] Lazy loading for big data
 
-## Changelog
+## Latest changelogs
+
+* 1.1.3
+  * Slightly increased code quality
+  * Replaced native functions with Lodash's (fix #3)
 
 * 1.1.2
   * Fixed table filtering with number value
-
-* 1.1.1
-  * Updated README.md
-
-* 1.1.0
-  * Updated README.md
-  * Renamed table, thead (incl. its tr+th), tbody (incl. its tr+th) default className
-  * Added customizable table class
-  
-* 1.0.0
-  * Removed global sortable prop, added sortable prop to each header object
-  * Removed global filterable prop, added filterable prop to each header object
-  * Fixed pagination bug when viewing on page 2 or more
-  * Improved pagination button, instead of arrows, now text
-  * Added validation of initialSort prop on the columns that isn't sortable
 
 ## Contributing
 
