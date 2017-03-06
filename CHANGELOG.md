@@ -1,0 +1,6 @@
+#### 1.1.4 (2017-3-6)
+
+##### Tests
+
+* **react-bs-datatable:** added more unit tests ([e30696d1](https://github.com/Imballinst/react-bs-datatable/commit/e30696d1b273965229c9aa15ff80b589f3c3dd26))
+
