@@ -42,14 +42,23 @@ describe('Datatable component (js/component/Datatable)', () => {
   it ('should render self and subcomponents', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.tableHeader).toBe(props.tableHeader);
-    expect(enzymeWrapper.instance().props.tableBody).toBe(props.tableBody);
-    expect(enzymeWrapper.instance().props.rowsPerPage).toBe(props.rowsPerPage);
-    expect(enzymeWrapper.instance().props.rowsPerPageOption).toBe(props.rowsPerPageOption);
-    expect(enzymeWrapper.instance().props.sortable).toBe(props.sortable);
-    expect(enzymeWrapper.instance().props.filterable).toBe(props.filterable);
-    expect(enzymeWrapper.instance().props.initialSort).toBe(props.initialSort);
-    expect(enzymeWrapper.instance().props.keyName).toBe(props.keyName);
+    expect(enzymeWrapper.instance().props.tableHeader).toEqual([
+      { title: 'Username', prop: 'userID'  },
+      { title: 'Person Name', prop: 'name' },
+    ]);
+    expect(enzymeWrapper.instance().props.tableBody).toEqual([
+      { userID: "i-am-tyler", name: "Tyler Olfson" },
+      { userID: "sir-bobby", name: "Bobby Charly" }
+    ]);
+    expect(enzymeWrapper.instance().props.rowsPerPage).toBe(5);
+    expect(enzymeWrapper.instance().props.rowsPerPageOption).toEqual([5, 10, 15, 20]);
+    expect(enzymeWrapper.instance().props.sortable).toBe(true);
+    expect(enzymeWrapper.instance().props.filterable).toBe(true);
+    expect(enzymeWrapper.instance().props.initialSort).toEqual({
+      prop: 'deviceID',
+      sortOrder: 'ascending'
+    });
+    expect(enzymeWrapper.instance().props.keyName).toBe('test-table');
 
     expect(enzymeWrapper.find('Row').length).toBe(1);
     expect(enzymeWrapper.find('Col').length).toBe(4);

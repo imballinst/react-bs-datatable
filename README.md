@@ -95,18 +95,9 @@ render(
 - [ ] Checkbox for each row (for bulk action)
 - [ ] Language diversity
 - [x] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
-- [ ] More extensive unit testing
+- [x] More extensive unit testing
 - [ ] Custom position for filter input field, pagination options, and page navigation
 - [ ] Lazy loading for big data
-
-## Latest changelogs
-
-* 1.1.3
-  * Slightly increased code quality
-  * Replaced native functions with Lodash's (fix #3)
-
-* 1.1.2
-  * Fixed table filtering with number value
 
 ## Contributing
 

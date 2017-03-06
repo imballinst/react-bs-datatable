@@ -4,10 +4,12 @@
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
   "main": "dist/react-bs-datatable.min.js",
   "scripts": {
-    "test": "jest && npm run build",
-    "build": "NODE_ENV=production webpack",
-    "dev": "webpack",
-    "analyze": "webpack --json | webpack-bundle-size-analyzer"
+    "test": "jest",
+    "build": "npm test && NODE_ENV=production webpack",
+    "analyze": "webpack --json | webpack-bundle-size-analyzer",
+    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
+    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
+    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,7 @@
     "react-bootstrap",
     "datatable"
   ],
-  "pre-commit": "test",
+  "pre-commit": "build",
   "jest": {
     "testPathDirs": [
       "tests"
@@ -48,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "expect": "^1.20.2",
+    "generate-changelog": "^1.1.0",
     "jest": "^17.0.3",
     "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.4.1",

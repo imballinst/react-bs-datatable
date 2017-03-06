@@ -1,13 +1,24 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Table, ButtonGroup, Button, FormGroup, FormControl, ControlLabel,
-         Form } from 'react-bootstrap';
-import classNames from 'classnames/bind';
 
+// Import React-Bootstrap
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import Table from 'react-bootstrap/lib/Table';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import Button from 'react-bootstrap/lib/Button';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import Form from 'react-bootstrap/lib/Form';
+
+// Import Lodash used functions
 import lodashFilter from 'lodash/filter';
 import lodashIncludes from 'lodash/includes';
 import lodashOrderBy from 'lodash/orderBy';
 import lodashForEach from 'lodash/forEach';
 import lodashKeys from 'lodash/keys';
+
+import classNames from 'classnames/bind';
 
 import SelectFilter from './utils/SelectFilter';
 import FontAwesome from './utils/FontAwesome';
@@ -51,19 +62,23 @@ class Datatable extends React.Component {
   }
 
   onPageNavigate = (nextPage) => (e) => {
+    e.preventDefault();
+
     this.setState({
       currentPage: nextPage
     });
   }
 
-  onRowsPerPageChange = () => (e) => {
+  onRowsPerPageChange = (e) => {
+    e.preventDefault();
+
     this.setState({
       rowsPerPage: e.target.value,
       currentPage: 1
     });
   }
 
-  onSortChange = (nextProp) => (e) => {
+  onSortChange = (nextProp) => {
     let nextSort = this.state.sortedProp;
 
     if (nextProp !== this.state.sortedProp.prop) {
@@ -304,7 +319,7 @@ class Datatable extends React.Component {
             defaultValue={this.state.rowsPerPage}
             componentClass="select"
             placeholder="select"
-            onChange={this.onRowsPerPageChange()}
+            onChange={this.onRowsPerPageChange}
           >
             {selectOption}
           </FormControl>

@@ -1,16 +1,21 @@
 import React, { PropTypes } from 'react';
-import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap';
+
+// Import React-Bootstrap
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import InputGroup from 'react-bootstrap/lib/InputGroup';
+import Button from 'react-bootstrap/lib/Button';
 
 import FontAwesome from './FontAwesome';
 
 class SelectFilter extends React.Component {
-  onInputChange = () => (e) => {
+  onInputChange = (e) => {
     e.preventDefault();
 
     this.props.onChangeFilter(e.target.value);
   }
 
-  onClearFilter = () => (e) => {
+  onClearFilter = (e) => {
     e.preventDefault();
 
     this.props.onChangeFilter('');
@@ -24,10 +29,10 @@ class SelectFilter extends React.Component {
             type="text"
             value={this.props.filterText}
             placeholder="Enter text"
-            onChange={this.onInputChange()}
+            onChange={this.onInputChange}
           />
           <InputGroup.Button>
-            <Button onClick={this.onClearFilter()}>
+            <Button onClick={this.onClearFilter}>
               <FontAwesome icon="times" additionalClass="fa-fw" />
             </Button>
           </InputGroup.Button>
