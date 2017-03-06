@@ -1,17 +1,12 @@
 import React, { PropTypes } from 'react';
 
 // Import React-Bootstrap
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
-import Button from 'react-bootstrap/lib/Button';
+import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap';
 
 import FontAwesome from './FontAwesome';
 
 class SelectFilter extends React.Component {
   onInputChange = (e) => {
-    e.preventDefault();
-
     this.props.onChangeFilter(e.target.value);
   }
 
@@ -23,7 +18,7 @@ class SelectFilter extends React.Component {
 
   render() {
     return (
-      <FormGroup controlId={"select-filter-" + this.props.keyName}>
+      <FormGroup controlId={`select-filter-${this.props.keyName}`}>
         <InputGroup>
           <FormControl
             type="text"
@@ -45,7 +40,7 @@ class SelectFilter extends React.Component {
 SelectFilter.propTypes = {
   filterText: PropTypes.string,
   keyName: PropTypes.string,
-  onChangeFilter: PropTypes.func
+  onChangeFilter: PropTypes.func,
 };
 
 export default SelectFilter;

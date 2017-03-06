@@ -1,0 +1,30 @@
+exports[`SelectFilter component (js/component/SelectFilter) should match normal snapshot 1`] = `
+<FormGroup
+  bsClass="form-group"
+  controlId="select-filter-selectFilterID">
+  <InputGroup
+    bsClass="input-group">
+    <FormControl
+      bsClass="form-control"
+      componentClass="input"
+      onChange={[Function]}
+      placeholder="Enter text"
+      type="text"
+      value="stub filter" />
+    <InputGroupButton
+      bsClass="input-group-btn">
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}>
+        <FontAwesome
+          additionalClass="fa-fw"
+          icon="times" />
+      </Button>
+    </InputGroupButton>
+  </InputGroup>
+</FormGroup>
+`;

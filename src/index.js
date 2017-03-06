@@ -1,22 +1,19 @@
 import React, { PropTypes } from 'react';
 
 // Import React-Bootstrap
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Table from 'react-bootstrap/lib/Table';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import Button from 'react-bootstrap/lib/Button';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import Form from 'react-bootstrap/lib/Form';
+import {
+  Row,
+  Col,
+  Table,
+  ButtonGroup,
+  Button,
+  FormGroup,
+  FormControl,
+  Form,
+} from 'react-bootstrap';
 
 // Import Lodash used functions
-import lodashFilter from 'lodash/filter';
-import lodashIncludes from 'lodash/includes';
-import lodashOrderBy from 'lodash/orderBy';
-import lodashForEach from 'lodash/forEach';
-import lodashKeys from 'lodash/keys';
+import * as _ from 'lodash';
 
 import classNames from 'classnames/bind';
 
@@ -31,7 +28,8 @@ class Datatable extends React.Component {
     let defaultSort = {};
 
     if (props.initialSort !== undefined) {
-      let found = false, i = 0;
+      let found = false;
+      let i = 0;
 
       while (!found && i < props.tableHeader.length) {
         if (props.tableHeader[i].prop === props.initialSort.prop) {
@@ -42,7 +40,7 @@ class Datatable extends React.Component {
           }
         }
 
-        i++;
+        i += 1;
       }
     }
 
@@ -50,22 +48,22 @@ class Datatable extends React.Component {
       sortedProp: defaultSort,
       rowsPerPage: defaultRowsPerPage,
       currentPage: 1,
-      filterText: ''
+      filterText: '',
     };
   }
 
   onChangeFilter = (text) => {
     this.setState({
       filterText: text,
-      currentPage: 1
+      currentPage: 1,
     });
   }
 
-  onPageNavigate = (nextPage) => (e) => {
+  onPageNavigate = nextPage => (e) => {
     e.preventDefault();
 
     this.setState({
-      currentPage: nextPage
+      currentPage: nextPage,
     });
   }
 
@@ -74,12 +72,12 @@ class Datatable extends React.Component {
 
     this.setState({
       rowsPerPage: e.target.value,
-      currentPage: 1
+      currentPage: 1,
     });
   }
 
   onSortChange = (nextProp) => {
-    let nextSort = this.state.sortedProp;
+    const nextSort = this.state.sortedProp;
 
     if (nextProp !== this.state.sortedProp.prop) {
       nextSort.prop = nextProp;
@@ -89,12 +87,14 @@ class Datatable extends React.Component {
     }
 
     this.setState({
-      sortedProp: nextSort
+      sortedProp: nextSort,
     });
   }
 
   isPropFilterable(prop) {
-    let i = 0, found = false, isFilterable = false;
+    let i = 0;
+    let found = false;
+    let isFilterable = false;
 
     while (!found && i < this.props.tableHeader.length) {
       if (this.props.tableHeader[i].prop === prop) {
@@ -105,7 +105,7 @@ class Datatable extends React.Component {
         }
       }
 
-      i++;
+      i += 1;
     }
 
     return isFilterable;
@@ -118,7 +118,7 @@ class Datatable extends React.Component {
       const sortedProp = this.state.sortedProp.prop;
       const sortMultiplier = (this.state.sortedProp.isAscending) ? 'asc' : 'desc';
 
-      sortedData = lodashOrderBy(sortedData, sortedProp, sortMultiplier);
+      sortedData = _.orderBy(sortedData, sortedProp, sortMultiplier);
     }
 
     return sortedData;
@@ -128,22 +128,23 @@ class Datatable extends React.Component {
     let filteredData = data;
 
     if (this.state.filterText !== '') {
-      filteredData = lodashFilter(filteredData, (element) => {
+      filteredData = _.filter(filteredData, (element) => {
         let isElementIncluded = false;
         let i = 0;
 
-        const elementProps = lodashKeys(element);
+        const elementProps = _.keys(element);
         const elementPropLength = elementProps.length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
           const elementValue = element[elementProps[i]];
           const columnValue = (typeof elementValue === 'number') ? elementValue.toString() : elementValue;
 
-          if (this.isPropFilterable(elementProps[i]) && lodashIncludes(columnValue, this.state.filterText)) {
+          if (this.isPropFilterable(elementProps[i]) &&
+              _.includes(columnValue, this.state.filterText)) {
             isElementIncluded = true;
           }
 
-          i++;
+          i += 1;
         }
 
         return isElementIncluded;
@@ -154,34 +155,31 @@ class Datatable extends React.Component {
   }
 
   paginateData(data) {
-    let paginatedData = data;
-    const startRow = (this.state.currentPage - 1) * this.state.rowsPerPage,
-          endRow = this.state.currentPage * this.state.rowsPerPage;
+    const startRow = (this.state.currentPage - 1) * this.state.rowsPerPage;
+    const endRow = this.state.currentPage * this.state.rowsPerPage;
 
-    paginatedData = paginatedData.slice(startRow, endRow);
-
-    return paginatedData;
+    return data.slice(startRow, endRow);
   }
 
   generateFirstPrevButtons(minPage, currentPage, hasPrev) {
-    let buttons = [],
-        firstPageProps = {
-          key: this.props.keyName + "-page-first",
-          disabled: !hasPrev,
-          onClick: this.onPageNavigate(minPage)
-        },
-        prevPageProps = {
-          key: this.props.keyName + "-page-prev",
-          disabled: !hasPrev,
-          onClick: this.onPageNavigate(currentPage - 1)
-        };
+    const buttons = [];
+    const firstPageProps = {
+      key: `${this.props.keyName}-page-first`,
+      disabled: !hasPrev,
+      onClick: this.onPageNavigate(minPage),
+    };
+    const prevPageProps = {
+      key: `${this.props.keyName}-page-prev`,
+      disabled: !hasPrev,
+      onClick: this.onPageNavigate(currentPage - 1),
+    };
 
     buttons.push(
       <Button {...firstPageProps}>
-        {"First"}
+        {'First'}
       </Button>,
       <Button {...prevPageProps}>
-        {"Prev"}
+        {'Prev'}
       </Button>
     );
 
@@ -189,24 +187,24 @@ class Datatable extends React.Component {
   }
 
   generateNextLastButtons(maxPage, currentPage, hasNext) {
-    let buttons = [];
+    const buttons = [];
     const nextPageProps = {
-      key: this.props.keyName + "-page-next",
+      key: `${this.props.keyName}-page-next`,
       disabled: !hasNext,
-      onClick: this.onPageNavigate(currentPage + 1)
+      onClick: this.onPageNavigate(currentPage + 1),
     };
     const lastPageProps = {
-      key: this.props.keyName + "-page-last",
+      key: `${this.props.keyName}-page-last`,
       disabled: !hasNext,
-      onClick: this.onPageNavigate(maxPage)
+      onClick: this.onPageNavigate(maxPage),
     };
 
     buttons.push(
       <Button {...nextPageProps}>
-        {"Next"}
+        {'Next'}
       </Button>,
       <Button {...lastPageProps}>
-        {"Last"}
+        {'Last'}
       </Button>
     );
 
@@ -216,9 +214,12 @@ class Datatable extends React.Component {
   renderPagination(data) {
     const dataLength = data.length;
     const numberOfPages = Math.ceil(dataLength / this.state.rowsPerPage);
+    const buttons = [];
 
-    let startNumber, i = 0;
-    let buttons = [], hasPrev = true, hasNext = true;
+    let startNumber;
+    let i = 0;
+    let hasPrev = true;
+    let hasNext = true;
 
     if (this.state.currentPage === 1) {
       startNumber = 1;
@@ -235,9 +236,9 @@ class Datatable extends React.Component {
 
     while (i < 3 && startNumber <= numberOfPages) {
       const pageBtnProps = {
-        key: this.props.keyName + "-page-btn-" + startNumber,
+        key: `${this.props.keyName}-page-btn-${startNumber}`,
         onClick: this.onPageNavigate(startNumber),
-        active: this.state.currentPage === startNumber
+        active: this.state.currentPage === startNumber,
       };
 
       buttons.push(
@@ -246,8 +247,8 @@ class Datatable extends React.Component {
         </Button>
       );
 
-      i++;
-      startNumber++;
+      i += 1;
+      startNumber += 1;
     }
 
     buttons.push(this.generateNextLastButtons(numberOfPages, this.state.currentPage, hasNext));
@@ -260,14 +261,16 @@ class Datatable extends React.Component {
   }
 
   renderFilterOption() {
-    let filterRender = null, i = 0, filterable = false;
+    let filterRender = null;
+    let i = 0;
+    let filterable = false;
 
     while (!filterable && i < this.props.tableHeader.length) {
       if (this.props.tableHeader[i].filterable === true) {
         filterable = true;
       }
 
-      i++;
+      i += 1;
     }
 
     if (filterable) {
@@ -283,27 +286,27 @@ class Datatable extends React.Component {
   }
 
   renderPaginationOption() {
-    let arrayOfOptions = [], selectOption = [];
-
-    // Push the defined/default rows per page
+    const selectOption = [];
     const defaultRowsPerPage = this.props.rowsPerPage !== undefined ? this.props.rowsPerPage : 5;
+
+    let arrayOfOptions = [];
     arrayOfOptions.push(defaultRowsPerPage);
 
     // Make sure there are no duplicates being pushed
     if (this.props.rowsPerPageOption !== undefined) {
-      lodashForEach(this.props.rowsPerPageOption, (opt) => {
-        if (!lodashIncludes(arrayOfOptions, opt) && typeof(opt) === 'number') {
+      _.forEach(this.props.rowsPerPageOption, (opt) => {
+        if (!_.includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
           arrayOfOptions.push(opt);
         }
       });
 
-      arrayOfOptions = lodashOrderBy(arrayOfOptions, undefined, 'asc');
+      arrayOfOptions = _.orderBy(arrayOfOptions, undefined, 'asc');
     }
 
-    lodashForEach(arrayOfOptions, (option) => {
+    _.forEach(arrayOfOptions, (option) => {
       const optionProps = {
-        key: this.props.keyName + "-page-opt-" + option,
-        value: option
+        key: `${this.props.keyName}-page-opt-${option}`,
+        value: option,
       };
 
       selectOption.push(
@@ -314,7 +317,7 @@ class Datatable extends React.Component {
     return (
       <Form inline>
         <FormGroup controlId="formControlPagination">
-          {"Show "}
+          {'Show '}
           <FormControl
             defaultValue={this.state.rowsPerPage}
             componentClass="select"
@@ -323,30 +326,32 @@ class Datatable extends React.Component {
           >
             {selectOption}
           </FormControl>
-          {" options per page"}
+          {' options per page'}
         </FormGroup>
       </Form>
     );
   }
 
   renderTableHeader() {
-    let headings = [];
+    const headings = [];
 
-    for (let i = 0; i < this.props.tableHeader.length; i++) {
-      let sortIcon = 'sort', sortIconRender = null;
+    for (let i = 0; i < this.props.tableHeader.length; i += 1) {
+      let sortIcon = 'sort';
+      let sortIconRender = null;
       const thClass = classNames({
         'thead-th-default': true,
-        'sortable': this.props.tableHeader[i].sortable === true
+        sortable: this.props.tableHeader[i].sortable === true,
       });
       const thProps = {
-        key: this.props.keyName + "-th-" + i,
+        key: `${this.props.keyName}-th-${i}`,
         onClick: this.props.tableHeader[i].sortable === true ?
                  this.onSortChange(this.props.tableHeader[i].prop) : undefined,
-        className: thClass
+        className: thClass,
       };
 
       if (this.props.tableHeader[i].sortable === true) {
-        if (this.state.sortedProp !== {} && this.state.sortedProp.prop === this.props.tableHeader[i].prop) {
+        if (this.state.sortedProp !== {} &&
+            this.state.sortedProp.prop === this.props.tableHeader[i].prop) {
           if (this.state.sortedProp.isAscending) {
             sortIcon = 'sort-asc';
           } else {
@@ -371,19 +376,19 @@ class Datatable extends React.Component {
   }
 
   renderTableBody(filteredData) {
-    let body = [];
+    const body = [];
 
     if (filteredData.length !== 0) {
-      for (let i = 0; i < filteredData.length; i++) {
+      for (let i = 0; i < filteredData.length; i += 1) {
         body.push(
-          <tr key={this.props.keyName + "-row-" + i} className="tbody-tr-default" >
+          <tr key={`${this.props.keyName}-row-${i}`} className="tbody-tr-default" >
             {this.renderSingleRow(filteredData, i)}
           </tr>
         );
       }
     } else {
       body.push(
-        <tr key={this.props.keyName + "-row-zero-length"} className="tbody-tr-default">
+        <tr key={`${this.props.keyName}-row-zero-length`} className="tbody-tr-default">
           <td className="tbody-td-default" colSpan={this.props.tableHeader.length}>
             No results to be shown.
           </td>
@@ -395,11 +400,11 @@ class Datatable extends React.Component {
   }
 
   renderSingleRow(data, rowIdx) {
-    let row = [];
+    const row = [];
 
-    for (let i = 0; i < this.props.tableHeader.length; i++) {
+    for (let i = 0; i < this.props.tableHeader.length; i += 1) {
       row.push(
-        <td key={this.props.keyName + "-col-" + rowIdx + i} className="tbody-td-default">
+        <td key={`${this.props.keyName}-col-${rowIdx}${i}`} className="tbody-td-default">
           {data[rowIdx][this.props.tableHeader[i].prop]}
         </td>
       );
@@ -418,7 +423,7 @@ class Datatable extends React.Component {
     const customClass = this.props.tableClass || '';
     const tableClass = classNames({
       'table-datatable': true,
-      [`${customClass}`]: true
+      [`${customClass}`]: true,
     });
 
     return (
@@ -456,7 +461,7 @@ Datatable.propTypes = {
   rowsPerPage: PropTypes.number,
   rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
   initialSort: PropTypes.object,
-  keyName: PropTypes.string.isRequired
+  keyName: PropTypes.string.isRequired,
 };
 
 export default Datatable;

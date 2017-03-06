@@ -1,0 +1,5 @@
+exports[`FontAwesome component (js/component/FontAwesome) should match normal snapshot 1`] = `
+<i
+  aria-hidden="true"
+  className="fa fa-history fa-fw" />
+`;

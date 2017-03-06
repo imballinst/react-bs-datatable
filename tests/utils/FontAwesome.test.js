@@ -1,6 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-
 import FontAwesome from '../../src/utils/FontAwesome';
 
 function setup() {
@@ -20,6 +17,12 @@ function setup() {
 }
 
 describe('FontAwesome component (js/component/FontAwesome)', () => {
+  it('should match normal snapshot', () => {
+    const { props, enzymeWrapper } = setup();
+
+    expect(enzymeWrapper).toMatchSnapshot();
+  });
+
   it ('should render self and subcomponents', () => {
     const { enzymeWrapper } = setup();
 

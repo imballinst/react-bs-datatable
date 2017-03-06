@@ -4,12 +4,12 @@ import classNames from 'classnames/bind';
 
 const FontAwesome = (props) => {
   const { icon, additionalClass } = props;
-  const faIconString = 'fa-' + icon;
+  const faIconString = `fa-${icon}`;
 
   const faClass = classNames({
-    'fa': true,
+    fa: true,
     [`${faIconString}`]: true,
-    [`${additionalClass}`]: true
+    [`${additionalClass}`]: true,
   });
 
   return (
@@ -19,7 +19,7 @@ const FontAwesome = (props) => {
 
 FontAwesome.propTypes = {
   icon: PropTypes.string.isRequired,
-  additionalClass: PropTypes.string.isRequired
+  additionalClass: PropTypes.string.isRequired,
 };
 
 export default FontAwesome;
