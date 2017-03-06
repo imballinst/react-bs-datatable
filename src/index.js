@@ -76,7 +76,7 @@ class Datatable extends React.Component {
     });
   }
 
-  onSortChange = (nextProp) => (e) => {
+  onSortChange = nextProp => (e) => {
     e.preventDefault();
 
     const nextSort = this.state.sortedProp;

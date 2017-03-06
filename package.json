@@ -7,7 +7,7 @@
     "test": "jest && npm run eslint",
     "jest:watch": "jest --watch",
     "eslint": "./node_modules/.bin/eslint --fix ./src/.",
-    "build": "npm test && NODE_ENV=production webpack",
+    "build": "npm test && NODE_ENV=production webpack && git add -A",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
