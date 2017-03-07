@@ -1,3 +1,9 @@
+#### 1.1.6 (2017-3-7)
+
+##### Tests
+
+* **datatable:** another improvement on event handler unit testing ([672073d6](https://github.com/Imballinst/react-bs-datatable/commit/672073d6975a8b385c932c525825e98ec88b2c82))
+
 #### 1.1.5 (2017-3-6)
 
 ##### Bug Fixes
