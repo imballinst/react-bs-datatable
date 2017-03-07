@@ -66,7 +66,6 @@ describe('SelectFilter component (js/component/SelectFilter)', () => {
     const value = '';
     enzymeWrapper.find(Button).simulate('click', {
       preventDefault: jest.fn(),
-      target: {value},
     });
 
     expect(props.onChangeFilter).toBeCalledWith(value);

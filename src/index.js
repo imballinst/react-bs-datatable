@@ -318,9 +318,10 @@ class Datatable extends React.Component {
 
     return (
       <Form inline>
-        <FormGroup controlId="formControlPagination">
+        <FormGroup controlId="formGroupPagination">
           {'Show '}
           <FormControl
+            id="formControlPagination"
             defaultValue={this.state.rowsPerPage}
             componentClass="select"
             placeholder="select"
