@@ -1,3 +1,9 @@
+#### 1.1.7 (2017-3-10)
+
+##### Bug Fixes
+
+* **datatable:** fixed column not sorting when inserted with react.element ([d1e400a8](https://github.com/Imballinst/react-bs-datatable/commit/d1e400a8642b53c1365c3f5bf5e5eb27c807df0d))
+
 #### 1.1.6 (2017-3-7)
 
 ##### Tests
