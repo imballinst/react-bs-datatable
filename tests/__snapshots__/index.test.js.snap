@@ -29,7 +29,7 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
           bsClass="form-control"
           componentClass="select"
           defaultValue={5}
-          id="formControlPagination"
+          name="form-control-pagination"
           onChange={[Function]}
           placeholder="select">
           <option

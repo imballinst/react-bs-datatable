@@ -120,7 +120,11 @@ class Datatable extends React.Component {
       const sortedProp = this.state.sortedProp.prop;
       const sortMultiplier = (this.state.sortedProp.isAscending) ? 'asc' : 'desc';
 
-      sortedData = _.orderBy(sortedData, sortedProp, sortMultiplier);
+      sortedData = _.orderBy(sortedData, (value) => {
+        const textRender = (React.isValidElement(value[sortedProp])) ?
+                            value[sortedProp].props.children : value;
+        return textRender;
+      }, sortMultiplier);
     }
 
     return sortedData;
@@ -321,7 +325,7 @@ class Datatable extends React.Component {
         <FormGroup controlId="formGroupPagination">
           {'Show '}
           <FormControl
-            id="formControlPagination"
+            name="form-control-pagination"
             defaultValue={this.state.rowsPerPage}
             componentClass="select"
             placeholder="select"
@@ -339,8 +343,6 @@ class Datatable extends React.Component {
     const headings = [];
 
     for (let i = 0; i < this.props.tableHeader.length; i += 1) {
-      let sortIcon = 'sort';
-      let sortIconRender = null;
       const thClass = classNames({
         'thead-th-default': true,
         sortable: this.props.tableHeader[i].sortable === true,
@@ -351,6 +353,8 @@ class Datatable extends React.Component {
                  this.onSortChange(this.props.tableHeader[i].prop) : undefined,
         className: thClass,
       };
+      let sortIcon = 'sort';
+      let sortIconRender = null;
 
       if (this.props.tableHeader[i].sortable === true) {
         if (this.state.sortedProp !== {} &&

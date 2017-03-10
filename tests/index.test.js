@@ -115,7 +115,7 @@ describe('Datatable component (js/component/Datatable)', () => {
   it('should change the rows per page state', () => {
     const { props, enzymeWrapper } = setup();
     const value = 15;
-    const selectedDom = enzymeWrapper.find('[id="formControlPagination"]');
+    const selectedDom = enzymeWrapper.find('[name="form-control-pagination"]');
 
     expect(enzymeWrapper.state('rowsPerPage')).toEqual(5);
 
