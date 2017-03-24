@@ -1,3 +1,9 @@
+#### 1.1.8 (2017-3-24)
+
+##### Bug Fixes
+
+* **sort:** fixed sorting not working on non-react-element ([da341f91](https://github.com/Imballinst/react-bs-datatable/commit/da341f91c606525726e70c2e5a13bbf6bf78db38))
+
 #### 1.1.7 (2017-3-10)
 
 ##### Bug Fixes
