@@ -61,7 +61,7 @@ module.exports = {
   },
   output: {
     path: buildPath + '/',
-    filename: isProd ? '/' + libraryName + '.min.js' : '/' + libraryName + '.js',
+    filename: isProd ? libraryName + '.min.js' : libraryName + '.js',
     library: libraryName,
     libraryTarget: 'umd'
   },

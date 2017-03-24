@@ -122,7 +122,7 @@ class Datatable extends React.Component {
 
       sortedData = _.orderBy(sortedData, (value) => {
         const textRender = (React.isValidElement(value[sortedProp])) ?
-                            value[sortedProp].props.children : value;
+                            value[sortedProp].props.children : value[sortedProp];
         return textRender;
       }, sortMultiplier);
     }
