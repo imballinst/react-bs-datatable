@@ -16,6 +16,13 @@
     "semi": 2,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [0, { "forbid": [] }],
+    "jsx-a11y/img-has-alt": [ 2, {
+      "elements": [ "img", "object", "area", "input[type=\"image\"]" ],
+      "img": ["Image"],
+      "object": ["Object"],
+      "area": ["Area"],
+      "input[type=\"image\"]": ["InputImage"]
+    }],
     "curly": [
       2,
       "all"
