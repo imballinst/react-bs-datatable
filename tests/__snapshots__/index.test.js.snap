@@ -1,29 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Datatable component (js/component/Datatable) should match normal snapshot 1`] = `
 <Row
   bsClass="row"
-  componentClass="div">
+  componentClass="div"
+>
   <Col
     bsClass="col"
     componentClass="div"
     md={4}
-    xs={12}>
+    xs={12}
+  >
     <SelectFilter
       filterText=""
-      onChangeFilter={[Function]} />
+      keyName="test-table"
+      onChangeFilter={[Function]}
+    />
   </Col>
   <Col
     bsClass="col"
     componentClass="div"
     md={4}
-    xs={12}>
+    xs={12}
+  >
     <Form
       bsClass="form"
       componentClass="form"
       horizontal={false}
-      inline={true}>
+      inline={true}
+    >
       <FormGroup
         bsClass="form-group"
-        controlId="formGroupPagination">
+        controlId="formGroupPagination"
+      >
         Show 
         <FormControl
           bsClass="form-control"
@@ -31,21 +40,26 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
           defaultValue={5}
           name="form-control-pagination"
           onChange={[Function]}
-          placeholder="select">
+          placeholder="select"
+        >
           <option
-            value={5}>
+            value={5}
+          >
             5
           </option>
           <option
-            value={10}>
+            value={10}
+          >
             10
           </option>
           <option
-            value={15}>
+            value={15}
+          >
             15
           </option>
           <option
-            value={20}>
+            value={20}
+          >
             20
           </option>
         </FormControl>
@@ -58,20 +72,23 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
     className="text-right"
     componentClass="div"
     md={4}
-    xs={12}>
+    xs={12}
+  >
     <ButtonGroup
       block={false}
       bsClass="btn-group"
       className="btn-group-page-nav"
       justified={false}
-      vertical={false}>
+      vertical={false}
+    >
       <Button
         active={false}
         block={false}
         bsClass="btn"
         bsStyle="default"
         disabled={true}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         First
       </Button>
       <Button
@@ -80,7 +97,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="btn"
         bsStyle="default"
         disabled={true}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Prev
       </Button>
       <Button
@@ -89,7 +107,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         1
       </Button>
       <Button
@@ -98,7 +117,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         2
       </Button>
       <Button
@@ -107,7 +127,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         3
       </Button>
       <Button
@@ -116,7 +137,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Next
       </Button>
       <Button
@@ -125,7 +147,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Last
       </Button>
     </ButtonGroup>
@@ -133,7 +156,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
   <Col
     bsClass="col"
     componentClass="div"
-    xs={12}>
+    xs={12}
+  >
     <Table
       bordered={false}
       bsClass="table"
@@ -141,89 +165,114 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
       condensed={false}
       hover={false}
       responsive={false}
-      striped={false}>
+      striped={false}
+    >
       <thead
-        className="thead-default">
+        className="thead-default"
+      >
         <tr
-          className="thead-tr-default">
+          className="thead-tr-default"
+        >
           <th
             className="thead-th-default sortable"
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             Username
             <span
-              className="pull-right">
+              className="pull-right"
+            >
               <FontAwesome
                 additionalClass="fa-fw"
-                icon="sort-asc" />
+                icon="sort-asc"
+              />
             </span>
           </th>
           <th
             className="thead-th-default sortable"
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             Person Name
             <span
-              className="pull-right">
+              className="pull-right"
+            >
               <FontAwesome
                 additionalClass="fa-fw"
-                icon="sort" />
+                icon="sort"
+              />
             </span>
           </th>
         </tr>
       </thead>
       <tbody
-        className="tbody-default">
+        className="tbody-default"
+      >
         <tr
-          className="tbody-tr-default">
+          className="tbody-tr-default"
+        >
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             i-am-tyler-1
           </td>
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             Tyler Olfson 1
           </td>
         </tr>
         <tr
-          className="tbody-tr-default">
+          className="tbody-tr-default"
+        >
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             i-am-tyler-2
           </td>
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             Tyler Olfson 2
           </td>
         </tr>
         <tr
-          className="tbody-tr-default">
+          className="tbody-tr-default"
+        >
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             i-am-tyler-3
           </td>
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             Tyler Olfson 3
           </td>
         </tr>
         <tr
-          className="tbody-tr-default">
+          className="tbody-tr-default"
+        >
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             i-am-tyler-4
           </td>
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             Tyler Olfson 4
           </td>
         </tr>
         <tr
-          className="tbody-tr-default">
+          className="tbody-tr-default"
+        >
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             i-am-tyler-5
           </td>
           <td
-            className="tbody-td-default">
+            className="tbody-td-default"
+          >
             Tyler Olfson 5
           </td>
         </tr>

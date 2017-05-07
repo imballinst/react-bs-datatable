@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import React-Bootstrap
 import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap';
@@ -38,9 +39,9 @@ class SelectFilter extends React.Component {
 }
 
 SelectFilter.propTypes = {
-  filterText: PropTypes.string,
-  keyName: PropTypes.string,
-  onChangeFilter: PropTypes.func,
+  filterText: PropTypes.string.isRequired,
+  keyName: PropTypes.string.isRequired,
+  onChangeFilter: PropTypes.func.isRequired,
 };
 
 export default SelectFilter;

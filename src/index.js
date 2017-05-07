@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import React-Bootstrap
 import {
@@ -24,7 +25,6 @@ class Datatable extends React.Component {
   constructor(props) {
     super(props);
 
-    const defaultRowsPerPage = props.rowsPerPage !== undefined ? props.rowsPerPage : 5;
     let defaultSort = {};
 
     if (props.initialSort !== undefined) {
@@ -46,10 +46,17 @@ class Datatable extends React.Component {
 
     this.state = {
       sortedProp: defaultSort,
-      rowsPerPage: defaultRowsPerPage,
+      rowsPerPage: props.rowsPerPage,
       currentPage: 1,
       filterText: '',
     };
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      filterText: '',
+      currentPage: 1,
+    });
   }
 
   onChangeFilter = (text) => {
@@ -186,7 +193,7 @@ class Datatable extends React.Component {
       </Button>,
       <Button {...prevPageProps}>
         {'Prev'}
-      </Button>
+      </Button>,
     );
 
     return buttons;
@@ -211,7 +218,7 @@ class Datatable extends React.Component {
       </Button>,
       <Button {...lastPageProps}>
         {'Last'}
-      </Button>
+      </Button>,
     );
 
     return buttons;
@@ -250,7 +257,7 @@ class Datatable extends React.Component {
       buttons.push(
         <Button {...pageBtnProps}>
           {startNumber}
-        </Button>
+        </Button>,
       );
 
       i += 1;
@@ -284,6 +291,7 @@ class Datatable extends React.Component {
         <SelectFilter
           onChangeFilter={this.onChangeFilter}
           filterText={this.state.filterText}
+          keyName={this.props.keyName}
         />
       );
     }
@@ -293,21 +301,19 @@ class Datatable extends React.Component {
 
   renderPaginationOption() {
     const selectOption = [];
-    const defaultRowsPerPage = this.props.rowsPerPage !== undefined ? this.props.rowsPerPage : 5;
+    const defaultRowsPerPage = this.props.rowsPerPage;
 
     let arrayOfOptions = [];
     arrayOfOptions.push(defaultRowsPerPage);
 
     // Make sure there are no duplicates being pushed
-    if (this.props.rowsPerPageOption !== undefined) {
-      _.forEach(this.props.rowsPerPageOption, (opt) => {
-        if (!_.includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
-          arrayOfOptions.push(opt);
-        }
-      });
+    _.forEach(this.props.rowsPerPageOption, (opt) => {
+      if (!_.includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
+        arrayOfOptions.push(opt);
+      }
+    });
 
-      arrayOfOptions = _.orderBy(arrayOfOptions, undefined, 'asc');
-    }
+    arrayOfOptions = _.orderBy(arrayOfOptions, undefined, 'asc');
 
     _.forEach(arrayOfOptions, (option) => {
       const optionProps = {
@@ -316,7 +322,7 @@ class Datatable extends React.Component {
       };
 
       selectOption.push(
-        <option {...optionProps}>{option}</option>
+        <option {...optionProps}>{option}</option>,
       );
     });
 
@@ -375,7 +381,7 @@ class Datatable extends React.Component {
         <th {...thProps}>
           {this.props.tableHeader[i].title}
           <span className="pull-right">{sortIconRender}</span>
-        </th>
+        </th>,
       );
     }
 
@@ -390,7 +396,7 @@ class Datatable extends React.Component {
         body.push(
           <tr key={`${this.props.keyName}-row-${i}`} className="tbody-tr-default" >
             {this.renderSingleRow(filteredData, i)}
-          </tr>
+          </tr>,
         );
       }
     } else {
@@ -399,7 +405,7 @@ class Datatable extends React.Component {
           <td className="tbody-td-default" colSpan={this.props.tableHeader.length}>
             No results to be shown.
           </td>
-        </tr>
+        </tr>,
       );
     }
 
@@ -413,7 +419,7 @@ class Datatable extends React.Component {
       row.push(
         <td key={`${this.props.keyName}-col-${rowIdx}${i}`} className="tbody-td-default">
           {data[rowIdx][this.props.tableHeader[i].prop]}
-        </td>
+        </td>,
       );
     }
 
@@ -427,7 +433,7 @@ class Datatable extends React.Component {
     const paginatedData = this.paginateData(sortedData);
     const pagination = this.renderPagination(sortedData);
 
-    const customClass = this.props.tableClass || '';
+    const customClass = this.props.tableClass;
     const tableClass = classNames({
       'table-datatable': true,
       [`${customClass}`]: true,
@@ -469,6 +475,13 @@ Datatable.propTypes = {
   rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
   initialSort: PropTypes.object,
   keyName: PropTypes.string.isRequired,
+};
+
+Datatable.defaultProps = {
+  tableClass: '',
+  rowsPerPage: 5,
+  rowsPerPageOption: [5, 10, 15, 20],
+  initialSort: undefined,
 };
 
 export default Datatable;

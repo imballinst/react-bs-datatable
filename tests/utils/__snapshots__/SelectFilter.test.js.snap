@@ -1,28 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`SelectFilter component (js/component/SelectFilter) should match normal snapshot 1`] = `
 <FormGroup
   bsClass="form-group"
-  controlId="select-filter-selectFilterID">
+  controlId="select-filter-selectFilterID"
+>
   <InputGroup
-    bsClass="input-group">
+    bsClass="input-group"
+  >
     <FormControl
       bsClass="form-control"
       componentClass="input"
       onChange={[Function]}
       placeholder="Enter text"
       type="text"
-      value="stub filter" />
+      value="stub filter"
+    />
     <InputGroupButton
-      bsClass="input-group-btn">
+      bsClass="input-group-btn"
+    >
       <Button
         active={false}
         block={false}
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         <FontAwesome
           additionalClass="fa-fw"
-          icon="times" />
+          icon="times"
+        />
       </Button>
     </InputGroupButton>
   </InputGroup>

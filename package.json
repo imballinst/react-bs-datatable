@@ -7,7 +7,7 @@
     "test": "jest && npm run eslint",
     "jest:watch": "jest --watch",
     "eslint": "./node_modules/.bin/eslint --fix ./src/.",
-    "build": "npm test && NODE_ENV=production webpack && git add -A",
+    "build": "npm test && webpack && git add -A",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
@@ -25,7 +25,7 @@
   ],
   "pre-commit": "build",
   "jest": {
-    "testPathDirs": [
+    "roots": [
       "tests"
     ],
     "setupFiles": [
@@ -47,8 +47,8 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-eslint": "^7.1.1",
-    "babel-jest": "^17.0.2",
-    "babel-loader": "^6.2.10",
+    "babel-jest": "^20.0.0",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.11.0",
@@ -56,25 +56,27 @@
     "enzyme": "^2.7.0",
     "enzyme-to-json": "^1.5.0",
     "eslint": "^3.9.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-babel": "^3.3.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-import": "^2.0.1",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1",
+    "eslint-plugin-jsx-a11y": "^5.0.0",
+    "eslint-plugin-react": "^7.0.0",
     "expect": "^1.20.2",
     "generate-changelog": "^1.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^17.0.3",
+    "jest": "^20.0.0",
     "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.4.1",
-    "sinon": "^1.17.5",
+    "react-test-renderer": "^15.5.4",
+    "sinon": "^2.2.0",
     "webpack": "^2.2.0-rc.3"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
+    "prop-types": "^15.5.8",
     "react": "^15.4.1",
-    "react-bootstrap": "^0.30.6",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.4.1"
   }
 }

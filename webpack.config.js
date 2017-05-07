@@ -2,21 +2,12 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProd = nodeEnv === 'production';
-
 const resourcePath = path.join(__dirname, './src');
 const buildPath = path.join(__dirname, './dist');
 
 const libraryName = 'react-bs-datatable';
 
-// Common plugins
-const plugins = [
-  new webpack.DefinePlugin({
-    'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
-  })
-];
-
+const plugins = [];
 const loaders = [
   {
     test: /\.(jsx|js)$/,
@@ -26,45 +17,44 @@ const loaders = [
 ];
 
 // Environment settings
-if (isProd) {
-  plugins.push(
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      output: {
-        comments: false
-      },
-    })
-  );
-}
+plugins.push(
+  new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false
+  }),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+      screw_ie8: true,
+      conditionals: true,
+      unused: true,
+      comparisons: true,
+      sequences: true,
+      dead_code: true,
+      evaluate: true,
+      if_return: true,
+      join_vars: true,
+    },
+    output: {
+      comments: false
+    },
+  })
+);
 
 // Configuration
 module.exports = {
-  devtool: isProd ? 'cheap-source-map' : 'eval',
+  devtool: 'cheap-source-map',
   context: resourcePath,
   entry: {
     index: './index.js'
   },
   output: {
     path: buildPath + '/',
-    filename: isProd ? libraryName + '.min.js' : libraryName + '.js',
+    filename: libraryName + '.min.js',
     library: libraryName,
     libraryTarget: 'umd'
   },
+  // Ignore these vendor libraries from being bundled in dist/
   externals: ['react', 'react-dom', 'react-bootstrap'],
   module: {
     loaders: loaders
