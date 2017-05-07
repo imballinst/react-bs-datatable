@@ -1,3 +1,13 @@
+#### 1.1.10 (2017-5-7)
+
+##### Bug Fixes
+
+* **build:** revert to a11y@4 and eslint-plugin-react@6.9 ([3ae7d350](https://github.com/Imballinst/react-bs-datatable/commit/3ae7d35029ec206a42d2d6ff92b9d4a20f26c118))
+
+##### Tests
+
+* **eslint:** fixed build failing, fixed #4 (hopeflly) ([5bc3d632](https://github.com/Imballinst/react-bs-datatable/commit/5bc3d632e96dff35ead4349050f8d0735c2534d8))
+
 #### 1.1.9 (2017-5-7)
 
 ##### Bug Fixes
