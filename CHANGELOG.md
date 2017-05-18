@@ -1,3 +1,10 @@
+#### 1.1.9 (2017-5-18)
+
+##### Bug Fixes
+
+* **filtering:** fix filter text for React Elements, ie: anchor elements, fixed #5, updated devDependencies ([4dc7ae06](https://github.com/Imballinst/react-bs-datatable/commit/4dc7ae0625a7219501bec7bc0df4956040fb537a))
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
 #### 1.1.9 (2017-5-7)
 
 ##### Bug Fixes
