@@ -1,3 +1,39 @@
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
 #### 1.1.8 (2017-3-24)
 
 ##### Bug Fixes

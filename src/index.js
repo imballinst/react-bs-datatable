@@ -149,8 +149,15 @@ class Datatable extends React.Component {
         const elementPropLength = elementProps.length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
-          const elementValue = element[elementProps[i]];
-          const columnValue = (typeof elementValue === 'number') ? elementValue.toString() : elementValue;
+          let columnValue = element[elementProps[i]];
+
+          if (React.isValidElement(columnValue)) {
+            // If columnValue is React element
+            columnValue = columnValue.props.children;
+          } else if (typeof elementValue === 'number') {
+            // If columnValue is a number
+            columnValue = columnValue.toString();
+          }
 
           if (this.isPropFilterable(elementProps[i]) &&
               _.includes(columnValue, this.state.filterText)) {
