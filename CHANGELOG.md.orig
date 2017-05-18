@@ -1,10 +1,45 @@
-#### 1.1.11 (2017-5-18)
+<<<<<<< HEAD
+#### 1.1.9 (2017-5-18)
+
+##### Bug Fixes
+
+* **filtering:** fix filter text for React Elements, ie: anchor elements, fixed #5, updated devDependencies ([4dc7ae06](https://github.com/Imballinst/react-bs-datatable/commit/4dc7ae0625a7219501bec7bc0df4956040fb537a))
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
 
 #### 1.1.9 (2017-5-7)
 
 ##### Bug Fixes
 
 * **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+
+#### 1.1.9 (2017-5-7)
+
+##### Bug Fixes
+
+* **updating data:** fixed updating data with less amount causing pagination to bugged out ([5bcf156f](https://github.com/Imballinst/react-bs-datatable/commit/5bcf156f26dfc0173f1aa49aff35419a76d2ab4f))
+=======
+#### 1.1.10 (2017-5-7)
+
+##### Bug Fixes
+
+* **build:** revert to a11y@4 and eslint-plugin-react@6.9 ([3ae7d350](https://github.com/Imballinst/react-bs-datatable/commit/3ae7d35029ec206a42d2d6ff92b9d4a20f26c118))
+
+##### Tests
+
+* **eslint:** fixed build failing, fixed #4 (hopeflly) ([5bc3d632](https://github.com/Imballinst/react-bs-datatable/commit/5bc3d632e96dff35ead4349050f8d0735c2534d8))
+>>>>>>> 16242b78e52589db3277e6637adfa2a8b642fdc9
 
 #### 1.1.9 (2017-5-7)
 
