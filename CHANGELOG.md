@@ -1,12 +1,4 @@
-#### 1.1.13 (2017-5-23)
-
 #### 1.1.12 (2017-5-23)
-
-#### 1.1.12 (2017-5-23)
-
-##### New Features
-
-* **optional pagination:** allow rendering table without pagination ([fbf9b4cf](https://github.com/Imballinst/react-bs-datatable/commit/fbf9b4cffdff36a55ee3b8e1091c30a93536adf7))
 
 #### 1.1.11 (2017-5-18)
 
