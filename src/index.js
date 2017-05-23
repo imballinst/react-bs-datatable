@@ -175,10 +175,16 @@ class Datatable extends React.Component {
   }
 
   paginateData(data) {
-    const startRow = (this.state.currentPage - 1) * this.state.rowsPerPage;
-    const endRow = this.state.currentPage * this.state.rowsPerPage;
+    let paginatedData = data;
 
-    return data.slice(startRow, endRow);
+    if (this.props.rowsPerPage !== undefined) {
+      const startRow = (this.state.currentPage - 1) * this.state.rowsPerPage;
+      const endRow = this.state.currentPage * this.state.rowsPerPage;
+
+      paginatedData = data.slice(startRow, endRow);
+    }
+
+    return paginatedData;
   }
 
   generateFirstPrevButtons(minPage, currentPage, hasPrev) {
@@ -232,52 +238,58 @@ class Datatable extends React.Component {
   }
 
   renderPagination(data) {
-    const dataLength = data.length;
-    const numberOfPages = Math.ceil(dataLength / this.state.rowsPerPage);
-    const buttons = [];
+    let renderedElements = null;
 
-    let startNumber;
-    let i = 0;
-    let hasPrev = true;
-    let hasNext = true;
+    if (this.props.rowsPerPage !== undefined) {
+      const dataLength = data.length;
+      const numberOfPages = Math.ceil(dataLength / this.state.rowsPerPage);
+      const buttons = [];
 
-    if (this.state.currentPage === 1) {
-      startNumber = 1;
-      hasPrev = false;
-      hasNext = (numberOfPages > 1);
-    } else if (this.state.currentPage === numberOfPages && numberOfPages !== 1) {
-      startNumber = (numberOfPages - 2 > 0) ? this.state.currentPage - 2 : 1;
-      hasNext = false;
-    } else {
-      startNumber = this.state.currentPage - 1;
-    }
+      let startNumber;
+      let i = 0;
+      let hasPrev = true;
+      let hasNext = true;
 
-    buttons.push(this.generateFirstPrevButtons(1, this.state.currentPage, hasPrev));
+      if (this.state.currentPage === 1) {
+        startNumber = 1;
+        hasPrev = false;
+        hasNext = (numberOfPages > 1);
+      } else if (this.state.currentPage === numberOfPages && numberOfPages !== 1) {
+        startNumber = (numberOfPages - 2 > 0) ? this.state.currentPage - 2 : 1;
+        hasNext = false;
+      } else {
+        startNumber = this.state.currentPage - 1;
+      }
 
-    while (i < 3 && startNumber <= numberOfPages) {
-      const pageBtnProps = {
-        key: `${this.props.keyName}-page-btn-${startNumber}`,
-        onClick: this.onPageNavigate(startNumber),
-        active: this.state.currentPage === startNumber,
-      };
+      buttons.push(this.generateFirstPrevButtons(1, this.state.currentPage, hasPrev));
 
-      buttons.push(
-        <Button {...pageBtnProps}>
-          {startNumber}
-        </Button>,
+      while (i < 3 && startNumber <= numberOfPages) {
+        const pageBtnProps = {
+          key: `${this.props.keyName}-page-btn-${startNumber}`,
+          onClick: this.onPageNavigate(startNumber),
+          active: this.state.currentPage === startNumber,
+        };
+
+        buttons.push(
+          <Button {...pageBtnProps}>
+            {startNumber}
+          </Button>,
+        );
+
+        i += 1;
+        startNumber += 1;
+      }
+
+      buttons.push(this.generateNextLastButtons(numberOfPages, this.state.currentPage, hasNext));
+
+      renderedElements = (
+        <ButtonGroup className="btn-group-page-nav">
+          {buttons}
+        </ButtonGroup>
       );
-
-      i += 1;
-      startNumber += 1;
     }
 
-    buttons.push(this.generateNextLastButtons(numberOfPages, this.state.currentPage, hasNext));
-
-    return (
-      <ButtonGroup className="btn-group-page-nav">
-        {buttons}
-      </ButtonGroup>
-    );
+    return renderedElements;
   }
 
   renderFilterOption() {
@@ -309,47 +321,52 @@ class Datatable extends React.Component {
   renderPaginationOption() {
     const selectOption = [];
     const defaultRowsPerPage = this.props.rowsPerPage;
+    let renderedElements = null;
 
-    let arrayOfOptions = [];
-    arrayOfOptions.push(defaultRowsPerPage);
+    if (defaultRowsPerPage !== undefined) {
+      let arrayOfOptions = [];
+      arrayOfOptions.push(defaultRowsPerPage);
 
-    // Make sure there are no duplicates being pushed
-    _.forEach(this.props.rowsPerPageOption, (opt) => {
-      if (!_.includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
-        arrayOfOptions.push(opt);
-      }
-    });
+      // Make sure there are no duplicates being pushed
+      _.forEach(this.props.rowsPerPageOption, (opt) => {
+        if (!_.includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
+          arrayOfOptions.push(opt);
+        }
+      });
 
-    arrayOfOptions = _.orderBy(arrayOfOptions, undefined, 'asc');
+      arrayOfOptions = _.orderBy(arrayOfOptions, undefined, 'asc');
 
-    _.forEach(arrayOfOptions, (option) => {
-      const optionProps = {
-        key: `${this.props.keyName}-page-opt-${option}`,
-        value: option,
-      };
+      _.forEach(arrayOfOptions, (option) => {
+        const optionProps = {
+          key: `${this.props.keyName}-page-opt-${option}`,
+          value: option,
+        };
 
-      selectOption.push(
-        <option {...optionProps}>{option}</option>,
+        selectOption.push(
+          <option {...optionProps}>{option}</option>,
+        );
+      });
+
+      renderedElements = (
+        <Form inline>
+          <FormGroup controlId="formGroupPagination">
+            {'Show '}
+            <FormControl
+              name="form-control-pagination"
+              defaultValue={this.state.rowsPerPage}
+              componentClass="select"
+              placeholder="select"
+              onChange={this.onRowsPerPageChange}
+            >
+              {selectOption}
+            </FormControl>
+            {' options per page'}
+          </FormGroup>
+        </Form>
       );
-    });
+    }
 
-    return (
-      <Form inline>
-        <FormGroup controlId="formGroupPagination">
-          {'Show '}
-          <FormControl
-            name="form-control-pagination"
-            defaultValue={this.state.rowsPerPage}
-            componentClass="select"
-            placeholder="select"
-            onChange={this.onRowsPerPageChange}
-          >
-            {selectOption}
-          </FormControl>
-          {' options per page'}
-        </FormGroup>
-      </Form>
-    );
+    return renderedElements;
   }
 
   renderTableHeader() {
@@ -486,8 +503,8 @@ Datatable.propTypes = {
 
 Datatable.defaultProps = {
   tableClass: '',
-  rowsPerPage: 5,
-  rowsPerPageOption: [5, 10, 15, 20],
+  rowsPerPage: undefined,
+  rowsPerPageOption: undefined,
   initialSort: undefined,
 };
 
