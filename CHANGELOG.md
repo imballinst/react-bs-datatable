@@ -1,3 +1,9 @@
+#### 1.1.14 (2017-5-23)
+
+##### Chores
+
+* **update readme:** updated README.md ([b85c5353](https://github.com/Imballinst/react-bs-datatable/commit/b85c53534be8c28744ae8a085cb67b3dbb911155))
+
 #### 1.1.13 (2017-5-23)
 
 #### 1.1.12 (2017-5-23)
