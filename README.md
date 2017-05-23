@@ -21,10 +21,10 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
     * `filterable`: Boolean. Enable/disable filtering on the column.
     * `sortable`: Boolean. Enable/disable sorting on the column.
 * tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-* tableClass: String. Classes used in <table> element tag.
+* tableClass: String. Classes used in <table> element tag. Default: `''`.
 * keyName **(Required)**: String. It is used to prepend the key property of children elements.
-* rowsPerPage: Integer. Initial rows per page. Default: `5`.
-* rowsPerPageOption: Array of integer, each consists of pagination options. Default: `[5]`.
+* rowsPerPage: Integer. Initial rows per page. Default: `undefined`.
+* rowsPerPageOption: Array of integer, each consists of pagination options. Default: `undefined`.
 * initialSort: Object, each consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
 
 ## Styling
