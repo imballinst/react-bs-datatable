@@ -14,7 +14,11 @@ import {
 } from 'react-bootstrap';
 
 // Import Lodash used functions
-import * as _ from 'lodash';
+import _filter from 'lodash/filter';
+import _forEach from 'lodash/forEach';
+import _orderBy from 'lodash/orderBy';
+import _includes from 'lodash/includes';
+import _keys from 'lodash/keys';
 
 import classNames from 'classnames/bind';
 
@@ -134,7 +138,7 @@ class Datatable extends React.Component {
         return isAnElement ? getLastChildren(reactElement.props.children) : reactElement;
       };
 
-      sortedData = _.orderBy(sortedData, (value) => {
+      sortedData = _orderBy(sortedData, (value) => {
         let quantifiedValue = getLastChildren(value[sortedProp]);
 
         // if onSort use the onSort[sortedProp] function
@@ -154,11 +158,11 @@ class Datatable extends React.Component {
     let filteredData = data;
 
     if (this.state.filterText !== '') {
-      filteredData = _.filter(filteredData, (element) => {
+      filteredData = _filter(filteredData, (element) => {
         let isElementIncluded = false;
         let i = 0;
 
-        const elementProps = _.keys(element);
+        const elementProps = _keys(element);
         const elementPropLength = elementProps.length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
@@ -173,7 +177,7 @@ class Datatable extends React.Component {
           }
 
           if (this.isPropFilterable(elementProps[i]) &&
-              _.includes(columnValue, this.state.filterText)) {
+              _includes(columnValue, this.state.filterText)) {
             isElementIncluded = true;
           }
 
@@ -341,15 +345,15 @@ class Datatable extends React.Component {
       arrayOfOptions.push(defaultRowsPerPage);
 
       // Make sure there are no duplicates being pushed
-      _.forEach(this.props.rowsPerPageOption, (opt) => {
-        if (!_.includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
+      _forEach(this.props.rowsPerPageOption, (opt) => {
+        if (!_includes(arrayOfOptions, opt) && typeof(opt) === 'number') {
           arrayOfOptions.push(opt);
         }
       });
 
-      arrayOfOptions = _.orderBy(arrayOfOptions, undefined, 'asc');
+      arrayOfOptions = _orderBy(arrayOfOptions, undefined, 'asc');
 
-      _.forEach(arrayOfOptions, (option) => {
+      _forEach(arrayOfOptions, (option) => {
         const optionProps = {
           key: `${this.props.keyName}-page-opt-${option}`,
           value: option,
