@@ -124,13 +124,26 @@ class Datatable extends React.Component {
     let sortedData = data;
 
     if (this.state.sortedProp !== {}) {
-      const sortedProp = this.state.sortedProp.prop;
-      const sortMultiplier = (this.state.sortedProp.isAscending) ? 'asc' : 'desc';
+      const { prop: sortedProp, isAscending } = this.state.sortedProp;
+      const onSort = this.props.onSort;
+
+      const sortMultiplier = (isAscending) ? 'asc' : 'desc';
+      const getLastChildren = (reactElement) => {
+        const isAnElement = React.isValidElement(reactElement);
+
+        return isAnElement ? getLastChildren(reactElement.props.children) : reactElement;
+      };
 
       sortedData = _.orderBy(sortedData, (value) => {
-        const textRender = (React.isValidElement(value[sortedProp])) ?
-                            value[sortedProp].props.children : value[sortedProp];
-        return textRender;
+        let quantifiedValue = getLastChildren(value[sortedProp]);
+
+        // if onSort use the onSort[sortedProp] function
+        // this is a handler for custom objects, such as moment
+        if (onSort && typeof onSort[sortedProp] === 'function') {
+          quantifiedValue = onSort[sortedProp](quantifiedValue);
+        }
+
+        return quantifiedValue;
       }, sortMultiplier);
     }
 
@@ -492,20 +505,22 @@ class Datatable extends React.Component {
 }
 
 Datatable.propTypes = {
+  initialSort: PropTypes.object,
+  keyName: PropTypes.string.isRequired,
+  onSort: PropTypes.object,
+  rowsPerPage: PropTypes.number,
+  rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableClass: PropTypes.string,
-  rowsPerPage: PropTypes.number,
-  rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
-  initialSort: PropTypes.object,
-  keyName: PropTypes.string.isRequired,
 };
 
 Datatable.defaultProps = {
-  tableClass: '',
+  initialSort: undefined,
+  onSort: undefined,
   rowsPerPage: undefined,
   rowsPerPageOption: undefined,
-  initialSort: undefined,
+  tableClass: '',
 };
 
 export default Datatable;
