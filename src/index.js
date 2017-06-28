@@ -171,13 +171,17 @@ class Datatable extends React.Component {
           if (React.isValidElement(columnValue)) {
             // If columnValue is React element
             columnValue = this.getLastChildren(columnValue);
-          } else if (typeof elementValue === 'number') {
+          } else if (typeof columnValue === 'number') {
             // If columnValue is a number
             columnValue = columnValue.toString();
           }
 
+          // Lowercase columnValue
+          columnValue = columnValue.toLowerCase();
+
+          // If filterable and columnValue contains filterText
           if (this.isPropFilterable(elementProps[i]) &&
-              _includes(columnValue, this.state.filterText)) {
+              _includes(columnValue, this.state.filterText.toLowerCase())) {
             isElementIncluded = true;
           }
 
