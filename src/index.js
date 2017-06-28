@@ -104,6 +104,11 @@ class Datatable extends React.Component {
     });
   }
 
+  getLastChildren(reactElement) {
+    return React.isValidElement(reactElement) ?
+      this.getLastChildren(reactElement.props.children) : reactElement;
+  }
+
   isPropFilterable(prop) {
     let i = 0;
     let found = false;
@@ -132,14 +137,9 @@ class Datatable extends React.Component {
       const onSort = this.props.onSort;
 
       const sortMultiplier = (isAscending) ? 'asc' : 'desc';
-      const getLastChildren = (reactElement) => {
-        const isAnElement = React.isValidElement(reactElement);
-
-        return isAnElement ? getLastChildren(reactElement.props.children) : reactElement;
-      };
 
       sortedData = _orderBy(sortedData, (value) => {
-        let quantifiedValue = getLastChildren(value[sortedProp]);
+        let quantifiedValue = this.getLastChildren(value[sortedProp]);
 
         // if onSort use the onSort[sortedProp] function
         // this is a handler for custom objects, such as moment
@@ -170,7 +170,7 @@ class Datatable extends React.Component {
 
           if (React.isValidElement(columnValue)) {
             // If columnValue is React element
-            columnValue = columnValue.props.children;
+            columnValue = this.getLastChildren(columnValue);
           } else if (typeof elementValue === 'number') {
             // If columnValue is a number
             columnValue = columnValue.toString();

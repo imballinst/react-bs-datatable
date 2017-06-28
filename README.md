@@ -25,7 +25,8 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 * keyName **(Required)**: String. It is used to prepend the key property of children elements.
 * rowsPerPage: Integer. Initial rows per page. Default: `undefined`.
 * rowsPerPageOption: Array of integer, each consists of pagination options. Default: `undefined`.
-* initialSort: Object, each consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
+* initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
+* onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
 
 ## Styling
 
@@ -59,6 +60,7 @@ This package doesn't include Bootstrap stylesheets. If you want to include it, y
 ## Example usage
 
 ```
+import moment from 'moment'; // Example for onSort prop
 import React from 'react'; // Import React
 import { render } from 'react-dom'; // Import render method
 import Datatable from 'react-bs-datatable'; // Import this package
@@ -66,13 +68,32 @@ import Datatable from 'react-bs-datatable'; // Import this package
 const header = [
   { title: 'Username', prop: 'username', sortable: true, filterable: true },
   { title: 'Name', prop: 'realname', sortable: true },
-  { title: 'Location', prop: 'location' }
+  { title: 'Location', prop: 'location' },
+  { title: 'Last Updated', prop: 'date', sortable: true },
 ];
 
-let body = [
-  { username: 'i-am-billy', realname: 'Billy', location: 'Mars' },
-  { username: 'john-nhoj', realname: 'John', location: 'Saturn' }
+const body = [
+  { 
+    username: 'i-am-billy', 
+    realname: 'Billy', 
+    location: 'Mars', 
+    date: moment().subtract(1, 'days').format('Do MMMM YYYY'),
+  },
+  { 
+    username: 'john-nhoj', 
+    realname: 'John', 
+    location: 'Saturn',
+    date: moment().subtract(2, 'days').format('Do MMMM YYYY'),
+  }
 ];
+
+const onSortFunction = {
+  date(columnValue) {
+    // Convert the string date format to UTC timestamp
+    // So the table could sort it by date instead of sort it by string
+    return moment(columnValue, 'Do MMMM YYYY').valueOf();
+  },
+};
 
 render(
   <Datatable
@@ -83,6 +104,7 @@ render(
     rowsPerPage={5}
     rowsPerPageOption={[5, 10, 15, 20]}
     initialSort={{prop: "username", isAscending: true}}
+    onSort={onSortFunction}
   />,
   document.getElementById('react-test')
 );
@@ -91,13 +113,12 @@ render(
 ## Next features/improvements
 
 - [x] Sortable props for each column instead of globally
+- [x] Custom sort function (eg. date is ordered by timestamp not by string)
 - [x] Filterable props for each column instead of globally
-- [ ] Checkbox for each row (for bulk action)
-- [ ] Language diversity
 - [x] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
 - [x] More extensive unit testing
 - [ ] Custom position for filter input field, pagination options, and page navigation
-- [ ] Lazy loading for big data
+- [ ] Lazy loading for big data (virtualization, asynchronous pagination)
 
 ## Contributing
 
