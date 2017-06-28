@@ -1,3 +1,9 @@
+#### 1.1.16 (2017-6-28)
+
+##### Bug Fixes
+
+* **typo:** fixed elementValue -> columnValue ([5e51cdf5](https://github.com/Imballinst/react-bs-datatable/commit/5e51cdf5a8abe44b8a05f9af7c9901de46f03675))
+
 #### 1.1.15 (2017-6-28)
 
 ##### New Features
