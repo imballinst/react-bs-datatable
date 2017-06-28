@@ -1,3 +1,17 @@
+#### 1.1.15 (2017-6-28)
+
+##### New Features
+
+* **custom sorting:** added feature for custom sorting by passing a quantifier function ([1a8d51dd](https://github.com/Imballinst/react-bs-datatable/commit/1a8d51ddc8ed2f555e08271c1e38fcd7c6f2b766))
+
+##### Bug Fixes
+
+* **isAnElement unknown variable:** removed unused variable, edit readme ([87072d87](https://github.com/Imballinst/react-bs-datatable/commit/87072d870a20283bb898d61a31764242729f8b26))
+
+##### Refactors
+
+* **lodash:** reduced bundle size by 50% by changing how lodash is imported ([c6e5b23a](https://github.com/Imballinst/react-bs-datatable/commit/c6e5b23aff84180d84fb729fbe15ee0f5ead51bd))
+
 #### 1.1.14 (2017-5-23)
 
 #### 1.1.13 (2017-5-23)
