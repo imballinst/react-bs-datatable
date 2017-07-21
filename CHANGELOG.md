@@ -1,3 +1,9 @@
+#### 1.1.17 (2017-7-21)
+
+##### Bug Fixes
+
+* **optimize:** enabled tree shaking, with externals enabled down from 400kB to 110kB ([8db750cc](https://github.com/Imballinst/react-bs-datatable/commit/8db750ccf80cec9ffd8f2ade2c66ab0ceeb1a7ff))
+
 #### 1.1.16 (2017-6-28)
 
 ##### Bug Fixes
