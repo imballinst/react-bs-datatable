@@ -2,16 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Import React-Bootstrap
-import {
-  Row,
-  Col,
-  Table,
-  ButtonGroup,
-  Button,
-  FormGroup,
-  FormControl,
-  Form,
-} from 'react-bootstrap';
+// import {
+//   Row,
+//   Col,
+//   Table,
+//   ButtonGroup,
+//   Button,
+//   FormGroup,
+//   FormControl,
+//   Form,
+// } from 'react-bootstrap';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import Table from 'react-bootstrap/lib/Table';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import Button from 'react-bootstrap/lib/Button';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Form from 'react-bootstrap/lib/Form';
 
 // Import Lodash used functions
 import _filter from 'lodash/filter';

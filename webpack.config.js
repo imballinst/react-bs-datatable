@@ -12,8 +12,16 @@ const loaders = [
   {
     test: /\.(jsx|js)$/,
     loader: 'babel-loader',
-    exclude: /node_modules/
-  }
+    exclude: /node_modules/,
+    options: {
+      babelrc: false,
+      presets: [
+        [ 'es2015', { modules: false } ],
+        "react",
+        "stage-2"
+      ]
+    }
+  },
 ];
 
 // Environment settings

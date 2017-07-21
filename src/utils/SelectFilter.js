@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Import React-Bootstrap
-import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/lib/Button';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import InputGroup from 'react-bootstrap/lib/InputGroup';
 
 import FontAwesome from './FontAwesome';
 
