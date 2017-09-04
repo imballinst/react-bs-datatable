@@ -1,3 +1,9 @@
+#### 1.1.18 (2017-9-4)
+
+##### Bug Fixes
+
+* **filter:** fixed filter can't filter empty element ([450c7fd6](https://github.com/Imballinst/react-bs-datatable/commit/450c7fd6535ea0fe8c607b0a18634376f04f1b47))
+
 #### 1.1.17 (2017-7-21)
 
 ##### Bug Fixes
