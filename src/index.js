@@ -1,17 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Import React-Bootstrap
-// import {
-//   Row,
-//   Col,
-//   Table,
-//   ButtonGroup,
-//   Button,
-//   FormGroup,
-//   FormControl,
-//   Form,
-// } from 'react-bootstrap';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Table from 'react-bootstrap/lib/Table';
@@ -174,23 +163,23 @@ class Datatable extends React.Component {
         const elementPropLength = elementProps.length;
 
         while (!isElementIncluded && (i < elementPropLength)) {
-          let columnValue = element[elementProps[i]];
+          if (this.isPropFilterable(elementProps[i])) {
+            let columnValue = element[elementProps[i]];
 
-          if (React.isValidElement(columnValue)) {
-            // If columnValue is React element
-            columnValue = this.getLastChildren(columnValue);
-          } else if (typeof columnValue === 'number') {
-            // If columnValue is a number
-            columnValue = columnValue.toString();
-          }
+            // Get last children and fill columnValue with empty string if undefined
+            if (React.isValidElement(columnValue)) {
+              columnValue = this.getLastChildren(columnValue) || '';
+            }
 
-          // Lowercase columnValue
-          columnValue = columnValue.toLowerCase();
+            // Convert to string if it is a number
+            if (typeof columnValue === 'number') {
+              columnValue = columnValue.toString();
+            }
 
-          // If filterable and columnValue contains filterText
-          if (this.isPropFilterable(elementProps[i]) &&
-              _includes(columnValue, this.state.filterText.toLowerCase())) {
-            isElementIncluded = true;
+            columnValue = columnValue.toLowerCase();
+
+            // If filterText is string/substring of columnValue
+            isElementIncluded = _includes(columnValue, this.state.filterText.toLowerCase());
           }
 
           i += 1;
