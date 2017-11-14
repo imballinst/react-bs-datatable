@@ -201,6 +201,20 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
               />
             </span>
           </th>
+          <th
+            className="thead-th-default sortable"
+            onClick={[Function]}
+          >
+            Person Name (reversed)
+            <span
+              className="pull-right"
+            >
+              <FontAwesome
+                additionalClass="fa-fw"
+                icon="sort"
+              />
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody
@@ -219,6 +233,11 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
           >
             Tyler Olfson 1
           </td>
+          <td
+            className="tbody-td-default"
+          >
+            1 Olfson Tyler
+          </td>
         </tr>
         <tr
           className="tbody-tr-default"
@@ -232,6 +251,11 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
             className="tbody-td-default"
           >
             Tyler Olfson 2
+          </td>
+          <td
+            className="tbody-td-default"
+          >
+            2 Olfson Tyler
           </td>
         </tr>
         <tr
@@ -247,6 +271,11 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
           >
             Tyler Olfson 3
           </td>
+          <td
+            className="tbody-td-default"
+          >
+            3 Olfson Tyler
+          </td>
         </tr>
         <tr
           className="tbody-tr-default"
@@ -261,6 +290,11 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
           >
             Tyler Olfson 4
           </td>
+          <td
+            className="tbody-td-default"
+          >
+            4 Olfson Tyler
+          </td>
         </tr>
         <tr
           className="tbody-tr-default"
@@ -274,6 +308,11 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
             className="tbody-td-default"
           >
             Tyler Olfson 5
+          </td>
+          <td
+            className="tbody-td-default"
+          >
+            5 Olfson Tyler
           </td>
         </tr>
       </tbody>

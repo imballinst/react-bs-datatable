@@ -3,10 +3,13 @@ import { shallow } from 'enzyme';
 
 import Datatable from '../src/index';
 
+const cell_transform = (row) => row.name.split(' ').reverse().join(' ');
+
 function setup() {
   const tableHeader = [
     { title: 'Username', prop: 'userID', sortable: true, filterable: true },
     { title: 'Person Name', prop: 'name', sortable: true, filterable: true },
+    { title: 'Person Name (reversed)', prop: 'name', cell: cell_transform, sortable: true, filterable: true },
   ];
 
   const tableBody = [
@@ -60,6 +63,7 @@ describe('Datatable component (js/component/Datatable)', () => {
     expect(enzymeWrapper.instance().props.tableHeader).toEqual([
       { title: 'Username', prop: 'userID', sortable: true, filterable: true },
       { title: 'Person Name', prop: 'name', sortable: true, filterable: true },
+      { title: 'Person Name (reversed)', prop: 'name', cell: cell_transform, sortable: true, filterable: true },
     ]);
     expect(enzymeWrapper.instance().props.tableBody).toEqual([
       { userID: "i-am-tyler-1", name: "Tyler Olfson 1" },
