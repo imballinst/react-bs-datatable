@@ -220,10 +220,10 @@ class Datatable extends React.Component {
 
     buttons.push(
       <Button {...firstPageProps}>
-        {'First'}
+        {this.props.labels.first || 'First'}
       </Button>,
       <Button {...prevPageProps}>
-        {'Prev'}
+        {this.props.labels.prev || 'Prev'}
       </Button>,
     );
 
@@ -245,10 +245,10 @@ class Datatable extends React.Component {
 
     buttons.push(
       <Button {...nextPageProps}>
-        {'Next'}
+        {this.props.labels.next || 'Next'}
       </Button>,
       <Button {...lastPageProps}>
-        {'Last'}
+        {this.props.labels.last || 'Last'}
       </Button>,
     );
 
@@ -368,7 +368,7 @@ class Datatable extends React.Component {
       renderedElements = (
         <Form inline>
           <FormGroup controlId="formGroupPagination">
-            {'Show '}
+            {this.props.labels.show || 'Show'}{' '}
             <FormControl
               name="form-control-pagination"
               defaultValue={this.state.rowsPerPage}
@@ -378,7 +378,7 @@ class Datatable extends React.Component {
             >
               {selectOption}
             </FormControl>
-            {' options per page'}
+            {' '}{this.props.labels.entries || 'entries'}
           </FormGroup>
         </Form>
       );
@@ -445,7 +445,7 @@ class Datatable extends React.Component {
       body.push(
         <tr key={`${this.props.keyName}-row-zero-length`} className="tbody-tr-default">
           <td className="tbody-td-default" colSpan={this.props.tableHeader.length}>
-            No results to be shown.
+            {this.props.labels.no_results || 'No results to be shown.'}
           </td>
         </tr>,
       );
@@ -518,6 +518,7 @@ Datatable.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableClass: PropTypes.string,
+  labels: PropTypes.object,
 };
 
 Datatable.defaultProps = {
@@ -526,6 +527,7 @@ Datatable.defaultProps = {
   rowsPerPage: undefined,
   rowsPerPageOption: undefined,
   tableClass: '',
+  labels: {},
 };
 
 export default Datatable;
