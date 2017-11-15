@@ -445,7 +445,7 @@ class Datatable extends React.Component {
       body.push(
         <tr key={`${this.props.keyName}-row-zero-length`} className="tbody-tr-default">
           <td className="tbody-td-default" colSpan={this.props.tableHeader.length}>
-            {this.props.labels.no_results || 'No results to be shown.'}
+            {this.props.labels.noResults || 'No results to be shown.'}
           </td>
         </tr>,
       );
