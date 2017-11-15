@@ -456,11 +456,18 @@ class Datatable extends React.Component {
 
   renderSingleRow(data, rowIdx) {
     const row = [];
+    let value = '';
 
     for (let i = 0; i < this.props.tableHeader.length; i += 1) {
+      const cell = this.props.tableHeader[i].cell;
+      if (cell === undefined) {
+        value = data[rowIdx][this.props.tableHeader[i].prop];
+      } else {
+        value = cell(data[rowIdx]);
+      }
       row.push(
         <td key={`${this.props.keyName}-col-${rowIdx}${i}`} className="tbody-td-default">
-          {data[rowIdx][this.props.tableHeader[i].prop]}
+          {value}
         </td>,
       );
     }
