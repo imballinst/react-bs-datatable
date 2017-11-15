@@ -33,7 +33,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
         bsClass="form-group"
         controlId="formGroupPagination"
       >
-        Show 
+        Show
+         
         <FormControl
           bsClass="form-control"
           componentClass="select"
@@ -63,7 +64,8 @@ exports[`Datatable component (js/component/Datatable) should match normal snapsh
             20
           </option>
         </FormControl>
-         options per page
+         
+        entries
       </FormGroup>
     </Form>
   </Col>
