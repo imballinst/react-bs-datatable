@@ -9,9 +9,11 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## Key features
 
-1. Sorting
+1. Sort
 2. Filter
 3. Pagination
+4. Custom Labels
+5. Presentational and raw data separation
 
 ## Props
 
@@ -20,13 +22,22 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
     * `prop` **(Required)**: String. Column name for the table body.
     * `filterable`: Boolean. Enable/disable filtering on the column.
     * `sortable`: Boolean. Enable/disable sorting on the column.
+    * `cell`: Function. Returns a React Component for the table to be rendered.
 * tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-* tableClass: String. Classes used in <table> element tag. Default: `''`.
+* tableClass: String. Classes used in `<table>` element tag. Default: `''`.
 * keyName **(Required)**: String. It is used to prepend the key property of children elements.
 * rowsPerPage: Integer. Initial rows per page. Default: `undefined`.
 * rowsPerPageOption: Array of integer, each consists of pagination options. Default: `undefined`.
 * initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
 * onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
+* labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
+    * `first`: String. First page label button.
+    * `last`: String. Last page label button.
+    * `prev`: String. Previous page label button.
+    * `next`: String. Next page label button.
+    * `show`: String. The text before select option of `rowsPerPageOption`.
+    * `entries`: String. The text after select option of `rowsPerPageOption`.
+    * `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
 
 ## Styling
 
@@ -90,7 +101,7 @@ const body = [
 const onSortFunction = {
   date(columnValue) {
     // Convert the string date format to UTC timestamp
-    // So the table could sort it by date instead of sort it by string
+    // So the table could sort it by number instead of string
     return moment(columnValue, 'Do MMMM YYYY').valueOf();
   },
 };
@@ -117,7 +128,8 @@ render(
 - [x] Filterable props for each column instead of globally
 - [x] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
 - [x] More extensive unit testing
-- [ ] Custom position for filter input field, pagination options, and page navigation
+- [x] Custom labels
+- [x] Option to separate presentational and raw data (by using `cell` property in `tableHeader`)
 - [ ] Lazy loading for big data (virtualization, asynchronous pagination)
 
 ## Contributing

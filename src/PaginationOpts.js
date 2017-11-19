@@ -37,7 +37,7 @@ class PaginationOpts extends React.Component {
       selectOption = _orderBy(selectOption, undefined, 'asc');
 
       // Push to array of React Elements
-      _forEach(rowsPerPageOption, (option) => {
+      _forEach(selectOption, (option) => {
         const optionProps = {
           key: `${keyName}-page-opt-${option}`,
           value: option,
