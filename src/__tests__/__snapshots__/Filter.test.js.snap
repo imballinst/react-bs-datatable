@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SelectFilter component (js/component/SelectFilter) should match normal snapshot 1`] = `
+exports[`Filter component (src/Filter) should match normal snapshot 1`] = `
 <FormGroup
   bsClass="form-group"
-  controlId="select-filter-selectFilterID"
+  controlId="select-filter-test-keyname"
 >
   <InputGroup
     bsClass="input-group"
@@ -14,7 +14,7 @@ exports[`SelectFilter component (js/component/SelectFilter) should match normal 
       onChange={[Function]}
       placeholder="Enter text"
       type="text"
-      value="stub filter"
+      value="old-test-filter"
     />
     <InputGroupButton
       bsClass="input-group-btn"

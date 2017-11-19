@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationOpts component (src/PaginationOpts) should match normal snapshot 1`] = `
+<Form
+  bsClass="form"
+  componentClass="form"
+  horizontal={false}
+  inline={true}
+>
+  <FormGroup
+    bsClass="form-group"
+    controlId="formGroupPagination"
+  >
+    Show
+     
+    <FormControl
+      bsClass="form-control"
+      componentClass="select"
+      defaultValue={5}
+      name="form-control-pagination"
+      onChange={[Function]}
+      placeholder="select"
+    >
+      5
+      10
+      15
+      20
+      <option
+        value={5}
+      >
+        5
+      </option>
+      <option
+        value={10}
+      >
+        10
+      </option>
+      <option
+        value={15}
+      >
+        15
+      </option>
+      <option
+        value={20}
+      >
+        20
+      </option>
+    </FormControl>
+     
+    entries
+  </FormGroup>
+</Form>
+`;

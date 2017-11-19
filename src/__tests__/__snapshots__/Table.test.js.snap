@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Datatable component (src/Datatable) should match normal snapshot 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={4}
+    xs={12}
+  >
+    <Filter
+      filterText=""
+      keyName="test-table"
+      onChangeFilter={[Function]}
+      tableHeader={
+        Array [
+          Object {
+            "filterable": true,
+            "prop": "userID",
+            "sortable": true,
+            "title": "Username",
+          },
+          Object {
+            "filterable": true,
+            "prop": "name",
+            "sortable": true,
+            "title": "Person Name",
+          },
+          Object {
+            "cell": [Function],
+            "filterable": true,
+            "prop": "reversedName",
+            "sortable": true,
+            "title": "Person Name (reversed)",
+          },
+        ]
+      }
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={4}
+    xs={12}
+  >
+    <PaginationOpts
+      keyName="test-table"
+      labels={Object {}}
+      onRowsPerPageChange={[Function]}
+      rowsPerPage={5}
+      rowsPerPageOption={
+        Array [
+          5,
+          10,
+          15,
+          20,
+        ]
+      }
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    className="text-right"
+    componentClass="div"
+    md={4}
+    xs={12}
+  >
+    <Pagination
+      currentPage={1}
+      data={
+        Array [
+          Object {
+            "name": "Tyler Olfson 1",
+            "userID": "i-am-tyler-1",
+          },
+          Object {
+            "name": "Tyler Olfson 2",
+            "userID": "i-am-tyler-2",
+          },
+          Object {
+            "name": "Tyler Olfson 3",
+            "userID": "i-am-tyler-3",
+          },
+          Object {
+            "name": "Tyler Olfson 4",
+            "userID": "i-am-tyler-4",
+          },
+          Object {
+            "name": "Tyler Olfson 5",
+            "userID": "i-am-tyler-5",
+          },
+          Object {
+            "name": "Tyler Olfson 6",
+            "userID": "i-am-tyler-6",
+          },
+          Object {
+            "name": "Bobby Charly 1",
+            "userID": "sir-bobby-1",
+          },
+          Object {
+            "name": "Bobby Charly 2",
+            "userID": "sir-bobby-2",
+          },
+          Object {
+            "name": "Bobby Charly 3",
+            "userID": "sir-bobby-3",
+          },
+          Object {
+            "name": "Bobby Charly 4",
+            "userID": "sir-bobby-4",
+          },
+          Object {
+            "name": "Bobby Charly 5",
+            "userID": "sir-bobby-5",
+          },
+          Object {
+            "name": "Bobby Charly 6",
+            "userID": "sir-bobby-6",
+          },
+        ]
+      }
+      keyName="test-table"
+      labels={Object {}}
+      onPageNavigate={[Function]}
+      rowsPerPage={5}
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={12}
+  >
+    <Table
+      bordered={false}
+      bsClass="table"
+      className="table-datatable table table-striped table-responsive"
+      condensed={false}
+      hover={false}
+      responsive={false}
+      striped={false}
+    >
+      <TableHeader
+        keyName="test-table"
+        onSortChange={[Function]}
+        sortedProp={
+          Object {
+            "isAscending": true,
+            "prop": "userID",
+          }
+        }
+        tableHeader={
+          Array [
+            Object {
+              "filterable": true,
+              "prop": "userID",
+              "sortable": true,
+              "title": "Username",
+            },
+            Object {
+              "filterable": true,
+              "prop": "name",
+              "sortable": true,
+              "title": "Person Name",
+            },
+            Object {
+              "cell": [Function],
+              "filterable": true,
+              "prop": "reversedName",
+              "sortable": true,
+              "title": "Person Name (reversed)",
+            },
+          ]
+        }
+      />
+      <TableBody
+        keyName="test-table"
+        labels={Object {}}
+        paginatedData={
+          Array [
+            Object {
+              "name": "Tyler Olfson 1",
+              "userID": "i-am-tyler-1",
+            },
+            Object {
+              "name": "Tyler Olfson 2",
+              "userID": "i-am-tyler-2",
+            },
+            Object {
+              "name": "Tyler Olfson 3",
+              "userID": "i-am-tyler-3",
+            },
+            Object {
+              "name": "Tyler Olfson 4",
+              "userID": "i-am-tyler-4",
+            },
+            Object {
+              "name": "Tyler Olfson 5",
+              "userID": "i-am-tyler-5",
+            },
+          ]
+        }
+        tableHeader={
+          Array [
+            Object {
+              "filterable": true,
+              "prop": "userID",
+              "sortable": true,
+              "title": "Username",
+            },
+            Object {
+              "filterable": true,
+              "prop": "name",
+              "sortable": true,
+              "title": "Person Name",
+            },
+            Object {
+              "cell": [Function],
+              "filterable": true,
+              "prop": "reversedName",
+              "sortable": true,
+              "title": "Person Name (reversed)",
+            },
+          ]
+        }
+      />
+    </Table>
+  </Col>
+</Row>
+`;
