@@ -7,6 +7,15 @@
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
+## Table of Contents
+* [Key Features](#key-features)
+* [Props](#props)
+* [Styling](#styling)
+* [Example Usage](#example-usage)
+* [Extending the Table](#extending-the-table)
+* [Next Features or Improvements](#next-features-or-improvements)
+* [Contributing](#contributing)
+
 ## Key features
 
 1. Sort
@@ -133,7 +142,101 @@ render(
 );
 ```
 
-## Next features/improvements
+## Extending the Table
+You can extend the table if you want to create your own layout (position the text filter to the top right, etc).
+```
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import Table from 'react-bootstrap/lib/Table';
+import classNames from 'classnames';
+import Datatable from 'react-bs-datatable';
+
+import {
+  sortData,
+  filterData,
+  paginateData,
+} from 'react-bs-datatable/src/utils/ClassHelpers';
+import Pagination from 'react-bs-datatable/src/Pagination';
+import PaginationOpts from 'react-bs-datatable/src/PaginationOpts';
+import TableHeader from 'react-bs-datatable/src/TableHeader';
+import TableBody from 'react-bs-datatable/src/TableBody';
+import Filter from 'react-bs-datatable/src/Filter';
+
+class CustomTable extends Datatable {
+  render() {
+    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
+    const {
+      tableHeader,
+      tableBody,
+      onSort,
+      tableClass: customClass,
+      keyName,
+      labels,
+      rowsPerPageOption,
+    } = this.props;
+
+    const filteredData = filterData(tableHeader, filterText, tableBody);
+    const sortedData = sortData(sortedProp, onSort, filteredData);
+
+    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
+
+    const tableClass = classNames({
+      'table-datatable': true,
+      [`${customClass}`]: true,
+    });
+
+    return (
+      <Row>
+        <Col xs={12} md={4}>
+          <PaginationOpts
+            labels={labels}
+            onRowsPerPageChange={this.onRowsPerPageChange}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOption={rowsPerPageOption}
+            keyName={keyName}
+          />
+        </Col>
+        <Col xs={12} md={4}>
+          <Pagination
+            data={sortedData}
+            rowsPerPage={rowsPerPage}
+            keyName={keyName}
+            currentPage={currentPage}
+            onPageNavigate={this.onPageNavigate}
+            labels={labels}
+          />
+        </Col>
+        <Col xs={12} md={4} className="text-right">
+          <Filter
+            tableHeader={tableHeader}
+            onChangeFilter={this.onChangeFilter}
+            filterText={filterText}
+            keyName={keyName}
+          />
+        </Col>
+        <Col xs={12}>
+          <Table className={tableClass}>
+            <TableHeader
+              tableHeader={tableHeader}
+              keyName={keyName}
+              sortedProp={sortedProp}
+              onSortChange={this.onSortChange}
+            />
+            <TableBody
+              tableHeader={tableHeader}
+              keyName={keyName}
+              labels={labels}
+              paginatedData={paginatedData}
+            />
+          </Table>
+        </Col>
+      </Row>
+    );
+  }
+}
+```
+
+## Next Features or Improvements
 
 - [x] Sortable props for each column instead of globally
 - [x] Custom sort function (eg. date is ordered by timestamp not by string)
