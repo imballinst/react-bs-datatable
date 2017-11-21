@@ -22,18 +22,19 @@ class Datatable extends React.Component {
   constructor(props) {
     super(props);
 
+    const { tableHeader, initialSort, rowsPerPageOption, rowsPerPage } = props;
     let defaultSort = {};
 
-    if (props.initialSort !== undefined) {
+    if (initialSort !== undefined) {
       let found = false;
       let i = 0;
 
-      while (!found && i < props.tableHeader.length) {
-        if (props.tableHeader[i].prop === props.initialSort.prop) {
+      while (!found && i < tableHeader.length) {
+        if (tableHeader[i].prop === initialSort.prop) {
           found = true;
 
-          if (props.tableHeader[i].sortable === true) {
-            defaultSort = props.initialSort;
+          if (tableHeader[i].sortable === true) {
+            defaultSort = initialSort;
           }
         }
 
@@ -41,10 +42,22 @@ class Datatable extends React.Component {
       }
     }
 
+    const isOptionsGiven = rowsPerPageOption.length;
+    let defaultRowsPerPage;
+
+    if (isOptionsGiven) {
+      if (rowsPerPageOption.includes(rowsPerPage)) {
+        defaultRowsPerPage = rowsPerPage;
+      } else {
+        defaultRowsPerPage = rowsPerPageOption[0];
+      }
+    }
+
+
     // Define initial state
     this.state = {
       sortedProp: defaultSort,
-      rowsPerPage: props.rowsPerPage,
+      rowsPerPage: defaultRowsPerPage,
       currentPage: 1,
       filterText: '',
     };

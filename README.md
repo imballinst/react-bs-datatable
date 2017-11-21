@@ -35,8 +35,8 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 * tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
 * tableClass: String. Classes used in `<table>` element tag. Default: `''`.
 * keyName **(Required)**: String. It is used to prepend the key property of children elements.
-* rowsPerPage: Integer. Initial rows per page. Default: `undefined`.
-* rowsPerPageOption: Array of integer, each consists of pagination options. Default: `undefined`.
+* rowsPerPage: Integer. Initial rows per page. If this and `rowsPerPageOption` are provided but `rowsPerPage` is not a member of `rowsPerPageOption`, then `rowsPerPageOption[0]` will be chosen as the property instead. If not provided, then no pagination options will be rendered. Default: `undefined`.
+* rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
 * initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
 * onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
 * labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
