@@ -79,6 +79,7 @@ import Datatable from 'react-bs-datatable'; // Import this package
 const header = [
   { title: 'Username', prop: 'username', sortable: true, filterable: true },
   { title: 'Name', prop: 'realname', sortable: true },
+  { title: 'Name Uppercased', prop: 'realnameuppercase', cell: (row) => row.realname.toUpperCase() },
   { title: 'Location', prop: 'location' },
   { title: 'Last Updated', prop: 'date', sortable: true },
 ];
@@ -106,6 +107,16 @@ const onSortFunction = {
   },
 };
 
+const customLabels = {
+  first: '<<',
+  last: '>>',
+  prev: '<',
+  next: '>',
+  show: 'Display',
+  entries: 'rows',
+  noResults: 'There is no data to be displayed',
+};
+
 render(
   <Datatable
     tableHeader={header}
@@ -116,6 +127,7 @@ render(
     rowsPerPageOption={[5, 10, 15, 20]}
     initialSort={{prop: "username", isAscending: true}}
     onSort={onSortFunction}
+    labels={customLabels}
   />,
   document.getElementById('react-test')
 );
