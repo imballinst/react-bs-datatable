@@ -1,3 +1,19 @@
+### 1.2.0 (2017-11-27)
+
+##### Chores
+
+* **README:** added README regarding datatable extending, addressed #11 ([a93dff8d](https://github.com/Imballinst/react-bs-datatable/commit/a93dff8da40630a9f3b32be3c9e391740090288d))
+* **readme:** added readme for labels and tableHeader.cell ([c910be7e](https://github.com/Imballinst/react-bs-datatable/commit/c910be7e0a85d583fb46832c70872b65d03c15be))
+
+##### Bug Fixes
+
+* **default pagination:** fixed fallback pagination to rowsPerPageOption if rowsPerPage not included ([723546e2](https://github.com/Imballinst/react-bs-datatable/commit/723546e201f3ed7e9726372fb5e37ff2a49bb240))
+* **pagination opts:** fixed pagination options doesnt getting sorted correctly, edit readme ([4b8c3343](https://github.com/Imballinst/react-bs-datatable/commit/4b8c334373f7082f4e1771ad4652bb1e5af4ee5d))
+
+##### Refactors
+
+* **datatable:** refactored datatable, added more unit tests ([621ae9a2](https://github.com/Imballinst/react-bs-datatable/commit/621ae9a2639d4ad9038cb05fecec0b9ae7fd72e4))
+
 #### 1.1.18 (2017-9-4)
 
 ##### Bug Fixes
