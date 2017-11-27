@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest && npm run eslint",
     "jest:watch": "jest --watch",
-    "eslint": "./node_modules/.bin/eslint --fix ./src/.",
+    "eslint": "eslint --fix ./src/.",
     "build": "npm test && webpack && git add -A",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version major && git push origin && git push origin --tags",
@@ -25,11 +25,9 @@
   ],
   "pre-commit": "build",
   "jest": {
-    "roots": [
-      "tests"
-    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$",
     "setupFiles": [
-      "./tests/jestsetup.js"
+      "./test/jestsetup.js"
     ],
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableHeader component (src/TableHeader) should match normal snapshot 1`] = `
+<thead
+  className="thead-default"
+>
+  <tr
+    className="thead-tr-default"
+  />
+</thead>
+`;

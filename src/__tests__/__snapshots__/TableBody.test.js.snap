@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableBody component (src/TableBody) should match normal snapshot 1`] = `
+<tbody
+  className="tbody-default"
+>
+  <tr
+    className="tbody-tr-default"
+  >
+    <td
+      className="tbody-td-default"
+      colSpan={0}
+    >
+      No results to be shown.
+    </td>
+  </tr>
+</tbody>
+`;

@@ -54,7 +54,7 @@ module.exports = {
   devtool: 'cheap-source-map',
   context: resourcePath,
   entry: {
-    index: './index.js'
+    index: './Table.js'
   },
   output: {
     path: buildPath + '/',

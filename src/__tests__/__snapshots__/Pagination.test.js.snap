@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination component (src/Pagination) should match normal snapshot 1`] = `
+<ButtonGroup
+  block={false}
+  bsClass="btn-group"
+  className="btn-group-page-nav"
+  justified={false}
+  vertical={false}
+>
+  <NavButton
+    disabled={true}
+    label="First"
+    onPageNavigate={[Function]}
+    pageNavNumber={1}
+  />
+  <NavButton
+    disabled={true}
+    label="Prev"
+    onPageNavigate={[Function]}
+    pageNavNumber={0}
+  />
+  <NavButton
+    disabled={true}
+    label="Next"
+    onPageNavigate={[Function]}
+    pageNavNumber={2}
+  />
+  <NavButton
+    disabled={true}
+    label="Last"
+    onPageNavigate={[Function]}
+    pageNavNumber={0}
+  />
+</ButtonGroup>
+`;

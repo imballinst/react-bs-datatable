@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BodyRow component (src/BodyRow) should match normal snapshot 1`] = `
+<tr
+  className="tbody-tr-default"
+/>
+`;
