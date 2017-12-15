@@ -7,7 +7,7 @@
     "test": "jest && npm run eslint",
     "jest:watch": "jest --watch",
     "eslint": "eslint --fix ./src/.",
-    "build": "npm test && webpack && git add -A",
+    "build": "webpack && npm run build:lib && git add -A",
     "build:lib": "cd src && babel . --out-dir ../lib --ignore test.js",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m \"updated CHANGELOG.md\" && npm version major && git push origin && git push origin --tags",
@@ -24,7 +24,7 @@
     "react-bootstrap",
     "datatable"
   ],
-  "pre-commit": "build",
+  "pre-commit": ["test", "build"],
   "jest": {
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$",
     "setupFiles": [
