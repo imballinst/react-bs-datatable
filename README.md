@@ -143,7 +143,7 @@ render(
 ```
 
 ## Extending the Table
-You can extend the table if you want to create your own layout (position the text filter to the top right, etc).
+You can extend the table if you want to create your own layout (position the text filter to the top right, etc). You'll have to import the components from `react-bs-datatable/lib` folder.
 ```
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -155,12 +155,12 @@ import {
   sortData,
   filterData,
   paginateData,
-} from 'react-bs-datatable/src/utils/ClassHelpers';
-import Pagination from 'react-bs-datatable/src/Pagination';
-import PaginationOpts from 'react-bs-datatable/src/PaginationOpts';
-import TableHeader from 'react-bs-datatable/src/TableHeader';
-import TableBody from 'react-bs-datatable/src/TableBody';
-import Filter from 'react-bs-datatable/src/Filter';
+} from 'react-bs-datatable/lib/utils/ClassHelpers';
+import Pagination from 'react-bs-datatable/lib/Pagination';
+import PaginationOpts from 'react-bs-datatable/lib/PaginationOpts';
+import TableHeader from 'react-bs-datatable/lib/TableHeader';
+import TableBody from 'react-bs-datatable/lib/TableBody';
+import Filter from 'react-bs-datatable/lib/Filter';
 
 class CustomTable extends Datatable {
   render() {
