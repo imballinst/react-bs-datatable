@@ -16,9 +16,9 @@ const loaders = [
     options: {
       babelrc: false,
       presets: [
-        [ 'es2015', { modules: false } ],
-        "react",
-        "stage-2"
+        ['env', { modules: false }],
+        'react',
+        'stage-2',
       ]
     }
   },
@@ -30,23 +30,7 @@ plugins.push(
     minimize: true,
     debug: false
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-      screw_ie8: true,
-      conditionals: true,
-      unused: true,
-      comparisons: true,
-      sequences: true,
-      dead_code: true,
-      evaluate: true,
-      if_return: true,
-      join_vars: true,
-    },
-    output: {
-      comments: false
-    },
-  })
+  new webpack.optimize.UglifyJsPlugin()
 );
 
 // Configuration
