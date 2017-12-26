@@ -1,3 +1,15 @@
+#### 1.2.1 (2017-12-26)
+
+##### Chores
+
+* **readme:** update readme ([713a2d25](https://github.com/Imballinst/react-bs-datatable/commit/713a2d25641353ee4ddb5c30102e9cded332fbac))
+* **precommit:** edited pre-commit scripts ([1f54160f](https://github.com/Imballinst/react-bs-datatable/commit/1f54160fd8ac000a4f91d479f902234e179a8dd1))
+
+##### Bug Fixes
+
+* **optimize:** changed main from dist to lib folder ([96693aeb](https://github.com/Imballinst/react-bs-datatable/commit/96693aeb17f003ead038731d53389af6cb4d0093))
+* **babel:** transformed src with babel to lib folder ([df4a7a85](https://github.com/Imballinst/react-bs-datatable/commit/df4a7a85e9358c7ba37cdcd00a67cbcc3f6c2f5e))
+
 ### 1.2.0 (2017-11-27)
 
 ##### Chores
