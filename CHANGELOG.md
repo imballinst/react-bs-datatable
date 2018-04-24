@@ -1,3 +1,9 @@
+#### 1.2.2 (2018-04-24)
+
+##### Bug Fixes
+
+* **modules:** fixed lib using commonjs modules ([b8743aae](https://github.com/Imballinst/react-bs-datatable/commit/b8743aae789f640612afbc00bbee87af8c80b1df))
+
 #### 1.2.1 (2017-12-26)
 
 ##### Chores
