@@ -19,7 +19,9 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## Installation
 
-To install, just execute `npm install --save react-bs-datatable` in your project folder.
+```
+npm install --save react-bs-datatable bootstrap-sass font-awesome
+```
 
 ## Key features
 
@@ -28,24 +30,12 @@ To install, just execute `npm install --save react-bs-datatable` in your project
 3. Pagination
 4. Custom Labels
 5. Presentational and raw data separation
-6. Custom sort and filter function
+6. Custom column sort and column filter function
 
 ## Props
 
-* tableHeader **(Required)**: Array of objects, each consists of: 
-    * `title`: String. Text for the header column.
-    * `prop` **(Required)**: String. Column name for the table body.
-    * `filterable`: Boolean. Enable/disable filtering on the column.
-    * `sortable`: Boolean. Enable/disable sorting on the column.
-    * `cell`: Function. Returns a React Component for the table to be rendered.
-* tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-* tableClass: String. Classes used in `<table>` element tag. Default: `''`.
-* keyName **(Required)**: String. It is used to prepend the key property of children elements.
-* rowsPerPage: Integer. Initial rows per page. If this and `rowsPerPageOption` are provided but `rowsPerPage` is not a member of `rowsPerPageOption`, then `rowsPerPageOption[0]` will be chosen as the property instead. If not provided, then no pagination options will be rendered. Default: `undefined`.
-* rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
 * initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
-* onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
-* onFilter: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
+* keyName **(Required)**: String. It is used to prepend the key property of children elements.
 * labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
     * `first`: String. First page label button.
     * `last`: String. Last page label button.
@@ -54,10 +44,22 @@ To install, just execute `npm install --save react-bs-datatable` in your project
     * `show`: String. The text before select option of `rowsPerPageOption`.
     * `entries`: String. The text after select option of `rowsPerPageOption`.
     * `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
+* onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
+* onFilter: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
+* tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
+* tableClass: String. Classes used in `<table>` element tag. Default: `''`.
+* tableHeader **(Required)**: Array of objects, each consists of: 
+    * `cell`: Function. Returns a React Component for the table to be rendered.
+    * `filterable`: Boolean. Enable/disable filtering on the column.
+    * `prop` **(Required)**: String. Column name for the table body.
+    * `sortable`: Boolean. Enable/disable sorting on the column.
+    * `title`: String. Text for the header column.
+* rowsPerPage: Integer. Initial rows per page. If this and `rowsPerPageOption` are provided but `rowsPerPage` is not a member of `rowsPerPageOption`, then `rowsPerPageOption[0]` will be chosen as the property instead. If not provided, then no pagination options will be rendered. Default: `undefined`.
+* rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
 
 ## Styling
 
-This package doesn't include Bootstrap stylesheets. If you want to include it, you could do so by importing its CSS in your HTML **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass) in your SCSS. You can also style the table by defining it in your SCSS.
+This package doesn't include Bootstrap stylesheets. If you want to include it, you can do so by importing its CSS **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass). You can also style the table yourself.
 
 ```
 .table-datatable {
@@ -148,7 +150,9 @@ const customLabels = {
 ```
 
 ## Extending the Table
+
 You can extend the table if you want to create your own layout (position the text filter to the top right, etc). You'll have to import the components from `react-bs-datatable/lib` folder.
+
 ```
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -251,6 +255,7 @@ class CustomTable extends Datatable {
 - [x] Custom labels
 - [x] Option to separate presentational and raw data (by using `cell` property in `tableHeader`)
 - [ ] Lazy loading for big data (virtualization, asynchronous pagination)
+- [ ] Better documentation, better demo page
 
 ## Contributing
 
