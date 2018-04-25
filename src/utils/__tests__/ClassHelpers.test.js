@@ -46,23 +46,36 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
   });
 
   it('should filter data correctly', () => {
+    // Initialization
     const tableHeader = [
       { prop: 'prop1', filterable: true },
       { prop: 'prop2', filterable: false },
     ];
-
     const firstData = { prop1: 1 };
     const secondData = { prop1: 2 };
     const data = [firstData, secondData];
 
-    const filteredTextFirst = '1';
-    const filteredTextSecond = '2';
+    // Without filter function
+    let filteredTextFirst = '1';
+    let filteredTextSecond = '2';
 
-    const sortFirstData = filterData(tableHeader, filteredTextFirst, undefined, data);
-    const sortSecondData = filterData(tableHeader, filteredTextSecond, undefined, data);
+    let filterFirstData = filterData(tableHeader, filteredTextFirst, undefined, data);
+    let filterSecondData = filterData(tableHeader, filteredTextSecond, undefined, data);
 
-    expect(sortFirstData[0]).toBe(firstData);
-    expect(sortSecondData[0]).toBe(secondData);
+    expect(filterFirstData[0]).toBe(firstData);
+    expect(filterSecondData[0]).toBe(secondData);
+
+    // With filter function
+    const filterFunction = { prop1: val => (val === 1 ? 'hehehe' : 'hahaha') };
+
+    filteredTextFirst = 'hehehe';
+    filteredTextSecond = 'hahaha';
+
+    filterFirstData = filterData(tableHeader, filteredTextFirst, filterFunction, data);
+    filterSecondData = filterData(tableHeader, filteredTextSecond, filterFunction, data);
+
+    expect(filterFirstData[0]).toBe(firstData);
+    expect(filterSecondData[0]).toBe(secondData);
   });
 
   it('should paginate data correctly', () => {
