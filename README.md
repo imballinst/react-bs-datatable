@@ -8,6 +8,7 @@
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
 ## Table of Contents
+* [Installation](#installation)
 * [Key Features](#key-features)
 * [Props](#props)
 * [Styling](#styling)
@@ -16,6 +17,10 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 * [Next Features or Improvements](#next-features-or-improvements)
 * [Contributing](#contributing)
 
+## Installation
+
+To install, just execute `npm install --save react-bs-datatable` in your project folder.
+
 ## Key features
 
 1. Sort
@@ -23,6 +28,7 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 3. Pagination
 4. Custom Labels
 5. Presentational and raw data separation
+6. Custom sort and filter function
 
 ## Props
 
@@ -39,6 +45,7 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 * rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
 * initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
 * onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
+* onFilter: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
 * labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
     * `first`: String. First page label button.
     * `last`: String. Last page label button.
@@ -111,7 +118,7 @@ const body = [
 const onSortFunction = {
   date(columnValue) {
     // Convert the string date format to UTC timestamp
-    // So the table could sort it by number instead of string
+    // So the table could sort it by number instead of by string
     return moment(columnValue, 'Do MMMM YYYY').valueOf();
   },
 };
@@ -126,20 +133,18 @@ const customLabels = {
   noResults: 'There is no data to be displayed',
 };
 
-render(
-  <Datatable
-    tableHeader={header}
-    tableBody={body}
-    keyName="userTable"
-    tableClass="striped hover responsive"
-    rowsPerPage={5}
-    rowsPerPageOption={[5, 10, 15, 20]}
-    initialSort={{prop: "username", isAscending: true}}
-    onSort={onSortFunction}
-    labels={customLabels}
-  />,
-  document.getElementById('react-test')
-);
+// In your render method
+<Datatable
+  tableHeader={header}
+  tableBody={body}
+  keyName="userTable"
+  tableClass="striped hover responsive"
+  rowsPerPage={5}
+  rowsPerPageOption={[5, 10, 15, 20]}
+  initialSort={{prop: "username", isAscending: true}}
+  onSort={onSortFunction}
+  labels={customLabels}
+/>
 ```
 
 ## Extending the Table

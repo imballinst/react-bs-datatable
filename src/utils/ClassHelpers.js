@@ -53,7 +53,7 @@ const sortData = (sortedProp, onSort, data) => {
   return sortedData;
 };
 
-const filterData = (tableHeader, filterText, data) => {
+const filterData = (tableHeader, filterText, onFilter, data) => {
   let filteredData = data;
 
   if (filterText !== '') {
@@ -65,14 +65,18 @@ const filterData = (tableHeader, filterText, data) => {
       const elementPropLength = elementProps.length;
 
       while (!isElementIncluded && (i < elementPropLength)) {
-        if (isPropFilterable(tableHeader, elementProps[i])) {
-          let columnValue = element[elementProps[i]];
+        const prop = elementProps[i];
+
+        if (isPropFilterable(tableHeader, prop)) {
+          let columnValue = element[prop];
 
           // Get last children and fill columnValue with empty string if undefined
           columnValue = getLastChildren(columnValue) || '';
 
-          // Convert to string if it is a number
-          if (typeof columnValue === 'number') {
+          if (onFilter && typeof onFilter[prop] === 'function') {
+            columnValue = onFilter[prop](columnValue);
+          } else if (typeof columnValue !== 'string') {
+            // Convert to string if it is not a string
             columnValue = columnValue.toString();
           }
 

@@ -58,11 +58,10 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     const filteredTextFirst = '1';
     const filteredTextSecond = '2';
 
-    const sortFirstData = filterData(tableHeader, filteredTextFirst, data);
-    const sortSecondData = filterData(tableHeader, filteredTextSecond, data);
+    const sortFirstData = filterData(tableHeader, filteredTextFirst, undefined, data);
+    const sortSecondData = filterData(tableHeader, filteredTextSecond, undefined, data);
 
     expect(sortFirstData[0]).toBe(firstData);
-
     expect(sortSecondData[0]).toBe(secondData);
   });
 

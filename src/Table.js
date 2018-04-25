@@ -112,13 +112,14 @@ class Datatable extends React.Component {
       tableHeader,
       tableBody,
       onSort,
+      onFilter,
       tableClass: customClass,
       keyName,
       labels,
       rowsPerPageOption,
     } = this.props;
 
-    const filteredData = filterData(tableHeader, filterText, tableBody);
+    const filteredData = filterData(tableHeader, filterText, onFilter, tableBody);
     const sortedData = sortData(sortedProp, onSort, filteredData);
 
     const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
@@ -182,6 +183,7 @@ Datatable.propTypes = {
   initialSort: PropTypes.object,
   keyName: PropTypes.string.isRequired,
   onSort: PropTypes.object,
+  onFilter: PropTypes.object,
   rowsPerPage: PropTypes.number,
   rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -193,6 +195,7 @@ Datatable.propTypes = {
 Datatable.defaultProps = {
   initialSort: undefined,
   onSort: undefined,
+  onFilter: undefined,
   rowsPerPage: undefined,
   rowsPerPageOption: undefined,
   tableClass: '',
