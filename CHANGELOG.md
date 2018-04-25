@@ -1,3 +1,19 @@
+#### 1.2.3 (2018-04-25)
+
+##### Chores
+
+* **readme:**
+  * edited README a bit ([161d5547](https://github.com/Imballinst/react-bs-datatable/commit/161d55474cdc1cf9b7d3bf4d05a61e023d2fe6d6))
+  * edited README ([3add6b6f](https://github.com/Imballinst/react-bs-datatable/commit/3add6b6f0e851f75dffeb0cb9d637a70d9363147))
+
+##### New Features
+
+* **onFilter:** added custom filter function ([477564d8](https://github.com/Imballinst/react-bs-datatable/commit/477564d8a786e424a1b93386ce1d504bd727ac22))
+
+##### Tests
+
+* **filter:** added more tests to filter function ([27735d25](https://github.com/Imballinst/react-bs-datatable/commit/27735d2502884891741e4484c53b41df4a06c8e8))
+
 #### 1.2.2 (2018-04-24)
 
 ##### Bug Fixes
