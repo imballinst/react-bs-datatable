@@ -44,8 +44,8 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
     * `show`: String. The text before select option of `rowsPerPageOption`.
     * `entries`: String. The text after select option of `rowsPerPageOption`.
     * `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
-* onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
-* onFilter: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Default: `undefined`.
+* onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Each function has a parameter which is the real value of that column. Default: `undefined`.
+* onFilter: see `onSort`.
 * tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
 * tableClass: String. Classes used in `<table>` element tag. Default: `''`.
 * tableHeader **(Required)**: Array of objects, each consists of: 
