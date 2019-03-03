@@ -12,7 +12,7 @@ exports[`Filter component (src/Filter) should match normal snapshot 1`] = `
       bsClass="form-control"
       componentClass="input"
       onChange={[Function]}
-      placeholder="Enter text"
+      placeholder="Enter a text!"
       type="text"
       value="old-test-filter"
     />
