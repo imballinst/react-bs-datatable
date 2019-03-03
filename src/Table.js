@@ -7,11 +7,7 @@ import Table from 'react-bootstrap/lib/Table';
 
 import classNames from 'classnames';
 
-import {
-  sortData,
-  filterData,
-  paginateData,
-} from './utils/ClassHelpers';
+import { sortData, filterData, paginateData } from './utils/ClassHelpers';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
 import TableHeader from './TableHeader';
@@ -53,7 +49,6 @@ class Datatable extends React.Component {
       }
     }
 
-
     // Define initial state
     this.state = {
       sortedProp: defaultSort,
@@ -76,20 +71,20 @@ class Datatable extends React.Component {
       filterText: text,
       currentPage: 1,
     });
-  }
+  };
 
   onPageNavigate = nextPage => () => {
     this.setState({
       currentPage: nextPage,
     });
-  }
+  };
 
   onRowsPerPageChange = (numOfPage) => {
     this.setState({
       rowsPerPage: parseInt(numOfPage, 10),
       currentPage: 1,
     });
-  }
+  };
 
   onSortChange = nextProp => () => {
     const nextSort = this.state.sortedProp;
@@ -104,7 +99,7 @@ class Datatable extends React.Component {
     this.setState({
       sortedProp: nextSort,
     });
-  }
+  };
 
   render() {
     const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
@@ -119,7 +114,12 @@ class Datatable extends React.Component {
       rowsPerPageOption,
     } = this.props;
 
-    const filteredData = filterData(tableHeader, filterText, onFilter, tableBody);
+    const filteredData = filterData(
+      tableHeader,
+      filterText,
+      onFilter,
+      tableBody,
+    );
     const sortedData = sortData(sortedProp, onSort, filteredData);
 
     const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
@@ -134,6 +134,7 @@ class Datatable extends React.Component {
         <Col xs={12} md={4}>
           <Filter
             tableHeader={tableHeader}
+            placeholder={labels.filterPlaceholder}
             onChangeFilter={this.onChangeFilter}
             filterText={filterText}
             keyName={keyName}

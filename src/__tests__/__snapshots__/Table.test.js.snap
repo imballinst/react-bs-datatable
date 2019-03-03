@@ -15,6 +15,7 @@ exports[`Datatable component (src/Datatable) should match normal snapshot 1`] = 
       filterText=""
       keyName="test-table"
       onChangeFilter={[Function]}
+      placeholder="Enter text"
       tableHeader={
         Array [
           Object {
