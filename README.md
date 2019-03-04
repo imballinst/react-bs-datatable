@@ -8,14 +8,15 @@
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
 ## Table of Contents
-* [Installation](#installation)
-* [Key Features](#key-features)
-* [Props](#props)
-* [Styling](#styling)
-* [Example Usage](#example-usage)
-* [Extending the Table](#extending-the-table)
-* [Next Features or Improvements](#next-features-or-improvements)
-* [Contributing](#contributing)
+
+- [Installation](#installation)
+- [Key Features](#key-features)
+- [Props](#props)
+- [Styling](#styling)
+- [Example Usage](#example-usage)
+- [Extending the Table](#extending-the-table)
+- [Next Features or Improvements](#next-features-or-improvements)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -34,28 +35,29 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
 
 ## Props
 
-* initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
-* keyName **(Required)**: String. It is used to prepend the key property of children elements.
-* labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
-    * `first`: String. First page label button.
-    * `last`: String. Last page label button.
-    * `prev`: String. Previous page label button.
-    * `next`: String. Next page label button.
-    * `show`: String. The text before select option of `rowsPerPageOption`.
-    * `entries`: String. The text after select option of `rowsPerPageOption`.
-    * `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
-* onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Each function has a parameter which is the real value of that column. Default: `undefined`.
-* onFilter: see `onSort`.
-* tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-* tableClass: String. Classes used in `<table>` element tag. Default: `''`.
-* tableHeader **(Required)**: Array of objects, each consists of: 
-    * `cell`: Function. Returns a React Component for the table to be rendered.
-    * `filterable`: Boolean. Enable/disable filtering on the column.
-    * `prop` **(Required)**: String. Column name for the table body.
-    * `sortable`: Boolean. Enable/disable sorting on the column.
-    * `title`: String. Text for the header column.
-* rowsPerPage: Integer. Initial rows per page. If this and `rowsPerPageOption` are provided but `rowsPerPage` is not a member of `rowsPerPageOption`, then `rowsPerPageOption[0]` will be chosen as the property instead. If not provided, then no pagination options will be rendered. Default: `undefined`.
-* rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
+- initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
+- keyName **(Required)**: String. It is used to prepend the key property of children elements.
+- labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
+  - `first`: String. First page label button.
+  - `last`: String. Last page label button.
+  - `prev`: String. Previous page label button.
+  - `next`: String. Next page label button.
+  - `show`: String. The text before select option of `rowsPerPageOption`.
+  - `entries`: String. The text after select option of `rowsPerPageOption`.
+  - `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
+  - `filterPlaceholder`: String. Custom placeholder text on the search filter if at least one column has `filterable` prop.
+- onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Each function has a parameter which is the real value of that column. Default: `undefined`.
+- onFilter: see `onSort`.
+- tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
+- tableClass: String. Classes used in `<table>` element tag. Default: `''`.
+- tableHeader **(Required)**: Array of objects, each consists of:
+  - `cell`: Function. Returns a React Component for the table to be rendered.
+  - `filterable`: Boolean. Enable/disable filtering on the column.
+  - `prop` **(Required)**: String. Column name for the table body.
+  - `sortable`: Boolean. Enable/disable sorting on the column.
+  - `title`: String. Text for the header column.
+- rowsPerPage: Integer. Initial rows per page. If this and `rowsPerPageOption` are provided but `rowsPerPage` is not a member of `rowsPerPageOption`, then `rowsPerPageOption[0]` will be chosen as the property instead. If not provided, then no pagination options will be rendered. Default: `undefined`.
+- rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
 
 ## Styling
 
@@ -103,15 +105,15 @@ const header = [
 ];
 
 const body = [
-  { 
-    username: 'i-am-billy', 
-    realname: 'Billy', 
-    location: 'Mars', 
+  {
+    username: 'i-am-billy',
+    realname: 'Billy',
+    location: 'Mars',
     date: moment().subtract(1, 'days').format('Do MMMM YYYY'),
   },
-  { 
-    username: 'john-nhoj', 
-    realname: 'John', 
+  {
+    username: 'john-nhoj',
+    realname: 'John',
     location: 'Saturn',
     date: moment().subtract(2, 'days').format('Do MMMM YYYY'),
   }
