@@ -9,7 +9,7 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ## This is unstable release
 
-Please note this is the `next` branch. For the stable release, please check [the master branch](https://github.com/Imballinst/react-bs-datatable/tree/gh-pages).
+Please note this is the `next` branch. For the stable release, please check [the master branch](https://github.com/Imballinst/react-bs-datatable/tree/master).
 
 ## Table of Contents
 
