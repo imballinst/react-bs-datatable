@@ -11,14 +11,14 @@ import FontAwesome from './modules/FontAwesome';
 class Filter extends React.Component {
   onInputChange = (e) => {
     this.props.onChangeFilter(e.target.value);
-  }
+  };
 
   onClearFilter = () => {
     this.props.onChangeFilter('');
-  }
+  };
 
   render() {
-    const { tableHeader, filterText, keyName } = this.props;
+    const { tableHeader, filterText, keyName, placeholder } = this.props;
     let filterRender = null;
     let i = 0;
     let filterable = false;
@@ -38,7 +38,7 @@ class Filter extends React.Component {
             <FormControl
               type="text"
               value={filterText}
-              placeholder="Enter text"
+              placeholder={placeholder}
               onChange={this.onInputChange}
             />
             <InputGroup.Button>
@@ -60,6 +60,11 @@ Filter.propTypes = {
   keyName: PropTypes.string.isRequired,
   filterText: PropTypes.string.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+};
+
+Filter.defaultProps = {
+  placeholder: 'Enter text',
 };
 
 export default Filter;
