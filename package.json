@@ -7,6 +7,7 @@
     "test": "jest && yarn eslint",
     "jest:watch": "jest --watch",
     "eslint": "eslint --fix ./src/.",
+    "webpack": "webpack",
     "build": "yarn build:lib && git add -A",
     "build:lib": "cd src && babel . --out-dir ../lib --ignore test.js",
     "analyze": "webpack --json | webpack-bundle-size-analyzer"
@@ -50,6 +51,8 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.8",
