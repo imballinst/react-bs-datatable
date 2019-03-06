@@ -21,7 +21,15 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
+  externals: [
+    function(context, request, callback) {
+      if (/(react|react-bootstrap)/.test(request)) {
+        return callback(null, 'commonjs ' + request);
+      }
+      callback();
+    }
+  ]
 };
 
 // // Old Webpack config
