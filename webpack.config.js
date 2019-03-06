@@ -1,4 +1,5 @@
 const path = require('path');
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -22,6 +23,7 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist')
   },
+  plugins: [new LodashModuleReplacementPlugin()],
   externals: [
     function(context, request, callback) {
       if (/(react|react-bootstrap)/.test(request)) {
