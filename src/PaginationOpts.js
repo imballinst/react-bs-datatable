@@ -4,22 +4,17 @@ import _forEach from 'lodash/forEach';
 import _orderBy from 'lodash/orderBy';
 import _includes from 'lodash/includes';
 
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Form from 'react-bootstrap/lib/Form';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
 
 class PaginationOpts extends React.Component {
-  onRowsPerPageChange = (e) => {
+  onRowsPerPageChange = e => {
     this.props.onRowsPerPageChange(e.target.value);
-  }
+  };
 
   render() {
-    const {
-      labels,
-      rowsPerPage,
-      keyName,
-      rowsPerPageOption,
-    } = this.props;
+    const { labels, rowsPerPage, keyName, rowsPerPageOption } = this.props;
     let selectOption = [];
     let renderedElements = null;
 
@@ -27,8 +22,8 @@ class PaginationOpts extends React.Component {
       selectOption.push(rowsPerPage);
 
       // Make sure there are no duplicates being pushed
-      _forEach(rowsPerPageOption, (opt) => {
-        if (!_includes(selectOption, opt) && typeof(opt) === 'number') {
+      _forEach(rowsPerPageOption, opt => {
+        if (!_includes(selectOption, opt) && typeof opt === 'number') {
           selectOption.push(opt);
         }
       });
@@ -37,15 +32,13 @@ class PaginationOpts extends React.Component {
       selectOption = _orderBy(selectOption, undefined, 'asc');
 
       // Push to array of React Elements
-      _forEach(selectOption, (option) => {
+      _forEach(selectOption, option => {
         const optionProps = {
           key: `${keyName}-page-opt-${option}`,
-          value: option,
+          value: option
         };
 
-        selectOption.push(
-          <option {...optionProps}>{option}</option>,
-        );
+        selectOption.push(<option {...optionProps}>{option}</option>);
       });
 
       renderedElements = (
@@ -60,8 +53,8 @@ class PaginationOpts extends React.Component {
               onChange={this.onRowsPerPageChange}
             >
               {selectOption}
-            </FormControl>
-            {' '}{labels.entries || 'entries'}
+            </FormControl>{' '}
+            {labels.entries || 'entries'}
           </FormGroup>
         </Form>
       );
@@ -76,12 +69,12 @@ PaginationOpts.propTypes = {
   labels: PropTypes.object.isRequired,
   onRowsPerPageChange: PropTypes.func.isRequired,
   rowsPerPageOption: PropTypes.array,
-  rowsPerPage: PropTypes.number,
+  rowsPerPage: PropTypes.number
 };
 
 PaginationOpts.defaultProps = {
   rowsPerPage: undefined,
-  rowsPerPageOption: undefined,
+  rowsPerPageOption: undefined
 };
 
 export default PaginationOpts;

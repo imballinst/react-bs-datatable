@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Table from 'react-bootstrap/lib/Table';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
 
 import classNames from 'classnames';
 
@@ -54,7 +54,7 @@ class Datatable extends React.Component {
       sortedProp: defaultSort,
       rowsPerPage: defaultRowsPerPage,
       currentPage: 1,
-      filterText: '',
+      filterText: ''
     };
   }
 
@@ -62,27 +62,27 @@ class Datatable extends React.Component {
     this.setState({
       filterText: '',
       currentPage: 1,
-      rowsPerPage: newProps.rowsPerPage,
+      rowsPerPage: newProps.rowsPerPage
     });
   }
 
-  onChangeFilter = (text) => {
+  onChangeFilter = text => {
     this.setState({
       filterText: text,
-      currentPage: 1,
+      currentPage: 1
     });
   };
 
   onPageNavigate = nextPage => () => {
     this.setState({
-      currentPage: nextPage,
+      currentPage: nextPage
     });
   };
 
-  onRowsPerPageChange = (numOfPage) => {
+  onRowsPerPageChange = numOfPage => {
     this.setState({
       rowsPerPage: parseInt(numOfPage, 10),
-      currentPage: 1,
+      currentPage: 1
     });
   };
 
@@ -97,7 +97,7 @@ class Datatable extends React.Component {
     }
 
     this.setState({
-      sortedProp: nextSort,
+      sortedProp: nextSort
     });
   };
 
@@ -111,14 +111,14 @@ class Datatable extends React.Component {
       tableClass: customClass,
       keyName,
       labels,
-      rowsPerPageOption,
+      rowsPerPageOption
     } = this.props;
 
     const filteredData = filterData(
       tableHeader,
       filterText,
       onFilter,
-      tableBody,
+      tableBody
     );
     const sortedData = sortData(sortedProp, onSort, filteredData);
 
@@ -126,7 +126,7 @@ class Datatable extends React.Component {
 
     const tableClass = classNames({
       'table-datatable': true,
-      [`${customClass}`]: true,
+      [`${customClass}`]: true
     });
 
     return (
@@ -190,7 +190,7 @@ Datatable.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableClass: PropTypes.string,
-  labels: PropTypes.object,
+  labels: PropTypes.object
 };
 
 Datatable.defaultProps = {
@@ -200,7 +200,7 @@ Datatable.defaultProps = {
   rowsPerPage: undefined,
   rowsPerPageOption: undefined,
   tableClass: '',
-  labels: {},
+  labels: {}
 };
 
 export default Datatable;
