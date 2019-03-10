@@ -35,9 +35,11 @@
   },
   "homepage": "https://github.com/Imballinst/react-bs-datatable#readme",
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
-    "babel-cli": "^6.26.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
@@ -53,10 +55,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
     "classnames": "^2.2.5",
-    "lodash": "^4.17.4",
     "prop-types": "^15.5.8",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.5",

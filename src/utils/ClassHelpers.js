@@ -1,13 +1,11 @@
 import React from 'react';
-import _filter from 'lodash/filter';
-import _orderBy from 'lodash/orderBy';
-import _includes from 'lodash/includes';
-import _keys from 'lodash/keys';
 
-const getLastChildren = (reactElement) => {
+const getLastChildren = reactElement => {
   const isReactElement = React.isValidElement(reactElement);
 
-  return isReactElement ? getLastChildren(reactElement.props.children) : reactElement;
+  return isReactElement
+    ? getLastChildren(reactElement.props.children)
+    : reactElement;
 };
 
 const isPropFilterable = (tableHeader, prop) => {
@@ -33,21 +31,28 @@ const isPropFilterable = (tableHeader, prop) => {
 const sortData = (sortedProp, onSort, data) => {
   let sortedData = data;
 
-  if (sortedProp !== {}) {
+  if (sortedProp.prop !== undefined) {
     const { prop, isAscending } = sortedProp;
-    const sortMultiplier = (isAscending) ? 'asc' : 'desc';
+    const sortMultiplier = isAscending ? 1 : -1;
 
-    sortedData = _orderBy(sortedData, (value) => {
-      let quantifiedValue = getLastChildren(value[prop]);
+    sortedData = sortedData.sort((a, b) => {
+      const quantifiedValue1 = getLastChildren(a[prop]);
+      const quantifiedValue2 = getLastChildren(b[prop]);
 
       // if onSort use the onSort[prop] function
       // this is a handler for custom objects, such as Date
       if (onSort && typeof onSort[prop] === 'function') {
-        quantifiedValue = onSort[prop](quantifiedValue);
+        return onSort[prop](quantifiedValue1, quantifiedValue2);
       }
 
-      return quantifiedValue;
-    }, sortMultiplier);
+      if (quantifiedValue1 < quantifiedValue2) {
+        return -1 * sortMultiplier;
+      } else if (quantifiedValue1 > quantifiedValue2) {
+        return 1 * sortMultiplier;
+      }
+
+      return 0;
+    });
   }
 
   return sortedData;
@@ -57,14 +62,14 @@ const filterData = (tableHeader, filterText, onFilter, data) => {
   let filteredData = data;
 
   if (filterText !== '') {
-    filteredData = _filter(filteredData, (element) => {
+    filteredData = filteredData.filter(element => {
       let isElementIncluded = false;
       let i = 0;
 
-      const elementProps = _keys(element);
+      const elementProps = Object.keys(element);
       const elementPropLength = elementProps.length;
 
-      while (!isElementIncluded && (i < elementPropLength)) {
+      while (!isElementIncluded && i < elementPropLength) {
         const prop = elementProps[i];
 
         if (isPropFilterable(tableHeader, prop)) {
@@ -83,7 +88,7 @@ const filterData = (tableHeader, filterText, onFilter, data) => {
           columnValue = columnValue.toLowerCase();
 
           // If filterText is string/substring of columnValue
-          isElementIncluded = _includes(columnValue, filterText.toLowerCase());
+          isElementIncluded = columnValue.includes(filterText.toLowerCase());
         }
 
         i += 1;
@@ -114,5 +119,5 @@ export {
   isPropFilterable,
   sortData,
   filterData,
-  paginateData,
+  paginateData
 };

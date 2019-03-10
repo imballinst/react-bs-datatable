@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _forEach from 'lodash/forEach';
-import _orderBy from 'lodash/orderBy';
-import _includes from 'lodash/includes';
 
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -22,17 +19,17 @@ class PaginationOpts extends React.Component {
       selectOption.push(rowsPerPage);
 
       // Make sure there are no duplicates being pushed
-      _forEach(rowsPerPageOption, opt => {
-        if (!_includes(selectOption, opt) && typeof opt === 'number') {
+      rowsPerPageOption.forEach(opt => {
+        if (!selectOption.includes(opt) && typeof opt === 'number') {
           selectOption.push(opt);
         }
       });
 
       // Order the pagination options ascending
-      selectOption = _orderBy(selectOption, undefined, 'asc');
+      selectOption = selectOption.sort();
 
       // Push to array of React Elements
-      _forEach(selectOption, option => {
+      selectOption.forEach(option => {
         const optionProps = {
           key: `${keyName}-page-opt-${option}`,
           value: option
