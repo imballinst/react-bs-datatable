@@ -21,7 +21,11 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 ## Installation
 
 ```
+# With NPM
 npm install --save react-bs-datatable bootstrap-sass font-awesome
+
+# With Yarn
+yarn add react-bs-datatable bootstrap-sass font-awesome
 ```
 
 ## Key features
@@ -180,13 +184,14 @@ class CustomTable extends Datatable {
       tableHeader,
       tableBody,
       onSort,
+      onFilter,
       tableClass: customClass,
       keyName,
       labels,
       rowsPerPageOption,
     } = this.props;
 
-    const filteredData = filterData(tableHeader, filterText, tableBody);
+    const filteredData = filterData(tableHeader, filterText, onFilter, tableBody);
     const sortedData = sortData(sortedProp, onSort, filteredData);
 
     const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
@@ -258,6 +263,8 @@ class CustomTable extends Datatable {
 - [x] Option to separate presentational and raw data (by using `cell` property in `tableHeader`)
 - [ ] Lazy loading for big data (virtualization, asynchronous pagination)
 - [ ] Better documentation, better demo page
+- [ ] Webpack 4
+- [ ] Reduce the bundle size
 
 ## Contributing
 
