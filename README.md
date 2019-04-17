@@ -67,12 +67,13 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 
 This package doesn't include Bootstrap stylesheets. If you want to include it, you can do so by importing its CSS **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass). You can also style the table yourself.
 
-```
+```scss
 .table-datatable {
   .thead-default {
     .thead-tr-default {
       .thead-th-default {
-        &.sortable { // If and only if a column is sortable
+        &.sortable {
+          // If and only if a column is sortable
           &:hover {
             background: #000; // Your color of choice
             cursor: pointer; // Changes the cursor into a pointer on hover
@@ -94,7 +95,7 @@ This package doesn't include Bootstrap stylesheets. If you want to include it, y
 
 ## Example usage
 
-```
+```Javascript
 import moment from 'moment'; // Example for onSort prop
 import React from 'react'; // Import React
 import { render } from 'react-dom'; // Import render method
@@ -157,9 +158,9 @@ const customLabels = {
 
 ## Extending the Table
 
-You can extend the table if you want to create your own layout (position the text filter to the top right, etc). You'll have to import the components from `react-bs-datatable/lib` folder.
+You can extend the table if you want to create your own layout (position the text filter to the top right, etc). You'll have to import the components from `react-bs-datatable/lib` folder. [CodeSandbox Example](https://codesandbox.io/s/kmzm5wkjlo).
 
-```
+```Javascript
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Table from 'react-bootstrap/lib/Table';
@@ -228,6 +229,7 @@ class CustomTable extends Datatable {
             onChangeFilter={this.onChangeFilter}
             filterText={filterText}
             keyName={keyName}
+            placeholder={labels.filterPlaceholder}
           />
         </Col>
         <Col xs={12}>
