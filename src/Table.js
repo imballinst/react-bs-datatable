@@ -101,6 +101,19 @@ class Datatable extends React.Component {
     });
   };
 
+  processData(tableHeader, tableBody, onSort, onFilter) {
+    const filteredData = filterData(
+      tableHeader,
+      filterText,
+      onFilter,
+      tableBody
+    );
+    const sortedData = sortData(sortedProp, onSort, filteredData);
+    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
+
+    return paginatedData;
+  }
+
   render() {
     const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
     const {
@@ -114,20 +127,8 @@ class Datatable extends React.Component {
       rowsPerPageOption
     } = this.props;
 
-    const filteredData = filterData(
-      tableHeader,
-      filterText,
-      onFilter,
-      tableBody
-    );
-    const sortedData = sortData(sortedProp, onSort, filteredData);
-
-    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
-
-    const tableClass = classNames({
-      'table-datatable': true,
-      [`${customClass}`]: true
-    });
+    const data = this.processData(tableHeader, tableBody, onSort, onFilter);
+    const tableClass = classNames('table-datatable', customClass);
 
     return (
       <Row>
@@ -171,7 +172,7 @@ class Datatable extends React.Component {
               tableHeader={tableHeader}
               keyName={keyName}
               labels={labels}
-              paginatedData={paginatedData}
+              data={data}
             />
           </Table>
         </Col>
