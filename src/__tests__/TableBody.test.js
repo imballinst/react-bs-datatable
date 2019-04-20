@@ -8,16 +8,14 @@ function setup() {
     paginatedData: [],
     keyName: 'pagination-keyname',
     tableHeader: [],
-    labels: {},
+    labels: {}
   };
 
-  const enzymeWrapper = shallow(
-    <TableBody {...props} />,
-  );
+  const enzymeWrapper = shallow(<TableBody {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 

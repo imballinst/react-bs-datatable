@@ -3,13 +3,23 @@ import { shallow } from 'enzyme';
 
 import Datatable from '../Table';
 
-const cellTransform = row => row.name.split(' ').reverse().join(' ');
+const cellTransform = row =>
+  row.name
+    .split(' ')
+    .reverse()
+    .join(' ');
 
 function setup() {
   const tableHeader = [
     { title: 'Username', prop: 'userID', sortable: true, filterable: true },
     { title: 'Person Name', prop: 'name', sortable: true, filterable: true },
-    { title: 'Person Name (reversed)', prop: 'reversedName', cell: cellTransform, sortable: true, filterable: true },
+    {
+      title: 'Person Name (reversed)',
+      prop: 'reversedName',
+      cell: cellTransform,
+      sortable: true,
+      filterable: true
+    }
   ];
 
   const tableBody = [
@@ -24,7 +34,7 @@ function setup() {
     { userID: 'sir-bobby-3', name: 'Bobby Charly 3' },
     { userID: 'sir-bobby-4', name: 'Bobby Charly 4' },
     { userID: 'sir-bobby-5', name: 'Bobby Charly 5' },
-    { userID: 'sir-bobby-6', name: 'Bobby Charly 6' },
+    { userID: 'sir-bobby-6', name: 'Bobby Charly 6' }
   ];
 
   const props = {
@@ -35,18 +45,16 @@ function setup() {
     rowsPerPageOption: [5, 10, 15, 20],
     initialSort: {
       prop: 'userID',
-      isAscending: true,
+      isAscending: true
     },
-    keyName: 'test-table',
+    keyName: 'test-table'
   };
 
-  const enzymeWrapper = shallow(
-    <Datatable {...props} />,
-  );
+  const enzymeWrapper = shallow(<Datatable {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
@@ -63,7 +71,13 @@ describe('Datatable component (src/Datatable)', () => {
     expect(enzymeWrapper.instance().props.tableHeader).toEqual([
       { title: 'Username', prop: 'userID', sortable: true, filterable: true },
       { title: 'Person Name', prop: 'name', sortable: true, filterable: true },
-      { title: 'Person Name (reversed)', prop: 'reversedName', cell: cellTransform, sortable: true, filterable: true },
+      {
+        title: 'Person Name (reversed)',
+        prop: 'reversedName',
+        cell: cellTransform,
+        sortable: true,
+        filterable: true
+      }
     ]);
     expect(enzymeWrapper.instance().props.tableBody).toEqual([
       { userID: 'i-am-tyler-1', name: 'Tyler Olfson 1' },
@@ -77,16 +91,21 @@ describe('Datatable component (src/Datatable)', () => {
       { userID: 'sir-bobby-3', name: 'Bobby Charly 3' },
       { userID: 'sir-bobby-4', name: 'Bobby Charly 4' },
       { userID: 'sir-bobby-5', name: 'Bobby Charly 5' },
-      { userID: 'sir-bobby-6', name: 'Bobby Charly 6' },
+      { userID: 'sir-bobby-6', name: 'Bobby Charly 6' }
     ]);
     expect(enzymeWrapper.instance().props.tableClass).toEqual(
-      'table table-striped table-responsive',
+      'table table-striped table-responsive'
     );
     expect(enzymeWrapper.instance().props.rowsPerPage).toBe(5);
-    expect(enzymeWrapper.instance().props.rowsPerPageOption).toEqual([5, 10, 15, 20]);
+    expect(enzymeWrapper.instance().props.rowsPerPageOption).toEqual([
+      5,
+      10,
+      15,
+      20
+    ]);
     expect(enzymeWrapper.instance().props.initialSort).toEqual({
       prop: 'userID',
-      isAscending: true,
+      isAscending: true
     });
     expect(enzymeWrapper.instance().props.keyName).toBe('test-table');
 
@@ -100,16 +119,19 @@ describe('Datatable component (src/Datatable)', () => {
 
     expect(enzymeWrapper.state('sortedProp')).toEqual({
       prop: 'userID',
-      isAscending: true,
+      isAscending: true
     });
 
-    enzymeWrapper.find('.thead-th-default').at(0).simulate('click', {
-      preventDefault: jest.fn(),
-    });
+    enzymeWrapper
+      .find('.thead-th-default')
+      .at(0)
+      .simulate('click', {
+        preventDefault: jest.fn()
+      });
 
     expect(enzymeWrapper.state('sortedProp')).toEqual({
       prop: 'userID',
-      isAscending: true,
+      isAscending: true
     });
   });
 });

@@ -11,16 +11,14 @@ function setup() {
     keyName: 'pagination-keyname',
     currentPage: 1,
     onPageNavigate,
-    rowsPerPage: 5,
+    rowsPerPage: 5
   };
 
-  const enzymeWrapper = shallow(
-    <Pagination {...props} />,
-  );
+  const enzymeWrapper = shallow(<Pagination {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 

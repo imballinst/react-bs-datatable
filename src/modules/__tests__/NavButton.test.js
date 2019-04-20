@@ -8,16 +8,14 @@ function setup() {
     pageNavNumber: 5,
     disabled: false,
     onPageNavigate: jest.fn(val => expect(val).toBe(5)),
-    label: 'test-label',
+    label: 'test-label'
   };
 
-  const enzymeWrapper = shallow(
-    <NavButton {...props} />,
-  );
+  const enzymeWrapper = shallow(<NavButton {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
@@ -39,6 +37,8 @@ describe('NavButton component (src/modules/NavButton)', () => {
   it('should call the jest mock function onPageNavigate', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.onPageNavigate.mock.calls.length).toBe(1);
+    expect(
+      enzymeWrapper.instance().props.onPageNavigate.mock.calls.length
+    ).toBe(1);
   });
 });
