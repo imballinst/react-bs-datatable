@@ -8,51 +8,49 @@ import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
 
-class Filter extends React.Component {
-  onInputChange = e => {
-    this.props.onChangeFilter(e.target.value);
-  };
-
-  onClearFilter = () => {
-    this.props.onChangeFilter('');
-  };
-
-  render() {
-    const { tableHeader, filterText, keyName, placeholder } = this.props;
-    let filterRender = null;
-    let i = 0;
-    let filterable = false;
-
-    while (!filterable && i < tableHeader.length) {
-      if (tableHeader[i].filterable === true) {
-        filterable = true;
-      }
-
-      i += 1;
-    }
-
-    if (filterable) {
-      filterRender = (
-        <FormGroup controlId={`select-filter-${keyName}`}>
-          <InputGroup>
-            <FormControl
-              type="text"
-              value={filterText}
-              placeholder={placeholder}
-              onChange={this.onInputChange}
-            />
-            <InputGroup.Button>
-              <Button onClick={this.onClearFilter}>
-                <FontAwesome icon="times" additionalClass="fa-fw" />
-              </Button>
-            </InputGroup.Button>
-          </InputGroup>
-        </FormGroup>
-      );
-    }
-
-    return filterRender;
+function Filter({ tableHeader, filterText, keyName, placeholder }) {
+  // Event handlers.
+  function onInputChange(e) {
+    onChangeFilter(e.target.value);
   }
+
+  function onClearFilter() {
+    onChangeFilter('');
+  }
+
+  let filterRender = null;
+  let i = 0;
+  let filterable = false;
+
+  while (!filterable && i < tableHeader.length) {
+    if (tableHeader[i].filterable === true) {
+      filterable = true;
+    }
+
+    i += 1;
+  }
+
+  if (filterable) {
+    filterRender = (
+      <FormGroup controlId={`select-filter-${keyName}`}>
+        <InputGroup>
+          <FormControl
+            type="text"
+            value={filterText}
+            placeholder={placeholder}
+            onChange={onInputChange}
+          />
+          <InputGroup.Button>
+            <Button onClick={onClearFilter}>
+              <FontAwesome icon="times" additionalClass="fa-fw" />
+            </Button>
+          </InputGroup.Button>
+        </InputGroup>
+      </FormGroup>
+    );
+  }
+
+  return filterRender;
 }
 
 Filter.propTypes = {
