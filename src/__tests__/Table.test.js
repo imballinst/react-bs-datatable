@@ -109,13 +109,13 @@ describe('Datatable component (src/Datatable)', () => {
     });
     expect(enzymeWrapper.instance().props.keyName).toBe('test-table');
 
-    // TODO: Fix this later. This is breaking the test.
+    // FIXME: this test is broken.
     // expect(enzymeWrapper.find('Row').length).toBe(1);
     // expect(enzymeWrapper.find('Col').length).toBe(4);
     // expect(enzymeWrapper.find('Table').length).toBe(1);
   });
 
-  // TODO: Fix this later. This is breaking the test.
+  // FIXME: this test is broken.
   // it('should change the sortedProp state', () => {
   //   const { props, enzymeWrapper } = setup();
 

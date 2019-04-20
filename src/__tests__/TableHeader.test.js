@@ -31,12 +31,6 @@ describe('TableHeader component (src/TableHeader)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.prop('tableHeader')).toEqual([]);
-    expect(enzymeWrapper.prop('keyName')).toBe('test-keyname');
-    expect(enzymeWrapper.prop('sortedProp')).toEqual({
-      prop: 'test-prop',
-      isAscending: true
-    });
-    expect(enzymeWrapper.prop('onSortChange')).toBe(onSortChange);
+    expect(enzymeWrapper.prop('className')).toBe('thead-default');
   });
 });
