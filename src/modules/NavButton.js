@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/Button';
 
-const NavButton = props => {
-  const { pageNavNumber, disabled, onPageNavigate, label } = props;
-
+function NavButton({ pageNavNumber, disabled, onPageNavigate, label }) {
   const btnProps = {
     disabled,
     onClick: onPageNavigate(pageNavNumber)
   };
 
   return <Button {...btnProps}>{label}</Button>;
-};
+}
 
 NavButton.propTypes = {
   pageNavNumber: PropTypes.number.isRequired,
