@@ -29,7 +29,7 @@ const isPropFilterable = (tableHeader, prop) => {
 };
 
 const sortData = (sortedProp, onSort, data) => {
-  let sortedData = data;
+  let sortedData = [...data];
 
   if (sortedProp.prop !== undefined) {
     const { prop, isAscending } = sortedProp;
@@ -59,7 +59,7 @@ const sortData = (sortedProp, onSort, data) => {
 };
 
 const filterData = (tableHeader, filterText, onFilter, data) => {
-  let filteredData = data;
+  let filteredData = [...data];
 
   if (filterText !== '') {
     filteredData = filteredData.filter(element => {
@@ -102,7 +102,7 @@ const filterData = (tableHeader, filterText, onFilter, data) => {
 };
 
 const paginateData = (rowsPerPage, currentPage, data) => {
-  let paginatedData = data;
+  let paginatedData = [...data];
 
   if (rowsPerPage !== undefined) {
     const startRow = (currentPage - 1) * rowsPerPage;

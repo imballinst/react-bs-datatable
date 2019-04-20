@@ -5,7 +5,7 @@ import TableBody from '../TableBody';
 
 function setup() {
   const props = {
-    paginatedData: [],
+    data: [],
     keyName: 'pagination-keyname',
     tableHeader: [],
     labels: {}
@@ -29,7 +29,7 @@ describe('TableBody component (src/TableBody)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.paginatedData).toEqual([]);
+    expect(enzymeWrapper.instance().props.data).toEqual([]);
     expect(enzymeWrapper.instance().props.keyName).toBe('pagination-keyname');
     expect(enzymeWrapper.instance().props.tableHeader).toEqual([]);
     expect(enzymeWrapper.instance().props.labels).toEqual({});
