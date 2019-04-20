@@ -102,6 +102,7 @@ class Datatable extends React.Component {
   };
 
   processData(tableHeader, tableBody, onSort, onFilter) {
+    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
     const filteredData = filterData(
       tableHeader,
       filterText,
@@ -152,7 +153,7 @@ class Datatable extends React.Component {
         </Col>
         <Col xs={12} md={4} className="text-right">
           <Pagination
-            data={sortedData}
+            data={tableBody}
             rowsPerPage={rowsPerPage}
             keyName={keyName}
             currentPage={currentPage}

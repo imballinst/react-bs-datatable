@@ -6,14 +6,14 @@ import Button from 'react-bootstrap/Button';
 
 import NavButton from './modules/NavButton';
 
-const Pagination = ({
+function Pagination({
   data,
   rowsPerPage,
   keyName,
   currentPage,
   onPageNavigate,
   labels
-}) => {
+}) {
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
@@ -95,7 +95,7 @@ const Pagination = ({
   }
 
   return renderedElements;
-};
+}
 
 Pagination.propTypes = {
   data: PropTypes.array.isRequired,

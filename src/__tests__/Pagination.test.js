@@ -32,10 +32,7 @@ describe('Pagination component (src/Pagination)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.prop('data')).toEqual([]);
-    expect(enzymeWrapper.prop('keyName')).toBe('pagination-keyname');
-    expect(enzymeWrapper.prop('currentPage')).toBe(1);
-    expect(enzymeWrapper.prop('rowsPerPage')).toBe(5);
-    expect(enzymeWrapper.prop('onPageNavigate')).toBe(onPageNavigate);
+    expect(enzymeWrapper.prop('className')).toEqual('btn-group-page-nav');
+    expect(enzymeWrapper.prop('children').length).toBe(4);
   });
 });

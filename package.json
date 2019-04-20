@@ -9,7 +9,7 @@
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
     "build": "yarn build:lib && git add -A",
-    "build:lib": "cd src && babel . --out-dir ../lib --ignore test.js",
+    "build:lib": "cd src && babel . --out-dir ../lib --ignore *.test.js",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "repository": {
