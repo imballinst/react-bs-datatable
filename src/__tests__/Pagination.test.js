@@ -32,10 +32,10 @@ describe('Pagination component (src/Pagination)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.data).toEqual([]);
-    expect(enzymeWrapper.instance().props.keyName).toBe('pagination-keyname');
-    expect(enzymeWrapper.instance().props.currentPage).toBe(1);
-    expect(enzymeWrapper.instance().props.rowsPerPage).toBe(5);
-    expect(enzymeWrapper.instance().props.onPageNavigate).toBe(onPageNavigate);
+    expect(enzymeWrapper.prop('data')).toEqual([]);
+    expect(enzymeWrapper.prop('keyName')).toBe('pagination-keyname');
+    expect(enzymeWrapper.prop('currentPage')).toBe(1);
+    expect(enzymeWrapper.prop('rowsPerPage')).toBe(5);
+    expect(enzymeWrapper.prop('onPageNavigate')).toBe(onPageNavigate);
   });
 });

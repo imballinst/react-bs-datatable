@@ -29,9 +29,9 @@ describe('TableBody component (src/TableBody)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.data).toEqual([]);
-    expect(enzymeWrapper.instance().props.keyName).toBe('pagination-keyname');
-    expect(enzymeWrapper.instance().props.tableHeader).toEqual([]);
-    expect(enzymeWrapper.instance().props.labels).toEqual({});
+    expect(enzymeWrapper.prop('data')).toEqual([]);
+    expect(enzymeWrapper.prop('keyName')).toBe('pagination-keyname');
+    expect(enzymeWrapper.prop('tableHeader')).toEqual([]);
+    expect(enzymeWrapper.prop('labels')).toEqual({});
   });
 });
