@@ -3,9 +3,9 @@ import React from 'react';
 const getLastChildren = reactElement => {
   const isReactElement = React.isValidElement(reactElement);
 
-  return isReactElement
-    ? getLastChildren(reactElement.props.children)
-    : reactElement;
+  return isReactElement ?
+    getLastChildren(reactElement.props.children) :
+    reactElement;
 };
 
 const isPropFilterable = (tableHeader, prop) => {
