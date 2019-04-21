@@ -32,18 +32,8 @@ describe('PaginationOpts component (src/PaginationOpts)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.keyName).toBe('test-keyname');
-    expect(enzymeWrapper.instance().props.labels).toEqual({});
-    expect(enzymeWrapper.instance().props.rowsPerPage).toBe(5);
-    expect(enzymeWrapper.instance().props.rowsPerPageOption).toEqual([
-      5,
-      10,
-      15,
-      20
-    ]);
-    expect(enzymeWrapper.instance().props.onRowsPerPageChange).toBe(
-      onRowsPerPageChange
-    );
+    expect(enzymeWrapper.prop('inline')).toBe(true);
+    expect(enzymeWrapper.prop('children').props.children.length).toBe(3);
   });
 
   it('should call onRowsPerPageChange on change', () => {

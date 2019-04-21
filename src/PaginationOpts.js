@@ -51,7 +51,7 @@ function PaginationOpts({
     renderedElements = (
       <Form inline>
         <Form.Group controlId="formGroupPagination">
-          {labels.show || 'Show'}{' '}
+          <span>{labels.show || 'Show'} </span>
           <Form.Control
             name="form-control-pagination"
             defaultValue={rowsPerPage}
@@ -60,8 +60,8 @@ function PaginationOpts({
             onChange={rowChangeHandler}
           >
             {selectOption}
-          </Form.Control>{' '}
-          {labels.entries || 'entries'}
+          </Form.Control>
+          <span> {labels.entries || 'entries'}</span>
         </Form.Group>
       </Form>
     );
