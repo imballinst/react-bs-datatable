@@ -40,11 +40,11 @@ function Filter({ tableHeader, filterText, keyName, placeholder }) {
             placeholder={placeholder}
             onChange={onInputChange}
           />
-          <InputGroup.Prepend>
+          <InputGroup.Append>
             <Button onClick={onClearFilter}>
               <FontAwesome icon="times" additionalClass="fa-fw" />
             </Button>
-          </InputGroup.Prepend>
+          </InputGroup.Append>
         </InputGroup>
       </FormGroup>
     );

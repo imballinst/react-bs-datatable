@@ -161,7 +161,7 @@ class Datatable extends React.Component {
             labels={labels}
           />
         </Col>
-        <Col xs={12}>
+        <Col xs="12">
           <Table className={tableClass}>
             <TableHeader
               tableHeader={tableHeader}

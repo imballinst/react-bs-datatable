@@ -4,3 +4,4 @@ npm-debug.log
 assets/
 *.orig
 stats.json
+*.log
