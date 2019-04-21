@@ -1,7 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Datatable from '../Table';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
 
 const cellTransform = row =>
   row.name
@@ -50,7 +53,7 @@ function setup() {
     keyName: 'test-table'
   };
 
-  const enzymeWrapper = shallow(<Datatable {...props} />);
+  const enzymeWrapper = mount(<Datatable {...props} />);
 
   return {
     props,
@@ -109,31 +112,29 @@ describe('Datatable component (src/Datatable)', () => {
     });
     expect(enzymeWrapper.instance().props.keyName).toBe('test-table');
 
-    // FIXME: this test is broken.
-    // expect(enzymeWrapper.find('Row').length).toBe(1);
-    // expect(enzymeWrapper.find('Col').length).toBe(4);
-    // expect(enzymeWrapper.find('Table').length).toBe(1);
+    expect(enzymeWrapper.find(Row).length).toBe(1);
+    expect(enzymeWrapper.find(Col).length).toBe(4);
+    expect(enzymeWrapper.find(Table).length).toBe(1);
   });
 
-  // FIXME: this test is broken.
-  // it('should change the sortedProp state', () => {
-  //   const { props, enzymeWrapper } = setup();
+  it('should change the sortedProp state', () => {
+    const { props, enzymeWrapper } = setup();
 
-  //   expect(enzymeWrapper.state('sortedProp')).toEqual({
-  //     prop: 'userID',
-  //     isAscending: true
-  //   });
+    expect(enzymeWrapper.state('sortedProp')).toEqual({
+      prop: 'userID',
+      isAscending: true
+    });
 
-  //   enzymeWrapper
-  //     .find('.thead-th-default')
-  //     .at(0)
-  //     .simulate('click', {
-  //       preventDefault: jest.fn()
-  //     });
+    enzymeWrapper
+      .find('.thead-th-default')
+      .at(0)
+      .simulate('click', {
+        preventDefault: jest.fn()
+      });
 
-  //   expect(enzymeWrapper.state('sortedProp')).toEqual({
-  //     prop: 'userID',
-  //     isAscending: true
-  //   });
-  // });
+    expect(enzymeWrapper.state('sortedProp')).toEqual({
+      prop: 'userID',
+      isAscending: false
+    });
+  });
 });
