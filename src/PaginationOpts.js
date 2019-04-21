@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormGroup from 'react-bootstrap/FormGroup';
-import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 
 class PaginationOpts extends React.Component {
@@ -40,19 +38,19 @@ class PaginationOpts extends React.Component {
 
       renderedElements = (
         <Form inline>
-          <FormGroup controlId="formGroupPagination">
+          <Form.Group controlId="formGroupPagination">
             {labels.show || 'Show'}{' '}
-            <FormControl
+            <Form.Control
               name="form-control-pagination"
               defaultValue={rowsPerPage}
-              componentClass="select"
+              as="select"
               placeholder="select"
               onChange={this.onRowsPerPageChange}
             >
               {selectOption}
-            </FormControl>{' '}
+            </Form.Control>{' '}
             {labels.entries || 'entries'}
-          </FormGroup>
+          </Form.Group>
         </Form>
       );
     }
