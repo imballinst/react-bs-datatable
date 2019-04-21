@@ -205,4 +205,14 @@ Datatable.defaultProps = {
   labels: {}
 };
 
+export {
+  sortData,
+  filterData,
+  paginateData,
+  Pagination,
+  PaginationOpts,
+  TableHeader,
+  TableBody,
+  Filter
+};
 export default Datatable;
