@@ -8,7 +8,13 @@ import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
 
-function Filter({ tableHeader, filterText, keyName, placeholder }) {
+function Filter({
+  tableHeader,
+  filterText,
+  keyName,
+  placeholder,
+  onChangeFilter
+}) {
   // Event handlers.
   function onInputChange(e) {
     onChangeFilter(e.target.value);
