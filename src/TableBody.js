@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 
 import BodyRow from './BodyRow';
 
-const TableBody = ({ tableHeader, keyName, labels, paginatedData }) => {
+const TableBody = ({ tableHeader, keyName, labels, data }) => {
   const body = [];
 
-  if (paginatedData.length !== 0) {
-    for (let i = 0; i < paginatedData.length; i += 1) {
+  if (data.length !== 0) {
+    for (let i = 0; i < data.length; i += 1) {
       body.push(
         <BodyRow
           key={`${keyName}-row-${i}`}
           tableHeader={tableHeader}
           keyName={keyName}
-          data={paginatedData}
+          data={data}
           rowIdx={i}
-        />,
+        />
       );
     }
   } else {
@@ -24,18 +24,18 @@ const TableBody = ({ tableHeader, keyName, labels, paginatedData }) => {
         <td className="tbody-td-default" colSpan={tableHeader.length}>
           {labels.noResults || 'No results to be shown.'}
         </td>
-      </tr>,
+      </tr>
     );
   }
 
-  return (<tbody className="tbody-default">{body}</tbody>);
+  return <tbody className="tbody-default">{body}</tbody>;
 };
 
 TableBody.propTypes = {
   tableHeader: PropTypes.array.isRequired,
   keyName: PropTypes.string.isRequired,
   labels: PropTypes.object.isRequired,
-  paginatedData: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired
 };
 
 export default TableBody;

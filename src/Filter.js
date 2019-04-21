@@ -1,58 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputGroup from 'react-bootstrap/lib/InputGroup';
-import Button from 'react-bootstrap/lib/Button';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
 
-class Filter extends React.Component {
-  onInputChange = (e) => {
-    this.props.onChangeFilter(e.target.value);
-  };
-
-  onClearFilter = () => {
-    this.props.onChangeFilter('');
-  };
-
-  render() {
-    const { tableHeader, filterText, keyName, placeholder } = this.props;
-    let filterRender = null;
-    let i = 0;
-    let filterable = false;
-
-    while (!filterable && i < tableHeader.length) {
-      if (tableHeader[i].filterable === true) {
-        filterable = true;
-      }
-
-      i += 1;
-    }
-
-    if (filterable) {
-      filterRender = (
-        <FormGroup controlId={`select-filter-${keyName}`}>
-          <InputGroup>
-            <FormControl
-              type="text"
-              value={filterText}
-              placeholder={placeholder}
-              onChange={this.onInputChange}
-            />
-            <InputGroup.Button>
-              <Button onClick={this.onClearFilter}>
-                <FontAwesome icon="times" additionalClass="fa-fw" />
-              </Button>
-            </InputGroup.Button>
-          </InputGroup>
-        </FormGroup>
-      );
-    }
-
-    return filterRender;
+function Filter({ tableHeader, filterText, keyName, placeholder }) {
+  // Event handlers.
+  function onInputChange(e) {
+    onChangeFilter(e.target.value);
   }
+
+  function onClearFilter() {
+    onChangeFilter('');
+  }
+
+  let filterRender = null;
+  let i = 0;
+  let filterable = false;
+
+  while (!filterable && i < tableHeader.length) {
+    if (tableHeader[i].filterable === true) {
+      filterable = true;
+    }
+
+    i += 1;
+  }
+
+  if (filterable) {
+    filterRender = (
+      <FormGroup controlId={`select-filter-${keyName}`}>
+        <InputGroup>
+          <FormControl
+            type="text"
+            value={filterText}
+            placeholder={placeholder}
+            onChange={onInputChange}
+          />
+          <InputGroup.Append>
+            <Button onClick={onClearFilter}>
+              <FontAwesome icon="times" additionalClass="fa-fw" />
+            </Button>
+          </InputGroup.Append>
+        </InputGroup>
+      </FormGroup>
+    );
+  }
+
+  return filterRender;
 }
 
 Filter.propTypes = {
@@ -60,11 +58,11 @@ Filter.propTypes = {
   keyName: PropTypes.string.isRequired,
   filterText: PropTypes.string.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string
 };
 
 Filter.defaultProps = {
-  placeholder: 'Enter text',
+  placeholder: 'Enter text'
 };
 
 export default Filter;

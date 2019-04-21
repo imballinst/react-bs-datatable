@@ -11,16 +11,14 @@ function setup() {
     keyName: 'pagination-keyname',
     currentPage: 1,
     onPageNavigate,
-    rowsPerPage: 5,
+    rowsPerPage: 5
   };
 
-  const enzymeWrapper = shallow(
-    <Pagination {...props} />,
-  );
+  const enzymeWrapper = shallow(<Pagination {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
@@ -34,10 +32,7 @@ describe('Pagination component (src/Pagination)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.data).toEqual([]);
-    expect(enzymeWrapper.instance().props.keyName).toBe('pagination-keyname');
-    expect(enzymeWrapper.instance().props.currentPage).toBe(1);
-    expect(enzymeWrapper.instance().props.rowsPerPage).toBe(5);
-    expect(enzymeWrapper.instance().props.onPageNavigate).toBe(onPageNavigate);
+    expect(enzymeWrapper.prop('className')).toEqual('btn-group-page-nav');
+    expect(enzymeWrapper.prop('children').length).toBe(4);
   });
 });

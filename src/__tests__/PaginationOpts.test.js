@@ -11,16 +11,14 @@ function setup() {
     labels: {},
     onRowsPerPageChange,
     rowsPerPageOption: [5, 10, 15, 20],
-    rowsPerPage: 5,
+    rowsPerPage: 5
   };
 
-  const enzymeWrapper = shallow(
-    <PaginationOpts {...props} />,
-  );
+  const enzymeWrapper = shallow(<PaginationOpts {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
@@ -37,8 +35,15 @@ describe('PaginationOpts component (src/PaginationOpts)', () => {
     expect(enzymeWrapper.instance().props.keyName).toBe('test-keyname');
     expect(enzymeWrapper.instance().props.labels).toEqual({});
     expect(enzymeWrapper.instance().props.rowsPerPage).toBe(5);
-    expect(enzymeWrapper.instance().props.rowsPerPageOption).toEqual([5, 10, 15, 20]);
-    expect(enzymeWrapper.instance().props.onRowsPerPageChange).toBe(onRowsPerPageChange);
+    expect(enzymeWrapper.instance().props.rowsPerPageOption).toEqual([
+      5,
+      10,
+      15,
+      20
+    ]);
+    expect(enzymeWrapper.instance().props.onRowsPerPageChange).toBe(
+      onRowsPerPageChange
+    );
   });
 
   it('should call onRowsPerPageChange on change', () => {
@@ -47,7 +52,7 @@ describe('PaginationOpts component (src/PaginationOpts)', () => {
     const selectOption = enzymeWrapper.find('[name="form-control-pagination"]');
 
     selectOption.simulate('change', {
-      target: { value: 10 },
+      target: { value: 10 }
     });
   });
 });

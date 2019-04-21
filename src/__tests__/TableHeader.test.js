@@ -10,16 +10,14 @@ function setup() {
     tableHeader: [],
     keyName: 'test-keyname',
     sortedProp: { prop: 'test-prop', isAscending: true },
-    onSortChange,
+    onSortChange
   };
 
-  const enzymeWrapper = shallow(
-    <TableHeader {...props} />,
-  );
+  const enzymeWrapper = shallow(<TableHeader {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
@@ -33,9 +31,6 @@ describe('TableHeader component (src/TableHeader)', () => {
   it('should have the same props before and after render', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.tableHeader).toEqual([]);
-    expect(enzymeWrapper.instance().props.keyName).toBe('test-keyname');
-    expect(enzymeWrapper.instance().props.sortedProp).toEqual({ prop: 'test-prop', isAscending: true });
-    expect(enzymeWrapper.instance().props.onSortChange).toBe(onSortChange);
+    expect(enzymeWrapper.prop('className')).toBe('thead-default');
   });
 });

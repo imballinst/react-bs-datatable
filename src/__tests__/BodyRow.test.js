@@ -5,19 +5,25 @@ import BodyRow from '../BodyRow';
 
 function setup() {
   const props = {
-    data: [],
+    data: [
+      {
+        prop1: 123
+      }
+    ],
     keyName: 'pagination-keyname',
-    tableHeader: [],
-    rowIdx: 1,
+    tableHeader: [
+      {
+        prop: 'prop1'
+      }
+    ],
+    rowIdx: 0
   };
 
-  const enzymeWrapper = shallow(
-    <BodyRow {...props} />,
-  );
+  const enzymeWrapper = shallow(<BodyRow {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
@@ -28,12 +34,10 @@ describe('BodyRow component (src/BodyRow)', () => {
     expect(enzymeWrapper).toMatchSnapshot();
   });
 
-  it('should have the same props before and after render', () => {
+  it('should render a table row', () => {
     const { props, enzymeWrapper } = setup();
 
-    expect(enzymeWrapper.instance().props.data).toEqual([]);
-    expect(enzymeWrapper.instance().props.keyName).toBe('pagination-keyname');
-    expect(enzymeWrapper.instance().props.tableHeader).toEqual([]);
-    expect(enzymeWrapper.instance().props.rowIdx).toBe(1);
+    expect(enzymeWrapper.prop('className')).toEqual('tbody-tr-default');
+    expect(enzymeWrapper.prop('children').length).toEqual(1);
   });
 });

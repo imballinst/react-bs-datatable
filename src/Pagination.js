@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import Button from 'react-bootstrap/lib/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
 
 import NavButton from './modules/NavButton';
 
-const Pagination = ({ data, rowsPerPage, keyName, currentPage, onPageNavigate, labels }) => {
+function Pagination({
+  data,
+  rowsPerPage,
+  keyName,
+  currentPage,
+  onPageNavigate,
+  labels
+}) {
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
@@ -27,9 +34,9 @@ const Pagination = ({ data, rowsPerPage, keyName, currentPage, onPageNavigate, l
     if (currentPage === 1) {
       startNumber = 1;
       hasPrev = false;
-      hasNext = (numberOfPages > 1);
+      hasNext = numberOfPages > 1;
     } else if (currentPage === numberOfPages && numberOfPages !== 1) {
-      startNumber = (numberOfPages - 2 > 0) ? currentPage - 2 : 1;
+      startNumber = numberOfPages - 2 > 0 ? currentPage - 2 : 1;
       hasNext = false;
     } else {
       startNumber = currentPage - 1;
@@ -49,21 +56,17 @@ const Pagination = ({ data, rowsPerPage, keyName, currentPage, onPageNavigate, l
         disabled={!hasPrev}
         onPageNavigate={onPageNavigate}
         label={prevLabel}
-      />,
+      />
     );
 
     while (i < 3 && startNumber <= numberOfPages) {
       const pageBtnProps = {
         key: `${keyName}-page-btn-${startNumber}`,
         onClick: onPageNavigate(startNumber),
-        active: currentPage === startNumber,
+        active: currentPage === startNumber
       };
 
-      buttons.push(
-        <Button {...pageBtnProps}>
-          {startNumber}
-        </Button>,
-      );
+      buttons.push(<Button {...pageBtnProps}>{startNumber}</Button>);
 
       i += 1;
       startNumber += 1;
@@ -83,18 +86,16 @@ const Pagination = ({ data, rowsPerPage, keyName, currentPage, onPageNavigate, l
         disabled={!hasNext}
         onPageNavigate={onPageNavigate}
         label={lastLabel}
-      />,
+      />
     );
 
     renderedElements = (
-      <ButtonGroup className="btn-group-page-nav">
-        {buttons}
-      </ButtonGroup>
+      <ButtonGroup className="btn-group-page-nav">{buttons}</ButtonGroup>
     );
   }
 
   return renderedElements;
-};
+}
 
 Pagination.propTypes = {
   data: PropTypes.array.isRequired,
@@ -102,12 +103,12 @@ Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
   onPageNavigate: PropTypes.func.isRequired,
   rowsPerPage: PropTypes.number,
-  labels: PropTypes.object,
+  labels: PropTypes.object
 };
 
 Pagination.defaultProps = {
   rowsPerPage: undefined,
-  labels: {},
+  labels: {}
 };
 
 export default Pagination;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Table from 'react-bootstrap/lib/Table';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
 
 import classNames from 'classnames';
 
@@ -54,7 +54,7 @@ class Datatable extends React.Component {
       sortedProp: defaultSort,
       rowsPerPage: defaultRowsPerPage,
       currentPage: 1,
-      filterText: '',
+      filterText: ''
     };
   }
 
@@ -62,27 +62,27 @@ class Datatable extends React.Component {
     this.setState({
       filterText: '',
       currentPage: 1,
-      rowsPerPage: newProps.rowsPerPage,
+      rowsPerPage: newProps.rowsPerPage
     });
   }
 
-  onChangeFilter = (text) => {
+  onChangeFilter = text => {
     this.setState({
       filterText: text,
-      currentPage: 1,
+      currentPage: 1
     });
   };
 
   onPageNavigate = nextPage => () => {
     this.setState({
-      currentPage: nextPage,
+      currentPage: nextPage
     });
   };
 
-  onRowsPerPageChange = (numOfPage) => {
+  onRowsPerPageChange = numOfPage => {
     this.setState({
       rowsPerPage: parseInt(numOfPage, 10),
-      currentPage: 1,
+      currentPage: 1
     });
   };
 
@@ -97,9 +97,23 @@ class Datatable extends React.Component {
     }
 
     this.setState({
-      sortedProp: nextSort,
+      sortedProp: nextSort
     });
   };
+
+  processData(tableHeader, tableBody, onSort, onFilter) {
+    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
+    const filteredData = filterData(
+      tableHeader,
+      filterText,
+      onFilter,
+      tableBody
+    );
+    const sortedData = sortData(sortedProp, onSort, filteredData);
+    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
+
+    return paginatedData;
+  }
 
   render() {
     const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
@@ -111,23 +125,11 @@ class Datatable extends React.Component {
       tableClass: customClass,
       keyName,
       labels,
-      rowsPerPageOption,
+      rowsPerPageOption
     } = this.props;
 
-    const filteredData = filterData(
-      tableHeader,
-      filterText,
-      onFilter,
-      tableBody,
-    );
-    const sortedData = sortData(sortedProp, onSort, filteredData);
-
-    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
-
-    const tableClass = classNames({
-      'table-datatable': true,
-      [`${customClass}`]: true,
-    });
+    const data = this.processData(tableHeader, tableBody, onSort, onFilter);
+    const tableClass = classNames('table-datatable', customClass);
 
     return (
       <Row>
@@ -151,7 +153,7 @@ class Datatable extends React.Component {
         </Col>
         <Col xs={12} md={4} className="text-right">
           <Pagination
-            data={sortedData}
+            data={tableBody}
             rowsPerPage={rowsPerPage}
             keyName={keyName}
             currentPage={currentPage}
@@ -159,7 +161,7 @@ class Datatable extends React.Component {
             labels={labels}
           />
         </Col>
-        <Col xs={12}>
+        <Col xs="12">
           <Table className={tableClass}>
             <TableHeader
               tableHeader={tableHeader}
@@ -171,7 +173,7 @@ class Datatable extends React.Component {
               tableHeader={tableHeader}
               keyName={keyName}
               labels={labels}
-              paginatedData={paginatedData}
+              data={data}
             />
           </Table>
         </Col>
@@ -190,7 +192,7 @@ Datatable.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableClass: PropTypes.string,
-  labels: PropTypes.object,
+  labels: PropTypes.object
 };
 
 Datatable.defaultProps = {
@@ -200,7 +202,17 @@ Datatable.defaultProps = {
   rowsPerPage: undefined,
   rowsPerPageOption: undefined,
   tableClass: '',
-  labels: {},
+  labels: {}
 };
 
+export {
+  sortData,
+  filterData,
+  paginateData,
+  Pagination,
+  PaginationOpts,
+  TableHeader,
+  TableBody,
+  Filter
+};
 export default Datatable;

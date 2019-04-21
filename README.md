@@ -96,7 +96,6 @@ This package doesn't include Bootstrap stylesheets. If you want to include it, y
 ```
 import moment from 'moment'; // Example for onSort prop
 import React from 'react'; // Import React
-import { render } from 'react-dom'; // Import render method
 import Datatable from 'react-bs-datatable'; // Import this package
 
 const header = [

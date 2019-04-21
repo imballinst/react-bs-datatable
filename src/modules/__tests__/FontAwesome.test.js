@@ -1,18 +1,19 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
 import FontAwesome from '../FontAwesome';
 
 function setup() {
   const props = {
     icon: 'history',
-    additionalClass: 'fa-fw',
+    additionalClass: 'fa-fw'
   };
 
-  const enzymeWrapper = shallow(
-    <FontAwesome {...props} />,
-  );
+  const enzymeWrapper = shallow(<FontAwesome {...props} />);
 
   return {
     props,
-    enzymeWrapper,
+    enzymeWrapper
   };
 }
 
