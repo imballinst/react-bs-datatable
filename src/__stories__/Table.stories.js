@@ -18,24 +18,29 @@ const header = [
   { title: 'Last Updated', prop: 'date', sortable: true }
 ];
 
-const body = [
-  {
-    username: 'i-am-billy',
-    realname: 'Billy',
-    location: 'Mars',
-    date: moment()
-      .subtract(1, 'days')
-      .format('Do MMMM YYYY')
-  },
-  {
+const body = Array.from(new Array(57), () => {
+  const rd = (Math.random() * 10).toFixed(1);
+
+  if (rd > 0.5) {
+    return {
+      username: 'i-am-billy',
+      realname: `Billy ${rd}`,
+      location: 'Mars',
+      date: moment()
+        .subtract(1, 'days')
+        .format('Do MMMM YYYY')
+    };
+  }
+
+  return {
     username: 'john-nhoj',
-    realname: 'John',
+    realname: `John ${rd}`,
     location: 'Saturn',
     date: moment()
       .subtract(2, 'days')
       .format('Do MMMM YYYY')
-  }
-];
+  };
+});
 
 const onSortFunction = {
   date(columnValue) {
@@ -55,7 +60,7 @@ const customLabels = {
   noResults: 'There is no data to be displayed'
 };
 
-storiesOf('Welcome', module).add('to Storybook', () => (
+storiesOf('Table', module).add('Filter, sort, pagination', () => (
   <Datatable
     tableHeader={header}
     tableBody={body}

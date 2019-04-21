@@ -46,6 +46,7 @@
     "@storybook/addon-links": "^5.0.10",
     "@storybook/addons": "^5.0.10",
     "@storybook/react": "^5.0.10",
+    "@storybook/theming": "^5.0.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
@@ -69,7 +70,6 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "@storybook/theming": "^5.0.10",
     "classnames": "^2.2.5",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
