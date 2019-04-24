@@ -1,10 +1,12 @@
 import React from 'react'; // Import React
+import { storiesOf } from '@storybook/react';
+import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
 
 const header = [
-  { title: 'Username', prop: 'username' },
+  { title: 'Username (filterable)', prop: 'username', filterable: true },
   { title: 'Name', prop: 'realname' },
   { title: 'Location', prop: 'location' },
   { title: 'Last Updated', prop: 'date' }
@@ -34,17 +36,10 @@ const body = Array.from(new Array(57), () => {
   };
 });
 
-const Pagination = {
-  name: 'Pagination',
-  story: () => (
-    <Datatable
-      tableHeader={header}
-      tableBody={body}
-      tableClass="striped hover responsive"
-      rowsPerPage={5}
-      rowsPerPageOption={[5, 10, 15, 20]}
-    />
-  )
-};
-
-export default Pagination;
+storiesOf(categoryName, module).add('Filter', () => (
+  <Datatable
+    tableHeader={header}
+    tableBody={body}
+    tableClass="striped hover responsive"
+  />
+));

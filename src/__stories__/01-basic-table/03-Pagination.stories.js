@@ -1,4 +1,6 @@
 import React from 'react'; // Import React
+import { storiesOf } from '@storybook/react';
+import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
@@ -34,15 +36,12 @@ const body = Array.from(new Array(57), () => {
   };
 });
 
-const Basic = {
-  name: 'Basic',
-  story: () => (
-    <Datatable
-      tableHeader={header}
-      tableBody={body}
-      tableClass="striped hover responsive"
-    />
-  )
-};
-
-export default Basic;
+storiesOf(categoryName, module).add('Pagination', () => (
+  <Datatable
+    tableHeader={header}
+    tableBody={body}
+    tableClass="striped hover responsive"
+    rowsPerPage={5}
+    rowsPerPageOption={[5, 10, 15, 20]}
+  />
+));

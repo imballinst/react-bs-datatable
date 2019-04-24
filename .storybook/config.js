@@ -1,5 +1,7 @@
 import { configure } from '@storybook/react';
 
+import './addons';
+
 import 'bootstrap/scss/bootstrap.scss';
 import 'font-awesome/scss/font-awesome.scss';
 import './assets/table.scss';

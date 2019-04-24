@@ -1,12 +1,23 @@
 import React from 'react'; // Import React
 import { storiesOf } from '@storybook/react';
+import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
 
 const header = [
-  { title: 'Username', prop: 'username', sortable: true },
+  {
+    title: 'Username (filterable)',
+    prop: 'username',
+    sortable: true,
+    filterable: true
+  },
   { title: 'Name', prop: 'realname', sortable: true },
+  {
+    title: 'Name Uppercased',
+    prop: 'realnameuppercase',
+    cell: row => row.realname.toUpperCase()
+  },
   { title: 'Location', prop: 'location' },
   { title: 'Last Updated', prop: 'date', sortable: true }
 ];
@@ -43,17 +54,25 @@ const onSortFunction = {
   }
 };
 
-const Sort = {
-  name: 'Sort',
-  story: () => (
-    <Datatable
-      tableHeader={header}
-      tableBody={body}
-      tableClass="striped hover responsive"
-      initialSort={{ prop: 'username', isAscending: true }}
-      onSort={onSortFunction}
-    />
-  )
+const customLabels = {
+  first: '<<',
+  last: '>>',
+  prev: '<',
+  next: '>',
+  show: 'Display',
+  entries: 'rows',
+  noResults: 'There is no data to be displayed'
 };
 
-export default Sort;
+storiesOf(categoryName, module).add('Custom Cell Representation', () => (
+  <Datatable
+    tableHeader={header}
+    tableBody={body}
+    tableClass="striped hover responsive"
+    rowsPerPage={5}
+    rowsPerPageOption={[5, 10, 15, 20]}
+    initialSort={{ prop: 'username', isAscending: true }}
+    onSort={onSortFunction}
+    labels={customLabels}
+  />
+));
