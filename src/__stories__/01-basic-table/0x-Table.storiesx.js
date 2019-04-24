@@ -1,10 +1,8 @@
 import React from 'react'; // Import React
 import { storiesOf } from '@storybook/react';
 
-// import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-
 import moment from 'moment'; // Example for onSort prop
-import Datatable from '../Table'; // Import this package
+import Datatable from '../../Table'; // Import this package
 
 const header = [
   { title: 'Username', prop: 'username', sortable: true, filterable: true },

@@ -38,7 +38,7 @@ class Datatable extends React.Component {
       }
     }
 
-    const isOptionsGiven = rowsPerPageOption.length;
+    const isOptionsGiven = rowsPerPageOption.length > 0;
     let defaultRowsPerPage;
 
     if (isOptionsGiven) {
@@ -122,14 +122,14 @@ class Datatable extends React.Component {
       tableBody,
       onSort,
       onFilter,
-      tableClass: customClass,
       keyName,
+      tableBsClass,
       labels,
       rowsPerPageOption
     } = this.props;
 
     const data = this.processData(tableHeader, tableBody, onSort, onFilter);
-    const tableClass = classNames('table-datatable', customClass);
+    const tableClass = classNames(`table-datatable-${keyName}`, tableBsClass);
 
     return (
       <Row>
@@ -184,14 +184,14 @@ class Datatable extends React.Component {
 
 Datatable.propTypes = {
   initialSort: PropTypes.object,
-  keyName: PropTypes.string.isRequired,
   onSort: PropTypes.object,
   onFilter: PropTypes.object,
   rowsPerPage: PropTypes.number,
   rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
-  tableClass: PropTypes.string,
+  tableBsClass: PropTypes.string,
+  keyName: PropTypes.string,
   labels: PropTypes.object
 };
 
@@ -200,8 +200,9 @@ Datatable.defaultProps = {
   onSort: undefined,
   onFilter: undefined,
   rowsPerPage: undefined,
-  rowsPerPageOption: undefined,
-  tableClass: '',
+  rowsPerPageOption: [],
+  tableBsClass: '',
+  keyName: 'default',
   labels: {}
 };
 
