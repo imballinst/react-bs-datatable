@@ -14,6 +14,7 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
 
+/** Datatable Component */
 class Datatable extends React.Component {
   constructor(props) {
     super(props);
@@ -187,6 +188,7 @@ class Datatable extends React.Component {
 }
 
 Datatable.propTypes = {
+  /** Initial sort of the table */
   initialSort: PropTypes.object,
   onSort: PropTypes.object,
   onFilter: PropTypes.object,

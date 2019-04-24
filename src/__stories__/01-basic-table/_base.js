@@ -1,1 +1,1 @@
-export const categoryName = 'Basic Table';
+export const categoryName = 'Getting Started';
