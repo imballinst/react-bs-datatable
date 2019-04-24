@@ -1,17 +1,16 @@
 import React from 'react'; // Import React
-import { storiesOf } from '@storybook/react';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
 
 const header = [
-  { title: 'Username', prop: 'username', sortable: true, filterable: true },
-  { title: 'Name', prop: 'realname', sortable: true },
   {
-    title: 'Name Uppercased',
-    prop: 'realnameuppercase',
-    cell: row => row.realname.toUpperCase()
+    title: 'Username (filterable)',
+    prop: 'username',
+    sortable: true,
+    filterable: true
   },
+  { title: 'Name', prop: 'realname', sortable: true },
   { title: 'Location', prop: 'location' },
   { title: 'Last Updated', prop: 'date', sortable: true }
 ];
@@ -58,33 +57,20 @@ const customLabels = {
   noResults: 'There is no data to be displayed'
 };
 
-storiesOf('Table', module).add('Filter, sort, pagination', () => (
-  <Datatable
-    tableHeader={header}
-    tableBody={body}
-    keyName="userTable"
-    tableClass="striped hover responsive"
-    rowsPerPage={5}
-    rowsPerPageOption={[5, 10, 15, 20]}
-    initialSort={{ prop: 'username', isAscending: true }}
-    onSort={onSortFunction}
-    labels={customLabels}
-  />
-));
+const CustomLabels = {
+  name: 'Custom Labels',
+  story: () => (
+    <Datatable
+      tableHeader={header}
+      tableBody={body}
+      tableClass="striped hover responsive"
+      rowsPerPage={5}
+      rowsPerPageOption={[5, 10, 15, 20]}
+      initialSort={{ prop: 'username', isAscending: true }}
+      onSort={onSortFunction}
+      labels={customLabels}
+    />
+  )
+};
 
-// import { action } from '@storybook/addon-actions';
-// import { linkTo } from '@storybook/addon-links';
-
-// import { Button, Welcome } from '@storybook/react/demo';
-
-// storiesOf('Button', module)
-//   .add('with text', () => (
-//     <Button onClick={action('clicked')}>Hello Button</Button>
-//   ))
-//   .add('with some emoji', () => (
-//     <Button onClick={action('clicked')}>
-//       <span role="img" aria-label="so cool">
-//         😀 😎 👍 💯
-//       </span>
-//     </Button>
-//   ));
+export default CustomLabels;

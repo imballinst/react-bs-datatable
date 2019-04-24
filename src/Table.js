@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Row from 'react-bootstrap/Row';
@@ -132,52 +132,56 @@ class Datatable extends React.Component {
     const tableClass = classNames(`table-datatable-${keyName}`, tableBsClass);
 
     return (
-      <Row>
-        <Col xs={12} md={4}>
-          <Filter
-            tableHeader={tableHeader}
-            placeholder={labels.filterPlaceholder}
-            onChangeFilter={this.onChangeFilter}
-            filterText={filterText}
-            keyName={keyName}
-          />
-        </Col>
-        <Col xs={12} md={4}>
-          <PaginationOpts
-            labels={labels}
-            onRowsPerPageChange={this.onRowsPerPageChange}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOption={rowsPerPageOption}
-            keyName={keyName}
-          />
-        </Col>
-        <Col xs={12} md={4} className="text-right">
-          <Pagination
-            data={tableBody}
-            rowsPerPage={rowsPerPage}
-            keyName={keyName}
-            currentPage={currentPage}
-            onPageNavigate={this.onPageNavigate}
-            labels={labels}
-          />
-        </Col>
-        <Col xs="12">
-          <Table className={tableClass}>
-            <TableHeader
+      <Fragment>
+        <Row className={`controlRow-${keyName}`}>
+          <Col xs={12} md={4}>
+            <Filter
               tableHeader={tableHeader}
+              placeholder={labels.filterPlaceholder}
+              onChangeFilter={this.onChangeFilter}
+              filterText={filterText}
               keyName={keyName}
-              sortedProp={sortedProp}
-              onSortChange={this.onSortChange}
             />
-            <TableBody
-              tableHeader={tableHeader}
-              keyName={keyName}
+          </Col>
+          <Col xs={12} md={4}>
+            <PaginationOpts
               labels={labels}
-              data={data}
+              onRowsPerPageChange={this.onRowsPerPageChange}
+              rowsPerPage={rowsPerPage}
+              rowsPerPageOption={rowsPerPageOption}
+              keyName={keyName}
             />
-          </Table>
-        </Col>
-      </Row>
+          </Col>
+          <Col xs={12} md={4} className="text-right">
+            <Pagination
+              data={tableBody}
+              rowsPerPage={rowsPerPage}
+              keyName={keyName}
+              currentPage={currentPage}
+              onPageNavigate={this.onPageNavigate}
+              labels={labels}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12">
+            <Table className={tableClass}>
+              <TableHeader
+                tableHeader={tableHeader}
+                keyName={keyName}
+                sortedProp={sortedProp}
+                onSortChange={this.onSortChange}
+              />
+              <TableBody
+                tableHeader={tableHeader}
+                keyName={keyName}
+                labels={labels}
+                data={data}
+              />
+            </Table>
+          </Col>
+        </Row>
+      </Fragment>
     );
   }
 }

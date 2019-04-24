@@ -1,12 +1,11 @@
 import React from 'react'; // Import React
-import { storiesOf } from '@storybook/react';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
 
 const header = [
   { title: 'Username (filterable)', prop: 'username', filterable: true },
-  { title: 'Name (filterable)', prop: 'realname' },
+  { title: 'Name', prop: 'realname' },
   { title: 'Location', prop: 'location' },
   { title: 'Last Updated', prop: 'date' }
 ];
@@ -35,10 +34,15 @@ const body = Array.from(new Array(57), () => {
   };
 });
 
-storiesOf('Table', module).add('Filter', () => (
-  <Datatable
-    tableHeader={header}
-    tableBody={body}
-    tableClass="striped hover responsive"
-  />
-));
+const Filter = {
+  name: 'Filter',
+  story: () => (
+    <Datatable
+      tableHeader={header}
+      tableBody={body}
+      tableClass="striped hover responsive"
+    />
+  )
+};
+
+export default Filter;

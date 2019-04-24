@@ -1,5 +1,4 @@
 import React from 'react'; // Import React
-import { storiesOf } from '@storybook/react';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
@@ -35,13 +34,17 @@ const body = Array.from(new Array(57), () => {
   };
 });
 
-export default {
-  name: 'Basic',
+const Pagination = {
+  name: 'Pagination',
   story: () => (
     <Datatable
       tableHeader={header}
       tableBody={body}
       tableClass="striped hover responsive"
+      rowsPerPage={5}
+      rowsPerPageOption={[5, 10, 15, 20]}
     />
   )
 };
+
+export default Pagination;

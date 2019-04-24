@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
-import FormGroup from 'react-bootstrap/FormGroup';
 import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
@@ -38,21 +37,19 @@ function Filter({
 
   if (filterable) {
     filterRender = (
-      <FormGroup controlId={`select-filter-${keyName}`}>
-        <InputGroup>
-          <FormControl
-            type="text"
-            value={filterText}
-            placeholder={placeholder}
-            onChange={onInputChange}
-          />
-          <InputGroup.Append>
-            <Button onClick={onClearFilter}>
-              <FontAwesome icon="times" additionalClass="fa-fw" />
-            </Button>
-          </InputGroup.Append>
-        </InputGroup>
-      </FormGroup>
+      <InputGroup>
+        <FormControl
+          type="text"
+          value={filterText}
+          placeholder={placeholder}
+          onChange={onInputChange}
+        />
+        <InputGroup.Append>
+          <Button onClick={onClearFilter}>
+            <FontAwesome icon="times" additionalClass="fa-fw" />
+          </Button>
+        </InputGroup.Append>
+      </InputGroup>
     );
   }
 
