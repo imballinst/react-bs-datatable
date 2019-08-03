@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function BodyRow({ tableHeader, keyName, data, rowIdx }) {
+function BodyRow({ tableHeader, data, rowIdx }) {
   const row = [];
 
   for (let i = 0; i < tableHeader.length; i += 1) {
@@ -15,7 +15,7 @@ function BodyRow({ tableHeader, keyName, data, rowIdx }) {
     }
 
     row.push(
-      <td key={`${keyName}-col-${rowIdx}${i}`} className="tbody-td-default">
+      <td key={`col-${rowIdx}${i}`} className="tbody-td-default">
         {value}
       </td>
     );
@@ -26,7 +26,6 @@ function BodyRow({ tableHeader, keyName, data, rowIdx }) {
 
 BodyRow.propTypes = {
   tableHeader: PropTypes.array.isRequired,
-  keyName: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   rowIdx: PropTypes.number.isRequired
 };

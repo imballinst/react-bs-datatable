@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 function PaginationOpts({
   labels,
   rowsPerPage,
-  keyName,
   rowsPerPageOption,
   onRowsPerPageChange
 }) {
@@ -41,7 +40,7 @@ function PaginationOpts({
     // Replace the numbers with array of React elements.
     selectOption.forEach((option, idx) => {
       const optionProps = {
-        key: `${keyName}-page-opt-${option}`,
+        key: `page-opt-${option}`,
         value: option
       };
 
@@ -71,7 +70,6 @@ function PaginationOpts({
 }
 
 PaginationOpts.propTypes = {
-  keyName: PropTypes.string.isRequired,
   labels: PropTypes.object.isRequired,
   onRowsPerPageChange: PropTypes.func.isRequired,
   rowsPerPageOption: PropTypes.array,

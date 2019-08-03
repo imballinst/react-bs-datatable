@@ -1,3 +1,8 @@
+/**
+ * This is a story for an extended table.
+ * If you want to personally customize how the table looks, like the positioning of filters/pagination, you can do it here.
+ * You will need to import the components and apply them in the render function.
+ */
 import React, { Fragment } from 'react'; // Import React
 import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
@@ -10,9 +15,6 @@ import classNames from 'classnames';
 
 // In your setup, replace "../../" with "react-bs-datatable"
 import Datatable, {
-  sortData,
-  filterData,
-  paginateData,
   Pagination,
   PaginationOpts,
   TableHeader,
@@ -28,32 +30,29 @@ class CustomTable extends Datatable {
       tableBody,
       onSort,
       onFilter,
-      keyName,
       tableBsClass,
       labels,
       rowsPerPageOption
     } = this.props;
 
     const data = this.processData(tableHeader, tableBody, onSort, onFilter);
-    const tableClass = classNames(`table-datatable-${keyName}`, tableBsClass);
+    const tableClass = classNames(`table-datatable`, tableBsClass);
 
     return (
       <Fragment>
-        <Row className={`controlRow-${keyName}`}>
+        <Row className="controlRow">
           <Col xs={12} md={4}>
             <PaginationOpts
               labels={labels}
               onRowsPerPageChange={this.onRowsPerPageChange}
               rowsPerPage={rowsPerPage}
               rowsPerPageOption={rowsPerPageOption}
-              keyName={keyName}
             />
           </Col>
           <Col xs={12} md={4}>
             <Pagination
               data={tableBody}
               rowsPerPage={rowsPerPage}
-              keyName={keyName}
               currentPage={currentPage}
               onPageNavigate={this.onPageNavigate}
               labels={labels}
@@ -65,7 +64,6 @@ class CustomTable extends Datatable {
               placeholder={labels.filterPlaceholder}
               onChangeFilter={this.onChangeFilter}
               filterText={filterText}
-              keyName={keyName}
             />
           </Col>
         </Row>
@@ -74,13 +72,11 @@ class CustomTable extends Datatable {
             <Table className={tableClass}>
               <TableHeader
                 tableHeader={tableHeader}
-                keyName={keyName}
                 sortedProp={sortedProp}
                 onSortChange={this.onSortChange}
               />
               <TableBody
                 tableHeader={tableHeader}
-                keyName={keyName}
                 labels={labels}
                 data={data}
               />

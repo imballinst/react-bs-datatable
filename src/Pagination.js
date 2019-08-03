@@ -9,7 +9,6 @@ import NavButton from './modules/NavButton';
 function Pagination({
   data,
   rowsPerPage,
-  keyName,
   currentPage,
   onPageNavigate,
   labels
@@ -44,14 +43,14 @@ function Pagination({
 
     buttons.push(
       <NavButton
-        key={`${keyName}-page-${firstLabel}`}
+        key={`page-${firstLabel}`}
         pageNavNumber={1}
         disabled={!hasPrev}
         onPageNavigate={onPageNavigate}
         label={firstLabel}
       />,
       <NavButton
-        key={`${keyName}-page-${prevLabel}`}
+        key={`page-${prevLabel}`}
         pageNavNumber={currentPage - 1}
         disabled={!hasPrev}
         onPageNavigate={onPageNavigate}
@@ -61,7 +60,7 @@ function Pagination({
 
     while (i < 3 && startNumber <= numberOfPages) {
       const pageBtnProps = {
-        key: `${keyName}-page-btn-${startNumber}`,
+        key: `page-btn-${startNumber}`,
         onClick: onPageNavigate(startNumber),
         active: currentPage === startNumber
       };
@@ -74,14 +73,14 @@ function Pagination({
 
     buttons.push(
       <NavButton
-        key={`${keyName}-page-${nextLabel}`}
+        key={`page-${nextLabel}`}
         pageNavNumber={currentPage + 1}
         disabled={!hasNext}
         onPageNavigate={onPageNavigate}
         label={nextLabel}
       />,
       <NavButton
-        key={`${keyName}-page-${lastLabel}`}
+        key={`page-${lastLabel}`}
         pageNavNumber={numberOfPages}
         disabled={!hasNext}
         onPageNavigate={onPageNavigate}
@@ -99,7 +98,6 @@ function Pagination({
 
 Pagination.propTypes = {
   data: PropTypes.array.isRequired,
-  keyName: PropTypes.string.isRequired,
   currentPage: PropTypes.number.isRequired,
   onPageNavigate: PropTypes.func.isRequired,
   rowsPerPage: PropTypes.number,

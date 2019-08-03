@@ -123,25 +123,23 @@ class Datatable extends React.Component {
       tableBody,
       onSort,
       onFilter,
-      keyName,
       tableBsClass,
       labels,
       rowsPerPageOption
     } = this.props;
 
     const data = this.processData(tableHeader, tableBody, onSort, onFilter);
-    const tableClass = classNames(`table-datatable-${keyName}`, tableBsClass);
+    const tableClass = classNames(`table-datatable`, tableBsClass);
 
     return (
       <Fragment>
-        <Row className={`controlRow-${keyName}`}>
+        <Row className="controlRow">
           <Col xs={12} md={4}>
             <Filter
               tableHeader={tableHeader}
               placeholder={labels.filterPlaceholder}
               onChangeFilter={this.onChangeFilter}
               filterText={filterText}
-              keyName={keyName}
             />
           </Col>
           <Col xs={12} md={4}>
@@ -150,14 +148,12 @@ class Datatable extends React.Component {
               onRowsPerPageChange={this.onRowsPerPageChange}
               rowsPerPage={rowsPerPage}
               rowsPerPageOption={rowsPerPageOption}
-              keyName={keyName}
             />
           </Col>
           <Col xs={12} md={4} className="text-right">
             <Pagination
               data={tableBody}
               rowsPerPage={rowsPerPage}
-              keyName={keyName}
               currentPage={currentPage}
               onPageNavigate={this.onPageNavigate}
               labels={labels}
@@ -169,13 +165,11 @@ class Datatable extends React.Component {
             <Table className={tableClass}>
               <TableHeader
                 tableHeader={tableHeader}
-                keyName={keyName}
                 sortedProp={sortedProp}
                 onSortChange={this.onSortChange}
               />
               <TableBody
                 tableHeader={tableHeader}
-                keyName={keyName}
                 labels={labels}
                 data={data}
               />
@@ -197,7 +191,6 @@ Datatable.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableBsClass: PropTypes.string,
-  keyName: PropTypes.string,
   labels: PropTypes.object
 };
 
@@ -208,7 +201,6 @@ Datatable.defaultProps = {
   rowsPerPage: undefined,
   rowsPerPageOption: [],
   tableBsClass: '',
-  keyName: 'default',
   labels: {}
 };
 
