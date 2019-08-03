@@ -19,15 +19,15 @@ const TableBody = ({ tableHeader, labels, data }) => {
     }
   } else {
     body.push(
-      <tr key={`row-zero-length`} className="tbody-tr-default">
-        <td className="tbody-td-default" colSpan={tableHeader.length}>
+      <tr key={`row-zero-length`} className="tbody-tr">
+        <td className="tbody-td" colSpan={tableHeader.length}>
           {labels.noResults || 'No results to be shown.'}
         </td>
       </tr>
     );
   }
 
-  return <tbody className="tbody-default">{body}</tbody>;
+  return <tbody className="tbody">{body}</tbody>;
 };
 
 TableBody.propTypes = {

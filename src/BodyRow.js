@@ -15,13 +15,13 @@ function BodyRow({ tableHeader, data, rowIdx }) {
     }
 
     row.push(
-      <td key={`col-${rowIdx}${i}`} className="tbody-td-default">
+      <td key={`col-${rowIdx}${i}`} className="tbody-td">
         {value}
       </td>
     );
   }
 
-  return <tr className="tbody-tr-default">{row}</tr>;
+  return <tr className="tbody-tr">{row}</tr>;
 }
 
 BodyRow.propTypes = {

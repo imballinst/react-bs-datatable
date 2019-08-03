@@ -10,7 +10,7 @@ const TableHeader = ({ tableHeader, sortedProp, onSortChange }) => {
 
   for (let i = 0; i < tableHeader.length; i += 1) {
     const thClass = classNames({
-      'thead-th-default': true,
+      'thead-th': true,
       sortable: tableHeader[i].sortable === true
     });
     const thProps = {
@@ -45,8 +45,8 @@ const TableHeader = ({ tableHeader, sortedProp, onSortChange }) => {
   }
 
   return (
-    <thead className="thead-default">
-      <tr className="thead-tr-default">{headings}</tr>
+    <thead className="thead">
+      <tr className="thead-tr">{headings}</tr>
     </thead>
   );
 };

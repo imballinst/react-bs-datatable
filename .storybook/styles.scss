@@ -1,22 +1,21 @@
 .table-datatable {
-  .thead-default {
-    .thead-tr-default {
-      .thead-th-default {
+  & > .thead {
+    & > .thead-tr {
+      & > .thead-th {
         &.sortable {
-          // If and only if a column is sortable
           &:hover {
-            background: #000; // Your color of choice
-            cursor: pointer; // Changes the cursor into a pointer on hover
+            background: #eaeaea;
+            cursor: pointer;
           }
         }
       }
     }
   }
 
-  .tbody-default {
-    .tbody-tr-default {
-      .tbody-td-default {
-        // do what you want
+  & > .tbody {
+    & > .tbody-tr {
+      &:nth-child(even) {
+        background: #eaeaea;
       }
     }
   }
