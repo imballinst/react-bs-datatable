@@ -36,6 +36,7 @@ const body = Array.from(new Array(57), () => {
   };
 });
 
+console.log(Datatable);
 storiesOf(categoryName, module).add('Basic', () => (
   <Datatable
     tableHeader={header}

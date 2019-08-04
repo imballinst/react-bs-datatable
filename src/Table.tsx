@@ -196,16 +196,3 @@ export default function Datatable({
     </Fragment>
   );
 }
-
-// Re-export these variables.
-// TODO(imballinst): alternatively, we can just put them separately in a index.ts file.
-export {
-  sortData,
-  filterData,
-  paginateData,
-  Pagination,
-  PaginationOpts,
-  TableHeader,
-  TableBody,
-  Filter
-};
