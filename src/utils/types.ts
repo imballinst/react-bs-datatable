@@ -21,3 +21,6 @@ export type LabelType = {
   noResults?: string;
   filterPlaceholder?: string;
 };
+
+export type RowsPerPageType = number | undefined;
+export type RowsPerPageOptionType = number[];

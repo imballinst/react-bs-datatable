@@ -1,23 +1,27 @@
 import React from 'react';
+import { HeaderType, SortType, RowsPerPageType } from './types';
 
-const getLastChildren = reactElement => {
+export function getLastChildren(
+  reactElement: React.ReactElement
+): React.ReactElement {
   const isReactElement = React.isValidElement(reactElement);
 
-  return isReactElement ?
-    getLastChildren(reactElement.props.children) :
-    reactElement;
-};
+  return isReactElement
+    ? getLastChildren(reactElement.props.children)
+    : reactElement;
+}
 
-const isPropFilterable = (tableHeader, prop) => {
+export function isPropFilterable(tableHeaders: HeaderType[], prop: string) {
+  const headersLength = tableHeaders.length;
   let i = 0;
   let found = false;
   let isFilterable = false;
 
-  while (!found && i < tableHeader.length) {
-    if (tableHeader[i].prop === prop) {
+  while (!found && i < headersLength) {
+    if (tableHeaders[i].prop === prop) {
       found = true;
 
-      if (tableHeader[i].filterable === true) {
+      if (tableHeaders[i].filterable === true) {
         isFilterable = true;
       }
     }
@@ -26,9 +30,9 @@ const isPropFilterable = (tableHeader, prop) => {
   }
 
   return isFilterable;
-};
+}
 
-const sortData = (sortedProp, onSort, data) => {
+export function sortData(data: any[], sortedProp: SortType, onSort?: any) {
   let sortedData = [...data];
 
   if (sortedProp.prop !== undefined) {
@@ -56,9 +60,14 @@ const sortData = (sortedProp, onSort, data) => {
   }
 
   return sortedData;
-};
+}
 
-const filterData = (tableHeader, filterText, onFilter, data) => {
+export function filterData(
+  data: any[],
+  tableHeaders: HeaderType[],
+  filterText: string,
+  onFilter?: any
+) {
   let filteredData = [...data];
 
   if (filterText !== '') {
@@ -72,7 +81,7 @@ const filterData = (tableHeader, filterText, onFilter, data) => {
       while (!isElementIncluded && i < elementPropLength) {
         const prop = elementProps[i];
 
-        if (isPropFilterable(tableHeader, prop)) {
+        if (isPropFilterable(tableHeaders, prop)) {
           let columnValue = element[prop];
 
           // Get last children and fill columnValue with empty string if undefined
@@ -99,9 +108,13 @@ const filterData = (tableHeader, filterText, onFilter, data) => {
   }
 
   return filteredData;
-};
+}
 
-const paginateData = (rowsPerPage, currentPage, data) => {
+export function paginateData(
+  data: any[],
+  currentPage: number,
+  rowsPerPage?: RowsPerPageType
+) {
   let paginatedData = [...data];
 
   if (rowsPerPage !== undefined) {
@@ -112,12 +125,4 @@ const paginateData = (rowsPerPage, currentPage, data) => {
   }
 
   return paginatedData;
-};
-
-export {
-  getLastChildren,
-  isPropFilterable,
-  sortData,
-  filterData,
-  paginateData
-};
+}

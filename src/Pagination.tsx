@@ -5,14 +5,23 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 
 import NavButton from './modules/NavButton';
+import { LabelType, RowsPerPageType } from './utils/types';
 
-function Pagination({
+type PaginationProps = {
+  data: any[];
+  rowsPerPage: RowsPerPageType;
+  currentPage: number;
+  onPageNavigate: any;
+  labels: LabelType;
+};
+
+export default function Pagination({
   data,
   rowsPerPage,
   currentPage,
   onPageNavigate,
   labels
-}) {
+}: PaginationProps) {
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
@@ -44,14 +53,14 @@ function Pagination({
     buttons.push(
       <NavButton
         key={`page-${firstLabel}`}
-        pageNavNumber={1}
+        pageNumber={1}
         disabled={!hasPrev}
         onPageNavigate={onPageNavigate}
         label={firstLabel}
       />,
       <NavButton
         key={`page-${prevLabel}`}
-        pageNavNumber={currentPage - 1}
+        pageNumber={currentPage - 1}
         disabled={!hasPrev}
         onPageNavigate={onPageNavigate}
         label={prevLabel}
@@ -74,14 +83,14 @@ function Pagination({
     buttons.push(
       <NavButton
         key={`page-${nextLabel}`}
-        pageNavNumber={currentPage + 1}
+        pageNumber={currentPage + 1}
         disabled={!hasNext}
         onPageNavigate={onPageNavigate}
         label={nextLabel}
       />,
       <NavButton
         key={`page-${lastLabel}`}
-        pageNavNumber={numberOfPages}
+        pageNumber={numberOfPages}
         disabled={!hasNext}
         onPageNavigate={onPageNavigate}
         label={lastLabel}
@@ -95,18 +104,3 @@ function Pagination({
 
   return renderedElements;
 }
-
-Pagination.propTypes = {
-  data: PropTypes.array.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  onPageNavigate: PropTypes.func.isRequired,
-  rowsPerPage: PropTypes.number,
-  labels: PropTypes.object
-};
-
-Pagination.defaultProps = {
-  rowsPerPage: undefined,
-  labels: {}
-};
-
-export default Pagination;

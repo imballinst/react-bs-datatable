@@ -4,43 +4,49 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 
-import { sortData, filterData, paginateData } from './utils/ClassHelpers';
+import { sortData, filterData, paginateData } from './utils/data';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
-import { SortType, LabelType, HeaderType } from './utils/types';
+import {
+  SortType,
+  LabelType,
+  HeaderType,
+  RowsPerPageType,
+  RowsPerPageOptionType
+} from './utils/types';
 import { makeClasses } from './utils/object';
 
 type DatatableProps = {
   /** Initial sort of the table. */
-  tableHeader: HeaderType[];
+  tableHeaders: HeaderType[];
   tableBody: any[];
   initialSort?: SortType;
   onSort?: any;
   onFilter?: any;
-  rowsPerPage?: number;
-  rowsPerPageOption?: number[];
+  rowsPerPage?: RowsPerPageType;
+  rowsPerPageOption?: RowsPerPageOptionType;
   tableBsClass?: string;
   labels?: LabelType;
 };
 
 type DatatableState = {
   sortedProp: SortType;
-  rowsPerPage: number;
+  rowsPerPage: RowsPerPageType;
   currentPage: number;
   filterText: string;
 };
 
 /** Datatable Component. */
-function Datatable({
+export default function Datatable({
   initialSort,
   onSort,
   onFilter,
   rowsPerPage = 5,
   rowsPerPageOption = [],
-  tableHeader,
+  tableHeaders,
   tableBody,
   tableBsClass = '',
   labels = {}
@@ -52,11 +58,11 @@ function Datatable({
       let found = false;
       let i = 0;
 
-      while (!found && i < tableHeader.length) {
-        if (tableHeader[i].prop === initialSort.prop) {
+      while (!found && i < tableHeaders.length) {
+        if (tableHeaders[i].prop === initialSort.prop) {
           found = true;
 
-          if (tableHeader[i].sortable === true) {
+          if (tableHeaders[i].sortable === true) {
             defaultSort = initialSort;
           }
         }
@@ -103,7 +109,7 @@ function Datatable({
     };
   }
 
-  function onRowsPerPageChange(numOfPage: number) {
+  function onRowsPerPageChange(numOfPage: RowsPerPageType) {
     return () => {
       setState(oldState => ({
         ...oldState,
@@ -132,13 +138,13 @@ function Datatable({
   }
 
   const filteredData = filterData(
-    tableHeader,
+    tableBody,
+    tableHeaders,
     state.filterText,
-    onFilter,
-    tableBody
+    onFilter
   );
-  const sortedData = sortData(state.sortedProp, onSort, filteredData);
-  const data = paginateData(state.rowsPerPage, state.currentPage, sortedData);
+  const sortedData = sortData(filteredData, state.sortedProp, onSort);
+  const data = paginateData(sortedData, state.currentPage, state.rowsPerPage);
 
   const tableClass = makeClasses(`table-datatable`, tableBsClass);
 
@@ -147,7 +153,7 @@ function Datatable({
       <Row className="controlRow">
         <Col xs={12} md={4}>
           <Filter
-            tableHeader={tableHeader}
+            tableHeaders={tableHeaders}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={state.filterText}
@@ -175,11 +181,15 @@ function Datatable({
         <Col xs="12">
           <Table className={tableClass}>
             <TableHeader
-              tableHeader={tableHeader}
+              tableHeaders={tableHeaders}
               sortedProp={state.sortedProp}
               onSortChange={onSortChange}
             />
-            <TableBody tableHeader={tableHeader} labels={labels} data={data} />
+            <TableBody
+              tableHeaders={tableHeaders}
+              labels={labels}
+              data={data}
+            />
           </Table>
         </Col>
       </Row>
@@ -187,16 +197,8 @@ function Datatable({
   );
 }
 
-Datatable.defaultProps = {
-  initialSort: undefined,
-  onSort: undefined,
-  onFilter: undefined,
-  rowsPerPage: undefined,
-  rowsPerPageOption: [],
-  tableBsClass: '',
-  labels: {}
-};
-
+// Re-export these variables.
+// TODO(imballinst): alternatively, we can just put them separately in a index.ts file.
 export {
   sortData,
   filterData,
@@ -207,4 +209,3 @@ export {
   TableBody,
   Filter
 };
-export default Datatable;

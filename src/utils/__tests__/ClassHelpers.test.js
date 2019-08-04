@@ -5,7 +5,7 @@ import {
   sortData,
   filterData,
   paginateData
-} from '../ClassHelpers';
+} from '../data';
 
 describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
   it('should get last children of a react component; or that object if not', () => {

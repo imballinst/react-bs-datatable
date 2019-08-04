@@ -1,50 +1,63 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
+import {
+  LabelType,
+  RowsPerPageType,
+  RowsPerPageOptionType
+} from './utils/types';
 
-function PaginationOpts({
+type PaginationOptsProps = {
+  labels: LabelType;
+  rowsPerPage?: RowsPerPageType;
+  rowsPerPageOption?: RowsPerPageOptionType;
+  onRowsPerPageChange: any;
+};
+
+export default function PaginationOpts({
   labels,
   rowsPerPage,
   rowsPerPageOption,
   onRowsPerPageChange
-}) {
-  function rowChangeHandler(e) {
+}: PaginationOptsProps) {
+  function rowChangeHandler(e: any) {
     onRowsPerPageChange(e.target.value);
   }
 
-  let selectOption = [];
+  let selectOption: React.ReactNode[] = [];
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
-    selectOption.push(rowsPerPage);
+    let opts: RowsPerPageOptionType = [rowsPerPage];
 
     // Make sure there are no duplicates being pushed.
-    rowsPerPageOption.forEach(opt => {
-      if (!selectOption.includes(opt) && typeof opt === 'number') {
-        selectOption.push(opt);
-      }
-    });
+    if (rowsPerPageOption !== undefined) {
+      rowsPerPageOption.forEach(opt => {
+        if (!opts.includes(opt) && typeof opt === 'number') {
+          opts.push(opt);
+        }
+      });
 
-    // Order the pagination options ascending.
-    selectOption = selectOption.sort((a, b) => {
-      if (a < b) {
-        return -1;
-      } else if (a > b) {
-        return 1;
-      }
+      // Order the pagination options ascending.
+      opts = opts.sort((a, b) => {
+        if (a < b) {
+          return -1;
+        } else if (a > b) {
+          return 1;
+        }
 
-      return 0;
-    });
+        return 0;
+      });
+    }
 
     // Replace the numbers with array of React elements.
-    selectOption.forEach((option, idx) => {
+    selectOption = opts.map((option: number | undefined, idx: number) => {
       const optionProps = {
         key: `page-opt-${option}`,
         value: option
       };
 
-      selectOption[idx] = <option {...optionProps}>{option}</option>;
+      return <option {...optionProps}>{option}</option>;
     });
 
     renderedElements = (
@@ -68,17 +81,3 @@ function PaginationOpts({
 
   return renderedElements;
 }
-
-PaginationOpts.propTypes = {
-  labels: PropTypes.object.isRequired,
-  onRowsPerPageChange: PropTypes.func.isRequired,
-  rowsPerPageOption: PropTypes.array,
-  rowsPerPage: PropTypes.number
-};
-
-PaginationOpts.defaultProps = {
-  rowsPerPage: undefined,
-  rowsPerPageOption: undefined
-};
-
-export default PaginationOpts;

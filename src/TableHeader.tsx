@@ -1,31 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-import classNames from 'classnames';
 
 import FontAwesome from './modules/FontAwesome';
+import { makeClasses } from './utils/object';
+import { HeaderType, SortType } from './utils/types';
 
-const TableHeader = ({ tableHeader, sortedProp, onSortChange }) => {
+type TableHeaderProps = {
+  tableHeaders: HeaderType[];
+  sortedProp: SortType;
+  onSortChange: any;
+};
+
+export default function TableHeader({
+  tableHeaders,
+  sortedProp,
+  onSortChange
+}: TableHeaderProps) {
   const headings = [];
 
-  for (let i = 0; i < tableHeader.length; i += 1) {
-    const thClass = classNames({
+  for (let i = 0; i < tableHeaders.length; i += 1) {
+    const thClass = makeClasses({
       'thead-th': true,
-      sortable: tableHeader[i].sortable === true
+      sortable: tableHeaders[i].sortable === true
     });
     const thProps = {
       key: `th-${i}`,
       onClick:
-        tableHeader[i].sortable === true
-          ? onSortChange(tableHeader[i].prop)
+        tableHeaders[i].sortable === true
+          ? onSortChange(tableHeaders[i].prop)
           : undefined,
       className: thClass
     };
     let sortIcon = 'sort';
     let sortIconRender = null;
 
-    if (tableHeader[i].sortable === true) {
-      if (sortedProp !== {} && sortedProp.prop === tableHeader[i].prop) {
+    if (tableHeaders[i].sortable === true) {
+      if (sortedProp !== {} && sortedProp.prop === tableHeaders[i].prop) {
         if (sortedProp.isAscending) {
           sortIcon = 'sort-asc';
         } else {
@@ -38,7 +47,7 @@ const TableHeader = ({ tableHeader, sortedProp, onSortChange }) => {
 
     headings.push(
       <th {...thProps}>
-        {tableHeader[i].title}
+        {tableHeaders[i].title}
         <span className="pull-right">{sortIconRender}</span>
       </th>
     );
@@ -49,12 +58,4 @@ const TableHeader = ({ tableHeader, sortedProp, onSortChange }) => {
       <tr className="thead-tr">{headings}</tr>
     </thead>
   );
-};
-
-TableHeader.propTypes = {
-  tableHeader: PropTypes.array.isRequired,
-  sortedProp: PropTypes.object.isRequired,
-  onSortChange: PropTypes.func.isRequired
-};
-
-export default TableHeader;
+}

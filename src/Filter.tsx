@@ -6,10 +6,23 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
+import { HeaderType } from './utils/types';
 
-function Filter({ tableHeader, filterText, placeholder, onChangeFilter }) {
+type FilterProps = {
+  tableHeaders: HeaderType[];
+  filterText: string;
+  onChangeFilter: any;
+  placeholder?: string;
+};
+
+export default function Filter({
+  tableHeaders,
+  filterText,
+  placeholder = 'Enter tezt...',
+  onChangeFilter
+}: FilterProps) {
   // Event handlers.
-  function onInputChange(e) {
+  function onInputChange(e: any) {
     onChangeFilter(e.target.value);
   }
 
@@ -21,8 +34,8 @@ function Filter({ tableHeader, filterText, placeholder, onChangeFilter }) {
   let i = 0;
   let filterable = false;
 
-  while (!filterable && i < tableHeader.length) {
-    if (tableHeader[i].filterable === true) {
+  while (!filterable && i < tableHeaders.length) {
+    if (tableHeaders[i].filterable === true) {
       filterable = true;
     }
 
@@ -49,16 +62,3 @@ function Filter({ tableHeader, filterText, placeholder, onChangeFilter }) {
 
   return filterRender;
 }
-
-Filter.propTypes = {
-  tableHeader: PropTypes.array.isRequired,
-  filterText: PropTypes.string.isRequired,
-  onChangeFilter: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
-};
-
-Filter.defaultProps = {
-  placeholder: 'Enter text'
-};
-
-export default Filter;
