@@ -4,8 +4,8 @@
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
   "main": "lib/Table.js",
   "scripts": {
-    "test": "jest && yarn eslint",
-    "jest:watch": "jest --watch",
+    "test": "jest --watch",
+    "lint": "yarn eslint",
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
     "build": "yarn build:lib && git add -A",
@@ -25,10 +25,7 @@
     "datatable"
   ],
   "jest": {
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$",
-    "setupFiles": [
-      "./test/jestsetup.js"
-    ]
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$"
   },
   "author": "Try Ajitiono",
   "license": "MIT",
@@ -42,6 +39,7 @@
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-links": "^5.1.10",
     "@storybook/addon-storysource": "^5.1.10",
@@ -55,8 +53,6 @@
     "babel-loader": "^8.0.5",
     "bootstrap": "^4.3.1",
     "css-loader": "^2.1.1",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.15.1",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-react": "^7.12.4",
