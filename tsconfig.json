@@ -20,8 +20,7 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true
+    "emitDecoratorMetadata": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "lib"]
