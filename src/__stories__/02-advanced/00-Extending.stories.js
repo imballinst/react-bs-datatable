@@ -60,7 +60,7 @@ class CustomTable extends Datatable {
           </Col>
           <Col xs={12} md={4}>
             <Filter
-              tableHeader={tableHeader}
+              tableHeaders={tableHeader}
               placeholder={labels.filterPlaceholder}
               onChangeFilter={this.onChangeFilter}
               filterText={filterText}
@@ -71,12 +71,12 @@ class CustomTable extends Datatable {
           <Col xs="12">
             <Table className={tableClass}>
               <TableHeader
-                tableHeader={tableHeader}
+                tableHeaders={tableHeader}
                 sortedProp={sortedProp}
                 onSortChange={this.onSortChange}
               />
               <TableBody
-                tableHeader={tableHeader}
+                tableHeaders={tableHeader}
                 labels={labels}
                 data={data}
               />
@@ -149,7 +149,7 @@ const customLabels = {
 
 storiesOf(categoryName, module).add('Extending the Table', () => (
   <CustomTable
-    tableHeader={header}
+    tableHeaders={header}
     tableBody={body}
     tableClass="striped hover responsive"
     rowsPerPage={5}

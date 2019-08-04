@@ -66,7 +66,7 @@ const customLabels = {
 
 storiesOf(categoryName, module).add('Custom Cell Representation', () => (
   <Datatable
-    tableHeader={header}
+    tableHeaders={header}
     tableBody={body}
     tableClass="striped hover responsive"
     rowsPerPage={5}

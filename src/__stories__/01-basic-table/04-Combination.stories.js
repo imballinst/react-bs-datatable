@@ -51,7 +51,7 @@ const onSortFunction = {
 
 storiesOf(categoryName, module).add('Filter, sort, and pagination', () => (
   <Datatable
-    tableHeader={header}
+    tableHeaders={header}
     tableBody={body}
     tableClass="striped hover responsive"
     rowsPerPage={5}

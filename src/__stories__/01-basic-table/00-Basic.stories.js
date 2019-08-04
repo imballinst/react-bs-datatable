@@ -39,7 +39,7 @@ const body = Array.from(new Array(57), () => {
 console.log('dtatble', Datatable);
 storiesOf(categoryName, module).add('Basic', () => (
   <Datatable
-    tableHeader={header}
+    tableHeaders={header}
     tableBody={body}
     tableClass="striped hover responsive"
   />

@@ -38,7 +38,7 @@ const body = Array.from(new Array(57), () => {
 
 storiesOf(categoryName, module).add('Pagination', () => (
   <Datatable
-    tableHeader={header}
+    tableHeaders={header}
     tableBody={body}
     tableClass="striped hover responsive"
     rowsPerPage={5}
