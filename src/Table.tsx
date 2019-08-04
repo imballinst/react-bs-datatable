@@ -1,11 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
-
-import classNames from 'classnames';
 
 import { sortData, filterData, paginateData } from './utils/ClassHelpers';
 import Pagination from './Pagination';
@@ -13,20 +10,42 @@ import PaginationOpts from './PaginationOpts';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
+import { SortType, LabelType, HeaderType } from './utils/types';
+import { makeClasses } from './utils/object';
 
-/** Datatable Component */
+type DatatableProps = {
+  /** Initial sort of the table. */
+  tableHeader: HeaderType[];
+  tableBody: any[];
+  initialSort?: SortType;
+  onSort?: any;
+  onFilter?: any;
+  rowsPerPage?: number;
+  rowsPerPageOption?: number[];
+  tableBsClass?: string;
+  labels?: LabelType;
+};
+
+type DatatableState = {
+  sortedProp: SortType;
+  rowsPerPage: number;
+  currentPage: number;
+  filterText: string;
+};
+
+/** Datatable Component. */
 function Datatable({
   initialSort,
   onSort,
   onFilter,
-  rowsPerPage,
-  rowsPerPageOption,
+  rowsPerPage = 5,
+  rowsPerPageOption = [],
   tableHeader,
   tableBody,
-  tableBsClass,
-  labels
-}) {
-  const [state, setState] = useState(() => {
+  tableBsClass = '',
+  labels = {}
+}: DatatableProps) {
+  const [state, setState] = useState<DatatableState>(() => {
     let defaultSort = {};
 
     if (initialSort !== undefined) {
@@ -46,21 +65,10 @@ function Datatable({
       }
     }
 
-    const isOptionsGiven = rowsPerPageOption.length > 0;
-    let defaultRowsPerPage;
-
-    if (isOptionsGiven) {
-      if (rowsPerPageOption.includes(rowsPerPage)) {
-        defaultRowsPerPage = rowsPerPage;
-      } else {
-        defaultRowsPerPage = rowsPerPageOption[0];
-      }
-    }
-
-    // Define initial state
+    // Define initial state.
     return {
       sortedProp: defaultSort,
-      rowsPerPage: defaultRowsPerPage,
+      rowsPerPage,
       currentPage: 1,
       filterText: ''
     };
@@ -78,7 +86,7 @@ function Datatable({
     }
   }, [tableBody, rowsPerPage]);
 
-  function onChangeFilter(text) {
+  function onChangeFilter(text: string) {
     setState(oldState => ({
       ...oldState,
       filterText: text,
@@ -86,7 +94,7 @@ function Datatable({
     }));
   }
 
-  function onPageNavigate(nextPage) {
+  function onPageNavigate(nextPage: number) {
     return () => {
       setState(oldState => ({
         ...oldState,
@@ -95,17 +103,17 @@ function Datatable({
     };
   }
 
-  function onRowsPerPageChange(numOfPage) {
+  function onRowsPerPageChange(numOfPage: number) {
     return () => {
       setState(oldState => ({
         ...oldState,
-        rowsPerPage: parseInt(numOfPage, 10),
+        rowsPerPage: numOfPage,
         currentPage: 1
       }));
     };
   }
 
-  function onSortChange(nextProp) {
+  function onSortChange(nextProp: string) {
     return () => {
       const nextSort = state.sortedProp;
 
@@ -123,22 +131,16 @@ function Datatable({
     };
   }
 
-  function processData() {
-    const { sortedProp, filterText, rowsPerPage, currentPage } = state;
-    const filteredData = filterData(
-      tableHeader,
-      filterText,
-      onFilter,
-      tableBody
-    );
-    const sortedData = sortData(sortedProp, onSort, filteredData);
-    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
+  const filteredData = filterData(
+    tableHeader,
+    state.filterText,
+    onFilter,
+    tableBody
+  );
+  const sortedData = sortData(state.sortedProp, onSort, filteredData);
+  const data = paginateData(state.rowsPerPage, state.currentPage, sortedData);
 
-    return paginatedData;
-  }
-
-  const data = processData(tableHeader, tableBody, onSort, onFilter);
-  const tableClass = classNames(`table-datatable`, tableBsClass);
+  const tableClass = makeClasses(`table-datatable`, tableBsClass);
 
   return (
     <Fragment>
@@ -184,19 +186,6 @@ function Datatable({
     </Fragment>
   );
 }
-
-Datatable.propTypes = {
-  /** Initial sort of the table */
-  initialSort: PropTypes.object,
-  onSort: PropTypes.object,
-  onFilter: PropTypes.object,
-  rowsPerPage: PropTypes.number,
-  rowsPerPageOption: PropTypes.arrayOf(PropTypes.number),
-  tableHeader: PropTypes.arrayOf(PropTypes.object).isRequired,
-  tableBody: PropTypes.arrayOf(PropTypes.object).isRequired,
-  tableBsClass: PropTypes.string,
-  labels: PropTypes.object
-};
 
 Datatable.defaultProps = {
   initialSort: undefined,

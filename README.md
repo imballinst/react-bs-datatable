@@ -40,7 +40,6 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
 ## Props
 
 - initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
-- keyName **(Required)**: String. It is used to prepend the key property of children elements.
 - labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
   - `first`: String. First page label button.
   - `last`: String. Last page label button.
