@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Row from 'react-bootstrap/Row';
@@ -15,11 +15,18 @@ import TableBody from './TableBody';
 import Filter from './Filter';
 
 /** Datatable Component */
-class Datatable extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { tableHeader, initialSort, rowsPerPageOption, rowsPerPage } = props;
+function Datatable({
+  initialSort,
+  onSort,
+  onFilter,
+  rowsPerPage,
+  rowsPerPageOption,
+  tableHeader,
+  tableBody,
+  tableBsClass,
+  labels
+}) {
+  const [state, setState] = useState(() => {
     let defaultSort = {};
 
     if (initialSort !== undefined) {
@@ -51,59 +58,73 @@ class Datatable extends React.Component {
     }
 
     // Define initial state
-    this.state = {
+    return {
       sortedProp: defaultSort,
       rowsPerPage: defaultRowsPerPage,
       currentPage: 1,
       filterText: ''
     };
-  }
+  });
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      filterText: '',
-      currentPage: 1,
-      rowsPerPage: newProps.rowsPerPage
-    });
-  }
+  useEffect(() => {
+    // Resets the table if the data passed down is different.
+    if (tableBody !== undefined) {
+      setState(oldState => ({
+        ...oldState,
+        filterText: '',
+        currentPage: 1,
+        rowsPerPage: rowsPerPage
+      }));
+    }
+  }, [tableBody, rowsPerPage]);
 
-  onChangeFilter = text => {
-    this.setState({
+  function onChangeFilter(text) {
+    setState(oldState => ({
+      ...oldState,
       filterText: text,
       currentPage: 1
-    });
-  };
+    }));
+  }
 
-  onPageNavigate = nextPage => () => {
-    this.setState({
-      currentPage: nextPage
-    });
-  };
+  function onPageNavigate(nextPage) {
+    return () => {
+      setState(oldState => ({
+        ...oldState,
+        currentPage: nextPage
+      }));
+    };
+  }
 
-  onRowsPerPageChange = numOfPage => {
-    this.setState({
-      rowsPerPage: parseInt(numOfPage, 10),
-      currentPage: 1
-    });
-  };
+  function onRowsPerPageChange(numOfPage) {
+    return () => {
+      setState(oldState => ({
+        ...oldState,
+        rowsPerPage: parseInt(numOfPage, 10),
+        currentPage: 1
+      }));
+    };
+  }
 
-  onSortChange = nextProp => () => {
-    const nextSort = this.state.sortedProp;
+  function onSortChange(nextProp) {
+    return () => {
+      const nextSort = state.sortedProp;
 
-    if (nextProp !== this.state.sortedProp.prop) {
-      nextSort.prop = nextProp;
-      nextSort.isAscending = true;
-    } else {
-      nextSort.isAscending = !this.state.sortedProp.isAscending;
-    }
+      if (nextProp !== state.sortedProp.prop) {
+        nextSort.prop = nextProp;
+        nextSort.isAscending = true;
+      } else {
+        nextSort.isAscending = !state.sortedProp.isAscending;
+      }
 
-    this.setState({
-      sortedProp: nextSort
-    });
-  };
+      setState(oldState => ({
+        ...oldState,
+        sortedProp: nextSort
+      }));
+    };
+  }
 
-  processData(tableHeader, tableBody, onSort, onFilter) {
-    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
+  function processData() {
+    const { sortedProp, filterText, rowsPerPage, currentPage } = state;
     const filteredData = filterData(
       tableHeader,
       filterText,
@@ -116,69 +137,52 @@ class Datatable extends React.Component {
     return paginatedData;
   }
 
-  render() {
-    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
-    const {
-      tableHeader,
-      tableBody,
-      onSort,
-      onFilter,
-      tableBsClass,
-      labels,
-      rowsPerPageOption
-    } = this.props;
+  const data = processData(tableHeader, tableBody, onSort, onFilter);
+  const tableClass = classNames(`table-datatable`, tableBsClass);
 
-    const data = this.processData(tableHeader, tableBody, onSort, onFilter);
-    const tableClass = classNames(`table-datatable`, tableBsClass);
-
-    return (
-      <Fragment>
-        <Row className="controlRow">
-          <Col xs={12} md={4}>
-            <Filter
+  return (
+    <Fragment>
+      <Row className="controlRow">
+        <Col xs={12} md={4}>
+          <Filter
+            tableHeader={tableHeader}
+            placeholder={labels.filterPlaceholder}
+            onChangeFilter={onChangeFilter}
+            filterText={state.filterText}
+          />
+        </Col>
+        <Col xs={12} md={4}>
+          <PaginationOpts
+            labels={labels}
+            onRowsPerPageChange={onRowsPerPageChange}
+            rowsPerPage={state.rowsPerPage}
+            rowsPerPageOption={rowsPerPageOption}
+          />
+        </Col>
+        <Col xs={12} md={4} className="text-right">
+          <Pagination
+            data={tableBody}
+            rowsPerPage={state.rowsPerPage}
+            currentPage={state.currentPage}
+            onPageNavigate={onPageNavigate}
+            labels={labels}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="12">
+          <Table className={tableClass}>
+            <TableHeader
               tableHeader={tableHeader}
-              placeholder={labels.filterPlaceholder}
-              onChangeFilter={this.onChangeFilter}
-              filterText={filterText}
+              sortedProp={state.sortedProp}
+              onSortChange={onSortChange}
             />
-          </Col>
-          <Col xs={12} md={4}>
-            <PaginationOpts
-              labels={labels}
-              onRowsPerPageChange={this.onRowsPerPageChange}
-              rowsPerPage={rowsPerPage}
-              rowsPerPageOption={rowsPerPageOption}
-            />
-          </Col>
-          <Col xs={12} md={4} className="text-right">
-            <Pagination
-              data={tableBody}
-              rowsPerPage={rowsPerPage}
-              currentPage={currentPage}
-              onPageNavigate={this.onPageNavigate}
-              labels={labels}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="12">
-            <Table className={tableClass}>
-              <TableHeader
-                tableHeader={tableHeader}
-                sortedProp={sortedProp}
-                onSortChange={this.onSortChange}
-              />
-              <TableBody
-                tableHeader={tableHeader}
-                labels={labels}
-                data={data}
-              />
-            </Table>
-          </Col>
-        </Row>
-      </Fragment>
-    );
-  }
+            <TableBody tableHeader={tableHeader} labels={labels} data={data} />
+          </Table>
+        </Col>
+      </Row>
+    </Fragment>
+  );
 }
 
 Datatable.propTypes = {
