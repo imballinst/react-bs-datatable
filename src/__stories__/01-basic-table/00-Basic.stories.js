@@ -4,7 +4,7 @@ import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
-
+console.log('react', React);
 const header = [
   { title: 'Username', prop: 'username' },
   { title: 'Name', prop: 'realname' },
@@ -36,7 +36,7 @@ const body = Array.from(new Array(57), () => {
   };
 });
 
-console.log(Datatable);
+console.log('dtatble', Datatable);
 storiesOf(categoryName, module).add('Basic', () => (
   <Datatable
     tableHeader={header}

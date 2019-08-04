@@ -38,7 +38,7 @@ type DatatableState = {
   currentPage: number;
   filterText: string;
 };
-
+console.log('reactxx', React);
 /** Datatable Component. */
 export default function Datatable({
   initialSort,

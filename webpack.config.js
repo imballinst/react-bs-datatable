@@ -2,11 +2,11 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './src/Table.js',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.tsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -19,11 +19,6 @@ module.exports = {
             plugins: ['@babel/plugin-proposal-class-properties']
           }
         }
-      },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
       }
     ]
   },
