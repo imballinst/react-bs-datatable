@@ -4,7 +4,8 @@
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
   "main": "lib/Table.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest && yarn eslint",
+    "jest": "jest --watch",
     "lint": "yarn eslint",
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
