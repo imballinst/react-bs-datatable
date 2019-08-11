@@ -8,6 +8,6 @@ describe('object util', () => {
     const expected2 = 'a, b, and c';
 
     expect(customJoin(strings, ', ')).toBe(expected);
-    expect(customJoin(strings, ', ', ', and ')).toBe(expected2);
+    expect(customJoin(strings, ', ', 'and ')).toBe(expected2);
   });
 });

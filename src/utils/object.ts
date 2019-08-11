@@ -6,6 +6,8 @@ export function customJoin(
   separator: string,
   lastSeparator: string = ''
 ) {
-  return `${array.slice(0, -1).join(separator)}${lastSeparator ||
-    separator}${array.slice(-1)}`;
+  const lastSep =
+    array.length === 2 ? lastSeparator : `${separator}${lastSeparator}`;
+
+  return `${array.slice(0, -1).join(separator)}${lastSep}${array.slice(-1)}`;
 }
