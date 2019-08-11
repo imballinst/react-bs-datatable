@@ -4,7 +4,8 @@ import Form from 'react-bootstrap/Form';
 import {
   LabelType,
   RowsPerPageType,
-  RowsPerPageOptionType
+  RowsPerPageOptionType,
+  TableClasses
 } from './utils/types';
 
 type PaginationOptsProps = {
@@ -12,6 +13,7 @@ type PaginationOptsProps = {
   rowsPerPage?: RowsPerPageType;
   rowsPerPageOption?: RowsPerPageOptionType;
   onRowsPerPageChange: any;
+  classes: TableClasses;
 };
 
 export default function PaginationOpts({

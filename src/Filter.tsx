@@ -5,13 +5,14 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
-import { HeaderType } from './utils/types';
+import { HeaderType, TableClasses } from './utils/types';
 
 type FilterProps = {
   tableHeaders: HeaderType[];
   filterText: string;
   onChangeFilter: any;
   placeholder?: string;
+  classes: TableClasses;
 };
 
 export default function Filter({

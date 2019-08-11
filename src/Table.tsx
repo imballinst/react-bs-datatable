@@ -15,7 +15,8 @@ import {
   LabelType,
   HeaderType,
   RowsPerPageType,
-  RowsPerPageOptionType
+  RowsPerPageOptionType,
+  TableClasses
 } from './utils/types';
 import { makeClasses, customJoin } from './utils/object';
 
@@ -23,21 +24,6 @@ type AsyncProps = {
   onSort: any;
   onFilter: any;
   onPaginate: any;
-};
-
-type TableClasses = {
-  controlRow?: string;
-  filterCol?: string;
-  filter?: string;
-  paginationOptsCol?: string;
-  paginationOpts?: string;
-  paginationCol?: string;
-  pagination?: string;
-  table?: string;
-  thead?: string;
-  theadRow?: string;
-  tbody?: string;
-  tbodyRow?: string;
 };
 
 type DatatableProps = {
@@ -239,6 +225,7 @@ export function useDatatableLifecycle({
     tableHeaders,
     onChangeFilter,
     onPageNavigate,
+    classes,
     onRowsPerPageChange,
     onSortChange,
     tableBody,
@@ -256,6 +243,7 @@ export default function Datatable(props: DatatableProps) {
     tableHeaders,
     onChangeFilter,
     onPageNavigate,
+    classes,
     onRowsPerPageChange,
     onSortChange,
     tableBody,
@@ -268,6 +256,7 @@ export default function Datatable(props: DatatableProps) {
       <Row className="controlRow__root">
         <Col xs={12} md={4}>
           <Filter
+            classes={classes}
             tableHeaders={tableHeaders}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
@@ -276,6 +265,7 @@ export default function Datatable(props: DatatableProps) {
         </Col>
         <Col xs={12} md={3}>
           <PaginationOpts
+            classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
             rowsPerPage={state.rowsPerPage}
@@ -284,6 +274,7 @@ export default function Datatable(props: DatatableProps) {
         </Col>
         <Col xs={12} md={5} className="text-right">
           <Pagination
+            classes={classes}
             data={tableBody}
             rowsPerPage={state.rowsPerPage}
             currentPage={state.currentPage}
@@ -296,11 +287,13 @@ export default function Datatable(props: DatatableProps) {
         <Col xs="12">
           <Table className={tableClass}>
             <TableHeader
+              classes={classes}
               tableHeaders={tableHeaders}
               sortedProp={state.sortedProp}
               onSortChange={onSortChange}
             />
             <TableBody
+              classes={classes}
               tableHeaders={tableHeaders}
               labels={labels}
               data={data}

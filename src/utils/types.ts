@@ -22,5 +22,22 @@ export type LabelType = {
   filterPlaceholder?: string;
 };
 
+export type TableClasses = {
+  controlRow?: string;
+  filterCol?: string;
+  filter?: string;
+  paginationOptsCol?: string;
+  paginationOpts?: string;
+  paginationCol?: string;
+  pagination?: string;
+  table?: string;
+  thead?: string;
+  theadRow?: string;
+  theadCol?: string;
+  tbody?: string;
+  tbodyRow?: string;
+  tbodyCol?: string;
+};
+
 export type RowsPerPageType = number | undefined;
 export type RowsPerPageOptionType = number[];

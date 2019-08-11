@@ -1,12 +1,13 @@
 import React from 'react';
 
 import BodyRow from './BodyRow';
-import { HeaderType, LabelType } from './utils/types';
+import { HeaderType, LabelType, TableClasses } from './utils/types';
 
 type TableBodyProps = {
   tableHeaders: HeaderType[];
   labels: LabelType;
   data: any[];
+  classes: TableClasses;
 };
 
 export default function TableBody({

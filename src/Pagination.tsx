@@ -4,7 +4,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 
 import NavButton from './modules/NavButton';
-import { LabelType, RowsPerPageType } from './utils/types';
+import { LabelType, RowsPerPageType, TableClasses } from './utils/types';
 
 type PaginationProps = {
   data: any[];
@@ -12,6 +12,7 @@ type PaginationProps = {
   currentPage: number;
   onPageNavigate: any;
   labels: LabelType;
+  classes: TableClasses;
 };
 
 export default function Pagination({
