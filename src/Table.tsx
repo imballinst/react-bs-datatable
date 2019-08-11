@@ -206,7 +206,7 @@ export function useDatatableLifecycle({
   const sortedData = sortData(filteredData, state.sortedProp, onSort);
   const data = paginateData(sortedData, state.currentPage, state.rowsPerPage);
 
-  const tableClass = makeClasses(`table-datatable`, tableBsClass);
+  const tableClass = makeClasses(`table-datatable__root`, tableBsClass);
 
   return {
     data,
@@ -241,7 +241,7 @@ export default function Datatable(props: DatatableProps) {
 
   return (
     <>
-      <Row className="controlRow">
+      <Row className="controlRow__root">
         <Col xs={12} md={4}>
           <Filter
             tableHeaders={tableHeaders}
@@ -250,7 +250,7 @@ export default function Datatable(props: DatatableProps) {
             filterText={state.filterText}
           />
         </Col>
-        <Col xs={12} md={4}>
+        <Col xs={12} md={3}>
           <PaginationOpts
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
@@ -258,7 +258,7 @@ export default function Datatable(props: DatatableProps) {
             rowsPerPageOption={rowsPerPageOption}
           />
         </Col>
-        <Col xs={12} md={4} className="text-right">
+        <Col xs={12} md={5} className="text-right">
           <Pagination
             data={tableBody}
             rowsPerPage={state.rowsPerPage}

@@ -61,7 +61,7 @@ export default function PaginationOpts({
     });
 
     renderedElements = (
-      <Form inline>
+      <Form inline className="paginationOpts__root">
         <Form.Group controlId="formGroupPagination">
           <span>{labels.show || 'Show'} </span>
           <Form.Control

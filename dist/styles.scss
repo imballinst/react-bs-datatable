@@ -1,4 +1,4 @@
-.table-datatable {
+.table-datatable__root {
   & > .thead {
     & > .thead-tr {
       & > .thead-th {
@@ -18,5 +18,13 @@
         background: #eaeaea;
       }
     }
+  }
+}
+
+.controlRow__root {
+  margin-bottom: 15px;
+
+  .paginationOpts__root {
+    justify-content: center;
   }
 }

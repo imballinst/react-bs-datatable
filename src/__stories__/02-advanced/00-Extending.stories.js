@@ -39,7 +39,7 @@ function CustomTable(props) {
 
   return (
     <>
-      <Row>
+      <Row className="controlRow__root">
         <Col xs="12">
           <Filter
             tableHeaders={tableHeaders}
@@ -65,7 +65,7 @@ function CustomTable(props) {
           </Table>
         </Col>
       </Row>
-      <Row className="controlRow">
+      <Row className="controlRow__root bottom">
         <Col xs={12} md={4} />
         <Col xs={12} md={4}>
           <PaginationOpts
@@ -75,7 +75,7 @@ function CustomTable(props) {
             rowsPerPageOption={rowsPerPageOption}
           />
         </Col>
-        <Col xs={12} md={4}>
+        <Col xs={12} md={4} className="text-right">
           <Pagination
             data={tableBody}
             rowsPerPage={state.rowsPerPage}
