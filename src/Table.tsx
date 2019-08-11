@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -184,7 +184,7 @@ export default function Datatable(props: DatatableProps) {
   } = useDatatableLifecycle(props);
 
   return (
-    <Fragment>
+    <>
       <Row className="controlRow">
         <Col xs={12} md={4}>
           <Filter
@@ -228,6 +228,6 @@ export default function Datatable(props: DatatableProps) {
           </Table>
         </Col>
       </Row>
-    </Fragment>
+    </>
   );
 }
