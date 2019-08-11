@@ -39,8 +39,12 @@ type DatatableState = {
   filterText: string;
 };
 
-/** Datatable Component. */
-export default function Datatable({
+/**
+ * Datatable lifecycle convenient function.
+ * It will be used when we are extending the table.
+ **/
+
+export function useDatatableLifecycle({
   initialSort,
   onSort,
   onFilter,
@@ -147,6 +151,37 @@ export default function Datatable({
   const data = paginateData(sortedData, state.currentPage, state.rowsPerPage);
 
   const tableClass = makeClasses(`table-datatable`, tableBsClass);
+
+  return {
+    data,
+    state,
+    rowsPerPageOption,
+    tableHeaders,
+    onChangeFilter,
+    onPageNavigate,
+    onRowsPerPageChange,
+    onSortChange,
+    tableBody,
+    tableClass,
+    labels
+  };
+}
+
+/** Datatable Component. */
+export default function Datatable(props: DatatableProps) {
+  const {
+    data,
+    state,
+    rowsPerPageOption,
+    tableHeaders,
+    onChangeFilter,
+    onPageNavigate,
+    onRowsPerPageChange,
+    onSortChange,
+    tableBody,
+    tableClass,
+    labels
+  } = useDatatableLifecycle(props);
 
   return (
     <Fragment>
