@@ -17,7 +17,7 @@ type FilterProps = {
 export default function Filter({
   tableHeaders,
   filterText,
-  placeholder = 'Enter tezt...',
+  placeholder = 'Enter text...',
   onChangeFilter
 }: FilterProps) {
   // Event handlers.
