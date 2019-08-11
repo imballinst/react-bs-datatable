@@ -7,7 +7,7 @@ import {
   paginateData
 } from '../data';
 
-describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
+describe('data util (src/utils/data)', () => {
   it('should get last children of a react component; or that object if not', () => {
     const text = 'testDiv';
     const aComponent = <div>{text}</div>;

@@ -19,6 +19,12 @@ import {
 } from './utils/types';
 import { makeClasses } from './utils/object';
 
+type AsyncProps = {
+  onSort: any;
+  onFilter: any;
+  onPaginate: any;
+};
+
 type DatatableProps = {
   /** Initial sort of the table. */
   tableHeaders: HeaderType[];
@@ -26,6 +32,7 @@ type DatatableProps = {
   initialSort?: SortType;
   onSort?: any;
   onFilter?: any;
+  async?: AsyncProps;
   rowsPerPage?: RowsPerPageType;
   rowsPerPageOption?: RowsPerPageOptionType;
   tableBsClass?: string;
@@ -169,6 +176,49 @@ export function useDatatableLifecycle({
 
 /** Datatable Component. */
 export default function Datatable(props: DatatableProps) {
+  // If in development, warn if async and onSort/onFilter are both passed.
+  if (process.env.NODE_ENV === 'development') {
+    if (props.async !== undefined) {
+      // Warn if onSort and/or onFilter is/are also passed down.
+      let str = [];
+
+      if (props.onSort !== undefined) {
+        str.push('[onSort]');
+      }
+
+      if (props.onFilter !== undefined) {
+        str.push('[onFilter]');
+      }
+
+      if (str.length > 0) {
+        console.warn(
+          `You are passing [async] props along with ${str.join(
+            ' and '
+          )}. When [async] is enabled, you should not pass onFilter or onSort.`
+        );
+      }
+
+      // Warn if all async options are not passed.
+      str = [];
+
+      if (props.async.onFilter === undefined) {
+        str.push('[async.onFilter]');
+      }
+
+      if (props.async.onSort === undefined) {
+        str.push('[async.onSort]');
+      }
+
+      if (props.async.onPaginate === undefined) {
+        str.push('[async.onPaginate]');
+      }
+
+      if (str.length > 0) {
+        console.warn(`These async props are missing: ${str.join(' and ')}`);
+      }
+    }
+  }
+
   const {
     data,
     state,

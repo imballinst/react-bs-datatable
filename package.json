@@ -27,7 +27,7 @@
     "datatable"
   ],
   "jest": {
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$"
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|ts)$"
   },
   "author": "Try Ajitiono",
   "license": "MIT",
@@ -49,6 +49,8 @@
     "@storybook/react": "^5.1.10",
     "@storybook/theming": "^5.1.10",
     "@types/classnames": "^2.2.9",
+    "@types/jest": "^24.0.17",
+    "@types/node": "^12.7.1",
     "@types/react": "^16.8.24",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
