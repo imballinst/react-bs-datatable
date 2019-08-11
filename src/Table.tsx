@@ -17,7 +17,7 @@ import {
   RowsPerPageType,
   RowsPerPageOptionType
 } from './utils/types';
-import { makeClasses } from './utils/object';
+import { makeClasses, customJoin } from './utils/object';
 
 type AsyncProps = {
   onSort: any;
@@ -57,11 +57,58 @@ export function useDatatableLifecycle({
   onFilter,
   rowsPerPage = 5,
   rowsPerPageOption = [],
+  async,
   tableHeaders,
   tableBody,
   tableBsClass = '',
   labels = {}
 }: DatatableProps) {
+  // If in development, warn if async and onSort/onFilter are both passed.
+  if (process.env.NODE_ENV === 'development') {
+    if (async !== undefined) {
+      // Warn if onSort and/or onFilter is/are also passed down.
+      let str = [];
+
+      if (onSort !== undefined) {
+        str.push('[onSort]');
+      }
+
+      if (onFilter !== undefined) {
+        str.push('[onFilter]');
+      }
+
+      if (str.length > 0) {
+        console.warn(
+          `You are passing [async] props along with ${customJoin(
+            str,
+            ' and '
+          )}. When [async] is enabled, you should not pass onFilter or onSort.`
+        );
+      }
+
+      // Warn if all async options are not passed.
+      str = [];
+
+      if (async.onFilter === undefined) {
+        str.push('[async.onFilter]');
+      }
+
+      if (async.onSort === undefined) {
+        str.push('[async.onSort]');
+      }
+
+      if (async.onPaginate === undefined) {
+        str.push('[async.onPaginate]');
+      }
+
+      if (str.length > 0) {
+        console.warn(
+          `These async props are missing: ${customJoin(str, ', ', ', and ')}`
+        );
+      }
+    }
+  }
+
   const [state, setState] = useState<DatatableState>(() => {
     let defaultSort = {};
 
@@ -176,49 +223,6 @@ export function useDatatableLifecycle({
 
 /** Datatable Component. */
 export default function Datatable(props: DatatableProps) {
-  // If in development, warn if async and onSort/onFilter are both passed.
-  if (process.env.NODE_ENV === 'development') {
-    if (props.async !== undefined) {
-      // Warn if onSort and/or onFilter is/are also passed down.
-      let str = [];
-
-      if (props.onSort !== undefined) {
-        str.push('[onSort]');
-      }
-
-      if (props.onFilter !== undefined) {
-        str.push('[onFilter]');
-      }
-
-      if (str.length > 0) {
-        console.warn(
-          `You are passing [async] props along with ${str.join(
-            ' and '
-          )}. When [async] is enabled, you should not pass onFilter or onSort.`
-        );
-      }
-
-      // Warn if all async options are not passed.
-      str = [];
-
-      if (props.async.onFilter === undefined) {
-        str.push('[async.onFilter]');
-      }
-
-      if (props.async.onSort === undefined) {
-        str.push('[async.onSort]');
-      }
-
-      if (props.async.onPaginate === undefined) {
-        str.push('[async.onPaginate]');
-      }
-
-      if (str.length > 0) {
-        console.warn(`These async props are missing: ${str.join(' and ')}`);
-      }
-    }
-  }
-
   const {
     data,
     state,
