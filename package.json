@@ -9,9 +9,7 @@
     "lint": "yarn eslint",
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
-    "build": "yarn build:lib && git add -A",
-    "tsc": "tsc",
-    "build:lib": "cd src && babel . --out-dir ../lib --ignore '__stories__/**/*.js','**/__tests__/*.test.js'",
+    "build": "tsc && git add -A",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
