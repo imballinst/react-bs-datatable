@@ -7,11 +7,31 @@ module.exports = async ({ config, mode }) => {
   // 'PRODUCTION' is used when building the static version of storybook.
 
   // Make whatever fine-grained changes you need
+  config.module.rules.push(
+    {
+      test: /\.scss$/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      include: path.resolve(__dirname, '../')
+    },
+    {
+      test: /\.tsx?$/,
+      loader: {
+        loader: 'ts-loader',
+        options: {
+          configFile: '../tsconfig.json'
+        }
+      },
+      exclude: /node_modules/
+    }
+  );
+
   config.module.rules.push({
-    test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../')
+    test: /\.stories\.jsx?$/,
+    loaders: [require.resolve('@storybook/addon-storysource/loader')],
+    enforce: 'pre'
   });
+
+  config.resolve.extensions.push('.ts', '.tsx');
 
   // Return the altered config
   return config;

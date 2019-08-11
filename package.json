@@ -5,11 +5,13 @@
   "main": "lib/Table.js",
   "scripts": {
     "test": "jest && yarn eslint",
-    "jest:watch": "jest --watch",
+    "jest": "jest --watch",
+    "lint": "yarn eslint",
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
     "build": "yarn build:lib && git add -A",
-    "build:lib": "cd src && babel . --out-dir ../lib --ignore *.test.js",
+    "tsc": "tsc",
+    "build:lib": "cd src && babel . --out-dir ../lib --ignore '__stories__/**/*.js','**/__tests__/*.test.js'",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -25,10 +27,7 @@
     "datatable"
   ],
   "jest": {
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$",
-    "setupFiles": [
-      "./test/jestsetup.js"
-    ]
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$"
   },
   "author": "Try Ajitiono",
   "license": "MIT",
@@ -42,17 +41,20 @@
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
-    "@storybook/addon-actions": "^5.0.10",
-    "@storybook/addon-links": "^5.0.10",
-    "@storybook/addons": "^5.0.10",
-    "@storybook/react": "^5.0.10",
+    "@babel/preset-typescript": "^7.3.3",
+    "@storybook/addon-actions": "^5.1.10",
+    "@storybook/addon-links": "^5.1.10",
+    "@storybook/addon-storysource": "^5.1.10",
+    "@storybook/addons": "^5.1.10",
+    "@storybook/react": "^5.1.10",
+    "@storybook/theming": "^5.1.10",
+    "@types/classnames": "^2.2.9",
+    "@types/react": "^16.8.24",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "bootstrap": "^4.3.1",
     "css-loader": "^2.1.1",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.15.1",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-react": "^7.12.4",
@@ -64,14 +66,14 @@
     "sass-loader": "^7.1.0",
     "sinon": "^7.2.7",
     "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "@storybook/theming": "^5.0.10",
     "classnames": "^2.2.5",
-    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.4"

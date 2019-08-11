@@ -1,0 +1,22 @@
+.table-datatable {
+  & > .thead {
+    & > .thead-tr {
+      & > .thead-th {
+        &.sortable {
+          &:hover {
+            background: #eaeaea;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  & > .tbody {
+    & > .tbody-tr {
+      &:nth-child(even) {
+        background: #eaeaea;
+      }
+    }
+  }
+}

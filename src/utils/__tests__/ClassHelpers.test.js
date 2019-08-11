@@ -5,7 +5,7 @@ import {
   sortData,
   filterData,
   paginateData
-} from '../ClassHelpers';
+} from '../data';
 
 describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
   it('should get last children of a react component; or that object if not', () => {
@@ -34,8 +34,8 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     const sortedPropFirst = { prop: 'prop1', isAscending: true };
     const sortedPropSecond = { prop: 'prop1', isAscending: false };
 
-    const sortFirstData = sortData(sortedPropFirst, undefined, data);
-    const sortSecondData = sortData(sortedPropSecond, undefined, data);
+    const sortFirstData = sortData(data, sortedPropFirst, undefined);
+    const sortSecondData = sortData(data, sortedPropSecond, undefined);
 
     expect(sortFirstData[0]).toBe(firstData);
     expect(sortFirstData[1]).toBe(secondData);
@@ -59,16 +59,16 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     let filteredTextSecond = '2';
 
     let filterFirstData = filterData(
+      data,
       tableHeader,
       filteredTextFirst,
-      undefined,
-      data
+      undefined
     );
     let filterSecondData = filterData(
+      data,
       tableHeader,
       filteredTextSecond,
-      undefined,
-      data
+      undefined
     );
 
     expect(filterFirstData[0]).toBe(firstData);
@@ -81,16 +81,16 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     filteredTextSecond = 'hahaha';
 
     filterFirstData = filterData(
+      data,
       tableHeader,
       filteredTextFirst,
-      filterFunction,
-      data
+      filterFunction
     );
     filterSecondData = filterData(
+      data,
       tableHeader,
       filteredTextSecond,
-      filterFunction,
-      data
+      filterFunction
     );
 
     expect(filterFirstData[0]).toBe(firstData);
@@ -104,11 +104,11 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
       return objectedNum;
     });
 
-    const showFiveData = paginateData(5, 1, tableData);
-    const showSixData = paginateData(6, 1, tableData);
+    const showFiveData = paginateData(tableData, 1, 5);
+    const showSixData = paginateData(tableData, 1, 6);
 
-    const showFiveDataPageTwo = paginateData(5, 2, tableData);
-    const showSixDataPageTwo = paginateData(6, 2, tableData);
+    const showFiveDataPageTwo = paginateData(tableData, 2, 5);
+    const showSixDataPageTwo = paginateData(tableData, 2, 6);
 
     expect(showFiveData.length).toBe(5);
     expect(showSixData.length).toBe(6);
