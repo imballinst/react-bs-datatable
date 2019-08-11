@@ -1,17 +1,16 @@
 import React from 'react';
-
 import {
   getLastChildren,
   isPropFilterable,
   sortData,
   filterData,
-  paginateData,
-} from '../ClassHelpers';
+  paginateData
+} from '../data';
 
 describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
   it('should get last children of a react component; or that object if not', () => {
     const text = 'testDiv';
-    const aComponent = (<div>{text}</div>);
+    const aComponent = <div>{text}</div>;
 
     expect(getLastChildren(aComponent)).toBe(text);
     expect(getLastChildren(text)).toBe(text);
@@ -20,7 +19,7 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
   it('should determine whether a prop is filterable or not from tableHeader', () => {
     const tableHeader = [
       { prop: 'prop1', filterable: true },
-      { prop: 'prop2', filterable: false },
+      { prop: 'prop2', filterable: false }
     ];
 
     expect(isPropFilterable(tableHeader, 'prop1')).toBe(true);
@@ -35,8 +34,8 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     const sortedPropFirst = { prop: 'prop1', isAscending: true };
     const sortedPropSecond = { prop: 'prop1', isAscending: false };
 
-    const sortFirstData = sortData(sortedPropFirst, undefined, data);
-    const sortSecondData = sortData(sortedPropSecond, undefined, data);
+    const sortFirstData = sortData(data, sortedPropFirst, undefined);
+    const sortSecondData = sortData(data, sortedPropSecond, undefined);
 
     expect(sortFirstData[0]).toBe(firstData);
     expect(sortFirstData[1]).toBe(secondData);
@@ -49,7 +48,7 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     // Initialization
     const tableHeader = [
       { prop: 'prop1', filterable: true },
-      { prop: 'prop2', filterable: false },
+      { prop: 'prop2', filterable: false }
     ];
     const firstData = { prop1: 1 };
     const secondData = { prop1: 2 };
@@ -59,8 +58,18 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     let filteredTextFirst = '1';
     let filteredTextSecond = '2';
 
-    let filterFirstData = filterData(tableHeader, filteredTextFirst, undefined, data);
-    let filterSecondData = filterData(tableHeader, filteredTextSecond, undefined, data);
+    let filterFirstData = filterData(
+      data,
+      tableHeader,
+      filteredTextFirst,
+      undefined
+    );
+    let filterSecondData = filterData(
+      data,
+      tableHeader,
+      filteredTextSecond,
+      undefined
+    );
 
     expect(filterFirstData[0]).toBe(firstData);
     expect(filterSecondData[0]).toBe(secondData);
@@ -71,25 +80,35 @@ describe('ClassHelpers util (src/utils/ClassHelpers)', () => {
     filteredTextFirst = 'hehehe';
     filteredTextSecond = 'hahaha';
 
-    filterFirstData = filterData(tableHeader, filteredTextFirst, filterFunction, data);
-    filterSecondData = filterData(tableHeader, filteredTextSecond, filterFunction, data);
+    filterFirstData = filterData(
+      data,
+      tableHeader,
+      filteredTextFirst,
+      filterFunction
+    );
+    filterSecondData = filterData(
+      data,
+      tableHeader,
+      filteredTextSecond,
+      filterFunction
+    );
 
     expect(filterFirstData[0]).toBe(firstData);
     expect(filterSecondData[0]).toBe(secondData);
   });
 
   it('should paginate data correctly', () => {
-    const tableData = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (val) => {
+    const tableData = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], val => {
       const objectedNum = { propNum: val };
 
       return objectedNum;
     });
 
-    const showFiveData = paginateData(5, 1, tableData);
-    const showSixData = paginateData(6, 1, tableData);
+    const showFiveData = paginateData(tableData, 1, 5);
+    const showSixData = paginateData(tableData, 1, 6);
 
-    const showFiveDataPageTwo = paginateData(5, 2, tableData);
-    const showSixDataPageTwo = paginateData(6, 2, tableData);
+    const showFiveDataPageTwo = paginateData(tableData, 2, 5);
+    const showSixDataPageTwo = paginateData(tableData, 2, 6);
 
     expect(showFiveData.length).toBe(5);
     expect(showSixData.length).toBe(6);

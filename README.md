@@ -7,6 +7,10 @@
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
+## This is unstable release
+
+Please note this is the `next` branch. For the stable release, please check [the master branch](https://github.com/Imballinst/react-bs-datatable/tree/master).
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -36,7 +40,6 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
 ## Props
 
 - initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
-- keyName **(Required)**: String. It is used to prepend the key property of children elements.
 - labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
   - `first`: String. First page label button.
   - `last`: String. Last page label button.
@@ -45,7 +48,6 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
   - `show`: String. The text before select option of `rowsPerPageOption`.
   - `entries`: String. The text after select option of `rowsPerPageOption`.
   - `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
-  - `filterPlaceholder`: String. Custom placeholder text on the search filter if at least one column has `filterable` prop.
 - onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Each function has a parameter which is the real value of that column. Default: `undefined`.
 - onFilter: see `onSort`.
 - tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
@@ -93,7 +95,6 @@ This package doesn't include Bootstrap stylesheets. If you want to include it, y
 ```
 import moment from 'moment'; // Example for onSort prop
 import React from 'react'; // Import React
-import { render } from 'react-dom'; // Import render method
 import Datatable from 'react-bs-datatable'; // Import this package
 
 const header = [

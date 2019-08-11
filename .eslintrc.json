@@ -1,9 +1,5 @@
 {
-  "plugins": [
-    "react",
-    "babel"
-  ],
-  "extends": ["airbnb"],
+  "plugins": ["react", "babel"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
@@ -16,14 +12,8 @@
     "semi": 2,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [0, { "forbid": [] }],
-    "curly": [
-      2,
-      "all"
-    ],
-    "operator-linebreak": [
-      2,
-      "after"
-    ],
+    "curly": [2, "all"],
+    "operator-linebreak": [2, "after"],
     "camelcase": [
       2,
       {
@@ -40,20 +30,11 @@
         "overrides": {}
       }
     ],
-    "keyword-spacing": [
-      2,
-      {}
-    ],
+    "keyword-spacing": [2, {}],
     "space-infix-ops": 2,
-    "space-before-blocks": [
-      2,
-      "always"
-    ],
+    "space-before-blocks": [2, "always"],
     "eol-last": 2,
-    "space-in-parens": [
-      2,
-      "never"
-    ],
+    "space-in-parens": [2, "never"],
     "no-multiple-empty-lines": 2
   },
   "globals": {
