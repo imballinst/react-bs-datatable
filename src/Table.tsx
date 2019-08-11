@@ -25,17 +25,41 @@ type AsyncProps = {
   onPaginate: any;
 };
 
+type TableClasses = {
+  controlRow?: string;
+  filterCol?: string;
+  filter?: string;
+  paginationOptsCol?: string;
+  paginationOpts?: string;
+  paginationCol?: string;
+  pagination?: string;
+  table?: string;
+  thead?: string;
+  theadRow?: string;
+  tbody?: string;
+  tbodyRow?: string;
+};
+
 type DatatableProps = {
   /** Initial sort of the table. */
   tableHeaders: HeaderType[];
+  /** Table data. */
   tableBody: any[];
+  /** Initial sort of the table. */
   initialSort?: SortType;
+  /** Custom onSort data modifier. */
   onSort?: any;
+  /** Custom onFilter data modifier. */
   onFilter?: any;
+  /** Custom classes of the table components. */
+  classes?: TableClasses;
+  /** Handler for asynchronous filter, sort, and pagination. */
   async?: AsyncProps;
+  /** Initial rows per page. */
   rowsPerPage?: RowsPerPageType;
+  /** Rows per page option. */
   rowsPerPageOption?: RowsPerPageOptionType;
-  tableBsClass?: string;
+  /** Labels/placeholders of the table components. */
   labels?: LabelType;
 };
 
@@ -59,8 +83,8 @@ export function useDatatableLifecycle({
   rowsPerPageOption = [],
   async,
   tableHeaders,
+  classes = {},
   tableBody,
-  tableBsClass = '',
   labels = {}
 }: DatatableProps) {
   useEffect(() => {
@@ -206,7 +230,7 @@ export function useDatatableLifecycle({
   const sortedData = sortData(filteredData, state.sortedProp, onSort);
   const data = paginateData(sortedData, state.currentPage, state.rowsPerPage);
 
-  const tableClass = makeClasses(`table-datatable__root`, tableBsClass);
+  const tableClass = makeClasses(`table-datatable__root`, classes.table);
 
   return {
     data,
