@@ -26,15 +26,19 @@ function CustomTable(props) {
   const {
     data,
     labels,
+    classes,
     onChangeFilter,
     onPageNavigate,
     onRowsPerPageChange,
     onSortChange,
     rowsPerPageOption,
-    state,
     tableBody,
     tableClass,
-    tableHeaders
+    tableHeaders,
+    filterText,
+    rowsPerPage,
+    currentPage,
+    sortedProp
   } = useDatatableLifecycle(props);
 
   return (
@@ -42,10 +46,11 @@ function CustomTable(props) {
       <Row className="controlRow__root">
         <Col xs="12">
           <Filter
+            classes={classes}
             tableHeaders={tableHeaders}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
-            filterText={state.filterText}
+            filterText={filterText}
           />
         </Col>
       </Row>
@@ -53,11 +58,13 @@ function CustomTable(props) {
         <Col xs="12">
           <Table className={tableClass}>
             <TableHeader
+              classes={classes}
               tableHeaders={tableHeaders}
-              sortedProp={state.sortedProp}
+              sortedProp={sortedProp}
               onSortChange={onSortChange}
             />
             <TableBody
+              classes={classes}
               tableHeaders={tableHeaders}
               labels={labels}
               data={data}
@@ -69,17 +76,19 @@ function CustomTable(props) {
         <Col xs={12} md={4} />
         <Col xs={12} md={4}>
           <PaginationOpts
+            classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
-            rowsPerPage={state.rowsPerPage}
+            rowsPerPage={rowsPerPage}
             rowsPerPageOption={rowsPerPageOption}
           />
         </Col>
         <Col xs={12} md={4} className="text-right">
           <Pagination
+            classes={classes}
             data={tableBody}
-            rowsPerPage={state.rowsPerPage}
-            currentPage={state.currentPage}
+            rowsPerPage={rowsPerPage}
+            currentPage={currentPage}
             onPageNavigate={onPageNavigate}
             labels={labels}
           />

@@ -6,7 +6,7 @@ type NavButtonProps = {
   pageNumber: number;
   disabled: boolean;
   onPageNavigate: any;
-  label: string;
+  label: string | number;
 };
 
 export default function NavButton({

@@ -17,6 +17,10 @@ export default function TableHeader({
   onSortChange,
   classes
 }: TableHeaderProps) {
+  function onSortHandler(prop: string) {
+    return () => onSortChange(prop);
+  }
+
   const headings = [];
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
@@ -28,7 +32,7 @@ export default function TableHeader({
       key: `th-${i}`,
       onClick:
         tableHeaders[i].sortable === true
-          ? onSortChange(tableHeaders[i].prop)
+          ? onSortHandler(tableHeaders[i].prop)
           : undefined,
       className: makeClasses(thClass, classes.theadCol)
     };

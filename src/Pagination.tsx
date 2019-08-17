@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
 
 import NavButton from './modules/NavButton';
 import { LabelType, RowsPerPageType, TableClasses } from './utils/types';
@@ -22,6 +21,13 @@ export default function Pagination({
   onPageNavigate,
   labels
 }: PaginationProps) {
+  const paginateHandler = useCallback(
+    (pageNum: number) => {
+      return () => onPageNavigate(pageNum);
+    },
+    [onPageNavigate]
+  );
+
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
@@ -55,14 +61,14 @@ export default function Pagination({
         key={`page-${firstLabel}`}
         pageNumber={1}
         disabled={!hasPrev}
-        onPageNavigate={onPageNavigate}
+        onPageNavigate={paginateHandler}
         label={firstLabel}
       />,
       <NavButton
         key={`page-${prevLabel}`}
         pageNumber={currentPage - 1}
         disabled={!hasPrev}
-        onPageNavigate={onPageNavigate}
+        onPageNavigate={paginateHandler}
         label={prevLabel}
       />
     );
@@ -70,11 +76,13 @@ export default function Pagination({
     while (i < 3 && startNumber <= numberOfPages) {
       const pageBtnProps = {
         key: `page-btn-${startNumber}`,
-        onClick: onPageNavigate(startNumber),
-        active: currentPage === startNumber
+        pageNumber: startNumber,
+        disabled: currentPage === startNumber,
+        onPageNavigate: paginateHandler,
+        label: startNumber
       };
 
-      buttons.push(<Button {...pageBtnProps}>{startNumber}</Button>);
+      buttons.push(<NavButton {...pageBtnProps} />);
 
       i += 1;
       startNumber += 1;
@@ -85,14 +93,14 @@ export default function Pagination({
         key={`page-${nextLabel}`}
         pageNumber={currentPage + 1}
         disabled={!hasNext}
-        onPageNavigate={onPageNavigate}
+        onPageNavigate={paginateHandler}
         label={nextLabel}
       />,
       <NavButton
         key={`page-${lastLabel}`}
         pageNumber={numberOfPages}
         disabled={!hasNext}
-        onPageNavigate={onPageNavigate}
+        onPageNavigate={paginateHandler}
         label={lastLabel}
       />
     );

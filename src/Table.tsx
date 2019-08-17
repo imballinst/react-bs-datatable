@@ -21,9 +21,14 @@ import {
 import { makeClasses, customJoin } from './utils/object';
 
 type AsyncProps = {
-  onSort: any;
-  onFilter: any;
-  onPaginate: any;
+  filterText: string;
+  rowsPerPage: number;
+  currentPage: number;
+  sortedProp: SortType;
+  onSort: (nextProp: string) => {};
+  onPaginate: (nextPage: number) => {};
+  onFilter: (text: string) => {};
+  onRowsPerPageChange: (numOfPage: RowsPerPageType) => {};
 };
 
 type DatatableProps = {
@@ -163,34 +168,44 @@ export function useDatatableLifecycle({
   }, [tableBody, rowsPerPage]);
 
   function onChangeFilter(text: string) {
-    setState(oldState => ({
-      ...oldState,
-      filterText: text,
-      currentPage: 1
-    }));
+    if (async && async.onFilter) {
+      async.onFilter(text);
+    } else {
+      setState(oldState => ({
+        ...oldState,
+        filterText: text,
+        currentPage: 1
+      }));
+    }
   }
 
   function onPageNavigate(nextPage: number) {
-    return () => {
+    if (async && async.onPaginate) {
+      async.onPaginate(nextPage);
+    } else {
       setState(oldState => ({
         ...oldState,
         currentPage: nextPage
       }));
-    };
+    }
   }
 
   function onRowsPerPageChange(numOfPage: RowsPerPageType) {
-    return () => {
+    if (async && async.onRowsPerPageChange) {
+      async.onRowsPerPageChange(numOfPage);
+    } else {
       setState(oldState => ({
         ...oldState,
         rowsPerPage: numOfPage,
         currentPage: 1
       }));
-    };
+    }
   }
 
   function onSortChange(nextProp: string) {
-    return () => {
+    if (async && async.onSort) {
+      async.onSort(nextProp);
+    } else {
       const nextSort = state.sortedProp;
 
       if (nextProp !== state.sortedProp.prop) {
@@ -204,24 +219,21 @@ export function useDatatableLifecycle({
         ...oldState,
         sortedProp: nextSort
       }));
-    };
+    }
   }
 
-  const filteredData = filterData(
-    tableBody,
-    tableHeaders,
-    state.filterText,
-    onFilter
-  );
-  const sortedData = sortData(filteredData, state.sortedProp, onSort);
-  const data = paginateData(sortedData, state.currentPage, state.rowsPerPage);
+  let data = tableBody;
+
+  if (async === undefined) {
+    data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
+    data = sortData(data, state.sortedProp, onSort);
+    data = paginateData(data, state.currentPage, state.rowsPerPage);
+  }
 
   const tableClass = makeClasses(`table-datatable__root`, classes.table);
 
   return {
     data,
-    state,
-    rowsPerPageOption,
     tableHeaders,
     onChangeFilter,
     onPageNavigate,
@@ -230,7 +242,13 @@ export function useDatatableLifecycle({
     onSortChange,
     tableBody,
     tableClass,
-    labels
+    labels,
+    rowsPerPageOption,
+    // States.
+    filterText: async ? async.filterText : state.filterText,
+    rowsPerPage: async ? async.rowsPerPage : state.rowsPerPage,
+    currentPage: async ? async.currentPage : state.currentPage,
+    sortedProp: async ? async.sortedProp : state.sortedProp
   };
 }
 
@@ -238,7 +256,6 @@ export function useDatatableLifecycle({
 export default function Datatable(props: DatatableProps) {
   const {
     data,
-    state,
     rowsPerPageOption,
     tableHeaders,
     onChangeFilter,
@@ -248,7 +265,11 @@ export default function Datatable(props: DatatableProps) {
     onSortChange,
     tableBody,
     tableClass,
-    labels
+    labels,
+    filterText,
+    rowsPerPage,
+    currentPage,
+    sortedProp
   } = useDatatableLifecycle(props);
 
   return (
@@ -260,7 +281,7 @@ export default function Datatable(props: DatatableProps) {
             tableHeaders={tableHeaders}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
-            filterText={state.filterText}
+            filterText={filterText}
           />
         </Col>
         <Col xs={12} md={3}>
@@ -268,7 +289,7 @@ export default function Datatable(props: DatatableProps) {
             classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
-            rowsPerPage={state.rowsPerPage}
+            rowsPerPage={rowsPerPage}
             rowsPerPageOption={rowsPerPageOption}
           />
         </Col>
@@ -276,8 +297,8 @@ export default function Datatable(props: DatatableProps) {
           <Pagination
             classes={classes}
             data={tableBody}
-            rowsPerPage={state.rowsPerPage}
-            currentPage={state.currentPage}
+            rowsPerPage={rowsPerPage}
+            currentPage={currentPage}
             onPageNavigate={onPageNavigate}
             labels={labels}
           />
@@ -289,7 +310,7 @@ export default function Datatable(props: DatatableProps) {
             <TableHeader
               classes={classes}
               tableHeaders={tableHeaders}
-              sortedProp={state.sortedProp}
+              sortedProp={sortedProp}
               onSortChange={onSortChange}
             />
             <TableBody

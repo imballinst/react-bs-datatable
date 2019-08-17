@@ -22,7 +22,7 @@ export default function PaginationOpts({
   rowsPerPageOption,
   onRowsPerPageChange
 }: PaginationOptsProps) {
-  function rowChangeHandler(e: any) {
+  function onRowsPerPageChangeHandler(e: any) {
     onRowsPerPageChange(e.target.value);
   }
 
@@ -71,7 +71,7 @@ export default function PaginationOpts({
             defaultValue={rowsPerPage}
             as="select"
             placeholder="select"
-            onChange={rowChangeHandler}
+            onChange={onRowsPerPageChangeHandler}
           >
             {selectOption}
           </Form.Control>
