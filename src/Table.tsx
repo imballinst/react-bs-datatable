@@ -55,6 +55,7 @@ type DatatableProps = {
 };
 
 type DatatableState = {
+  filterable: boolean;
   sortedProp: SortType;
   rowsPerPage: RowsPerPageType;
   currentPage: number;
@@ -127,28 +128,29 @@ export function useDatatableLifecycle({
   }, []);
 
   const [state, setState] = useState<DatatableState>(() => {
+    const sortObj = initialSort || {};
+    let filterable = async !== undefined;
     let defaultSort = {};
 
-    if (initialSort !== undefined) {
-      let found = false;
-      let i = 0;
-
-      while (!found && i < tableHeaders.length) {
-        if (tableHeaders[i].prop === initialSort.prop) {
-          found = true;
-
-          if (tableHeaders[i].sortable === true) {
-            defaultSort = initialSort;
-          }
+    tableHeaders.forEach(header => {
+      if (header.prop === sortObj.prop) {
+        if (header.sortable) {
+          defaultSort = {
+            isAscending: true,
+            prop: header.prop
+          };
         }
-
-        i += 1;
       }
-    }
+
+      if (header.filterable && !filterable) {
+        filterable = true;
+      }
+    });
 
     // Define initial state.
     return {
       sortedProp: defaultSort,
+      filterable,
       rowsPerPage,
       currentPage: 1,
       filterText: ''
@@ -241,10 +243,12 @@ export function useDatatableLifecycle({
     onRowsPerPageChange,
     onSortChange,
     tableBody,
+    async,
     tableClass,
     labels,
     rowsPerPageOption,
     // States.
+    filterable: state.filterable,
     filterText: async ? async.filterText : state.filterText,
     rowsPerPage: async ? async.rowsPerPage : state.rowsPerPage,
     currentPage: async ? async.currentPage : state.currentPage,
@@ -266,6 +270,7 @@ export default function Datatable(props: DatatableProps) {
     tableBody,
     tableClass,
     labels,
+    filterable,
     filterText,
     rowsPerPage,
     currentPage,
@@ -277,8 +282,8 @@ export default function Datatable(props: DatatableProps) {
       <Row className="controlRow__root">
         <Col xs={12} md={4}>
           <Filter
+            filterable={filterable}
             classes={classes}
-            tableHeaders={tableHeaders}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}

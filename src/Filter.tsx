@@ -5,10 +5,10 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
-import { HeaderType, TableClasses } from './utils/types';
+import { TableClasses } from './utils/types';
 
 type FilterProps = {
-  tableHeaders: HeaderType[];
+  filterable: boolean;
   filterText: string;
   onChangeFilter: any;
   placeholder?: string;
@@ -16,7 +16,7 @@ type FilterProps = {
 };
 
 export default function Filter({
-  tableHeaders,
+  filterable,
   filterText,
   placeholder = 'Enter text...',
   onChangeFilter
@@ -31,16 +31,6 @@ export default function Filter({
   }
 
   let filterRender = null;
-  let i = 0;
-  let filterable = false;
-
-  while (!filterable && i < tableHeaders.length) {
-    if (tableHeaders[i].filterable === true) {
-      filterable = true;
-    }
-
-    i += 1;
-  }
 
   if (filterable) {
     filterRender = (
