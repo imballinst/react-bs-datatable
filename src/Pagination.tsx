@@ -75,7 +75,7 @@ export default function Pagination({
 
     while (i < 3 && startNumber <= numberOfPages) {
       const pageBtnProps = {
-        key: `page-btn-${startNumber}`,
+        key: `page-btn-${i}`,
         pageNumber: startNumber,
         disabled: currentPage === startNumber,
         onPageNavigate: paginateHandler,
