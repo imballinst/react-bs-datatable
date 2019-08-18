@@ -24,12 +24,22 @@ export type LabelType = {
 
 export type TableClasses = {
   controlRow?: string;
+  // Filter.
   filterCol?: string;
-  filter?: string;
+  filterInputGroup?: string;
+  filterFormControl?: string;
+  filterClearButton?: string;
+  // Pagination options.
   paginationOptsCol?: string;
-  paginationOpts?: string;
+  paginationOptsForm?: string;
+  paginationOptsFormGroup?: string;
+  paginationOptsFormText?: string;
+  paginationOptsFormControl?: string;
+  // Pagination.
   paginationCol?: string;
-  pagination?: string;
+  paginationButtonGroup?: string;
+  paginationButton?: string;
+  // Table.
   table?: string;
   thead?: string;
   theadRow?: string;

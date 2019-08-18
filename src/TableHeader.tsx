@@ -1,8 +1,8 @@
 import React from 'react';
 
 import FontAwesome from './modules/FontAwesome';
-import { makeClasses } from './utils/object';
-import { HeaderType, SortType, TableClasses } from './utils/types';
+import { makeClasses } from './helpers/object';
+import { HeaderType, SortType, TableClasses } from './helpers/types';
 
 type TableHeaderProps = {
   tableHeaders: HeaderType[];
@@ -60,8 +60,8 @@ export default function TableHeader({
   }
 
   return (
-    <thead className="thead">
-      <tr className="thead-tr">{headings}</tr>
+    <thead className={makeClasses('thead', classes.thead)}>
+      <tr className={makeClasses('thead-tr', classes.theadRow)}>{headings}</tr>
     </thead>
   );
 }

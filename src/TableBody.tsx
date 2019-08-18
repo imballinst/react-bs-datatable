@@ -1,7 +1,8 @@
 import React from 'react';
 
 import BodyRow from './BodyRow';
-import { HeaderType, LabelType, TableClasses } from './utils/types';
+import { HeaderType, LabelType, TableClasses } from './helpers/types';
+import { makeClasses } from './helpers/object';
 
 type TableBodyProps = {
   tableHeaders: HeaderType[];
@@ -13,7 +14,8 @@ type TableBodyProps = {
 export default function TableBody({
   tableHeaders,
   labels,
-  data
+  data,
+  classes
 }: TableBodyProps) {
   const body = [];
   const dataLength = data.length;
@@ -23,6 +25,7 @@ export default function TableBody({
       body.push(
         <BodyRow
           key={`row-${i}`}
+          classes={classes}
           tableHeaders={tableHeaders}
           data={data}
           rowIdx={i}
@@ -39,5 +42,5 @@ export default function TableBody({
     );
   }
 
-  return <tbody className="tbody">{body}</tbody>;
+  return <tbody className={makeClasses('tbody', classes.tbody)}>{body}</tbody>;
 }

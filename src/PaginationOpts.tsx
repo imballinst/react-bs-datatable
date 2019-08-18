@@ -6,7 +6,8 @@ import {
   RowsPerPageType,
   RowsPerPageOptionType,
   TableClasses
-} from './utils/types';
+} from './helpers/types';
+import { makeClasses } from './helpers/object';
 
 type PaginationOptsProps = {
   labels: LabelType;
@@ -20,7 +21,8 @@ export default function PaginationOpts({
   labels,
   rowsPerPage,
   rowsPerPageOption,
-  onRowsPerPageChange
+  onRowsPerPageChange,
+  classes
 }: PaginationOptsProps) {
   function onRowsPerPageChangeHandler(e: any) {
     onRowsPerPageChange(Number(e.target.value));
@@ -63,19 +65,34 @@ export default function PaginationOpts({
     });
 
     renderedElements = (
-      <Form inline className="paginationOpts__root">
-        <Form.Group controlId="formGroupPagination">
-          <span>{labels.show || 'Show'} </span>
+      <Form
+        inline
+        className={makeClasses(
+          'paginationOpts__root',
+          classes.paginationOptsForm
+        )}
+      >
+        <Form.Group
+          controlId="formGroupPagination"
+          className={classes.paginationOptsFormGroup}
+        >
+          <span className={classes.paginationOptsFormText}>
+            {labels.show || 'Show'}{' '}
+          </span>
           <Form.Control
             name="form-control-pagination"
             defaultValue={rowsPerPage}
             as="select"
             placeholder="select"
             onChange={onRowsPerPageChangeHandler}
+            className={classes.paginationOptsFormControl}
           >
             {selectOption}
           </Form.Control>
-          <span> {labels.entries || 'entries'}</span>
+          <span className={classes.paginationOptsFormText}>
+            {' '}
+            {labels.entries || 'entries'}
+          </span>
         </Form.Group>
       </Form>
     );

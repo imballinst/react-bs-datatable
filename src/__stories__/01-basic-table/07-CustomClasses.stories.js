@@ -73,6 +73,11 @@ const classes = {
         background: pink;
       }
     }
+  `,
+  tbodyRow: css`
+    &:nth-child(even) {
+      background: #eaeaea;
+    }
   `
 };
 

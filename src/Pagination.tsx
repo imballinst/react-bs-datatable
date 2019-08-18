@@ -3,12 +3,12 @@ import React, { useCallback } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 import NavButton from './modules/NavButton';
-import { LabelType, RowsPerPageType, TableClasses } from './utils/types';
+import { LabelType, RowsPerPageType, TableClasses } from './helpers/types';
 
 type PaginationProps = {
   rowsPerPage: RowsPerPageType;
   currentPage: number;
-  maxPage: number;
+  maxPage?: number;
   onPageNavigate: any;
   labels: LabelType;
   classes: TableClasses;
@@ -19,7 +19,8 @@ export default function Pagination({
   currentPage,
   onPageNavigate,
   labels,
-  maxPage
+  maxPage,
+  classes
 }: PaginationProps) {
   const paginateHandler = useCallback(
     (pageNum: number) => {
@@ -30,7 +31,7 @@ export default function Pagination({
 
   let renderedElements = null;
 
-  if (rowsPerPage !== undefined) {
+  if (rowsPerPage !== undefined && maxPage !== undefined) {
     const buttons = [];
 
     const firstLabel = labels.first || 'First';
@@ -60,6 +61,7 @@ export default function Pagination({
 
     buttons.push(
       <NavButton
+        className={classes.paginationButton}
         key={`page-${firstLabel}`}
         pageNumber={1}
         disabled={!hasPrev}
@@ -67,6 +69,7 @@ export default function Pagination({
         label={firstLabel}
       />,
       <NavButton
+        className={classes.paginationButton}
         key={`page-${prevLabel}`}
         // If out of bounds, prev button refers to the last page.
         pageNumber={isCurrentPageOutOfBounds ? maxPage : currentPage - 1}
@@ -83,7 +86,8 @@ export default function Pagination({
           pageNumber: startNumber,
           disabled: currentPage === startNumber,
           onPageNavigate: paginateHandler,
-          label: startNumber
+          label: startNumber,
+          className: classes.paginationButton
         };
 
         buttons.push(<NavButton {...pageBtnProps} />);
@@ -98,6 +102,7 @@ export default function Pagination({
       buttons.push(
         <NavButton
           key={`page-btn-${startNumber}`}
+          className={classes.paginationButton}
           pageNumber={currentPage - 1}
           disabled
           onPageNavigate={paginateHandler}
@@ -108,6 +113,7 @@ export default function Pagination({
 
     buttons.push(
       <NavButton
+        className={classes.paginationButton}
         key={`page-${nextLabel}`}
         pageNumber={currentPage + 1}
         disabled={!hasNext}
@@ -115,6 +121,7 @@ export default function Pagination({
         label={nextLabel}
       />,
       <NavButton
+        className={classes.paginationButton}
         key={`page-${lastLabel}`}
         pageNumber={maxPage}
         disabled={!hasNext}
@@ -124,7 +131,9 @@ export default function Pagination({
     );
 
     renderedElements = (
-      <ButtonGroup className="btn-group-page-nav">{buttons}</ButtonGroup>
+      <ButtonGroup className={classes.paginationButtonGroup}>
+        {buttons}
+      </ButtonGroup>
     );
   }
 

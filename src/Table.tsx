@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 
-import { sortData, filterData, paginateData } from './utils/data';
+import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
 import TableHeader from './TableHeader';
@@ -17,8 +17,8 @@ import {
   RowsPerPageType,
   RowsPerPageOptionType,
   TableClasses
-} from './utils/types';
-import { makeClasses, customJoin } from './utils/object';
+} from './helpers/types';
+import { makeClasses, customJoin } from './helpers/object';
 
 type AsyncProps = {
   filterText: string;
@@ -72,8 +72,8 @@ export function useDatatableLifecycle({
   initialSort,
   onSort,
   onFilter,
-  rowsPerPage = 5,
-  rowsPerPageOption = [],
+  rowsPerPage,
+  rowsPerPageOption,
   async,
   tableHeaders,
   classes = {},
@@ -232,11 +232,13 @@ export function useDatatableLifecycle({
     data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
     const dataLength = data.length;
 
-    data = paginateData(data, state.currentPage, state.rowsPerPage);
-    data = sortData(data, state.sortedProp, onSort);
+    if (state.rowsPerPage) {
+      // Pagination needs.
+      data = paginateData(data, state.currentPage, state.rowsPerPage);
+      maxPage = Math.ceil(dataLength / state.rowsPerPage);
+    }
 
-    // Pagination needs.
-    maxPage = Math.ceil(dataLength / rowsPerPage);
+    data = sortData(data, state.sortedProp, onSort);
   } else {
     maxPage = async.maxPage;
   }
@@ -288,8 +290,8 @@ export default function Datatable(props: DatatableProps) {
 
   return (
     <>
-      <Row className="controlRow__root">
-        <Col xs={12} md={4}>
+      <Row className={makeClasses('controlRow__root', classes.controlRow)}>
+        <Col xs={12} md={4} className={classes.filterCol}>
           <Filter
             filterable={filterable}
             classes={classes}
@@ -298,7 +300,7 @@ export default function Datatable(props: DatatableProps) {
             filterText={filterText}
           />
         </Col>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={3} className={classes.paginationOptsCol}>
           <PaginationOpts
             classes={classes}
             labels={labels}
@@ -307,7 +309,11 @@ export default function Datatable(props: DatatableProps) {
             rowsPerPageOption={rowsPerPageOption}
           />
         </Col>
-        <Col xs={12} md={5} className="text-right">
+        <Col
+          xs={12}
+          md={5}
+          className={makeClasses('text-right', classes.paginationCol)}
+        >
           <Pagination
             maxPage={maxPage}
             classes={classes}

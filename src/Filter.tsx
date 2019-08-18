@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 
 import FontAwesome from './modules/FontAwesome';
-import { TableClasses } from './utils/types';
+import { TableClasses } from './helpers/types';
 
 type FilterProps = {
   filterable: boolean;
@@ -19,7 +19,8 @@ export default function Filter({
   filterable,
   filterText,
   placeholder = 'Enter text...',
-  onChangeFilter
+  onChangeFilter,
+  classes
 }: FilterProps) {
   // Event handlers.
   function onInputChange(e: any) {
@@ -34,15 +35,16 @@ export default function Filter({
 
   if (filterable) {
     filterRender = (
-      <InputGroup>
+      <InputGroup className={classes.filterInputGroup}>
         <FormControl
           type="text"
           value={filterText}
           placeholder={placeholder}
           onChange={onInputChange}
+          className={classes.filterFormControl}
         />
         <InputGroup.Append>
-          <Button onClick={onClearFilter}>
+          <Button onClick={onClearFilter} className={classes.filterClearButton}>
             <FontAwesome icon="times" additionalClass="fa-fw" />
           </Button>
         </InputGroup.Append>

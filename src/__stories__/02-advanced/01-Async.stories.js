@@ -4,7 +4,7 @@ import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
-import { sortData } from '../../utils/data';
+import { sortData } from '../../helpers/data';
 
 const header = [
   {
