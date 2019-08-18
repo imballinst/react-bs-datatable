@@ -78,6 +78,14 @@ const classes = {
     &:nth-child(even) {
       background: #eaeaea;
     }
+  `,
+  paginationOptsFormText: css`
+    &:first-child {
+      margin-right: 8px;
+    }
+    &:last-child {
+      margin-left: 8px;
+    }
   `
 };
 
