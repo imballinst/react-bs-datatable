@@ -130,7 +130,7 @@ export function useDatatableLifecycle({
 
   const [state, setState] = useState<DatatableState>(() => {
     const sortObj = initialSort || {};
-    let filterable = async !== undefined;
+    let filterable = async !== undefined && async.onFilter !== undefined;
     let defaultSort = {};
 
     tableHeaders.forEach(header => {
@@ -143,7 +143,7 @@ export function useDatatableLifecycle({
         }
       }
 
-      if (header.filterable && !filterable) {
+      if (header.filterable && async === undefined && !filterable) {
         filterable = true;
       }
     });
