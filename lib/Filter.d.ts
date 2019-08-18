@@ -1,10 +1,11 @@
 /// <reference types="react" />
-import { HeaderType } from './utils/types';
+import { TableClasses } from './helpers/types';
 declare type FilterProps = {
-    tableHeaders: HeaderType[];
+    filterable: boolean;
     filterText: string;
     onChangeFilter: any;
     placeholder?: string;
+    classes: TableClasses;
 };
-export default function Filter({ tableHeaders, filterText, placeholder, onChangeFilter }: FilterProps): JSX.Element | null;
+export default function Filter({ filterable, filterText, placeholder, onChangeFilter, classes }: FilterProps): JSX.Element | null;
 export {};
