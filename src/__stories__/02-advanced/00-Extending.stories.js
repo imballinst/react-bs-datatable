@@ -38,7 +38,9 @@ function CustomTable(props) {
     filterText,
     rowsPerPage,
     currentPage,
-    sortedProp
+    sortedProp,
+    filterable,
+    maxPage
   } = useDatatableLifecycle(props);
 
   return (
@@ -51,6 +53,7 @@ function CustomTable(props) {
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}
+            filterable={filterable}
           />
         </Col>
       </Row>
@@ -91,6 +94,7 @@ function CustomTable(props) {
             currentPage={currentPage}
             onPageNavigate={onPageNavigate}
             labels={labels}
+            maxPage={maxPage}
           />
         </Col>
       </Row>

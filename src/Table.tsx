@@ -253,7 +253,6 @@ export function useDatatableLifecycle({
     classes,
     onRowsPerPageChange,
     onSortChange,
-    async,
     tableClass,
     labels,
     rowsPerPageOption,
