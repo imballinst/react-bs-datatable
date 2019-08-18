@@ -9,9 +9,7 @@
     "lint": "yarn eslint",
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
-    "build": "yarn build:lib && git add -A",
-    "tsc": "tsc",
-    "build:lib": "cd src && babel . --out-dir ../lib --ignore '__stories__/**/*.js','**/__tests__/*.test.js'",
+    "build": "tsc && git add -A",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -27,7 +25,7 @@
     "datatable"
   ],
   "jest": {
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js)$"
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|ts)$"
   },
   "author": "Try Ajitiono",
   "license": "MIT",
@@ -48,11 +46,13 @@
     "@storybook/addons": "^5.1.10",
     "@storybook/react": "^5.1.10",
     "@storybook/theming": "^5.1.10",
-    "@types/classnames": "^2.2.9",
+    "@types/jest": "^24.0.17",
+    "@types/node": "^12.7.1",
     "@types/react": "^16.8.24",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-emotion": "^10.0.15",
     "bootstrap": "^4.3.1",
     "css-loader": "^2.1.1",
     "eslint": "^5.15.1",
@@ -73,7 +73,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
+    "emotion": "^10.0.14",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.4"

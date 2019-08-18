@@ -3,7 +3,7 @@
  * If you want to personally customize how the table looks, like the positioning of filters/pagination, you can do it here.
  * You will need to import the components and apply them in the render function.
  */
-import React, { Fragment } from 'react'; // Import React
+import React from 'react'; // Import React
 import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
 
@@ -11,81 +11,95 @@ import moment from 'moment'; // Example for onSort prop
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
-import classNames from 'classnames';
 
 // In your setup, replace "../../" with "react-bs-datatable"
-import Datatable, {
+import {
   Pagination,
   PaginationOpts,
   TableHeader,
   TableBody,
-  Filter
-} from '../../Table';
+  Filter,
+  useDatatableLifecycle
+} from '../../';
 
-class CustomTable extends Datatable {
-  render() {
-    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
-    const {
-      tableHeader,
-      tableBody,
-      onSort,
-      onFilter,
-      tableBsClass,
-      labels,
-      rowsPerPageOption
-    } = this.props;
+function CustomTable(props) {
+  const {
+    data,
+    labels,
+    classes,
+    onChangeFilter,
+    onPageNavigate,
+    onRowsPerPageChange,
+    onSortChange,
+    rowsPerPageOption,
+    tableBody,
+    tableClass,
+    tableHeaders,
+    filterText,
+    rowsPerPage,
+    currentPage,
+    sortedProp,
+    filterable,
+    maxPage
+  } = useDatatableLifecycle(props);
 
-    const data = this.processData(tableHeader, tableBody, onSort, onFilter);
-    const tableClass = classNames(`table-datatable`, tableBsClass);
-
-    return (
-      <Fragment>
-        <Row className="controlRow">
-          <Col xs={12} md={4}>
-            <PaginationOpts
+  return (
+    <>
+      <Row className="controlRow__root">
+        <Col xs="12">
+          <Filter
+            classes={classes}
+            tableHeaders={tableHeaders}
+            placeholder={labels.filterPlaceholder}
+            onChangeFilter={onChangeFilter}
+            filterText={filterText}
+            filterable={filterable}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="12">
+          <Table className={tableClass}>
+            <TableHeader
+              classes={classes}
+              tableHeaders={tableHeaders}
+              sortedProp={sortedProp}
+              onSortChange={onSortChange}
+            />
+            <TableBody
+              classes={classes}
+              tableHeaders={tableHeaders}
               labels={labels}
-              onRowsPerPageChange={this.onRowsPerPageChange}
-              rowsPerPage={rowsPerPage}
-              rowsPerPageOption={rowsPerPageOption}
+              data={data}
             />
-          </Col>
-          <Col xs={12} md={4}>
-            <Pagination
-              data={tableBody}
-              rowsPerPage={rowsPerPage}
-              currentPage={currentPage}
-              onPageNavigate={this.onPageNavigate}
-              labels={labels}
-            />
-          </Col>
-          <Col xs={12} md={4}>
-            <Filter
-              tableHeaders={tableHeader}
-              placeholder={labels.filterPlaceholder}
-              onChangeFilter={this.onChangeFilter}
-              filterText={filterText}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="12">
-            <Table className={tableClass}>
-              <TableHeader
-                tableHeaders={tableHeader}
-                sortedProp={sortedProp}
-                onSortChange={this.onSortChange}
-              />
-              <TableBody
-                tableHeaders={tableHeader}
-                labels={labels}
-                data={data}
-              />
-            </Table>
-          </Col>
-        </Row>
-      </Fragment>
-    );
-  }
+          </Table>
+        </Col>
+      </Row>
+      <Row className="controlRow__root bottom">
+        <Col xs={12} md={4} />
+        <Col xs={12} md={4}>
+          <PaginationOpts
+            classes={classes}
+            labels={labels}
+            onRowsPerPageChange={onRowsPerPageChange}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOption={rowsPerPageOption}
+          />
+        </Col>
+        <Col xs={12} md={4} className="text-right">
+          <Pagination
+            classes={classes}
+            data={tableBody}
+            rowsPerPage={rowsPerPage}
+            currentPage={currentPage}
+            onPageNavigate={onPageNavigate}
+            labels={labels}
+            maxPage={maxPage}
+          />
+        </Col>
+      </Row>
+    </>
+  );
 }
 
 const header = [
@@ -144,7 +158,7 @@ const customLabels = {
   next: '>',
   show: 'Display',
   entries: 'rows',
-  noResults: 'There is no data to be displayed'
+  noResults: 'There are no data to be displayed'
 };
 
 storiesOf(categoryName, module).add('Extending the Table', () => (

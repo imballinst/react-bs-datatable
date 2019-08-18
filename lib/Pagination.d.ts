@@ -1,11 +1,12 @@
 /// <reference types="react" />
-import { LabelType, RowsPerPageType } from './utils/types';
+import { LabelType, RowsPerPageType, TableClasses } from './helpers/types';
 declare type PaginationProps = {
-    data: any[];
     rowsPerPage: RowsPerPageType;
     currentPage: number;
+    maxPage?: number;
     onPageNavigate: any;
     labels: LabelType;
+    classes: TableClasses;
 };
-export default function Pagination({ data, rowsPerPage, currentPage, onPageNavigate, labels }: PaginationProps): JSX.Element | null;
+export default function Pagination({ rowsPerPage, currentPage, onPageNavigate, labels, maxPage, classes }: PaginationProps): JSX.Element | null;
 export {};

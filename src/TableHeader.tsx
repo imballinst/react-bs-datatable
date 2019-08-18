@@ -1,20 +1,26 @@
 import React from 'react';
 
 import FontAwesome from './modules/FontAwesome';
-import { makeClasses } from './utils/object';
-import { HeaderType, SortType } from './utils/types';
+import { makeClasses } from './helpers/object';
+import { HeaderType, SortType, TableClasses } from './helpers/types';
 
 type TableHeaderProps = {
   tableHeaders: HeaderType[];
   sortedProp: SortType;
   onSortChange: any;
+  classes: TableClasses;
 };
 
 export default function TableHeader({
   tableHeaders,
   sortedProp,
-  onSortChange
+  onSortChange,
+  classes
 }: TableHeaderProps) {
+  function onSortHandler(prop: string) {
+    return () => onSortChange(prop);
+  }
+
   const headings = [];
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
@@ -26,9 +32,9 @@ export default function TableHeader({
       key: `th-${i}`,
       onClick:
         tableHeaders[i].sortable === true
-          ? onSortChange(tableHeaders[i].prop)
+          ? onSortHandler(tableHeaders[i].prop)
           : undefined,
-      className: thClass
+      className: makeClasses(thClass, classes.theadCol)
     };
     let sortIcon = 'sort';
     let sortIconRender = null;
@@ -54,8 +60,8 @@ export default function TableHeader({
   }
 
   return (
-    <thead className="thead">
-      <tr className="thead-tr">{headings}</tr>
+    <thead className={makeClasses('thead', classes.thead)}>
+      <tr className={makeClasses('thead-tr', classes.theadRow)}>{headings}</tr>
     </thead>
   );
 }

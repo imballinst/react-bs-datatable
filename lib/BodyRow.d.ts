@@ -1,9 +1,10 @@
 /// <reference types="react" />
-import { HeaderType } from './utils/types';
+import { HeaderType, TableClasses } from './helpers/types';
 declare type BodyRowProps = {
     tableHeaders: HeaderType[];
     data: any[];
     rowIdx: number;
+    classes: TableClasses;
 };
-export default function BodyRow({ tableHeaders, data, rowIdx }: BodyRowProps): JSX.Element;
+export default function BodyRow({ tableHeaders, data, rowIdx, classes }: BodyRowProps): JSX.Element;
 export {};

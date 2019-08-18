@@ -1,10 +1,10 @@
-import { sortData, filterData, paginateData } from './utils/data';
+import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
-import Table from './Table';
+import Table, { useDatatableLifecycle } from './Table';
 
 export default Table;
 export {
@@ -15,5 +15,6 @@ export {
   PaginationOpts,
   TableHeader,
   TableBody,
-  Filter
+  Filter,
+  useDatatableLifecycle
 };

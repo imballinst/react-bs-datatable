@@ -40,13 +40,14 @@ export function sortData(data: any[], sortedProp: SortType, onSort?: any) {
     const sortMultiplier = isAscending ? 1 : -1;
 
     sortedData = sortedData.sort((a, b) => {
-      const quantifiedValue1 = getLastChildren(a[prop]);
-      const quantifiedValue2 = getLastChildren(b[prop]);
+      let quantifiedValue1 = getLastChildren(a[prop]);
+      let quantifiedValue2 = getLastChildren(b[prop]);
 
       // if onSort use the onSort[prop] function
       // this is a handler for custom objects, such as Date
       if (onSort && typeof onSort[prop] === 'function') {
-        return onSort[prop](quantifiedValue1, quantifiedValue2);
+        quantifiedValue1 = onSort[prop](quantifiedValue1);
+        quantifiedValue2 = onSort[prop](quantifiedValue2);
       }
 
       if (quantifiedValue1 < quantifiedValue2) {

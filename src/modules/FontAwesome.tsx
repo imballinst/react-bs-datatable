@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeClasses } from '../utils/object';
+import { makeClasses } from '../helpers/object';
 
 type FontAwesomeProps = {
   icon: string;

@@ -4,24 +4,28 @@ import Form from 'react-bootstrap/Form';
 import {
   LabelType,
   RowsPerPageType,
-  RowsPerPageOptionType
-} from './utils/types';
+  RowsPerPageOptionType,
+  TableClasses
+} from './helpers/types';
+import { makeClasses } from './helpers/object';
 
 type PaginationOptsProps = {
   labels: LabelType;
   rowsPerPage?: RowsPerPageType;
   rowsPerPageOption?: RowsPerPageOptionType;
   onRowsPerPageChange: any;
+  classes: TableClasses;
 };
 
 export default function PaginationOpts({
   labels,
   rowsPerPage,
   rowsPerPageOption,
-  onRowsPerPageChange
+  onRowsPerPageChange,
+  classes
 }: PaginationOptsProps) {
-  function rowChangeHandler(e: any) {
-    onRowsPerPageChange(e.target.value);
+  function onRowsPerPageChangeHandler(e: any) {
+    onRowsPerPageChange(Number(e.target.value));
   }
 
   let selectOption: React.ReactNode[] = [];
@@ -61,19 +65,34 @@ export default function PaginationOpts({
     });
 
     renderedElements = (
-      <Form inline>
-        <Form.Group controlId="formGroupPagination">
-          <span>{labels.show || 'Show'} </span>
+      <Form
+        inline
+        className={makeClasses(
+          'paginationOpts__root',
+          classes.paginationOptsForm
+        )}
+      >
+        <Form.Group
+          controlId="formGroupPagination"
+          className={classes.paginationOptsFormGroup}
+        >
+          <span className={classes.paginationOptsFormText}>
+            {labels.show || 'Show'}{' '}
+          </span>
           <Form.Control
             name="form-control-pagination"
             defaultValue={rowsPerPage}
             as="select"
             placeholder="select"
-            onChange={rowChangeHandler}
+            onChange={onRowsPerPageChangeHandler}
+            className={classes.paginationOptsFormControl}
           >
             {selectOption}
           </Form.Control>
-          <span> {labels.entries || 'entries'}</span>
+          <span className={classes.paginationOptsFormText}>
+            {' '}
+            {labels.entries || 'entries'}
+          </span>
         </Form.Group>
       </Form>
     );

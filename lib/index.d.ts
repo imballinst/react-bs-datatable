@@ -1,9 +1,9 @@
-import { sortData, filterData, paginateData } from './utils/data';
+import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
-import Table from './Table';
+import Table, { useDatatableLifecycle } from './Table';
 export default Table;
-export { sortData, filterData, paginateData, Pagination, PaginationOpts, TableHeader, TableBody, Filter };
+export { sortData, filterData, paginateData, Pagination, PaginationOpts, TableHeader, TableBody, Filter, useDatatableLifecycle };

@@ -4,20 +4,23 @@ import Button from 'react-bootstrap/Button';
 
 type NavButtonProps = {
   pageNumber: number;
-  disabled: boolean;
+  disabled?: boolean;
   onPageNavigate: any;
-  label: string;
+  label: string | number;
+  className?: string;
 };
 
 export default function NavButton({
   pageNumber,
   disabled,
   onPageNavigate,
-  label
+  label,
+  className
 }: NavButtonProps) {
   const btnProps = {
     disabled,
-    onClick: onPageNavigate(pageNumber)
+    onClick: onPageNavigate(pageNumber),
+    className
   };
 
   return <Button {...btnProps}>{label}</Button>;
