@@ -23,7 +23,7 @@ export default function PaginationOpts({
   onRowsPerPageChange
 }: PaginationOptsProps) {
   function onRowsPerPageChangeHandler(e: any) {
-    onRowsPerPageChange(e.target.value);
+    onRowsPerPageChange(Number(e.target.value));
   }
 
   let selectOption: React.ReactNode[] = [];

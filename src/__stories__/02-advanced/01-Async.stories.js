@@ -61,7 +61,6 @@ function AsyncTable() {
 
   const onFilter = useCallback(text => {
     setFilter(text);
-    // setCurrentPage(1);
   }, []);
 
   const onSort = useCallback(nextProp => {
@@ -85,7 +84,6 @@ function AsyncTable() {
 
   const onRowsPerPageChange = useCallback(rowsPerPage => {
     setRowsPerPage(rowsPerPage);
-    // setCurrentPage(1);
   }, []);
 
   // Simulate API hit.

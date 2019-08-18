@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 type NavButtonProps = {
   pageNumber: number;
-  disabled: boolean;
+  disabled?: boolean;
   onPageNavigate: any;
   label: string | number;
 };

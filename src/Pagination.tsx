@@ -38,6 +38,7 @@ export default function Pagination({
     const nextLabel = labels.next || 'Next';
     const lastLabel = labels.last || 'Last';
 
+    const isCurrentPageOutOfBounds = currentPage > maxPage;
     let startNumber;
     let i = 0;
     let hasPrev = true;
@@ -67,26 +68,42 @@ export default function Pagination({
       />,
       <NavButton
         key={`page-${prevLabel}`}
-        pageNumber={currentPage - 1}
+        // If out of bounds, prev button refers to the last page.
+        pageNumber={isCurrentPageOutOfBounds ? maxPage : currentPage - 1}
         disabled={!hasPrev}
         onPageNavigate={paginateHandler}
         label={prevLabel}
       />
     );
 
-    while (i < 3 && startNumber <= maxPage) {
-      const pageBtnProps = {
-        key: `page-btn-${i}`,
-        pageNumber: startNumber,
-        disabled: currentPage === startNumber,
-        onPageNavigate: paginateHandler,
-        label: startNumber
-      };
+    if (!isCurrentPageOutOfBounds) {
+      while (i < 3 && startNumber <= maxPage) {
+        const pageBtnProps = {
+          key: `page-btn-${i}`,
+          pageNumber: startNumber,
+          disabled: currentPage === startNumber,
+          onPageNavigate: paginateHandler,
+          label: startNumber
+        };
 
-      buttons.push(<NavButton {...pageBtnProps} />);
+        buttons.push(<NavButton {...pageBtnProps} />);
 
-      i += 1;
-      startNumber += 1;
+        i += 1;
+        startNumber += 1;
+      }
+    } else {
+      // If current page is more than maxPage, we disable the button.
+      // This is intentional so the user knows that no data in there.
+      hasNext = false;
+      buttons.push(
+        <NavButton
+          key={`page-btn-${startNumber}`}
+          pageNumber={currentPage - 1}
+          disabled
+          onPageNavigate={paginateHandler}
+          label={currentPage}
+        />
+      );
     }
 
     buttons.push(
