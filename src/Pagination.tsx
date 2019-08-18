@@ -6,20 +6,20 @@ import NavButton from './modules/NavButton';
 import { LabelType, RowsPerPageType, TableClasses } from './utils/types';
 
 type PaginationProps = {
-  data: any[];
   rowsPerPage: RowsPerPageType;
   currentPage: number;
+  maxPage: number;
   onPageNavigate: any;
   labels: LabelType;
   classes: TableClasses;
 };
 
 export default function Pagination({
-  data,
   rowsPerPage,
   currentPage,
   onPageNavigate,
-  labels
+  labels,
+  maxPage
 }: PaginationProps) {
   const paginateHandler = useCallback(
     (pageNum: number) => {
@@ -31,8 +31,6 @@ export default function Pagination({
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
-    const dataLength = data.length;
-    const numberOfPages = Math.ceil(dataLength / rowsPerPage);
     const buttons = [];
 
     const firstLabel = labels.first || 'First';
@@ -46,13 +44,16 @@ export default function Pagination({
     let hasNext = true;
 
     if (currentPage === 1) {
+      // Active button is the first one.
       startNumber = 1;
       hasPrev = false;
-      hasNext = numberOfPages > 1;
-    } else if (currentPage === numberOfPages && numberOfPages !== 1) {
-      startNumber = numberOfPages - 2 > 0 ? currentPage - 2 : 1;
+      hasNext = maxPage > 1;
+    } else if (currentPage === maxPage && maxPage !== 1) {
+      // Active button is in the last.
+      startNumber = maxPage - 2 > 0 ? currentPage - 2 : 1;
       hasNext = false;
     } else {
+      // Active button is in the middle.
       startNumber = currentPage - 1;
     }
 
@@ -73,7 +74,7 @@ export default function Pagination({
       />
     );
 
-    while (i < 3 && startNumber <= numberOfPages) {
+    while (i < 3 && startNumber <= maxPage) {
       const pageBtnProps = {
         key: `page-btn-${i}`,
         pageNumber: startNumber,
@@ -98,7 +99,7 @@ export default function Pagination({
       />,
       <NavButton
         key={`page-${lastLabel}`}
-        pageNumber={numberOfPages}
+        pageNumber={maxPage}
         disabled={!hasNext}
         onPageNavigate={paginateHandler}
         label={lastLabel}

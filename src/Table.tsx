@@ -22,9 +22,10 @@ import { makeClasses, customJoin } from './utils/object';
 
 type AsyncProps = {
   filterText: string;
+  sortedProp: SortType;
   rowsPerPage: number;
   currentPage: number;
-  sortedProp: SortType;
+  maxPage: number;
   onSort: (nextProp: string) => {};
   onPaginate: (nextPage: number) => {};
   onFilter: (text: string) => {};
@@ -225,11 +226,19 @@ export function useDatatableLifecycle({
   }
 
   let data = tableBody;
+  let maxPage;
 
   if (async === undefined) {
     data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
-    data = sortData(data, state.sortedProp, onSort);
+    const dataLength = data.length;
+
     data = paginateData(data, state.currentPage, state.rowsPerPage);
+    data = sortData(data, state.sortedProp, onSort);
+
+    // Pagination needs.
+    maxPage = Math.ceil(dataLength / rowsPerPage);
+  } else {
+    maxPage = async.maxPage;
   }
 
   const tableClass = makeClasses(`table-datatable__root`, classes.table);
@@ -242,7 +251,6 @@ export function useDatatableLifecycle({
     classes,
     onRowsPerPageChange,
     onSortChange,
-    tableBody,
     async,
     tableClass,
     labels,
@@ -252,7 +260,8 @@ export function useDatatableLifecycle({
     filterText: async ? async.filterText : state.filterText,
     rowsPerPage: async ? async.rowsPerPage : state.rowsPerPage,
     currentPage: async ? async.currentPage : state.currentPage,
-    sortedProp: async ? async.sortedProp : state.sortedProp
+    sortedProp: async ? async.sortedProp : state.sortedProp,
+    maxPage
   };
 }
 
@@ -267,14 +276,14 @@ export default function Datatable(props: DatatableProps) {
     classes,
     onRowsPerPageChange,
     onSortChange,
-    tableBody,
     tableClass,
     labels,
     filterable,
     filterText,
     rowsPerPage,
     currentPage,
-    sortedProp
+    sortedProp,
+    maxPage
   } = useDatatableLifecycle(props);
 
   return (
@@ -300,8 +309,8 @@ export default function Datatable(props: DatatableProps) {
         </Col>
         <Col xs={12} md={5} className="text-right">
           <Pagination
+            maxPage={maxPage}
             classes={classes}
-            data={tableBody}
             rowsPerPage={rowsPerPage}
             currentPage={currentPage}
             onPageNavigate={onPageNavigate}
