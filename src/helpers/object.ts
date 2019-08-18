@@ -1,6 +1,25 @@
-import classNames from 'classnames';
+export function makeClasses(...args: any[]) {
+  const classes = [];
 
-export const makeClasses = classNames;
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (!arg) continue;
+
+    const argType = typeof arg;
+
+    if (argType === 'string' || argType === 'number') {
+      classes.push(arg);
+    } else if (argType === 'object') {
+      for (const key in arg) {
+        if (arg[key]) {
+          classes.push(key);
+        }
+      }
+    }
+  }
+
+  return classes.join(' ');
+}
 export function customJoin(
   array: string[],
   separator: string,
