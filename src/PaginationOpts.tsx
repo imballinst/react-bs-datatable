@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Form from 'react-bootstrap/Form';
 import {
   LabelType,
   RowsPerPageType,
   RowsPerPageOptionType,
-  TableClasses
+  TableClasses,
+  TableComponents
 } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
@@ -15,6 +15,11 @@ type PaginationOptsProps = {
   rowsPerPageOption?: RowsPerPageOptionType;
   onRowsPerPageChange: any;
   classes: TableClasses;
+  components: {
+    Form: TableComponents['Form'];
+    FormGroup: TableComponents['FormGroup'];
+    FormControl: TableComponents['FormControl'];
+  };
 };
 
 export default function PaginationOpts({
@@ -22,7 +27,8 @@ export default function PaginationOpts({
   rowsPerPage,
   rowsPerPageOption,
   onRowsPerPageChange,
-  classes
+  classes,
+  components: { Form, FormGroup, FormControl }
 }: PaginationOptsProps) {
   function onRowsPerPageChangeHandler(e: any) {
     onRowsPerPageChange(Number(e.target.value));
@@ -72,14 +78,14 @@ export default function PaginationOpts({
           classes.paginationOptsForm
         )}
       >
-        <Form.Group
+        <FormGroup
           controlId="formGroupPagination"
           className={classes.paginationOptsFormGroup}
         >
           <span className={classes.paginationOptsFormText}>
             {labels.show || 'Show'}{' '}
           </span>
-          <Form.Control
+          <FormGroup
             name="form-control-pagination"
             defaultValue={rowsPerPage}
             as="select"
@@ -88,12 +94,12 @@ export default function PaginationOpts({
             className={classes.paginationOptsFormControl}
           >
             {selectOption}
-          </Form.Control>
+          </FormGroup>
           <span className={classes.paginationOptsFormText}>
             {' '}
             {labels.entries || 'entries'}
           </span>
-        </Form.Group>
+        </FormGroup>
       </Form>
     );
   }

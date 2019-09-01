@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import RowElement from 'react-bootstrap/Row';
-import ColElement from 'react-bootstrap/Col';
-import TableElement from 'react-bootstrap/Table';
-
 import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
@@ -16,10 +12,18 @@ import {
   HeaderType,
   RowsPerPageType,
   RowsPerPageOptionType,
-  TableClasses
+  TableClasses,
+  TableComponents
 } from './helpers/types';
 import { makeClasses, customJoin } from './helpers/object';
-import { useTableContext } from './modules/TableContext';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Form from 'react-bootstrap/Form';
+import FontAwesome from './modules/FontAwesome';
 
 type AsyncProps = {
   filterText: string;
@@ -54,6 +58,8 @@ type DatatableProps = {
   rowsPerPageOption?: RowsPerPageOptionType;
   /** Labels/placeholders of the table components. */
   labels?: LabelType;
+  /** Custom table components. */
+  Components?: TableComponents;
 };
 
 type DatatableState = {
@@ -79,7 +85,31 @@ export function useDatatableLifecycle({
   tableHeaders,
   classes = {},
   tableBody,
-  labels = {}
+  labels = {},
+  Components = {
+    // Global.
+    Row,
+    Col,
+    Button,
+    // Table.
+    Table,
+    TableHead: 'thead',
+    TableBody: 'tbody',
+    TableRow: 'tr',
+    TableCell: 'td',
+    // Filter.
+    InputGroup,
+    Adornment: InputGroup.Append,
+    // Pagination.
+    ButtonGroup: ButtonGroup,
+    // Pagination options.
+    Form,
+    FormGroup: Form.Group,
+    FormControl: Form.Control,
+    // ICons.
+    ClearIcon: FontAwesome,
+    SortIcon: FontAwesome
+  }
 }: DatatableProps) {
   useEffect(() => {
     // If in development, warn if async and onSort/onFilter are both passed.
@@ -257,6 +287,7 @@ export function useDatatableLifecycle({
     tableClass,
     labels,
     rowsPerPageOption,
+    Components,
     // States.
     filterable: state.filterable,
     filterText: async ? async.filterText : state.filterText,
@@ -285,36 +316,46 @@ export default function Datatable(props: DatatableProps) {
     rowsPerPage,
     currentPage,
     sortedProp,
-    maxPage
+    maxPage,
+    Components
   } = useDatatableLifecycle(props);
-  const {
-    Row = RowElement,
-    Col = ColElement,
-    Table = TableElement
-  } = useTableContext();
 
   return (
     <>
-      <Row className={makeClasses('controlRow__root', classes.controlRow)}>
-        <Col xs={12} md={4} className={classes.filterCol}>
+      <Components.Row
+        className={makeClasses('controlRow__root', classes.controlRow)}
+      >
+        <Components.Col xs={12} md={4} className={classes.filterCol}>
           <Filter
             filterable={filterable}
             classes={classes}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}
+            components={{
+              Adornment: Components.Adornment,
+              Button: Components.Button,
+              ClearIcon: Components.ClearIcon,
+              FormControl: Components.FormControl,
+              InputGroup: Components.InputGroup
+            }}
           />
-        </Col>
-        <Col xs={12} md={3} className={classes.paginationOptsCol}>
+        </Components.Col>
+        <Components.Col xs={12} md={3} className={classes.paginationOptsCol}>
           <PaginationOpts
             classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
             rowsPerPage={rowsPerPage}
             rowsPerPageOption={rowsPerPageOption}
+            components={{
+              Form: Components.Form,
+              FormGroup: Components.FormGroup,
+              FormControl: Components.FormControl
+            }}
           />
-        </Col>
-        <Col
+        </Components.Col>
+        <Components.Col
           xs={12}
           md={5}
           className={makeClasses('text-right', classes.paginationCol)}
@@ -326,27 +367,41 @@ export default function Datatable(props: DatatableProps) {
             currentPage={currentPage}
             onPageNavigate={onPageNavigate}
             labels={labels}
+            components={{
+              Button: Components.Button,
+              ButtonGroup: Components.ButtonGroup
+            }}
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12">
+        </Components.Col>
+      </Components.Row>
+      <Components.Row>
+        <Components.Col xs="12">
           <Table className={tableClass}>
             <TableHeader
               classes={classes}
               tableHeaders={tableHeaders}
               sortedProp={sortedProp}
               onSortChange={onSortChange}
+              components={{
+                TableHead: Components.TableHead,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
             />
             <TableBody
               classes={classes}
               tableHeaders={tableHeaders}
               labels={labels}
               data={data}
+              components={{
+                TableBody: Components.TableBody,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
             />
           </Table>
-        </Col>
-      </Row>
+        </Components.Col>
+      </Components.Row>
     </>
   );
 }

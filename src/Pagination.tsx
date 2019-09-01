@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
 
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-
 import NavButton from './modules/NavButton';
-import { LabelType, RowsPerPageType, TableClasses } from './helpers/types';
+import {
+  LabelType,
+  RowsPerPageType,
+  TableClasses,
+  TableComponents
+} from './helpers/types';
 
 type PaginationProps = {
   rowsPerPage: RowsPerPageType;
@@ -12,6 +15,10 @@ type PaginationProps = {
   onPageNavigate: any;
   labels: LabelType;
   classes: TableClasses;
+  components: {
+    Button: TableComponents['Button'];
+    ButtonGroup: TableComponents['ButtonGroup'];
+  };
 };
 
 export default function Pagination({
@@ -20,7 +27,8 @@ export default function Pagination({
   onPageNavigate,
   labels,
   maxPage,
-  classes
+  classes,
+  components: { Button, ButtonGroup }
 }: PaginationProps) {
   const paginateHandler = useCallback(
     (pageNum: number) => {
@@ -61,6 +69,7 @@ export default function Pagination({
 
     buttons.push(
       <NavButton
+        Component={Button}
         className={classes.paginationButton}
         key={`page-${firstLabel}`}
         pageNumber={1}
@@ -69,6 +78,7 @@ export default function Pagination({
         label={firstLabel}
       />,
       <NavButton
+        Component={Button}
         className={classes.paginationButton}
         key={`page-${prevLabel}`}
         // If out of bounds, prev button refers to the last page.
@@ -81,16 +91,17 @@ export default function Pagination({
 
     if (!isCurrentPageOutOfBounds) {
       while (i < 3 && startNumber <= maxPage) {
-        const pageBtnProps = {
-          key: `page-btn-${i}`,
-          pageNumber: startNumber,
-          disabled: currentPage === startNumber,
-          onPageNavigate: paginateHandler,
-          label: startNumber,
-          className: classes.paginationButton
-        };
-
-        buttons.push(<NavButton {...pageBtnProps} />);
+        buttons.push(
+          <NavButton
+            Component={Button}
+            key={`page-btn-${i}`}
+            pageNumber={startNumber}
+            disabled={currentPage === startNumber}
+            onPageNavigate={paginateHandler}
+            label={startNumber}
+            className={classes.paginationButton}
+          />
+        );
 
         i += 1;
         startNumber += 1;
@@ -101,6 +112,7 @@ export default function Pagination({
       hasNext = false;
       buttons.push(
         <NavButton
+          Component={Button}
           key={`page-btn-${startNumber}`}
           className={classes.paginationButton}
           pageNumber={currentPage - 1}
@@ -113,6 +125,7 @@ export default function Pagination({
 
     buttons.push(
       <NavButton
+        Component={Button}
         className={classes.paginationButton}
         key={`page-${nextLabel}`}
         pageNumber={currentPage + 1}
@@ -121,6 +134,7 @@ export default function Pagination({
         label={nextLabel}
       />,
       <NavButton
+        Component={Button}
         className={classes.paginationButton}
         key={`page-${lastLabel}`}
         pageNumber={maxPage}

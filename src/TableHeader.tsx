@@ -2,20 +2,31 @@ import React from 'react';
 
 import FontAwesome from './modules/FontAwesome';
 import { makeClasses } from './helpers/object';
-import { HeaderType, SortType, TableClasses } from './helpers/types';
+import {
+  HeaderType,
+  SortType,
+  TableClasses,
+  TableComponents
+} from './helpers/types';
 
 type TableHeaderProps = {
   tableHeaders: HeaderType[];
   sortedProp: SortType;
   onSortChange: any;
   classes: TableClasses;
+  components: {
+    TableHead: TableComponents['TableHead'];
+    TableRow: TableComponents['TableRow'];
+    TableCell: TableComponents['TableCell'];
+  };
 };
 
 export default function TableHeader({
   tableHeaders,
   sortedProp,
   onSortChange,
-  classes
+  classes,
+  components: { TableHead, TableRow, TableCell }
 }: TableHeaderProps) {
   function onSortHandler(prop: string) {
     return () => onSortChange(prop);
@@ -52,16 +63,18 @@ export default function TableHeader({
     }
 
     headings.push(
-      <th {...thProps}>
+      <TableCell {...thProps}>
         {tableHeaders[i].title}
         <span className="pull-right">{sortIconRender}</span>
-      </th>
+      </TableCell>
     );
   }
 
   return (
-    <thead className={makeClasses('thead', classes.thead)}>
-      <tr className={makeClasses('thead-tr', classes.theadRow)}>{headings}</tr>
-    </thead>
+    <TableHead className={makeClasses('thead', classes.thead)}>
+      <TableRow className={makeClasses('thead-tr', classes.theadRow)}>
+        {headings}
+      </TableRow>
+    </TableHead>
   );
 }

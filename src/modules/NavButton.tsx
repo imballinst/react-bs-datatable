@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from 'react-bootstrap/Button';
+import { TableComponents } from '../helpers/types';
 
 type NavButtonProps = {
   pageNumber: number;
@@ -8,6 +8,7 @@ type NavButtonProps = {
   onPageNavigate: any;
   label: string | number;
   className?: string;
+  Component: TableComponents['Button'];
 };
 
 export default function NavButton({
@@ -15,7 +16,8 @@ export default function NavButton({
   disabled,
   onPageNavigate,
   label,
-  className
+  className,
+  Component
 }: NavButtonProps) {
   const btnProps = {
     disabled,
@@ -23,5 +25,5 @@ export default function NavButton({
     className
   };
 
-  return <Button {...btnProps}>{label}</Button>;
+  return <Component {...btnProps}>{label}</Component>;
 }

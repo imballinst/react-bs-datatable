@@ -1,11 +1,6 @@
 import React from 'react';
 
-import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl';
-
-import FontAwesome from './modules/FontAwesome';
-import { TableClasses } from './helpers/types';
+import { TableClasses, TableComponents } from './helpers/types';
 
 type FilterProps = {
   filterable: boolean;
@@ -13,6 +8,13 @@ type FilterProps = {
   onChangeFilter: any;
   placeholder?: string;
   classes: TableClasses;
+  components: {
+    InputGroup: TableComponents['InputGroup'];
+    FormControl: TableComponents['FormControl'];
+    Adornment: TableComponents['Adornment'];
+    Button: TableComponents['Button'];
+    ClearIcon: TableComponents['ClearIcon'];
+  };
 };
 
 export default function Filter({
@@ -20,7 +22,8 @@ export default function Filter({
   filterText,
   placeholder = 'Enter text...',
   onChangeFilter,
-  classes
+  classes,
+  components: { InputGroup, FormControl, Adornment, Button, ClearIcon }
 }: FilterProps) {
   // Event handlers.
   function onInputChange(e: any) {
@@ -43,11 +46,11 @@ export default function Filter({
           onChange={onInputChange}
           className={classes.filterFormControl}
         />
-        <InputGroup.Append>
+        <Adornment>
           <Button onClick={onClearFilter} className={classes.filterClearButton}>
-            <FontAwesome icon="times" additionalClass="fa-fw" />
+            <ClearIcon icon="times" additionalClass="fa-fw" />
           </Button>
-        </InputGroup.Append>
+        </Adornment>
       </InputGroup>
     );
   }

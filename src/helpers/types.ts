@@ -49,5 +49,31 @@ export type TableClasses = {
   tbodyCol?: string;
 };
 
+type TableComponentType = React.ElementType<any> | string;
+export type TableComponents = {
+  // Global.
+  Row: TableComponentType;
+  Col: TableComponentType;
+  Button: TableComponentType;
+  // Table.
+  Table: TableComponentType;
+  TableHead: TableComponentType;
+  TableBody: TableComponentType;
+  TableRow: TableComponentType;
+  TableCell: TableComponentType;
+  // Filter.
+  InputGroup: TableComponentType;
+  Adornment: TableComponentType;
+  // Pagination.
+  ButtonGroup: TableComponentType;
+  // Pagination options.
+  Form: TableComponentType;
+  FormGroup: TableComponentType;
+  FormControl: TableComponentType;
+  // Icons.
+  ClearIcon: TableComponentType;
+  SortIcon: TableComponentType;
+};
+
 export type RowsPerPageType = number | undefined;
 export type RowsPerPageOptionType = number[];

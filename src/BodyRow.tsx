@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderType, TableClasses } from './helpers/types';
+import { HeaderType, TableClasses, TableComponents } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
 type BodyRowProps = {
@@ -8,8 +8,8 @@ type BodyRowProps = {
   rowIdx: number;
   classes: TableClasses;
   components: {
-    TableRow: React.ElementType;
-    TableCell: React.ElementType;
+    TableRow: TableComponents['TableRow'];
+    TableCell: TableComponents['TableCell'];
   };
 };
 
