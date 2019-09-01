@@ -60,48 +60,51 @@ export default function PaginationOpts({
       });
     }
 
-    // Replace the numbers with array of React elements.
-    selectOption = opts.map((option: number | undefined, idx: number) => {
-      const optionProps = {
-        key: `page-opt-${option}`,
-        value: option
-      };
+    // Only render option if the length is more than 1.
+    if (opts.length > 1) {
+      // Replace the numbers with array of React elements.
+      selectOption = opts.map((option: number | undefined, idx: number) => {
+        const optionProps = {
+          key: `page-opt-${option}`,
+          value: option
+        };
 
-      return <option {...optionProps}>{option}</option>;
-    });
+        return <option {...optionProps}>{option}</option>;
+      });
 
-    renderedElements = (
-      <Form
-        inline
-        className={makeClasses(
-          'paginationOpts__root',
-          classes.paginationOptsForm
-        )}
-      >
-        <FormGroup
-          controlId="formGroupPagination"
-          className={classes.paginationOptsFormGroup}
+      renderedElements = (
+        <Form
+          inline
+          className={makeClasses(
+            'paginationOpts__root',
+            classes.paginationOptsForm
+          )}
         >
-          <span className={classes.paginationOptsFormText}>
-            {labels.show || 'Show'}{' '}
-          </span>
-          <FormControl
-            name="form-control-pagination"
-            defaultValue={rowsPerPage}
-            as="select"
-            placeholder="select"
-            onChange={onRowsPerPageChangeHandler}
-            className={classes.paginationOptsFormControl}
+          <FormGroup
+            controlId="formGroupPagination"
+            className={classes.paginationOptsFormGroup}
           >
-            {selectOption}
-          </FormControl>
-          <span className={classes.paginationOptsFormText}>
-            {' '}
-            {labels.entries || 'entries'}
-          </span>
-        </FormGroup>
-      </Form>
-    );
+            <span className={classes.paginationOptsFormText}>
+              {labels.show || 'Show'}{' '}
+            </span>
+            <FormControl
+              name="form-control-pagination"
+              defaultValue={rowsPerPage}
+              as="select"
+              placeholder="select"
+              onChange={onRowsPerPageChangeHandler}
+              className={classes.paginationOptsFormControl}
+            >
+              {selectOption}
+            </FormControl>
+            <span className={classes.paginationOptsFormText}>
+              {' '}
+              {labels.entries || 'entries'}
+            </span>
+          </FormGroup>
+        </Form>
+      );
+    }
   }
 
   return renderedElements;

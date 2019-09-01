@@ -7,13 +7,9 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
 import {
-  SortType,
-  LabelType,
-  HeaderType,
   RowsPerPageType,
-  RowsPerPageOptionType,
-  TableClasses,
-  TableComponents
+  DatatableProps,
+  DatatableState
 } from './helpers/types';
 import { makeClasses, customJoin } from './helpers/object';
 import Row from 'react-bootstrap/Row';
@@ -24,51 +20,6 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import FontAwesome from './modules/FontAwesome';
-
-type AsyncProps = {
-  filterText: string;
-  sortedProp: SortType;
-  rowsPerPage: number;
-  currentPage: number;
-  maxPage: number;
-  onSort: (nextProp: string) => {};
-  onPaginate: (nextPage: number) => {};
-  onFilter: (text: string) => {};
-  onRowsPerPageChange: (numOfPage: RowsPerPageType) => {};
-};
-
-type DatatableProps = {
-  /** Initial sort of the table. */
-  tableHeaders: HeaderType[];
-  /** Table data. */
-  tableBody: any[];
-  /** Initial sort of the table. */
-  initialSort?: SortType;
-  /** Custom onSort data modifier. */
-  onSort?: any;
-  /** Custom onFilter data modifier. */
-  onFilter?: any;
-  /** Custom classes of the table components. */
-  classes?: TableClasses;
-  /** Handler for asynchronous filter, sort, and pagination. */
-  async?: AsyncProps;
-  /** Initial rows per page. */
-  rowsPerPage?: RowsPerPageType;
-  /** Rows per page option. */
-  rowsPerPageOption?: RowsPerPageOptionType;
-  /** Labels/placeholders of the table components. */
-  labels?: LabelType;
-  /** Custom table components. */
-  Components?: TableComponents;
-};
-
-type DatatableState = {
-  filterable: boolean;
-  sortedProp: SortType;
-  rowsPerPage: RowsPerPageType;
-  currentPage: number;
-  filterText: string;
-};
 
 /**
  * Datatable lifecycle convenient function.
@@ -299,7 +250,7 @@ export function useDatatableLifecycle({
 }
 
 /** Datatable Component. */
-export default function Datatable(props: DatatableProps) {
+function Datatable(props: DatatableProps) {
   const {
     data,
     rowsPerPageOption,
@@ -405,3 +356,22 @@ export default function Datatable(props: DatatableProps) {
     </>
   );
 }
+
+const includedProps = ['rowsPerPage', 'rowsPerPageOption', 'tableBody'];
+
+// Only update if rowsPerPage, rowsPerPageOption, and tableBody changes.
+export default React.memo(Datatable, (prevProps, nextProps) => {
+  const checkedPropsLength = includedProps.length;
+  let shouldUpdate = false;
+  let index = 0;
+
+  while (!shouldUpdate && index < checkedPropsLength) {
+    if (prevProps[includedProps[index]] !== nextProps[includedProps[index]]) {
+      shouldUpdate = true;
+    }
+
+    index += 1;
+  }
+
+  return shouldUpdate;
+});

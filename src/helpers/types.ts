@@ -77,3 +77,48 @@ export type TableComponents = {
 
 export type RowsPerPageType = number | undefined;
 export type RowsPerPageOptionType = number[];
+
+export type AsyncProps = {
+  filterText: string;
+  sortedProp: SortType;
+  rowsPerPage: number;
+  currentPage: number;
+  maxPage: number;
+  onSort: (nextProp: string) => {};
+  onPaginate: (nextPage: number) => {};
+  onFilter: (text: string) => {};
+  onRowsPerPageChange: (numOfPage: RowsPerPageType) => {};
+};
+
+export type DatatableProps = {
+  /** Initial sort of the table. */
+  tableHeaders: HeaderType[];
+  /** Table data. */
+  tableBody: any[];
+  /** Initial sort of the table. */
+  initialSort?: SortType;
+  /** Custom onSort data modifier. */
+  onSort?: any;
+  /** Custom onFilter data modifier. */
+  onFilter?: any;
+  /** Custom classes of the table components. */
+  classes?: TableClasses;
+  /** Handler for asynchronous filter, sort, and pagination. */
+  async?: AsyncProps;
+  /** Initial rows per page. */
+  rowsPerPage?: RowsPerPageType;
+  /** Rows per page option. */
+  rowsPerPageOption?: RowsPerPageOptionType;
+  /** Labels/placeholders of the table components. */
+  labels?: LabelType;
+  /** Custom table components. */
+  Components?: TableComponents;
+};
+
+export type DatatableState = {
+  filterable: boolean;
+  sortedProp: SortType;
+  rowsPerPage: RowsPerPageType;
+  currentPage: number;
+  filterText: string;
+};

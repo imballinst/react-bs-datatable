@@ -1,10 +1,9 @@
 /**
- * This is a story for an extended table.
- * If you want to personally customize how the table looks, like the positioning of filters/pagination, you can do it here.
- * You will need to import the components and apply them in the render function.
+ * The table you imported from ./Table has React.memo embedded, e.g. in the CustomTable component below.
+ * This causes the table not to re-render every time its parent component re-renders.
  * If you are about to extend your table, do not forget to wrap it with memo.
  */
-import React from 'react'; // Import React
+import React, { useState } from 'react'; // Import React
 import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
 
@@ -20,6 +19,10 @@ import {
   useDatatableLifecycle
 } from '../../';
 import { shouldTableUpdate } from '../../helpers/object';
+
+// This is a number that will be shown on the screen to determine how many times the table has re-rendered.
+let num1 = 0;
+let num2 = 0;
 
 const CustomTable = React.memo(props => {
   const {
@@ -41,9 +44,10 @@ const CustomTable = React.memo(props => {
     maxPage,
     Components
   } = useDatatableLifecycle(props);
-
+  num1 += 1;
   return (
     <>
+      <h3>{num1}</h3>
       <Components.Row className="controlRow__root">
         <Components.Col xs="12">
           <Filter
@@ -127,6 +131,113 @@ const CustomTable = React.memo(props => {
   );
 }, shouldTableUpdate);
 
+function NonMemoizedTable(props) {
+  const {
+    data,
+    rowsPerPageOption,
+    tableHeaders,
+    onChangeFilter,
+    onPageNavigate,
+    classes,
+    onRowsPerPageChange,
+    onSortChange,
+    tableClass,
+    labels,
+    filterable,
+    filterText,
+    rowsPerPage,
+    currentPage,
+    sortedProp,
+    maxPage,
+    Components
+  } = useDatatableLifecycle(props);
+  num2 += 1;
+  return (
+    <>
+      <h3>{num2}</h3>
+      <Components.Row className="controlRow__root">
+        <Components.Col xs="12">
+          <Filter
+            classes={classes}
+            tableHeaders={tableHeaders}
+            placeholder={labels.filterPlaceholder}
+            onChangeFilter={onChangeFilter}
+            filterText={filterText}
+            filterable={filterable}
+            components={{
+              Adornment: Components.Adornment,
+              Button: Components.Button,
+              ClearIcon: Components.ClearIcon,
+              FormControl: Components.FormControl,
+              InputGroup: Components.InputGroup
+            }}
+          />
+        </Components.Col>
+      </Components.Row>
+      <Components.Row>
+        <Components.Col xs="12">
+          <Components.Table className={tableClass}>
+            <TableHeader
+              classes={classes}
+              tableHeaders={tableHeaders}
+              sortedProp={sortedProp}
+              onSortChange={onSortChange}
+              components={{
+                TableHead: Components.TableHead,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
+            />
+            <TableBody
+              classes={classes}
+              tableHeaders={tableHeaders}
+              labels={labels}
+              data={data}
+              components={{
+                TableBody: Components.TableBody,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
+            />
+          </Components.Table>
+        </Components.Col>
+      </Components.Row>
+      <Components.Row className="controlRow__root bottom">
+        <Components.Col xs={12} md={4} />
+        <Components.Col xs={12} md={4}>
+          <PaginationOpts
+            classes={classes}
+            labels={labels}
+            onRowsPerPageChange={onRowsPerPageChange}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOption={rowsPerPageOption}
+            components={{
+              Form: Components.Form,
+              FormGroup: Components.FormGroup,
+              FormControl: Components.FormControl
+            }}
+          />
+        </Components.Col>
+        <Components.Col xs={12} md={4} className="text-right">
+          <Pagination
+            classes={classes}
+            data={data}
+            rowsPerPage={rowsPerPage}
+            currentPage={currentPage}
+            onPageNavigate={onPageNavigate}
+            labels={labels}
+            maxPage={maxPage}
+            components={{
+              Button: Components.Button,
+              ButtonGroup: Components.ButtonGroup
+            }}
+          />
+        </Components.Col>
+      </Components.Row>
+    </>
+  );
+}
+
 const header = [
   {
     title: 'Username (filterable)',
@@ -186,15 +297,39 @@ const customLabels = {
   noResults: 'There are no data to be displayed'
 };
 
-storiesOf(categoryName, module).add('Extending the Table', () => (
-  <CustomTable
-    tableHeaders={header}
-    tableBody={body}
-    tableClass="striped hover responsive"
-    rowsPerPage={5}
-    rowsPerPageOption={[5, 10, 15, 20]}
-    initialSort={{ prop: 'username', isAscending: true }}
-    onSort={onSortFunction}
-    labels={customLabels}
-  />
-));
+function Wrapper() {
+  const [idx, setIdx] = useState(0);
+
+  function onClick() {
+    setIdx(idx + 1);
+  }
+
+  return (
+    <>
+      <button onClick={onClick}>Try re-render</button>
+      <CustomTable
+        tableHeaders={header}
+        tableBody={body}
+        tableClass="striped hover responsive"
+        rowsPerPage={5}
+        rowsPerPageOption={[5, 10, 15, 20]}
+        initialSort={{ prop: 'username', isAscending: true }}
+        onSort={onSortFunction}
+        labels={customLabels}
+      />
+      <hr />
+      <NonMemoizedTable
+        tableHeaders={header}
+        tableBody={body}
+        tableClass="striped hover responsive"
+        rowsPerPage={5}
+        rowsPerPageOption={[5, 10, 15, 20]}
+        initialSort={{ prop: 'username', isAscending: true }}
+        onSort={onSortFunction}
+        labels={customLabels}
+      />
+    </>
+  );
+}
+
+storiesOf(categoryName, module).add('Extending the Table', () => <Wrapper />);
