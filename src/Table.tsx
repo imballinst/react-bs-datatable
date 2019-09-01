@@ -9,7 +9,8 @@ import Filter from './Filter';
 import {
   RowsPerPageType,
   DatatableProps,
-  DatatableState
+  DatatableState,
+  TableComponents
 } from './helpers/types';
 import { makeClasses, customJoin } from './helpers/object';
 import Row from 'react-bootstrap/Row';
@@ -37,30 +38,7 @@ export function useDatatableLifecycle({
   classes = {},
   tableBody,
   labels = {},
-  Components = {
-    // Global.
-    Row,
-    Col,
-    Button,
-    // Table.
-    Table,
-    TableHead: 'thead',
-    TableBody: 'tbody',
-    TableRow: 'tr',
-    TableCell: 'td',
-    // Filter.
-    InputGroup,
-    Adornment: InputGroup.Append,
-    // Pagination.
-    ButtonGroup,
-    // Pagination options.
-    Form,
-    FormGroup: Form.Group,
-    FormControl: Form.Control,
-    // ICons.
-    ClearIcon: FontAwesome,
-    SortIcon: FontAwesome
-  }
+  Components
 }: DatatableProps) {
   useEffect(() => {
     // If in development, warn if async and onSort/onFilter are both passed.
@@ -227,6 +205,41 @@ export function useDatatableLifecycle({
 
   const tableClass = makeClasses(`table-datatable__root`, classes.table);
 
+  // Default components.
+  let usedComponents: TableComponents = {
+    // Global.
+    Row,
+    Col,
+    Button,
+    // Table.
+    Table,
+    TableHead: 'thead',
+    TableBody: 'tbody',
+    TableRow: 'tr',
+    TableCell: 'td',
+    // Filter.
+    InputGroup,
+    Adornment: InputGroup.Append,
+    // Pagination.
+    ButtonGroup,
+    // Pagination options.
+    Form,
+    FormGroup: Form.Group,
+    FormControl: Form.Control,
+    // ICons.
+    ClearIcon: FontAwesome,
+    SortIcon: FontAwesome
+  };
+
+  if (Components !== undefined) {
+    if (typeof Components === 'object') {
+      for (const key in Components) {
+        // Replace usedComponent fields with the passed Components.
+        usedComponents[key] = Components[key];
+      }
+    }
+  }
+
   return {
     data,
     tableHeaders,
@@ -238,7 +251,7 @@ export function useDatatableLifecycle({
     tableClass,
     labels,
     rowsPerPageOption,
-    Components,
+    Components: usedComponents,
     // States.
     filterable: state.filterable,
     filterText: async ? async.filterText : state.filterText,
