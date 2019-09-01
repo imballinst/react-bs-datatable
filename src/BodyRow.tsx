@@ -7,13 +7,18 @@ type BodyRowProps = {
   data: any[];
   rowIdx: number;
   classes: TableClasses;
+  components: {
+    TableRow: React.ElementType;
+    TableCell: React.ElementType;
+  };
 };
 
 export default function BodyRow({
   tableHeaders,
   data,
   rowIdx,
-  classes
+  classes,
+  components
 }: BodyRowProps) {
   const row = [];
 
@@ -28,14 +33,18 @@ export default function BodyRow({
     }
 
     row.push(
-      <td
+      <components.TableCell
         key={`col-${rowIdx}${i}`}
         className={makeClasses('tbody-td', classes.tbodyCol)}
       >
         {value}
-      </td>
+      </components.TableCell>
     );
   }
 
-  return <tr className={makeClasses('tbody-tr', classes.tbodyRow)}>{row}</tr>;
+  return (
+    <components.TableRow className={makeClasses('tbody-tr', classes.tbodyRow)}>
+      {row}
+    </components.TableRow>
+  );
 }

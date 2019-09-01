@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Table from 'react-bootstrap/Table';
+import RowElement from 'react-bootstrap/Row';
+import ColElement from 'react-bootstrap/Col';
+import TableElement from 'react-bootstrap/Table';
 
 import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
@@ -19,6 +19,7 @@ import {
   TableClasses
 } from './helpers/types';
 import { makeClasses, customJoin } from './helpers/object';
+import { useTableContext } from './modules/TableContext';
 
 type AsyncProps = {
   filterText: string;
@@ -286,6 +287,11 @@ export default function Datatable(props: DatatableProps) {
     sortedProp,
     maxPage
   } = useDatatableLifecycle(props);
+  const {
+    Row = RowElement,
+    Col = ColElement,
+    Table = TableElement
+  } = useTableContext();
 
   return (
     <>

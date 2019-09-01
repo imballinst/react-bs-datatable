@@ -3,6 +3,7 @@ import React from 'react';
 import BodyRow from './BodyRow';
 import { HeaderType, LabelType, TableClasses } from './helpers/types';
 import { makeClasses } from './helpers/object';
+import { useTableContext } from './modules/TableContext';
 
 type TableBodyProps = {
   tableHeaders: HeaderType[];
@@ -19,6 +20,7 @@ export default function TableBody({
 }: TableBodyProps) {
   const body = [];
   const dataLength = data.length;
+  const { TableRow = 'tr', TableCell = 'td' } = useTableContext();
 
   if (dataLength !== 0) {
     for (let i = 0; i < dataLength; i += 1) {
@@ -26,6 +28,10 @@ export default function TableBody({
         <BodyRow
           key={`row-${i}`}
           classes={classes}
+          components={{
+            TableRow,
+            TableCell
+          }}
           tableHeaders={tableHeaders}
           data={data}
           rowIdx={i}
@@ -34,11 +40,11 @@ export default function TableBody({
     }
   } else {
     body.push(
-      <tr key={`row-zero-length`} className="tbody-tr">
-        <td className="tbody-td" colSpan={tableHeaders.length}>
+      <TableRow key={`row-zero-length`} className="tbody-tr">
+        <TableCell className="tbody-td" colSpan={tableHeaders.length}>
           {labels.noResults || 'No results to be shown.'}
-        </td>
-      </tr>
+        </TableCell>
+      </TableRow>
     );
   }
 
