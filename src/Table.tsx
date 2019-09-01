@@ -101,7 +101,7 @@ export function useDatatableLifecycle({
     InputGroup,
     Adornment: InputGroup.Append,
     // Pagination.
-    ButtonGroup: ButtonGroup,
+    ButtonGroup,
     // Pagination options.
     Form,
     FormGroup: Form.Group,

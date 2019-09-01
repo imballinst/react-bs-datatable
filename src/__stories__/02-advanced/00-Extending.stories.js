@@ -8,9 +8,6 @@ import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Table from 'react-bootstrap/Table';
 
 // In your setup, replace "../../" with "react-bs-datatable"
 import {
@@ -25,28 +22,28 @@ import {
 function CustomTable(props) {
   const {
     data,
-    labels,
-    classes,
+    rowsPerPageOption,
+    tableHeaders,
     onChangeFilter,
     onPageNavigate,
+    classes,
     onRowsPerPageChange,
     onSortChange,
-    rowsPerPageOption,
-    tableBody,
     tableClass,
-    tableHeaders,
+    labels,
+    filterable,
     filterText,
     rowsPerPage,
     currentPage,
     sortedProp,
-    filterable,
-    maxPage
+    maxPage,
+    Components
   } = useDatatableLifecycle(props);
 
   return (
     <>
-      <Row className="controlRow__root">
-        <Col xs="12">
+      <Components.Row className="controlRow__root">
+        <Components.Col xs="12">
           <Filter
             classes={classes}
             tableHeaders={tableHeaders}
@@ -54,50 +51,76 @@ function CustomTable(props) {
             onChangeFilter={onChangeFilter}
             filterText={filterText}
             filterable={filterable}
+            components={{
+              Adornment: Components.Adornment,
+              Button: Components.Button,
+              ClearIcon: Components.ClearIcon,
+              FormControl: Components.FormControl,
+              InputGroup: Components.InputGroup
+            }}
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12">
-          <Table className={tableClass}>
+        </Components.Col>
+      </Components.Row>
+      <Components.Row>
+        <Components.Col xs="12">
+          <Components.Table className={tableClass}>
             <TableHeader
               classes={classes}
               tableHeaders={tableHeaders}
               sortedProp={sortedProp}
               onSortChange={onSortChange}
+              components={{
+                TableHead: Components.TableHead,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
             />
             <TableBody
               classes={classes}
               tableHeaders={tableHeaders}
               labels={labels}
               data={data}
+              components={{
+                TableBody: Components.TableBody,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
             />
-          </Table>
-        </Col>
-      </Row>
-      <Row className="controlRow__root bottom">
-        <Col xs={12} md={4} />
-        <Col xs={12} md={4}>
+          </Components.Table>
+        </Components.Col>
+      </Components.Row>
+      <Components.Row className="controlRow__root bottom">
+        <Components.Col xs={12} md={4} />
+        <Components.Col xs={12} md={4}>
           <PaginationOpts
             classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
             rowsPerPage={rowsPerPage}
             rowsPerPageOption={rowsPerPageOption}
+            components={{
+              Form: Components.Form,
+              FormGroup: Components.FormGroup,
+              FormControl: Components.FormControl
+            }}
           />
-        </Col>
-        <Col xs={12} md={4} className="text-right">
+        </Components.Col>
+        <Components.Col xs={12} md={4} className="text-right">
           <Pagination
             classes={classes}
-            data={tableBody}
+            data={data}
             rowsPerPage={rowsPerPage}
             currentPage={currentPage}
             onPageNavigate={onPageNavigate}
             labels={labels}
             maxPage={maxPage}
+            components={{
+              Button: Components.Button,
+              ButtonGroup: Components.ButtonGroup
+            }}
           />
-        </Col>
-      </Row>
+        </Components.Col>
+      </Components.Row>
     </>
   );
 }

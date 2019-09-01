@@ -85,7 +85,7 @@ export default function PaginationOpts({
           <span className={classes.paginationOptsFormText}>
             {labels.show || 'Show'}{' '}
           </span>
-          <FormGroup
+          <FormControl
             name="form-control-pagination"
             defaultValue={rowsPerPage}
             as="select"
@@ -94,7 +94,7 @@ export default function PaginationOpts({
             className={classes.paginationOptsFormControl}
           >
             {selectOption}
-          </FormGroup>
+          </FormControl>
           <span className={classes.paginationOptsFormText}>
             {' '}
             {labels.entries || 'entries'}
