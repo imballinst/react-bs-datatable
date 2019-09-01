@@ -332,4 +332,4 @@ function Wrapper() {
   );
 }
 
-storiesOf(categoryName, module).add('Extending the Table', () => <Wrapper />);
+storiesOf(categoryName, module).add('Testing render count', () => <Wrapper />);
