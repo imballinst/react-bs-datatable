@@ -4,10 +4,70 @@ import {
   LabelType,
   RowsPerPageType,
   RowsPerPageOptionType,
-  TableClasses,
-  TableComponents
+  TableClasses
 } from './helpers/types';
 import { makeClasses } from './helpers/object';
+import Form from 'react-bootstrap/Form';
+
+type PaginationOptsGroupProps = {
+  labels: LabelType;
+  value: RowsPerPageType;
+  options: RowsPerPageOptionType;
+  onChange: any;
+  classes: TableClasses;
+};
+
+export function PaginationOptsGroup({
+  classes,
+  labels,
+  value,
+  onChange,
+  options
+}: PaginationOptsGroupProps) {
+  return (
+    <Form
+      inline
+      className={makeClasses(
+        'paginationOpts__root',
+        classes.paginationOptsForm
+      )}
+    >
+      <Form.Group
+        controlId="formGroupPagination"
+        className={classes.paginationOptsFormGroup}
+      >
+        <span className={classes.paginationOptsFormText}>
+          {labels.show || 'Show'}{' '}
+        </span>
+        <Form.Control
+          name="form-control-pagination"
+          defaultValue={value}
+          as="select"
+          placeholder="select"
+          onChange={onChange}
+          className={classes.paginationOptsFormControl}
+        >
+          {options.map((option: number | undefined, idx: number) => {
+            const optionProps = {
+              key: `page-opt-${option}`,
+              value: option
+            };
+
+            return <option {...optionProps}>{option}</option>;
+          })}
+        </Form.Control>
+        <span className={classes.paginationOptsFormText}>
+          {' '}
+          {labels.entries || 'entries'}
+        </span>
+      </Form.Group>
+    </Form>
+  );
+}
+
+export type PaginationOptsGroupFunctionComponent = (
+  props: PaginationOptsGroupProps
+) => JSX.Element;
 
 type PaginationOptsProps = {
   labels: LabelType;
@@ -15,11 +75,7 @@ type PaginationOptsProps = {
   rowsPerPageOption?: RowsPerPageOptionType;
   onRowsPerPageChange: any;
   classes: TableClasses;
-  components: {
-    Form: TableComponents['Form'];
-    FormGroup: TableComponents['FormGroup'];
-    FormControl: TableComponents['FormControl'];
-  };
+  CustomPaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
 };
 
 export default function PaginationOpts({
@@ -28,13 +84,12 @@ export default function PaginationOpts({
   rowsPerPageOption,
   onRowsPerPageChange,
   classes,
-  components: { Form, FormGroup, FormControl }
+  CustomPaginationOptsGroup
 }: PaginationOptsProps) {
   function onRowsPerPageChangeHandler(e: any) {
     onRowsPerPageChange(Number(e.target.value));
   }
 
-  let selectOption: React.ReactNode[] = [];
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
@@ -62,47 +117,17 @@ export default function PaginationOpts({
 
     // Only render option if the length is more than 1.
     if (opts.length > 1) {
-      // Replace the numbers with array of React elements.
-      selectOption = opts.map((option: number | undefined, idx: number) => {
-        const optionProps = {
-          key: `page-opt-${option}`,
-          value: option
-        };
-
-        return <option {...optionProps}>{option}</option>;
-      });
+      const UsedPaginationOpts =
+        CustomPaginationOptsGroup || PaginationOptsGroup;
 
       renderedElements = (
-        <Form
-          inline
-          className={makeClasses(
-            'paginationOpts__root',
-            classes.paginationOptsForm
-          )}
-        >
-          <FormGroup
-            controlId="formGroupPagination"
-            className={classes.paginationOptsFormGroup}
-          >
-            <span className={classes.paginationOptsFormText}>
-              {labels.show || 'Show'}{' '}
-            </span>
-            <FormControl
-              name="form-control-pagination"
-              defaultValue={rowsPerPage}
-              as="select"
-              placeholder="select"
-              onChange={onRowsPerPageChangeHandler}
-              className={classes.paginationOptsFormControl}
-            >
-              {selectOption}
-            </FormControl>
-            <span className={classes.paginationOptsFormText}>
-              {' '}
-              {labels.entries || 'entries'}
-            </span>
-          </FormGroup>
-        </Form>
+        <UsedPaginationOpts
+          classes={classes}
+          labels={labels}
+          onChange={onRowsPerPageChangeHandler}
+          options={opts}
+          value={rowsPerPage}
+        />
       );
     }
   }

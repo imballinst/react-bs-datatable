@@ -18,7 +18,6 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Form from 'react-bootstrap/Form';
 import FontAwesome from './modules/FontAwesome';
 
 /**
@@ -221,9 +220,7 @@ export function useDatatableLifecycle({
     // Pagination.
     ButtonGroup,
     // Pagination options.
-    Form,
-    FormGroup: Form.Group,
-    FormControl: Form.Control,
+    PaginationOptsGroup: undefined,
     // ICons.
     ClearIcon: FontAwesome,
     SortIcon: FontAwesome
@@ -287,7 +284,7 @@ function Datatable(props: DatatableProps) {
       <Components.Row
         className={makeClasses('controlRow__root', classes.controlRow)}
       >
-        <Components.Col xs={12} md={4} className={classes.filterCol}>
+        <Components.Col xs={12} sm={4} className={classes.filterCol}>
           <Filter
             filterable={filterable}
             classes={classes}
@@ -297,23 +294,19 @@ function Datatable(props: DatatableProps) {
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        <Components.Col xs={12} md={3} className={classes.paginationOptsCol}>
+        <Components.Col xs={12} sm={3} className={classes.paginationOptsCol}>
           <PaginationOpts
             classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
             rowsPerPage={rowsPerPage}
             rowsPerPageOption={rowsPerPageOption}
-            components={{
-              Form: Components.Form,
-              FormGroup: Components.FormGroup,
-              FormControl: Components.FormControl
-            }}
+            CustomPaginationOptsGroup={Components.PaginationOptsGroup}
           />
         </Components.Col>
         <Components.Col
           xs={12}
-          md={5}
+          sm={5}
           className={makeClasses('text-right', classes.paginationCol)}
         >
           <Pagination

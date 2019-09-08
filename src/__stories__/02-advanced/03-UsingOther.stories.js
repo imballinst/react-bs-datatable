@@ -15,7 +15,13 @@ import {
   Button,
   TextField,
   InputAdornment,
-  IconButton
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  Grid
 } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -107,13 +113,53 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
     initialSort={{ prop: 'username', isAscending: true }}
     onSort={onSortFunction}
     Components={{
+      Row(props) {
+        return <Grid container spacing={2} {...props} />;
+      },
+      Col(props) {
+        return <Grid item {...props} />;
+      },
       Table,
       TableHead,
       TableBody,
       TableCell,
       TableRow,
       Button,
-      FilterGroup
+      FilterGroup,
+      PaginationOptsGroup({ classes, onChange, options, value }) {
+        const inputLabel = React.useRef(null);
+        const [labelWidth, setLabelWidth] = React.useState(0);
+        React.useEffect(() => {
+          if (inputLabel.current !== null) {
+            setLabelWidth(inputLabel.current.offsetWidth);
+          }
+        }, [inputLabel.current]);
+        console.log(labelWidth);
+        return (
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
+              Number of rows
+            </InputLabel>
+            <Select
+              value={value}
+              onChange={onChange}
+              input={
+                <OutlinedInput
+                  labelWidth={labelWidth}
+                  name="age"
+                  id="outlined-age-simple"
+                />
+              }
+            >
+              {options.map(opt => (
+                <MenuItem value={opt} key={opt}>
+                  {opt}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        );
+      }
     }}
   />
 ));

@@ -1,4 +1,5 @@
 import { FilterGroupFunctionComponent } from '../Filter';
+import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 
 export type SortType = {
   prop?: string;
@@ -68,9 +69,7 @@ export type TableComponents = {
   // Pagination.
   ButtonGroup: TableComponentType;
   // Pagination options.
-  Form: TableComponentType;
-  FormGroup: TableComponentType;
-  FormControl: TableComponentType;
+  PaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
   // Icons.
   ClearIcon: TableComponentType;
   SortIcon: TableComponentType;
