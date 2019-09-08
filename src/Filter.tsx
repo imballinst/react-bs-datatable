@@ -8,7 +8,8 @@ import FontAwesome from './modules/FontAwesome';
 
 type FilterGroupProps = {
   filterText: string;
-  onChangeFilter: any;
+  onChangeFilter: (event: any) => void;
+  onClearFilter?: () => void;
   placeholder?: string;
   classes: TableClasses;
 };
@@ -26,12 +27,9 @@ export function FilterGroup({
   classes,
   filterText,
   placeholder,
-  onChangeFilter
+  onChangeFilter,
+  onClearFilter
 }: FilterGroupProps) {
-  function onClearFilter() {
-    onChangeFilter('');
-  }
-
   return (
     <InputGroup className={classes.filterInputGroup}>
       <Form.Control
@@ -63,6 +61,10 @@ function Filter({
     onChangeFilter(e.target.value);
   }
 
+  function onClearFilter() {
+    onChangeFilter('');
+  }
+
   let filterRender = null;
 
   if (filterable) {
@@ -74,6 +76,7 @@ function Filter({
         filterText={filterText}
         placeholder={placeholder}
         onChangeFilter={onInputChange}
+        onClearFilter={onClearFilter}
       />
     );
   }

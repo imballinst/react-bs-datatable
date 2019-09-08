@@ -11,7 +11,13 @@ import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  TextField,
+  InputAdornment,
+  IconButton
+} from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const header = [
   {
@@ -57,6 +63,40 @@ const onSortFunction = {
   }
 };
 
+function FilterGroup({
+  classes,
+  filterText,
+  onChangeFilter,
+  onClearFilter,
+  placeholder
+}) {
+  return (
+    <TextField
+      fullWidth
+      id="outlined-filter"
+      label={placeholder}
+      className={classes.textField}
+      value={filterText}
+      onChange={onChangeFilter}
+      margin="none"
+      variant="outlined"
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              edge="end"
+              aria-label="toggle password visibility"
+              onClick={onClearFilter}
+            >
+              <ClearIcon />
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+    />
+  );
+}
+
 storiesOf(categoryName, module).add('Using Material UI Table', () => (
   <Datatable
     tableHeaders={header}
@@ -73,20 +113,7 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
       TableCell,
       TableRow,
       Button,
-      FilterGroup({ classes, filterText, onChangeFilter, placeholder }) {
-        return (
-          <TextField
-            fullWidth
-            id="outlined-filter"
-            label={placeholder}
-            className={classes.textField}
-            value={filterText}
-            onChange={onChangeFilter}
-            margin="none"
-            variant="outlined"
-          />
-        );
-      }
+      FilterGroup
     }}
   />
 ));
