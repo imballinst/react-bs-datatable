@@ -7,6 +7,7 @@ import {
   TableClasses,
   TableComponents
 } from './helpers/types';
+import { makeClasses } from './helpers/object';
 
 type PaginationProps = {
   rowsPerPage: RowsPerPageType;
@@ -145,7 +146,12 @@ export default function Pagination({
     );
 
     renderedElements = (
-      <ButtonGroup className={classes.paginationButtonGroup}>
+      <ButtonGroup
+        className={makeClasses(
+          'ButtonGroup__root',
+          classes.paginationButtonGroup
+        )}
+      >
         {buttons}
       </ButtonGroup>
     );

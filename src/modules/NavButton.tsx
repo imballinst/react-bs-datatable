@@ -17,9 +17,11 @@ export default function NavButton({
   onPageNavigate,
   label,
   className,
-  Component
+  Component,
+  ...props
 }: NavButtonProps) {
   const btnProps = {
+    ...props,
     disabled,
     onClick: onPageNavigate(pageNumber),
     className

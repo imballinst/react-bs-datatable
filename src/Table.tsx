@@ -222,7 +222,6 @@ export function useDatatableLifecycle({
     // Pagination options.
     PaginationOptsGroup: undefined,
     // ICons.
-    ClearIcon: FontAwesome,
     SortIcon: FontAwesome
   };
 
@@ -294,7 +293,7 @@ function Datatable(props: DatatableProps) {
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        <Components.Col xs={12} sm={3} className={classes.paginationOptsCol}>
+        <Components.Col xs={12} sm={2} className={classes.paginationOptsCol}>
           <PaginationOpts
             classes={classes}
             labels={labels}
@@ -306,7 +305,7 @@ function Datatable(props: DatatableProps) {
         </Components.Col>
         <Components.Col
           xs={12}
-          sm={5}
+          sm={6}
           className={makeClasses('text-right', classes.paginationCol)}
         >
           <Pagination
@@ -324,7 +323,7 @@ function Datatable(props: DatatableProps) {
         </Components.Col>
       </Components.Row>
       <Components.Row>
-        <Components.Col xs="12">
+        <Components.Col xs={12}>
           <Table className={tableClass}>
             <TableHeader
               classes={classes}

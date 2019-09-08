@@ -71,7 +71,6 @@ export type TableComponents = {
   // Pagination options.
   PaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
   // Icons.
-  ClearIcon: TableComponentType;
   SortIcon: TableComponentType;
 };
 

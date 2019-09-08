@@ -1,17 +1,18 @@
 import React from 'react'; // Import React
 import { storiesOf } from '@storybook/react';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { css } from 'emotion';
 
 import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
   Button,
   TextField,
   InputAdornment,
@@ -21,9 +22,11 @@ import {
   Select,
   OutlinedInput,
   MenuItem,
-  Grid
+  Grid,
+  ButtonGroup
 } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
+import { makeClasses } from '../../helpers/object';
 
 const header = [
   {
@@ -69,18 +72,12 @@ const onSortFunction = {
   }
 };
 
-function FilterGroup({
-  classes,
-  filterText,
-  onChangeFilter,
-  onClearFilter,
-  placeholder
-}) {
+function FilterGroup({ classes, filterText, onChangeFilter, onClearFilter }) {
   return (
     <TextField
       fullWidth
       id="outlined-filter"
-      label={placeholder}
+      label="Search text"
       className={classes.textField}
       value={filterText}
       onChange={onChangeFilter}
@@ -103,6 +100,17 @@ function FilterGroup({
   );
 }
 
+const classes = {
+  buttonGroup: css`
+    height: 100%;
+  `,
+  paginationButton: css`
+    .ButtonGroup__root & {
+      padding: 8px 12px;
+    }
+  `
+};
+
 storiesOf(categoryName, module).add('Using Material UI Table', () => (
   <Datatable
     tableHeaders={header}
@@ -124,9 +132,26 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
       TableBody,
       TableCell,
       TableRow,
-      Button,
+      ButtonGroup(props) {
+        return (
+          <ButtonGroup
+            {...props}
+            className={makeClasses(props.className, classes.buttonGroup)}
+            size="large"
+            variant="outlined"
+          />
+        );
+      },
+      Button(props) {
+        return (
+          <Button
+            {...props}
+            className={makeClasses(props.className, classes.paginationButton)}
+          />
+        );
+      },
       FilterGroup,
-      PaginationOptsGroup({ classes, onChange, options, value }) {
+      PaginationOptsGroup({ onChange, options, value }) {
         const inputLabel = React.useRef(null);
         const [labelWidth, setLabelWidth] = React.useState(0);
         React.useEffect(() => {
@@ -134,7 +159,7 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
             setLabelWidth(inputLabel.current.offsetWidth);
           }
         }, [inputLabel.current]);
-        console.log(labelWidth);
+
         return (
           <FormControl variant="outlined" fullWidth>
             <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
@@ -143,6 +168,7 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
             <Select
               value={value}
               onChange={onChange}
+              margin="none"
               input={
                 <OutlinedInput
                   labelWidth={labelWidth}
