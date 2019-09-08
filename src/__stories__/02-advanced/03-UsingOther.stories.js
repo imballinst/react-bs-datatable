@@ -11,6 +11,7 @@ import { categoryName } from './_base';
 
 import moment from 'moment'; // Example for onSort prop
 import Datatable from '../../Table'; // Import this package
+import { Button, TextField } from '@material-ui/core';
 
 const header = [
   {
@@ -70,7 +71,22 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
       TableHead,
       TableBody,
       TableCell,
-      TableRow
+      TableRow,
+      Button,
+      FilterGroup({ classes, filterText, onChangeFilter, placeholder }) {
+        return (
+          <TextField
+            fullWidth
+            id="outlined-filter"
+            label={placeholder}
+            className={classes.textField}
+            value={filterText}
+            onChange={onChangeFilter}
+            margin="none"
+            variant="outlined"
+          />
+        );
+      }
     }}
   />
 ));

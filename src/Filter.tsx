@@ -1,59 +1,84 @@
 import React from 'react';
 
-import { TableClasses, TableComponents } from './helpers/types';
+import { TableClasses } from './helpers/types';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import FontAwesome from './modules/FontAwesome';
 
-type FilterProps = {
-  filterable: boolean;
+type FilterGroupProps = {
   filterText: string;
   onChangeFilter: any;
   placeholder?: string;
   classes: TableClasses;
-  components: {
-    InputGroup: TableComponents['InputGroup'];
-    FormControl: TableComponents['FormControl'];
-    Adornment: TableComponents['Adornment'];
-    Button: TableComponents['Button'];
-    ClearIcon: TableComponents['ClearIcon'];
-  };
 };
 
-export default function Filter({
+export type FilterGroupFunctionComponent = (
+  props: FilterGroupProps
+) => JSX.Element;
+
+interface FilterProps extends FilterGroupProps {
+  filterable: boolean;
+  CustomFilterGroup?: FilterGroupFunctionComponent;
+}
+
+export function FilterGroup({
+  classes,
+  filterText,
+  placeholder,
+  onChangeFilter
+}: FilterGroupProps) {
+  function onClearFilter() {
+    onChangeFilter('');
+  }
+
+  return (
+    <InputGroup className={classes.filterInputGroup}>
+      <Form.Control
+        type="text"
+        value={filterText}
+        placeholder={placeholder}
+        onChange={onChangeFilter}
+        className={classes.filterFormControl}
+      />
+      <InputGroup.Append>
+        <Button onClick={onClearFilter} className={classes.filterClearButton}>
+          <FontAwesome icon="times" additionalClass="fa-fw" />
+        </Button>
+      </InputGroup.Append>
+    </InputGroup>
+  );
+}
+
+function Filter({
   filterable,
   filterText,
   placeholder = 'Enter text...',
   onChangeFilter,
   classes,
-  components: { InputGroup, FormControl, Adornment, Button, ClearIcon }
+  CustomFilterGroup
 }: FilterProps) {
   // Event handlers.
   function onInputChange(e: any) {
     onChangeFilter(e.target.value);
   }
 
-  function onClearFilter() {
-    onChangeFilter('');
-  }
-
   let filterRender = null;
 
   if (filterable) {
+    const UsedFilterGroup = CustomFilterGroup || FilterGroup;
+
     filterRender = (
-      <InputGroup className={classes.filterInputGroup}>
-        <FormControl
-          type="text"
-          value={filterText}
-          placeholder={placeholder}
-          onChange={onInputChange}
-          className={classes.filterFormControl}
-        />
-        <Adornment>
-          <Button onClick={onClearFilter} className={classes.filterClearButton}>
-            <ClearIcon icon="times" additionalClass="fa-fw" />
-          </Button>
-        </Adornment>
-      </InputGroup>
+      <UsedFilterGroup
+        classes={classes}
+        filterText={filterText}
+        placeholder={placeholder}
+        onChangeFilter={onInputChange}
+      />
     );
   }
 
   return filterRender;
 }
+
+export default React.memo(Filter);

@@ -17,7 +17,6 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
-import InputGroup from 'react-bootstrap/InputGroup';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import FontAwesome from './modules/FontAwesome';
@@ -218,8 +217,7 @@ export function useDatatableLifecycle({
     TableRow: 'tr',
     TableCell: 'td',
     // Filter.
-    InputGroup,
-    Adornment: InputGroup.Append,
+    FilterGroup: undefined,
     // Pagination.
     ButtonGroup,
     // Pagination options.
@@ -296,13 +294,7 @@ function Datatable(props: DatatableProps) {
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}
-            components={{
-              Adornment: Components.Adornment,
-              Button: Components.Button,
-              ClearIcon: Components.ClearIcon,
-              FormControl: Components.FormControl,
-              InputGroup: Components.InputGroup
-            }}
+            CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
         <Components.Col xs={12} md={3} className={classes.paginationOptsCol}>

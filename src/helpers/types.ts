@@ -1,3 +1,5 @@
+import { FilterGroupFunctionComponent } from '../Filter';
+
 export type SortType = {
   prop?: string;
   isAscending?: boolean;
@@ -62,8 +64,7 @@ export type TableComponents = {
   TableRow: TableComponentType;
   TableCell: TableComponentType;
   // Filter.
-  InputGroup: TableComponentType;
-  Adornment: TableComponentType;
+  FilterGroup?: FilterGroupFunctionComponent;
   // Pagination.
   ButtonGroup: TableComponentType;
   // Pagination options.
