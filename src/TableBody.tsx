@@ -1,7 +1,12 @@
 import React from 'react';
 
 import BodyRow from './BodyRow';
-import { HeaderType, LabelType, TableClasses } from './helpers/types';
+import {
+  HeaderType,
+  LabelType,
+  TableClasses,
+  TableComponents
+} from './helpers/types';
 import { makeClasses } from './helpers/object';
 
 type TableBodyProps = {
@@ -9,13 +14,19 @@ type TableBodyProps = {
   labels: LabelType;
   data: any[];
   classes: TableClasses;
+  components: {
+    TableBody: TableComponents['TableBody'];
+    TableRow: TableComponents['TableRow'];
+    TableCell: TableComponents['TableCell'];
+  };
 };
 
 export default function TableBody({
   tableHeaders,
   labels,
   data,
-  classes
+  classes,
+  components: { TableBody, TableRow, TableCell }
 }: TableBodyProps) {
   const body = [];
   const dataLength = data.length;
@@ -26,6 +37,10 @@ export default function TableBody({
         <BodyRow
           key={`row-${i}`}
           classes={classes}
+          components={{
+            TableRow,
+            TableCell
+          }}
           tableHeaders={tableHeaders}
           data={data}
           rowIdx={i}
@@ -34,13 +49,17 @@ export default function TableBody({
     }
   } else {
     body.push(
-      <tr key={`row-zero-length`} className="tbody-tr">
-        <td className="tbody-td" colSpan={tableHeaders.length}>
+      <TableRow key={`row-zero-length`} className="tbody-tr">
+        <TableCell className="tbody-td" colSpan={tableHeaders.length}>
           {labels.noResults || 'No results to be shown.'}
-        </td>
-      </tr>
+        </TableCell>
+      </TableRow>
     );
   }
 
-  return <tbody className={makeClasses('tbody', classes.tbody)}>{body}</tbody>;
+  return (
+    <TableBody className={makeClasses('tbody', classes.tbody)}>
+      {body}
+    </TableBody>
+  );
 }

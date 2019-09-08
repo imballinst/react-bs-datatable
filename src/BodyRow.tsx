@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderType, TableClasses } from './helpers/types';
+import { HeaderType, TableClasses, TableComponents } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
 type BodyRowProps = {
@@ -7,13 +7,18 @@ type BodyRowProps = {
   data: any[];
   rowIdx: number;
   classes: TableClasses;
+  components: {
+    TableRow: TableComponents['TableRow'];
+    TableCell: TableComponents['TableCell'];
+  };
 };
 
 export default function BodyRow({
   tableHeaders,
   data,
   rowIdx,
-  classes
+  classes,
+  components
 }: BodyRowProps) {
   const row = [];
 
@@ -28,14 +33,18 @@ export default function BodyRow({
     }
 
     row.push(
-      <td
+      <components.TableCell
         key={`col-${rowIdx}${i}`}
         className={makeClasses('tbody-td', classes.tbodyCol)}
       >
         {value}
-      </td>
+      </components.TableCell>
     );
   }
 
-  return <tr className={makeClasses('tbody-tr', classes.tbodyRow)}>{row}</tr>;
+  return (
+    <components.TableRow className={makeClasses('tbody-tr', classes.tbodyRow)}>
+      {row}
+    </components.TableRow>
+  );
 }

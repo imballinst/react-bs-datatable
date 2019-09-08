@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Table from 'react-bootstrap/Table';
-
 import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
 import PaginationOpts from './PaginationOpts';
@@ -11,57 +7,18 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
 import {
-  SortType,
-  LabelType,
-  HeaderType,
   RowsPerPageType,
-  RowsPerPageOptionType,
-  TableClasses
+  DatatableProps,
+  DatatableState,
+  TableComponents
 } from './helpers/types';
 import { makeClasses, customJoin } from './helpers/object';
-
-type AsyncProps = {
-  filterText: string;
-  sortedProp: SortType;
-  rowsPerPage: number;
-  currentPage: number;
-  maxPage: number;
-  onSort: (nextProp: string) => {};
-  onPaginate: (nextPage: number) => {};
-  onFilter: (text: string) => {};
-  onRowsPerPageChange: (numOfPage: RowsPerPageType) => {};
-};
-
-type DatatableProps = {
-  /** Initial sort of the table. */
-  tableHeaders: HeaderType[];
-  /** Table data. */
-  tableBody: any[];
-  /** Initial sort of the table. */
-  initialSort?: SortType;
-  /** Custom onSort data modifier. */
-  onSort?: any;
-  /** Custom onFilter data modifier. */
-  onFilter?: any;
-  /** Custom classes of the table components. */
-  classes?: TableClasses;
-  /** Handler for asynchronous filter, sort, and pagination. */
-  async?: AsyncProps;
-  /** Initial rows per page. */
-  rowsPerPage?: RowsPerPageType;
-  /** Rows per page option. */
-  rowsPerPageOption?: RowsPerPageOptionType;
-  /** Labels/placeholders of the table components. */
-  labels?: LabelType;
-};
-
-type DatatableState = {
-  filterable: boolean;
-  sortedProp: SortType;
-  rowsPerPage: RowsPerPageType;
-  currentPage: number;
-  filterText: string;
-};
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import FontAwesome from './modules/FontAwesome';
 
 /**
  * Datatable lifecycle convenient function.
@@ -78,7 +35,8 @@ export function useDatatableLifecycle({
   tableHeaders,
   classes = {},
   tableBody,
-  labels = {}
+  labels = {},
+  Components
 }: DatatableProps) {
   useEffect(() => {
     // If in development, warn if async and onSort/onFilter are both passed.
@@ -245,6 +203,37 @@ export function useDatatableLifecycle({
 
   const tableClass = makeClasses(`table-datatable__root`, classes.table);
 
+  // Default components.
+  let usedComponents: TableComponents = {
+    // Global.
+    Row,
+    Col,
+    Button,
+    // Table.
+    Table,
+    TableHead: 'thead',
+    TableBody: 'tbody',
+    TableRow: 'tr',
+    TableCell: 'td',
+    // Filter.
+    FilterGroup: undefined,
+    // Pagination.
+    ButtonGroup,
+    // Pagination options.
+    PaginationOptsGroup: undefined,
+    // ICons.
+    SortIcon: FontAwesome
+  };
+
+  if (Components !== undefined) {
+    if (typeof Components === 'object') {
+      for (const key in Components) {
+        // Replace usedComponent fields with the passed Components.
+        usedComponents[key] = Components[key];
+      }
+    }
+  }
+
   return {
     data,
     tableHeaders,
@@ -256,6 +245,7 @@ export function useDatatableLifecycle({
     tableClass,
     labels,
     rowsPerPageOption,
+    Components: usedComponents,
     // States.
     filterable: state.filterable,
     filterText: async ? async.filterText : state.filterText,
@@ -267,7 +257,7 @@ export function useDatatableLifecycle({
 }
 
 /** Datatable Component. */
-export default function Datatable(props: DatatableProps) {
+function Datatable(props: DatatableProps) {
   const {
     data,
     rowsPerPageOption,
@@ -284,33 +274,38 @@ export default function Datatable(props: DatatableProps) {
     rowsPerPage,
     currentPage,
     sortedProp,
-    maxPage
+    maxPage,
+    Components
   } = useDatatableLifecycle(props);
 
   return (
     <>
-      <Row className={makeClasses('controlRow__root', classes.controlRow)}>
-        <Col xs={12} md={4} className={classes.filterCol}>
+      <Components.Row
+        className={makeClasses('controlRow__root', classes.controlRow)}
+      >
+        <Components.Col xs={12} sm={4} className={classes.filterCol}>
           <Filter
             filterable={filterable}
             classes={classes}
             placeholder={labels.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}
+            CustomFilterGroup={Components.FilterGroup}
           />
-        </Col>
-        <Col xs={12} md={3} className={classes.paginationOptsCol}>
+        </Components.Col>
+        <Components.Col xs={12} sm={2} className={classes.paginationOptsCol}>
           <PaginationOpts
             classes={classes}
             labels={labels}
             onRowsPerPageChange={onRowsPerPageChange}
             rowsPerPage={rowsPerPage}
             rowsPerPageOption={rowsPerPageOption}
+            CustomPaginationOptsGroup={Components.PaginationOptsGroup}
           />
-        </Col>
-        <Col
+        </Components.Col>
+        <Components.Col
           xs={12}
-          md={5}
+          sm={6}
           className={makeClasses('text-right', classes.paginationCol)}
         >
           <Pagination
@@ -320,27 +315,60 @@ export default function Datatable(props: DatatableProps) {
             currentPage={currentPage}
             onPageNavigate={onPageNavigate}
             labels={labels}
+            components={{
+              Button: Components.Button,
+              ButtonGroup: Components.ButtonGroup
+            }}
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12">
+        </Components.Col>
+      </Components.Row>
+      <Components.Row>
+        <Components.Col xs={12}>
           <Table className={tableClass}>
             <TableHeader
               classes={classes}
               tableHeaders={tableHeaders}
               sortedProp={sortedProp}
               onSortChange={onSortChange}
+              components={{
+                TableHead: Components.TableHead,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
             />
             <TableBody
               classes={classes}
               tableHeaders={tableHeaders}
               labels={labels}
               data={data}
+              components={{
+                TableBody: Components.TableBody,
+                TableCell: Components.TableCell,
+                TableRow: Components.TableRow
+              }}
             />
           </Table>
-        </Col>
-      </Row>
+        </Components.Col>
+      </Components.Row>
     </>
   );
 }
+
+const includedProps = ['rowsPerPage', 'rowsPerPageOption', 'tableBody'];
+
+// Only update if rowsPerPage, rowsPerPageOption, and tableBody changes.
+export default React.memo(Datatable, (prevProps, nextProps) => {
+  const checkedPropsLength = includedProps.length;
+  let shouldUpdate = false;
+  let index = 0;
+
+  while (!shouldUpdate && index < checkedPropsLength) {
+    if (prevProps[includedProps[index]] !== nextProps[includedProps[index]]) {
+      shouldUpdate = true;
+    }
+
+    index += 1;
+  }
+
+  return shouldUpdate;
+});

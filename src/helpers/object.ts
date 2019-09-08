@@ -1,3 +1,5 @@
+import { DatatableProps } from './types';
+
 export function makeClasses(...args: any[]) {
   const classes = [];
 
@@ -20,6 +22,7 @@ export function makeClasses(...args: any[]) {
 
   return classes.join(' ');
 }
+
 export function customJoin(
   array: string[],
   separator: string,
@@ -29,4 +32,24 @@ export function customJoin(
     array.length === 2 ? lastSeparator : `${separator}${lastSeparator}`;
 
   return `${array.slice(0, -1).join(separator)}${lastSep}${array.slice(-1)}`;
+}
+
+export function shouldTableUpdate(
+  prevProps: DatatableProps,
+  nextProps: DatatableProps
+) {
+  const includedProps = ['rowsPerPage', 'rowsPerPageOption', 'tableBody'];
+  const checkedPropsLength = includedProps.length;
+  let shouldUpdate = false;
+  let index = 0;
+
+  while (!shouldUpdate && index < checkedPropsLength) {
+    if (prevProps[includedProps[index]] !== nextProps[includedProps[index]]) {
+      shouldUpdate = true;
+    }
+
+    index += 1;
+  }
+
+  return shouldUpdate;
 }
