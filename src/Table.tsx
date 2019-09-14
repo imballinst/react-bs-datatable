@@ -264,6 +264,7 @@ export function useDatatableLifecycle({
 
 /** Datatable Component. */
 function Datatable(props: DatatableProps) {
+  console.log('x', { ...props });
   const {
     data,
     rowsPerPageOption,
@@ -283,7 +284,6 @@ function Datatable(props: DatatableProps) {
     maxPage,
     Components
   } = useDatatableLifecycle(props);
-
   return (
     <>
       <Components.Row
@@ -365,16 +365,16 @@ const includedProps = ['rowsPerPage', 'rowsPerPageOption', 'tableBody'];
 // Only update if rowsPerPage, rowsPerPageOption, and tableBody changes.
 export default React.memo(Datatable, (prevProps, nextProps) => {
   const checkedPropsLength = includedProps.length;
-  let shouldUpdate = false;
+  let isSame = true;
   let index = 0;
 
-  while (!shouldUpdate && index < checkedPropsLength) {
+  while (isSame && index < checkedPropsLength) {
     if (prevProps[includedProps[index]] !== nextProps[includedProps[index]]) {
-      shouldUpdate = true;
+      isSame = false;
     }
 
     index += 1;
   }
 
-  return shouldUpdate;
+  return isSame;
 });
