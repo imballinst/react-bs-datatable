@@ -1,0 +1,1 @@
+{"version":3,"file":"FontAwesome.js","sourceRoot":"","sources":["../../src/modules/FontAwesome.tsx"],"names":[],"mappings":";;;;;AAAA,gDAA0B;AAC1B,4CAAgD;AAOhD,SAAwB,WAAW,CAAC,EAGjB;QAFjB,cAAI,EACJ,oCAAe;IAEf,IAAM,YAAY,GAAG,QAAM,IAAM,CAAC;IAClC,IAAM,OAAO,GAAG,oBAAW,CAAC,IAAI,EAAE,YAAY,EAAE,eAAe,CAAC,CAAC;IAEjE,OAAO,qCAAG,SAAS,EAAE,OAAO,iBAAc,MAAM,GAAG,CAAC;AACtD,CAAC;AARD,8BAQC"}

@@ -1,0 +1,18 @@
+.table-datatable__root {
+  & .thead-th {
+    &.sortable {
+      &:hover {
+        background: #eaeaea;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.controlRow__root {
+  margin-bottom: 15px;
+
+  .paginationOpts__root {
+    justify-content: center;
+  }
+}

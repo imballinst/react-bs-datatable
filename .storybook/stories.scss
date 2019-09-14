@@ -1,0 +1,10 @@
+#root {
+  padding: 16px;
+}
+
+.controlRow__root {
+  &.bottom {
+    margin-bottom: 0;
+    margin-top: 15px;
+  }
+}
