@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'; // Import React
+import React, { useCallback, useEffect, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
-
-import Datatable from '../../Table'; // Import this package
+// In your setup, replace "../../" with "react-bs-datatable".
+import Datatable from '../../';
 
 const header = [
   {

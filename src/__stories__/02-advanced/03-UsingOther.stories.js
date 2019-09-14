@@ -1,12 +1,13 @@
-import React from 'react'; // Import React
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { css } from 'emotion';
 
 import { categoryName } from './_base';
 
-import moment from 'moment'; // Example for onSort prop
-import Datatable from '../../Table'; // Import this package
+import moment from 'moment';
+// In your setup, replace "../../" with "react-bs-datatable".
+import Datatable from '../../';
 import {
   Table,
   TableBody,

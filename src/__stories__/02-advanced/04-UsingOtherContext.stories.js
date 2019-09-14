@@ -3,15 +3,16 @@
  * By providing `Components` to the Context, all tables in the children nodes will be using it instead.
  */
 
-import React from 'react'; // Import React
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { css } from 'emotion';
 
 import { categoryName } from './_base';
 
-import moment from 'moment'; // Example for onSort prop
-import Datatable from '../../Table'; // Import this package
+import moment from 'moment';
+// In your setup, replace "../../" with "react-bs-datatable".
+import Datatable, { TableComponentsProvider } from '../../';
 import {
   Table,
   TableBody,
@@ -32,7 +33,6 @@ import {
 } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import { makeClasses } from '../../helpers/object';
-import { TableComponentsProvider } from '../../modules/TableContext';
 
 const header = [
   {

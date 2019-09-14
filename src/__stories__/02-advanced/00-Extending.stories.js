@@ -4,11 +4,11 @@
  * You will need to import the components and apply them in the render function.
  * If you are about to extend your table, do not forget to wrap it with memo.
  */
-import React from 'react'; // Import React
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
 
-import moment from 'moment'; // Example for onSort prop
+import moment from 'moment';
 
 // In your setup, replace "../../" with "react-bs-datatable"
 import {

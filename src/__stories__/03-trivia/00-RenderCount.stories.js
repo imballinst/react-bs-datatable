@@ -3,13 +3,13 @@
  * This causes the table not to re-render every time its parent component re-renders.
  * If you are about to extend your table, do not forget to wrap it with memo.
  */
-import React, { useState } from 'react'; // Import React
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { categoryName } from './_base';
 
-import moment from 'moment'; // Example for onSort prop
+import moment from 'moment';
 
-// In your setup, replace "../../" with "react-bs-datatable"
+// In your setup, replace "../../" with "react-bs-datatable".
 import {
   Pagination,
   PaginationOpts,
