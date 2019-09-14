@@ -5,3 +5,4 @@ assets/
 *.orig
 stats.json
 *.log
+storybook-static/

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DatatableProps, TableComponents } from './helpers/types';
+import { RowsPerPageType, DatatableProps, TableComponents } from './helpers/types';
 /**
  * Datatable lifecycle convenient function.
  * It will be used when we are extending the table.
@@ -10,7 +10,7 @@ export declare function useDatatableLifecycle({ initialSort, onSort, onFilter, r
     onChangeFilter: (text: string) => void;
     onPageNavigate: (nextPage: number) => void;
     classes: import("./helpers/types").TableClasses;
-    onRowsPerPageChange: (numOfPage: number | undefined) => void;
+    onRowsPerPageChange: (numOfPage: RowsPerPageType) => void;
     onSortChange: (nextProp: string) => void;
     tableClass: string;
     labels: import("./helpers/types").LabelType;
@@ -18,10 +18,10 @@ export declare function useDatatableLifecycle({ initialSort, onSort, onFilter, r
     Components: TableComponents;
     filterable: boolean;
     filterText: string;
-    rowsPerPage: number | undefined;
+    rowsPerPage: RowsPerPageType;
     currentPage: number;
     sortedProp: import("./helpers/types").SortType;
-    maxPage: number | undefined;
+    maxPage: RowsPerPageType;
 };
 /** Datatable Component. */
 declare function Datatable(props: DatatableProps): JSX.Element;
