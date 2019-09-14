@@ -59,36 +59,36 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 - onSort: `Object`. Used to customize sort functions, e.g. sorting dates. `{ propName: (propValue) => {}`. Default: `undefined`.
 - onFilter: see `onSort`.
 - classes: `Object`. Used to add custom styles. Default: `{}`.
-  - controlRow: `string`. Class\[es\] for the control row (filter, pagination options, and pagination).
-  - filterCol: `string`. Class\[es\] for the filter column.
-  - filterInputGroup: `string`. Class\[es\] for the filter `Input.Group`.
-  - filterFormControl: `string`. Class\[es\] for the filter `Form.Control`.
-  - filterClearButton: `string`. Class\[es\] for the filter `Button`.
-  - paginationOptsCol: `string`. Class\[es\] for the pagination options column.
-  - paginationOptsForm: `string`. Class\[es\] for the pagination options `Form`.
-  - paginationOptsFormGroup: `string`. Class\[es\] for the pagination options `Form.Group`.
-  - paginationOptsFormText: `string`. Class\[es\] for the pagination options form text, e.g. the "Show ... rows".
-  - paginationOptsFormControl: `string`. Class\[es\] for the pagination options `Form.Control`.
-  - paginationCol: `string`. Class\[es\] for the pagination column.
-  - paginationButtonGroup: `string`. Class\[es\] for the pagination `ButtonGroup`.
-  - paginationButton: `string`. Class\[es\] for the pagination `Button`.
-  - table: `string`. Class\[es\] for the `table` element.
-  - thead: `string`. Class\[es\] for the `thead` element.
-  - theadRow: `string`. Class\[es\] for the `tr` element.
-  - theadCol: `string`. Class\[es\] for the `th` element.
-  - tbody: `string`. Class\[es\] for the `tbody` element.
-  - tbodyRow: `string`. Class\[es\] for the `tr` element.
-  - tbodyCol: `string`. Class\[es\] for the `td` element.
+  - `controlRow`: `string`. Class\[es\] for the control row (filter, pagination options, and pagination).
+  - `filterCol`: `string`. Class\[es\] for the filter column.
+  - `filterInputGroup`: `string`. Class\[es\] for the filter `Input.Group`.
+  - `filterFormControl`: `string`. Class\[es\] for the filter `Form.Control`.
+  - `filterClearButton`: `string`. Class\[es\] for the filter `Button`.
+  - `paginationOptsCol`: `string`. Class\[es\] for the pagination options column.
+  - `paginationOptsForm`: `string`. Class\[es\] for the pagination options `Form`.
+  - `paginationOptsFormGroup`: `string`. Class\[es\] for the pagination options `Form.Group`.
+  - `paginationOptsFormText`: `string`. Class\[es\] for the pagination options form text, e.g. the "Show ... rows".
+  - `paginationOptsFormControl`: `string`. Class\[es\] for the pagination options `Form.Control`.
+  - `paginationCol`: `string`. Class\[es\] for the pagination column.
+  - `paginationButtonGroup`: `string`. Class\[es\] for the pagination `ButtonGroup`.
+  - `paginationButton`: `string`. Class\[es\] for the pagination `Button`.
+  - `table`: `string`. Class\[es\] for the `table` element.
+  - `thead`: `string`. Class\[es\] for the `thead` element.
+  - `theadRow`: `string`. Class\[es\] for the `tr` element.
+  - `theadCol`: `string`. Class\[es\] for the `th` element.
+  - `tbody`: `string`. Class\[es\] for the `tbody` element.
+  - `tbodyRow`: `string`. Class\[es\] for the `tr` element.
+  - `tbodyCol`: `string`. Class\[es\] for the `td` element.
 - async: `Object`. When using `async`, you are the one who "controls" the table state. Default: `undefined`.
-  - filterText: `string`, the value of the filter input field.
-  - sortedProp: see `initialSort`.
-  - rowsPerPage: `number`, the value of the rows per page
-  - currentPage: `number`, the value of the current page shown.
-  - maxPage: `number`, the maximum number of page.
-  - onSort: `(nextProp: string) => {}`. You will modify `sortedProp` inside the function.
-  - onPaginate: `(nextPage: number) => {}`. You will modify `currentPage` inside the function.
-  - onFilter: `(text: string) => {}`. You will modify `filterText` inside the function.
-  - onRowsPerPageChange: `(numOfPage: RowsPerPageType) => {}`. You will modify `rowsPerPage` inside the function.
+  - `filterText`: `string`, the value of the filter input field.
+  - `sortedProp`: see `initialSort`.
+  - `rowsPerPage`: `number`, the value of the rows per page
+  - `currentPage`: `number`, the value of the current page shown.
+  - `maxPage`: `number`, the maximum number of page.
+  - `onSort`: `(`nextProp`: string) => {}`. You will modify `sortedProp` inside the function.
+  - `onPaginate`: `(`nextPage`: number) => {}`. You will modify `currentPage` inside the function.
+  - `onFilter`: `(`text`: string) => {}`. You will modify `filterText` inside the function.
+  - `onRowsPerPageChange`: `(numOfPage: RowsPerPageType) => {}`. You will modify `rowsPerPage` inside the function.
 - labels: `Object` used to customize the labels inside the table. Default: `{}`.
   - `first`: `string`. First page label button.
   - `last`: `string`. Last page label button.
