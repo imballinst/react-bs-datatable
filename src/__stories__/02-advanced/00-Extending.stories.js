@@ -17,9 +17,9 @@ import {
   TableHeader,
   TableBody,
   Filter,
-  useDatatableLifecycle
+  useDatatableLifecycle,
+  shouldTableUpdate
 } from '../../';
-import { shouldTableUpdate } from '../../helpers/object';
 
 const CustomTable = React.memo(props => {
   const {

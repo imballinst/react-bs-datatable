@@ -34,22 +34,40 @@ export function customJoin(
   return `${array.slice(0, -1).join(separator)}${lastSep}${array.slice(-1)}`;
 }
 
+const includedProps = [
+  'classes',
+  'async',
+  'rowsPerPage',
+  'rowsPerPageOption',
+  'tableBody'
+];
+
 export function shouldTableUpdate(
   prevProps: DatatableProps,
   nextProps: DatatableProps
 ) {
-  const includedProps = ['rowsPerPage', 'rowsPerPageOption', 'tableBody'];
   const checkedPropsLength = includedProps.length;
-  let shouldUpdate = false;
+  let isSame = true;
   let index = 0;
 
-  while (!shouldUpdate && index < checkedPropsLength) {
-    if (prevProps[includedProps[index]] !== nextProps[includedProps[index]]) {
-      shouldUpdate = true;
+  while (isSame && index < checkedPropsLength) {
+    const prop = includedProps[index];
+
+    if (prevProps[prop] !== nextProps[prop]) {
+      if (prop === 'rowsPerPageOption') {
+        // First, check if defined -- defaults to empty array.
+        const prevOptions = prevProps[prop] || [];
+        const nextOptions = nextProps[prop] || [];
+
+        // Then, check if they have same length.
+        isSame = prevOptions.length === nextOptions.length;
+      } else {
+        isSame = false;
+      }
     }
 
     index += 1;
   }
 
-  return shouldUpdate;
+  return isSame;
 }

@@ -16,9 +16,9 @@ import {
   TableHeader,
   TableBody,
   Filter,
-  useDatatableLifecycle
+  useDatatableLifecycle,
+  shouldTableUpdate
 } from '../../';
-import { shouldTableUpdate } from '../../helpers/object';
 
 // This is a number that will be shown on the screen to determine how many times the table has re-rendered.
 let num1 = 0;

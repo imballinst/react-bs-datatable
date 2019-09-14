@@ -6,5 +6,6 @@ import TableBody from './TableBody';
 import Filter from './Filter';
 import Table, { useDatatableLifecycle } from './Table';
 import { TableComponentsProvider } from './modules/TableContext';
+import { shouldTableUpdate } from './helpers/object';
 export default Table;
-export { sortData, filterData, paginateData, Pagination, PaginationOpts, TableHeader, TableBody, Filter, useDatatableLifecycle, TableComponentsProvider };
+export { sortData, filterData, paginateData, Pagination, PaginationOpts, TableHeader, TableBody, Filter, useDatatableLifecycle, TableComponentsProvider, shouldTableUpdate };
