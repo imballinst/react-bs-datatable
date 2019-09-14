@@ -75,15 +75,15 @@ const classes = {
     }
   `,
   tbodyRow: css`
-    &:nth-child(even) {
+    &:nth-of-type(even) {
       background: #eaeaea;
     }
   `,
   paginationOptsFormText: css`
-    &:first-child {
+    &:first-of-type {
       margin-right: 8px;
     }
-    &:last-child {
+    &:last-of-type {
       margin-left: 8px;
     }
   `

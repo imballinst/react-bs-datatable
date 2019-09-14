@@ -19,6 +19,7 @@ import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FontAwesome from './modules/FontAwesome';
+import { useComponentProvider } from './modules/TableContext';
 
 /**
  * Datatable lifecycle convenient function.
@@ -204,6 +205,11 @@ export function useDatatableLifecycle({
   const tableClass = makeClasses(`table-datatable__root`, classes.table);
 
   // Default components.
+  // If context has keys, then use context. Instead, use Components props.
+  const context = useComponentProvider();
+  const passedComponents =
+    Object.keys(context).length > 0 ? context : Components;
+
   let usedComponents: TableComponents = {
     // Global.
     Row,
@@ -225,11 +231,11 @@ export function useDatatableLifecycle({
     SortIcon: FontAwesome
   };
 
-  if (Components !== undefined) {
-    if (typeof Components === 'object') {
-      for (const key in Components) {
-        // Replace usedComponent fields with the passed Components.
-        usedComponents[key] = Components[key];
+  if (passedComponents !== undefined) {
+    if (typeof passedComponents === 'object') {
+      for (const key in passedComponents) {
+        // Replace usedComponent fields with the passedComponents fields.
+        usedComponents[key] = passedComponents[key];
       }
     }
   }
