@@ -7,28 +7,16 @@
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
-## This is unstable release
+## What's new in v2?
 
-Please note this is the `next` branch. For the stable release, please check [the master branch](https://github.com/Imballinst/react-bs-datatable/tree/master).
+1. TypeScript! The Table comes out with the `*.d.ts` files. You should be more type-safe now.
+2. Async capability for huge amount of data. Filtering, sorting, and pagination all support this feature.
+3. Custom table components. Tired of using Bootstrap? I know the lib name is Bootstrap, but maybe you want to change it to something else!
+4. Of course, there may be some breaking changes. Please see the updated docs and Storybook demo for the most up-to-date usages.
 
-## Table of Contents
+## Storybook Demo.
 
-- [Installation](#installation)
-- [Key Features](#key-features)
-- [Props](#props)
-- [Styling](#styling)
-- [Example Usage](#example-usage)
-- [Extending the Table](#extending-the-table)
-- [Next Features or Improvements](#next-features-or-improvements)
-- [Contributing](#contributing)
-
-## Installation
-
-```
-npm install --save react-bs-datatable bootstrap-sass font-awesome
-```
-
-## Key features
+Head to https://imballinst.github.io/react-bs-datatable to see the list of the features in actions.
 
 1. Sort
 2. Filter
@@ -36,229 +24,87 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
 4. Custom Labels
 5. Presentational and raw data separation
 6. Custom column sort and column filter function
+7. Custom classes
+8. Create your own table by extending the existing features
+9. Async
+10. Custom Table Components (e.g. using Material UI Components)
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Props](#props)
+- [Next Features or Improvements](#next-features-or-improvements)
+- [Contributing](#contributing)
+
+## Installation
+
+```
+# With NPM.
+npm install --save react-bs-datatable bootstrap-sass font-awesome
+
+# With Yarn.
+yarn add react-bs-datatable bootstrap-sass font-awesome
+```
 
 ## Props
 
-- initialSort: Object, consists of `prop` (String) and `isAscending` (Boolean). Default: `undefined`.
-- labels: Object, consists of keys and values. Default: `{}`. Used to modify tabel labels such as:
-  - `first`: String. First page label button.
-  - `last`: String. Last page label button.
-  - `prev`: String. Previous page label button.
-  - `next`: String. Next page label button.
-  - `show`: String. The text before select option of `rowsPerPageOption`.
-  - `entries`: String. The text after select option of `rowsPerPageOption`.
-  - `noResults`: String. Displayed text if table has empty `tableBody` or `[]`.
-- onSort: Object, consists of keys and values. Key is the prop name and value is the quantifier function. Each function has a parameter which is the real value of that column. Default: `undefined`.
+- tableHeaders **(Required)**: `Object[]`, each consists of:
+  - `prop` **(Required)**: `string`. Column name for the table body.
+  - `cell`: `function`. Returns a React Component for the table to be rendered.
+  - `filterable`: `boolean`. Enable/disable filtering on the column.
+  - `sortable`: `boolean`. Enable/disable sorting on the column.
+  - `title`: `string`. Text for the header column.
+- tableBody **(Required)**: `Object[]`, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
+- initialSort: `Object`, consists of `prop` (`string`) and `isAscending` (`boolean`). Default: `undefined`.
+- onSort: `Object`. Used to customize sort functions, e.g. sorting dates. `{ propName: (propValue) => {}`. Default: `undefined`.
 - onFilter: see `onSort`.
-- tableBody **(Required)**: Array of objects, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-- tableClass: String. Classes used in `<table>` element tag. Default: `''`.
-- tableHeader **(Required)**: Array of objects, each consists of:
-  - `cell`: Function. Returns a React Component for the table to be rendered.
-  - `filterable`: Boolean. Enable/disable filtering on the column.
-  - `prop` **(Required)**: String. Column name for the table body.
-  - `sortable`: Boolean. Enable/disable sorting on the column.
-  - `title`: String. Text for the header column.
-- rowsPerPage: Integer. Initial rows per page. If this and `rowsPerPageOption` are provided but `rowsPerPage` is not a member of `rowsPerPageOption`, then `rowsPerPageOption[0]` will be chosen as the property instead. If not provided, then no pagination options will be rendered. Default: `undefined`.
-- rowsPerPageOption: Array of integers for pagination options. Default: `undefined`.
-
-## Styling
-
-This package doesn't include Bootstrap stylesheets. If you want to include it, you can do so by importing its CSS **or** its SCSS [bootstrap-sass](https://github.com/twbs/bootstrap-sass). You can also style the table yourself.
-
-```
-.table-datatable {
-  .thead-default {
-    .thead-tr-default {
-      .thead-th-default {
-        &.sortable { // If and only if a column is sortable
-          &:hover {
-            background: #000; // Your color of choice
-            cursor: pointer; // Changes the cursor into a pointer on hover
-          }
-        }
-      }
-    }
-  }
-
-  .tbody-default {
-    .tbody-tr-default {
-      .tbody-td-default {
-        // do what you want
-      }
-    }
-  }
-}
-```
-
-## Example usage
-
-```
-import moment from 'moment'; // Example for onSort prop
-import React from 'react'; // Import React
-import Datatable from 'react-bs-datatable'; // Import this package
-
-const header = [
-  { title: 'Username', prop: 'username', sortable: true, filterable: true },
-  { title: 'Name', prop: 'realname', sortable: true },
-  { title: 'Name Uppercased', prop: 'realnameuppercase', cell: (row) => row.realname.toUpperCase() },
-  { title: 'Location', prop: 'location' },
-  { title: 'Last Updated', prop: 'date', sortable: true },
-];
-
-const body = [
-  {
-    username: 'i-am-billy',
-    realname: 'Billy',
-    location: 'Mars',
-    date: moment().subtract(1, 'days').format('Do MMMM YYYY'),
-  },
-  {
-    username: 'john-nhoj',
-    realname: 'John',
-    location: 'Saturn',
-    date: moment().subtract(2, 'days').format('Do MMMM YYYY'),
-  }
-];
-
-const onSortFunction = {
-  date(columnValue) {
-    // Convert the string date format to UTC timestamp
-    // So the table could sort it by number instead of by string
-    return moment(columnValue, 'Do MMMM YYYY').valueOf();
-  },
-};
-
-const customLabels = {
-  first: '<<',
-  last: '>>',
-  prev: '<',
-  next: '>',
-  show: 'Display',
-  entries: 'rows',
-  noResults: 'There is no data to be displayed',
-};
-
-// In your render method
-<Datatable
-  tableHeader={header}
-  tableBody={body}
-  keyName="userTable"
-  tableClass="striped hover responsive"
-  rowsPerPage={5}
-  rowsPerPageOption={[5, 10, 15, 20]}
-  initialSort={{prop: "username", isAscending: true}}
-  onSort={onSortFunction}
-  labels={customLabels}
-/>
-```
-
-## Extending the Table
-
-You can extend the table if you want to create your own layout (position the text filter to the top right, etc). You'll have to import the components from `react-bs-datatable/lib` folder.
-
-```
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Table from 'react-bootstrap/lib/Table';
-import classNames from 'classnames';
-import Datatable from 'react-bs-datatable';
-
-import {
-  sortData,
-  filterData,
-  paginateData,
-} from 'react-bs-datatable/lib/utils/ClassHelpers';
-import Pagination from 'react-bs-datatable/lib/Pagination';
-import PaginationOpts from 'react-bs-datatable/lib/PaginationOpts';
-import TableHeader from 'react-bs-datatable/lib/TableHeader';
-import TableBody from 'react-bs-datatable/lib/TableBody';
-import Filter from 'react-bs-datatable/lib/Filter';
-
-class CustomTable extends Datatable {
-  render() {
-    const { sortedProp, filterText, rowsPerPage, currentPage } = this.state;
-    const {
-      tableHeader,
-      tableBody,
-      onSort,
-      tableClass: customClass,
-      keyName,
-      labels,
-      rowsPerPageOption,
-    } = this.props;
-
-    const filteredData = filterData(tableHeader, filterText, tableBody);
-    const sortedData = sortData(sortedProp, onSort, filteredData);
-
-    const paginatedData = paginateData(rowsPerPage, currentPage, sortedData);
-
-    const tableClass = classNames({
-      'table-datatable': true,
-      [`${customClass}`]: true,
-    });
-
-    return (
-      <Row>
-        <Col xs={12} md={4}>
-          <PaginationOpts
-            labels={labels}
-            onRowsPerPageChange={this.onRowsPerPageChange}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOption={rowsPerPageOption}
-            keyName={keyName}
-          />
-        </Col>
-        <Col xs={12} md={4}>
-          <Pagination
-            data={sortedData}
-            rowsPerPage={rowsPerPage}
-            keyName={keyName}
-            currentPage={currentPage}
-            onPageNavigate={this.onPageNavigate}
-            labels={labels}
-          />
-        </Col>
-        <Col xs={12} md={4} className="text-right">
-          <Filter
-            tableHeader={tableHeader}
-            onChangeFilter={this.onChangeFilter}
-            filterText={filterText}
-            keyName={keyName}
-          />
-        </Col>
-        <Col xs={12}>
-          <Table className={tableClass}>
-            <TableHeader
-              tableHeader={tableHeader}
-              keyName={keyName}
-              sortedProp={sortedProp}
-              onSortChange={this.onSortChange}
-            />
-            <TableBody
-              tableHeader={tableHeader}
-              keyName={keyName}
-              labels={labels}
-              paginatedData={paginatedData}
-            />
-          </Table>
-        </Col>
-      </Row>
-    );
-  }
-}
-```
+- classes: `Object`. Used to add custom styles. Default: `{}`.
+  - controlRow: `string`. Class\[es\] for the control row (filter, pagination options, and pagination).
+  - filterCol: `string`. Class\[es\] for the filter column.
+  - filterInputGroup: `string`. Class\[es\] for the filter `Input.Group`.
+  - filterFormControl: `string`. Class\[es\] for the filter `Form.Control`.
+  - filterClearButton: `string`. Class\[es\] for the filter `Button`.
+  - paginationOptsCol: `string`. Class\[es\] for the pagination options column.
+  - paginationOptsForm: `string`. Class\[es\] for the pagination options `Form`.
+  - paginationOptsFormGroup: `string`. Class\[es\] for the pagination options `Form.Group`.
+  - paginationOptsFormText: `string`. Class\[es\] for the pagination options form text, e.g. the "Show ... rows".
+  - paginationOptsFormControl: `string`. Class\[es\] for the pagination options `Form.Control`.
+  - paginationCol: `string`. Class\[es\] for the pagination column.
+  - paginationButtonGroup: `string`. Class\[es\] for the pagination `ButtonGroup`.
+  - paginationButton: `string`. Class\[es\] for the pagination `Button`.
+  - table: `string`. Class\[es\] for the `table` element.
+  - thead: `string`. Class\[es\] for the `thead` element.
+  - theadRow: `string`. Class\[es\] for the `tr` element.
+  - theadCol: `string`. Class\[es\] for the `th` element.
+  - tbody: `string`. Class\[es\] for the `tbody` element.
+  - tbodyRow: `string`. Class\[es\] for the `tr` element.
+  - tbodyCol: `string`. Class\[es\] for the `td` element.
+- async: `Object`. When using `async`, you are the one who "controls" the table state. Default: `undefined`.
+  - filterText: `string`, the value of the filter input field.
+  - sortedProp: see `initialSort`.
+  - rowsPerPage: `number`, the value of the rows per page
+  - currentPage: `number`, the value of the current page shown.
+  - maxPage: `number`, the maximum number of page.
+  - onSort: `(nextProp: string) => {}`. You will modify `sortedProp` inside the function.
+  - onPaginate: `(nextPage: number) => {}`. You will modify `currentPage` inside the function.
+  - onFilter: `(text: string) => {}`. You will modify `filterText` inside the function.
+  - onRowsPerPageChange: `(numOfPage: RowsPerPageType) => {}`. You will modify `rowsPerPage` inside the function.
+- labels: `Object` used to customize the labels inside the table. Default: `{}`.
+  - `first`: `string`. First page label button.
+  - `last`: `string`. Last page label button.
+  - `prev`: `string`. Previous page label button.
+  - `next`: `string`. Next page label button.
+  - `show`: `string`. The text before select option of `rowsPerPageOption`.
+  - `entries`: `string`. The text after select option of `rowsPerPageOption`.
+  - `noResults`: `string`. Displayed text if table has empty `tableBody` or `[]`.
+- tableClass: `string`. Classes used in `<table>` element tag. Default: `''`.
+- rowsPerPage: `number`. Initial rows per page. Default: `undefined`.
+- rowsPerPageOption: `number[]` for pagination options. Default: `undefined`.
 
 ## Next Features or Improvements
 
-- [x] Sortable props for each column instead of globally
-- [x] Custom sort function (eg. date is ordered by timestamp not by string)
-- [x] Filterable props for each column instead of globally
-- [x] Custom table classes (it's fixed to striped, responsive, and hover at the moment)
-- [x] More extensive unit testing
-- [x] Custom labels
-- [x] Option to separate presentational and raw data (by using `cell` property in `tableHeader`)
-- [ ] Lazy loading for big data (virtualization, asynchronous pagination)
-- [ ] Better documentation, better demo page
+- [ ] Automated documentation change on code updates
+- [ ] Analyze code size
 
 ## Contributing
 
