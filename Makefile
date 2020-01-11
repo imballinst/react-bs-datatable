@@ -9,9 +9,9 @@ publish-storybook:
 	# Checkout to gh-pages branch.
 	git checkout gh-pages
 	# Cleanup previous build.
-	rm -rf sb_dll static favicon.ico iframe.html index.html main.* runtime* vendors*
-	# Bring the contents of the storybook-static folder outside.
-	mv storybook-static/* ../
+	rm -rf sb_dll static favicon.ico iframe.html index.html main.* runtime~main.* vendors~main.*
+	# Bring the contents of the storybook-static to the root project.
+	mv storybook-static/* .
 	# Commit the changes.
 	git add -A
 	# git config alias.c "commit -s -v".
