@@ -97,6 +97,7 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
   - `show`: `string`. The text before select option of `rowsPerPageOption`.
   - `entries`: `string`. The text after select option of `rowsPerPageOption`.
   - `noResults`: `string`. Displayed text if table has empty `tableBody` or `[]`.
+  - `filterPlaceholder`: `string`. Placeholder text for filter input field.
 - tableClass: `string`. Classes used in `<table>` element tag. Default: `''`.
 - rowsPerPage: `number`. Initial rows per page. Default: `undefined`.
 - rowsPerPageOption: `number[]` for pagination options. Default: `undefined`.
