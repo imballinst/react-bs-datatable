@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FilterGroupFunctionComponent } from '../Filter';
 import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 
