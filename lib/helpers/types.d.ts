@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { FilterGroupFunctionComponent } from '../Filter';
 import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 export declare type SortType = {
@@ -12,6 +12,7 @@ export declare type HeaderType = {
     filterable?: boolean;
     sortable?: boolean;
 };
+export declare type OnRowClick = (value: any) => void;
 export declare type LabelType = {
     first?: string;
     last?: string;
@@ -95,6 +96,8 @@ export declare type DatatableProps = {
     labels?: LabelType;
     /** Custom table components. */
     Components?: TableComponents;
+    /** On row click event. */
+    onRowClick?: OnRowClick;
 };
 export declare type DatatableState = {
     filterable: boolean;
