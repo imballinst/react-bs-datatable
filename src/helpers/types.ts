@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { FilterGroupFunctionComponent } from '../Filter';
 import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 
@@ -13,6 +15,8 @@ export type HeaderType = {
   filterable?: boolean;
   sortable?: boolean;
 };
+
+export type OnRowClick = (value: any) => (e: React.MouseEvent<{}>) => void;
 
 export type LabelType = {
   first?: string;
@@ -112,6 +116,8 @@ export type DatatableProps = {
   labels?: LabelType;
   /** Custom table components. */
   Components?: TableComponents;
+  /** On row click event. */
+  onRowClick?: OnRowClick;
 };
 
 export type DatatableState = {

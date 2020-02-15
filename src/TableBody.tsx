@@ -5,7 +5,8 @@ import {
   HeaderType,
   LabelType,
   TableClasses,
-  TableComponents
+  TableComponents,
+  OnRowClick
 } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
@@ -19,6 +20,7 @@ type TableBodyProps = {
     TableRow: TableComponents['TableRow'];
     TableCell: TableComponents['TableCell'];
   };
+  onRowClick?: OnRowClick;
 };
 
 export default function TableBody({
@@ -26,7 +28,8 @@ export default function TableBody({
   labels,
   data,
   classes,
-  components: { TableBody, TableRow, TableCell }
+  components: { TableBody, TableRow, TableCell },
+  onRowClick
 }: TableBodyProps) {
   const body = [];
   const dataLength = data.length;
@@ -43,6 +46,7 @@ export default function TableBody({
           }}
           tableHeaders={tableHeaders}
           data={data}
+          onClick={onRowClick}
           rowIdx={i}
         />
       );

@@ -37,7 +37,8 @@ export function useDatatableLifecycle({
   classes = {},
   tableBody,
   labels = {},
-  Components
+  Components,
+  onRowClick
 }: DatatableProps) {
   useEffect(() => {
     // If in development, warn if async and onSort/onFilter are both passed.
@@ -250,6 +251,7 @@ export function useDatatableLifecycle({
     labels,
     rowsPerPageOption,
     Components: usedComponents,
+    onRowClick,
     // States.
     filterable: state.filterable,
     filterText: async ? async.filterText : state.filterText,
@@ -279,7 +281,8 @@ function Datatable(props: DatatableProps) {
     currentPage,
     sortedProp,
     maxPage,
-    Components
+    Components,
+    onRowClick
   } = useDatatableLifecycle(props);
 
   return (
@@ -350,6 +353,7 @@ function Datatable(props: DatatableProps) {
                 TableCell: Components.TableCell,
                 TableRow: Components.TableRow
               }}
+              onRowClick={onRowClick}
             />
           </Table>
         </Components.Col>
