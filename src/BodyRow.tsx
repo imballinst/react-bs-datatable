@@ -49,12 +49,16 @@ export default function BodyRow({
     );
   }
 
+  function onRowClick() {
+    if (typeof onClick === 'function') {
+      onClick(data[rowIdx]);
+    }
+  }
+
   return (
     <components.TableRow
       className={makeClasses('tbody-tr', classes.tbodyRow)}
-      onClick={
-        typeof onClick === 'function' ? onClick(data[rowIdx]) : undefined
-      }
+      onClick={onRowClick}
     >
       {row}
     </components.TableRow>

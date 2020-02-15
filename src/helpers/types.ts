@@ -16,7 +16,7 @@ export type HeaderType = {
   sortable?: boolean;
 };
 
-export type OnRowClick = (value: any) => (e: React.MouseEvent<{}>) => void;
+export type OnRowClick = (value: any) => void;
 
 export type LabelType = {
   first?: string;
