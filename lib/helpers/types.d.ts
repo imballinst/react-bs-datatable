@@ -1,4 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import { FilterGroupFunctionComponent } from '../Filter';
 import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 export declare type SortType = {
