@@ -14,6 +14,8 @@ export type HeaderType = {
   sortable?: boolean;
 };
 
+export type OnRowClick = (value: any) => void;
+
 export type LabelType = {
   first?: string;
   last?: string;
@@ -112,6 +114,8 @@ export type DatatableProps = {
   labels?: LabelType;
   /** Custom table components. */
   Components?: TableComponents;
+  /** On row click event. */
+  onRowClick?: OnRowClick;
 };
 
 export type DatatableState = {

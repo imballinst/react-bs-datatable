@@ -101,6 +101,7 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 - tableClass: `string`. Classes used in `<table>` element tag. Default: `''`.
 - rowsPerPage: `number`. Initial rows per page. Default: `undefined`.
 - rowsPerPageOption: `number[]` for pagination options. Default: `undefined`.
+- onRowClick: `(data: any) => void` for row on click event, where `data` contains the data of the row being clicked. Default: `undefined`.
 
 ## Next Features or Improvements
 

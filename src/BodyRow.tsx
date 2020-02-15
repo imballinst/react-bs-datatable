@@ -1,5 +1,10 @@
 import React from 'react';
-import { HeaderType, TableClasses, TableComponents } from './helpers/types';
+import {
+  HeaderType,
+  TableClasses,
+  TableComponents,
+  OnRowClick
+} from './helpers/types';
 import { makeClasses } from './helpers/object';
 
 type BodyRowProps = {
@@ -11,6 +16,7 @@ type BodyRowProps = {
     TableRow: TableComponents['TableRow'];
     TableCell: TableComponents['TableCell'];
   };
+  onClick?: OnRowClick;
 };
 
 export default function BodyRow({
@@ -18,7 +24,8 @@ export default function BodyRow({
   data,
   rowIdx,
   classes,
-  components
+  components,
+  onClick
 }: BodyRowProps) {
   const row = [];
 
@@ -42,8 +49,17 @@ export default function BodyRow({
     );
   }
 
+  function onRowClick() {
+    if (typeof onClick === 'function') {
+      onClick(data[rowIdx]);
+    }
+  }
+
   return (
-    <components.TableRow className={makeClasses('tbody-tr', classes.tbodyRow)}>
+    <components.TableRow
+      className={makeClasses('tbody-tr', classes.tbodyRow)}
+      onClick={onRowClick}
+    >
       {row}
     </components.TableRow>
   );
