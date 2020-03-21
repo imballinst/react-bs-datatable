@@ -50,8 +50,8 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 
 | Prop                | Type                  | Description                                                                | Default |
 | ------------------- | --------------------- | -------------------------------------------------------------------------- | ------- |
-| `tableHeaders\*`    | `Array`               | Table headers. See [tableHeaders prop](#tableHeaders).                     | -       |
-| `tableBody\*`       | `Array`               | Table body. See [tableBody prop](#tableBody).                              | -       |
+| `tableHeaders*`     | `Array`               | Table headers. See [tableHeaders prop](#tableHeaders).                     | -       |
+| `tableBody*`        | `Array`               | Table body. See [tableBody prop](#tableBody).                              | -       |
 | `initialSort`       | `Object`              | Initial sort. See [initialSort prop](#initialSort).                        | -       |
 | `onSort`            | `Object`              | Object containing custom sort functions. See [onSort prop](#onSort).       | -       |
 | `onFilter`          | `Object`              | Object containing custom filter functions. See [onFilter prop](#onFilter). | -       |
@@ -67,7 +67,7 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 
 | Field        | Type                                                               | Description                                          |
 | ------------ | ------------------------------------------------------------------ | ---------------------------------------------------- |
-| `prop\*`     | `string`                                                           | Column name for the table body.                      |
+| `prop*`      | `string`                                                           | Column name for the table body.                      |
 | `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop. |
 | `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                         |
 | `filterable` | `boolean`                                                          | Enable/disable filtering on the column.              |
@@ -93,10 +93,10 @@ const tableBody = [
 
 ### initialSort
 
-| Field           | Type      | Description                             |
-| --------------- | --------- | --------------------------------------- |
-| `prop\*`        | `string`  | Currently sorted prop.                  |
-| `isAscending\*` | `boolean` | `true` if ascending, otherwise `false`. |
+| Field          | Type      | Description                             |
+| -------------- | --------- | --------------------------------------- |
+| `prop*`        | `string`  | Currently sorted prop.                  |
+| `isAscending*` | `boolean` | `true` if ascending, otherwise `false`. |
 
 ### onSort
 
