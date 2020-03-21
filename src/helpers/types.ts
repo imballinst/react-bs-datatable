@@ -9,7 +9,8 @@ export type SortType = {
 export type HeaderType = {
   prop: string;
   title?: string;
-  cell?: any;
+  headerCell?: (icon: React.ReactNode, sortedProp: SortType) => React.ReactNode;
+  cell?: (row: any) => React.ReactNode;
   filterable?: boolean;
   sortable?: boolean;
 };

@@ -31,7 +31,7 @@ export default function BodyRow({
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
     const cell = tableHeaders[i].cell;
-    let value = '';
+    let value: React.ReactNode = '';
 
     if (cell === undefined) {
       value = data[rowIdx][tableHeaders[i].prop];
