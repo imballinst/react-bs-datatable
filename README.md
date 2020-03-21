@@ -48,14 +48,20 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 
 ## Props
 
-| Prop             | Type       | Description                                             |
-| ---------------- | ---------- | ------------------------------------------------------- |
-| `tableHeaders\*` | `Array`    | Table headers. See [tableHeaders prop](#tableHeaders).  |
-| `tableBody\*`    | `Array`    | Table body. See [tableBody prop](#tableBody).           |
-| `initialSort`    | `Object`   | Initial sort. See [initialSort prop](#initialSort).     |
-| `onSort`         | `function` | Custom sort function. See [onSort prop](#onSort).       |
-| `onFilter`       | `function` | Custom filter function. See [onFilter prop](#onFilter). |
-| `classes`        | `Object`   | Custom classes. See [classes prop](#classes).           |
+| Prop                | Type                  | Description                                                                | Default |
+| ------------------- | --------------------- | -------------------------------------------------------------------------- | ------- |
+| `tableHeaders\*`    | `Array`               | Table headers. See [tableHeaders prop](#tableHeaders).                     | -       |
+| `tableBody\*`       | `Array`               | Table body. See [tableBody prop](#tableBody).                              | -       |
+| `initialSort`       | `Object`              | Initial sort. See [initialSort prop](#initialSort).                        | -       |
+| `onSort`            | `Object`              | Object containing custom sort functions. See [onSort prop](#onSort).       | -       |
+| `onFilter`          | `Object`              | Object containing custom filter functions. See [onFilter prop](#onFilter). | -       |
+| `classes`           | `Object`              | Custom classes. See [classes prop](#classes).                              | -       |
+| `async`             | `Object`              | Enable asynchronous actions. See [async prop](#async).                     | -       |
+| `labels`            | `Object`              | Custom labels inside the table. See [labels prop](#labels).                | `{}`    |
+| `tableClass`        | `string`              | Classes used in `<table>` element tag.                                     | `''`    |
+| `rowsPerPage`       | `number`              | Initial rows per page.                                                     | -       |
+| `rowsPerPageOption` | `number[]`            | Pagination options.                                                        | -       |
+| `onRowClick`        | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                       | -       |
 
 ### tableHeaders
 
@@ -145,31 +151,45 @@ This prop is used to add custom styles to the table.
 | `tbodyRow`                  | `string` | `tr` element inside `tbody`.                              |
 | `tbodyCol`                  | `string` | `td` element.                                             |
 
-<!-- TODO: continue here -->
+### async
 
-- async: `Object`. When using `async`, you are the one who "controls" the table state. Default: `undefined`.
-  - `filterText`: `string`, the value of the filter input field.
-  - `sortedProp`: see `initialSort`.
-  - `rowsPerPage`: `number`, the value of the rows per page
-  - `currentPage`: `number`, the value of the current page shown.
-  - `maxPage`: `number`, the maximum number of page.
-  - `onSort`: `(`nextProp`: string) => {}`. You will modify `sortedProp` inside the function.
-  - `onPaginate`: `(`nextPage`: number) => {}`. You will modify `currentPage` inside the function.
-  - `onFilter`: `(`text`: string) => {}`. You will modify `filterText` inside the function.
-  - `onRowsPerPageChange`: `(numOfPage: RowsPerPageType) => {}`. You will modify `rowsPerPage` inside the function.
-- labels: `Object` used to customize the labels inside the table. Default: `{}`.
-  - `first`: `string`. First page label button.
-  - `last`: `string`. Last page label button.
-  - `prev`: `string`. Previous page label button.
-  - `next`: `string`. Next page label button.
-  - `show`: `string`. The text before select option of `rowsPerPageOption`.
-  - `entries`: `string`. The text after select option of `rowsPerPageOption`.
-  - `noResults`: `string`. Displayed text if table has empty `tableBody` or `[]`.
-  - `filterPlaceholder`: `string`. Placeholder text for filter input field.
-- tableClass: `string`. Classes used in `<table>` element tag. Default: `''`.
-- rowsPerPage: `number`. Initial rows per page. Default: `undefined`.
-- rowsPerPageOption: `number[]` for pagination options. Default: `undefined`.
-- onRowClick: `(data: any) => void` for row on click event, where `data` contains the data of the row being clicked. Default: `undefined`.
+| Field                 | Type                                   | Description                               |
+| --------------------- | -------------------------------------- | ----------------------------------------- |
+| `filterText`          | `string`                               | The value of the filter input field.      |
+| `sortedProp`          | `SortType`                             | See [initialSort prop](#initialSort).     |
+| `rowsPerPage`         | `number`                               | Value of the rows per page                |
+| `currentPage`         | `number`                               | Value of the current page shown.          |
+| `maxPage`             | `number`                               | Total numbers of page.                    |
+| `onSort`              | `(nextProp: string) => void`           | Event fired when a column is sorted.      |
+| `onPaginate`          | `(nextPage: number) => void`           | Event fired when the table page updates.  |
+| `onFilter`            | `(text: string) => void`               | Event fired when the filter text updates. |
+| `onRowsPerPageChange` | `(numOfPage: RowsPerPageType) => void` | Event fired when rows per page updates.   |
+
+### labels
+
+| Field               | Type     | Description                              |
+| ------------------- | -------- | ---------------------------------------- |
+| `first`             | `string` | First page label button.                 |
+| `last`              | `string` | Last page label button.                  |
+| `prev`              | `string` | Previous page label button.              |
+| `next`              | `string` | Next page label button.                  |
+| `show`              | `string` | The text before rows per page option.    |
+| `entries`           | `string` | The text after rows per page option.     |
+| `noResults`         | `string` | Displayed text if `tableBody` is `[]`.   |
+| `filterPlaceholder` | `string` | Placeholder text for filter input field. |
+
+### onRowClick
+
+When we want to add a click event to the table rows, we can use this prop.
+
+```js
+function onRowClick(row) {
+  alert(`You clicked on the row ${JSON.stringify(row)}`);
+}
+
+// This will trigger an alert, containing the notification text and the JSON string of the row data.
+<Datatable onRowClick={onRowClick} />;
+```
 
 ## Next Features or Improvements
 
