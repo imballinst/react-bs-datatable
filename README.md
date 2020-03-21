@@ -38,7 +38,7 @@ Head to https://imballinst.github.io/react-bs-datatable to see the list of the f
 
 ## Installation
 
-```
+```bash
 # With NPM.
 npm install --save react-bs-datatable bootstrap-sass font-awesome
 
@@ -48,37 +48,105 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 
 ## Props
 
-- tableHeaders **(Required)**: `Object[]`, each consists of:
-  - `prop` **(Required)**: `string`. Column name for the table body.
-  - `cell`: `function`. Returns a React Component for the table to be rendered.
-  - `filterable`: `boolean`. Enable/disable filtering on the column.
-  - `sortable`: `boolean`. Enable/disable sorting on the column.
-  - `title`: `string`. Text for the header column.
-- tableBody **(Required)**: `Object[]`, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-- initialSort: `Object`, consists of `prop` (`string`) and `isAscending` (`boolean`). Default: `undefined`.
-- onSort: `Object`. Used to customize sort functions, e.g. sorting dates. `{ propName: (propValue) => {}`. Default: `undefined`.
-- onFilter: see `onSort`.
-- classes: `Object`. Used to add custom styles. Default: `{}`.
-  - `controlRow`: `string`. Class\[es\] for the control row (filter, pagination options, and pagination).
-  - `filterCol`: `string`. Class\[es\] for the filter column.
-  - `filterInputGroup`: `string`. Class\[es\] for the filter `Input.Group`.
-  - `filterFormControl`: `string`. Class\[es\] for the filter `Form.Control`.
-  - `filterClearButton`: `string`. Class\[es\] for the filter `Button`.
-  - `paginationOptsCol`: `string`. Class\[es\] for the pagination options column.
-  - `paginationOptsForm`: `string`. Class\[es\] for the pagination options `Form`.
-  - `paginationOptsFormGroup`: `string`. Class\[es\] for the pagination options `Form.Group`.
-  - `paginationOptsFormText`: `string`. Class\[es\] for the pagination options form text, e.g. the "Show ... rows".
-  - `paginationOptsFormControl`: `string`. Class\[es\] for the pagination options `Form.Control`.
-  - `paginationCol`: `string`. Class\[es\] for the pagination column.
-  - `paginationButtonGroup`: `string`. Class\[es\] for the pagination `ButtonGroup`.
-  - `paginationButton`: `string`. Class\[es\] for the pagination `Button`.
-  - `table`: `string`. Class\[es\] for the `table` element.
-  - `thead`: `string`. Class\[es\] for the `thead` element.
-  - `theadRow`: `string`. Class\[es\] for the `tr` element.
-  - `theadCol`: `string`. Class\[es\] for the `th` element.
-  - `tbody`: `string`. Class\[es\] for the `tbody` element.
-  - `tbodyRow`: `string`. Class\[es\] for the `tr` element.
-  - `tbodyCol`: `string`. Class\[es\] for the `td` element.
+| Prop             | Type       | Description                                             |
+| ---------------- | ---------- | ------------------------------------------------------- |
+| `tableHeaders\*` | `Array`    | Table headers. See [tableHeaders prop](#tableHeaders).  |
+| `tableBody\*`    | `Array`    | Table body. See [tableBody prop](#tableBody).           |
+| `initialSort`    | `Object`   | Initial sort. See [initialSort prop](#initialSort).     |
+| `onSort`         | `function` | Custom sort function. See [onSort prop](#onSort).       |
+| `onFilter`       | `function` | Custom filter function. See [onFilter prop](#onFilter). |
+| `classes`        | `Object`   | Custom classes. See [classes prop](#classes).           |
+
+### tableHeaders
+
+| Field        | Type                                                               | Description                                          |
+| ------------ | ------------------------------------------------------------------ | ---------------------------------------------------- |
+| `prop\*`     | `string`                                                           | Column name for the table body.                      |
+| `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop. |
+| `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                         |
+| `filterable` | `boolean`                                                          | Enable/disable filtering on the column.              |
+| `sortable`   | `boolean`                                                          | Enable/disable sorting on the column.                |
+| `title`      | `string`                                                           | Text for the header column.                          |
+
+### tableBody
+
+The table body prop consists of key-value mapping of the headers that we already define in `tableHeaders`. For example:
+
+```tsx
+const tableHeaders = [
+  { prop: 'name', title: 'Name' },
+  { prop: 'score', title: 'Score' }
+];
+
+// Here, `tableBody` consists of object with the key "name" and "score".
+const tableBody = [
+  { name: 'Jack', score: 100 },
+  { name: 'Sam', score: 55 }
+];
+```
+
+### initialSort
+
+| Field           | Type      | Description                             |
+| --------------- | --------- | --------------------------------------- |
+| `prop\*`        | `string`  | Currently sorted prop.                  |
+| `isAscending\*` | `boolean` | `true` if ascending, otherwise `false`. |
+
+### onSort
+
+The `onSort` prop consists of key-value mapping of the headers that we already define in `tableHeaders`, as well. This function is mostly used to sort columns that don't represent its actual value. For example:
+
+```tsx
+const tableHeaders = [
+  { prop: 'name', title: 'Name' },
+  // The format of the date here is, say, dd MMM YYYY.
+  { prop: 'date', title: 'Test date' },
+  { prop: 'score', title: 'Score' }
+];
+
+// Here, `onSort` consists of columns that we want to have a custom filter function.
+const onSort = {
+  date: (value: any) => {
+    // This will convert the string to integer.
+    // Otherwise, the date will be sorted by date-month-year instead of year-month-date (in order).
+    return moment(value, 'dd MMM YYYY').valueOf();
+  }
+};
+```
+
+### onFilter
+
+`onFilter`'s usage is the same as `onSort`. It allows us to filter columns that don't represent their actual values.
+
+### classes
+
+This prop is used to add custom styles to the table.
+
+| Field                       | Type     | Description                                               |
+| --------------------------- | -------- | --------------------------------------------------------- |
+| `controlRow`                | `string` | Control row (filter, pagination options, and pagination). |
+| `filterCol`                 | `string` | Filter column.                                            |
+| `filterInputGroup`          | `string` | Filter `Input.Group`.                                     |
+| `filterFormControl`         | `string` | Filter `Form.Control`.                                    |
+| `filterClearButton`         | `string` | Filter `Button`.                                          |
+| `paginationOptsCol`         | `string` | Pagination options column.                                |
+| `paginationOptsForm`        | `string` | Pagination options `Form`.                                |
+| `paginationOptsFormGroup`   | `string` | Pagination options `Form.Group`.                          |
+| `paginationOptsFormText`    | `string` | Pagination options form text (the "Show ... rows").       |
+| `paginationOptsFormControl` | `string` | Pagination options `Form.Control`.                        |
+| `paginationCol`             | `string` | Pagination column.                                        |
+| `paginationButtonGroup`     | `string` | Pagination `ButtonGroup`.                                 |
+| `paginationButton`          | `string` | Pagination `Button`.                                      |
+| `table`                     | `string` | `table` element.                                          |
+| `thead`                     | `string` | `thead` element.                                          |
+| `theadRow`                  | `string` | `tr` element inside `thead`.                              |
+| `theadCol`                  | `string` | `th` element.                                             |
+| `tbody`                     | `string` | `tbody` element.                                          |
+| `tbodyRow`                  | `string` | `tr` element inside `tbody`.                              |
+| `tbodyCol`                  | `string` | `td` element.                                             |
+
+<!-- TODO: continue here -->
+
 - async: `Object`. When using `async`, you are the one who "controls" the table state. Default: `undefined`.
   - `filterText`: `string`, the value of the filter input field.
   - `sortedProp`: see `initialSort`.
