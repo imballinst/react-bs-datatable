@@ -62,12 +62,21 @@ export default function TableHeader({
       sortIconRender = <FontAwesome icon={sortIcon} additionalClass="fa-fw" />;
     }
 
-    headings.push(
-      <TableCell {...thProps}>
-        {tableHeaders[i].title}
-        <span className="pull-right">{sortIconRender}</span>
-      </TableCell>
-    );
+    const headerCell = tableHeaders[i].headerCell;
+    let rendered;
+
+    if (headerCell) {
+      rendered = headerCell(sortIconRender, sortedProp);
+    } else {
+      rendered = (
+        <>
+          {tableHeaders[i].title}
+          <span className="pull-right">{sortIconRender}</span>
+        </>
+      );
+    }
+
+    headings.push(<TableCell {...thProps}>{rendered}</TableCell>);
   }
 
   return (

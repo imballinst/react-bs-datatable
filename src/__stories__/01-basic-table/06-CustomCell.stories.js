@@ -13,7 +13,23 @@ const header = [
     sortable: true,
     filterable: true
   },
-  { title: 'Name', prop: 'realname', sortable: true },
+  {
+    prop: 'realname',
+    sortable: true,
+    headerCell: (icon, sortedProp) => {
+      // icon is the actual icon.
+      // sortedProp is the currently sortedProp -- in case we want to access it.
+      const isActive = sortedProp.prop === 'realname';
+      const order = sortedProp.isAscending ? 'asc' : 'desc';
+
+      return (
+        <>
+          {`Name ${isActive ? `(Active ${order})` : '(Inactive)'}`}
+          <span className="pull-right">{icon}</span>
+        </>
+      );
+    }
+  },
   {
     title: 'Name Uppercased',
     prop: 'realnameuppercase',

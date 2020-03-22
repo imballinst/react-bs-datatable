@@ -38,7 +38,7 @@ Head to https://imballinst.github.io/react-bs-datatable to see the list of the f
 
 ## Installation
 
-```
+```bash
 # With NPM.
 npm install --save react-bs-datatable bootstrap-sass font-awesome
 
@@ -48,60 +48,148 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 
 ## Props
 
-- tableHeaders **(Required)**: `Object[]`, each consists of:
-  - `prop` **(Required)**: `string`. Column name for the table body.
-  - `cell`: `function`. Returns a React Component for the table to be rendered.
-  - `filterable`: `boolean`. Enable/disable filtering on the column.
-  - `sortable`: `boolean`. Enable/disable sorting on the column.
-  - `title`: `string`. Text for the header column.
-- tableBody **(Required)**: `Object[]`, each consists of `propNames` and `propValues`, depends on how many columns you define in the header.
-- initialSort: `Object`, consists of `prop` (`string`) and `isAscending` (`boolean`). Default: `undefined`.
-- onSort: `Object`. Used to customize sort functions, e.g. sorting dates. `{ propName: (propValue) => {}`. Default: `undefined`.
-- onFilter: see `onSort`.
-- classes: `Object`. Used to add custom styles. Default: `{}`.
-  - `controlRow`: `string`. Class\[es\] for the control row (filter, pagination options, and pagination).
-  - `filterCol`: `string`. Class\[es\] for the filter column.
-  - `filterInputGroup`: `string`. Class\[es\] for the filter `Input.Group`.
-  - `filterFormControl`: `string`. Class\[es\] for the filter `Form.Control`.
-  - `filterClearButton`: `string`. Class\[es\] for the filter `Button`.
-  - `paginationOptsCol`: `string`. Class\[es\] for the pagination options column.
-  - `paginationOptsForm`: `string`. Class\[es\] for the pagination options `Form`.
-  - `paginationOptsFormGroup`: `string`. Class\[es\] for the pagination options `Form.Group`.
-  - `paginationOptsFormText`: `string`. Class\[es\] for the pagination options form text, e.g. the "Show ... rows".
-  - `paginationOptsFormControl`: `string`. Class\[es\] for the pagination options `Form.Control`.
-  - `paginationCol`: `string`. Class\[es\] for the pagination column.
-  - `paginationButtonGroup`: `string`. Class\[es\] for the pagination `ButtonGroup`.
-  - `paginationButton`: `string`. Class\[es\] for the pagination `Button`.
-  - `table`: `string`. Class\[es\] for the `table` element.
-  - `thead`: `string`. Class\[es\] for the `thead` element.
-  - `theadRow`: `string`. Class\[es\] for the `tr` element.
-  - `theadCol`: `string`. Class\[es\] for the `th` element.
-  - `tbody`: `string`. Class\[es\] for the `tbody` element.
-  - `tbodyRow`: `string`. Class\[es\] for the `tr` element.
-  - `tbodyCol`: `string`. Class\[es\] for the `td` element.
-- async: `Object`. When using `async`, you are the one who "controls" the table state. Default: `undefined`.
-  - `filterText`: `string`, the value of the filter input field.
-  - `sortedProp`: see `initialSort`.
-  - `rowsPerPage`: `number`, the value of the rows per page
-  - `currentPage`: `number`, the value of the current page shown.
-  - `maxPage`: `number`, the maximum number of page.
-  - `onSort`: `(`nextProp`: string) => {}`. You will modify `sortedProp` inside the function.
-  - `onPaginate`: `(`nextPage`: number) => {}`. You will modify `currentPage` inside the function.
-  - `onFilter`: `(`text`: string) => {}`. You will modify `filterText` inside the function.
-  - `onRowsPerPageChange`: `(numOfPage: RowsPerPageType) => {}`. You will modify `rowsPerPage` inside the function.
-- labels: `Object` used to customize the labels inside the table. Default: `{}`.
-  - `first`: `string`. First page label button.
-  - `last`: `string`. Last page label button.
-  - `prev`: `string`. Previous page label button.
-  - `next`: `string`. Next page label button.
-  - `show`: `string`. The text before select option of `rowsPerPageOption`.
-  - `entries`: `string`. The text after select option of `rowsPerPageOption`.
-  - `noResults`: `string`. Displayed text if table has empty `tableBody` or `[]`.
-  - `filterPlaceholder`: `string`. Placeholder text for filter input field.
-- tableClass: `string`. Classes used in `<table>` element tag. Default: `''`.
-- rowsPerPage: `number`. Initial rows per page. Default: `undefined`.
-- rowsPerPageOption: `number[]` for pagination options. Default: `undefined`.
-- onRowClick: `(data: any) => void` for row on click event, where `data` contains the data of the row being clicked. Default: `undefined`.
+| Prop                | Type                  | Description                                                                | Default |
+| ------------------- | --------------------- | -------------------------------------------------------------------------- | ------- |
+| `tableHeaders*`     | `Array`               | Table headers. See [tableHeaders prop](#tableHeaders).                     | -       |
+| `tableBody*`        | `Array`               | Table body. See [tableBody prop](#tableBody).                              | -       |
+| `initialSort`       | `Object`              | Initial sort. See [initialSort prop](#initialSort).                        | -       |
+| `onSort`            | `Object`              | Object containing custom sort functions. See [onSort prop](#onSort).       | -       |
+| `onFilter`          | `Object`              | Object containing custom filter functions. See [onFilter prop](#onFilter). | -       |
+| `classes`           | `Object`              | Custom classes. See [classes prop](#classes).                              | -       |
+| `async`             | `Object`              | Enable asynchronous actions. See [async prop](#async).                     | -       |
+| `labels`            | `Object`              | Custom labels inside the table. See [labels prop](#labels).                | `{}`    |
+| `tableClass`        | `string`              | Classes used in `<table>` element tag.                                     | `''`    |
+| `rowsPerPage`       | `number`              | Initial rows per page.                                                     | -       |
+| `rowsPerPageOption` | `number[]`            | Pagination options.                                                        | -       |
+| `onRowClick`        | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                       | -       |
+
+### tableHeaders
+
+| Field        | Type                                                               | Description                                          |
+| ------------ | ------------------------------------------------------------------ | ---------------------------------------------------- |
+| `prop*`      | `string`                                                           | Column name for the table body.                      |
+| `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop. |
+| `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                         |
+| `filterable` | `boolean`                                                          | Enable/disable filtering on the column.              |
+| `sortable`   | `boolean`                                                          | Enable/disable sorting on the column.                |
+| `title`      | `string`                                                           | Text for the header column.                          |
+
+### tableBody
+
+The table body prop consists of key-value mapping of the headers that we already define in `tableHeaders`. For example:
+
+```tsx
+const tableHeaders = [
+  { prop: 'name', title: 'Name' },
+  { prop: 'score', title: 'Score' }
+];
+
+// Here, `tableBody` consists of object with the key "name" and "score".
+const tableBody = [
+  { name: 'Jack', score: 100 },
+  { name: 'Sam', score: 55 }
+];
+```
+
+### initialSort
+
+| Field          | Type      | Description                             |
+| -------------- | --------- | --------------------------------------- |
+| `prop*`        | `string`  | Currently sorted prop.                  |
+| `isAscending*` | `boolean` | `true` if ascending, otherwise `false`. |
+
+### onSort
+
+The `onSort` prop consists of key-value mapping of the headers that we already define in `tableHeaders`, as well. This function is mostly used to sort columns that don't represent its actual value. For example:
+
+```tsx
+const tableHeaders = [
+  { prop: 'name', title: 'Name' },
+  // The format of the date here is, say, dd MMM YYYY.
+  { prop: 'date', title: 'Test date' },
+  { prop: 'score', title: 'Score' }
+];
+
+// Here, `onSort` consists of columns that we want to have a custom filter function.
+const onSort = {
+  date: (value: any) => {
+    // This will convert the string to integer.
+    // Otherwise, the date will be sorted by date-month-year instead of year-month-date (in order).
+    return moment(value, 'dd MMM YYYY').valueOf();
+  }
+};
+```
+
+### onFilter
+
+`onFilter`'s usage is the same as `onSort`. It allows us to filter columns that don't represent their actual values.
+
+### classes
+
+This prop is used to add custom styles to the table.
+
+| Field                       | Type     | Description                                               |
+| --------------------------- | -------- | --------------------------------------------------------- |
+| `controlRow`                | `string` | Control row (filter, pagination options, and pagination). |
+| `filterCol`                 | `string` | Filter column.                                            |
+| `filterInputGroup`          | `string` | Filter `Input.Group`.                                     |
+| `filterFormControl`         | `string` | Filter `Form.Control`.                                    |
+| `filterClearButton`         | `string` | Filter `Button`.                                          |
+| `paginationOptsCol`         | `string` | Pagination options column.                                |
+| `paginationOptsForm`        | `string` | Pagination options `Form`.                                |
+| `paginationOptsFormGroup`   | `string` | Pagination options `Form.Group`.                          |
+| `paginationOptsFormText`    | `string` | Pagination options form text (the "Show ... rows").       |
+| `paginationOptsFormControl` | `string` | Pagination options `Form.Control`.                        |
+| `paginationCol`             | `string` | Pagination column.                                        |
+| `paginationButtonGroup`     | `string` | Pagination `ButtonGroup`.                                 |
+| `paginationButton`          | `string` | Pagination `Button`.                                      |
+| `table`                     | `string` | `table` element.                                          |
+| `thead`                     | `string` | `thead` element.                                          |
+| `theadRow`                  | `string` | `tr` element inside `thead`.                              |
+| `theadCol`                  | `string` | `th` element.                                             |
+| `tbody`                     | `string` | `tbody` element.                                          |
+| `tbodyRow`                  | `string` | `tr` element inside `tbody`.                              |
+| `tbodyCol`                  | `string` | `td` element.                                             |
+
+### async
+
+| Field                 | Type                                   | Description                               |
+| --------------------- | -------------------------------------- | ----------------------------------------- |
+| `filterText`          | `string`                               | The value of the filter input field.      |
+| `sortedProp`          | `SortType`                             | See [initialSort prop](#initialSort).     |
+| `rowsPerPage`         | `number`                               | Value of the rows per page                |
+| `currentPage`         | `number`                               | Value of the current page shown.          |
+| `maxPage`             | `number`                               | Total numbers of page.                    |
+| `onSort`              | `(nextProp: string) => void`           | Event fired when a column is sorted.      |
+| `onPaginate`          | `(nextPage: number) => void`           | Event fired when the table page updates.  |
+| `onFilter`            | `(text: string) => void`               | Event fired when the filter text updates. |
+| `onRowsPerPageChange` | `(numOfPage: RowsPerPageType) => void` | Event fired when rows per page updates.   |
+
+### labels
+
+| Field               | Type     | Description                              |
+| ------------------- | -------- | ---------------------------------------- |
+| `first`             | `string` | First page label button.                 |
+| `last`              | `string` | Last page label button.                  |
+| `prev`              | `string` | Previous page label button.              |
+| `next`              | `string` | Next page label button.                  |
+| `show`              | `string` | The text before rows per page option.    |
+| `entries`           | `string` | The text after rows per page option.     |
+| `noResults`         | `string` | Displayed text if `tableBody` is `[]`.   |
+| `filterPlaceholder` | `string` | Placeholder text for filter input field. |
+
+### onRowClick
+
+When we want to add a click event to the table rows, we can use this prop.
+
+```js
+function onRowClick(row) {
+  alert(`You clicked on the row ${JSON.stringify(row)}`);
+}
+
+// This will trigger an alert, containing the notification text and the JSON string of the row data.
+<Datatable onRowClick={onRowClick} />;
+```
 
 ## Next Features or Improvements
 
