@@ -116,7 +116,6 @@ storiesOf(categoryName, module).add('Using Material UI Table', () => (
   <Datatable
     tableHeaders={header}
     tableBody={body}
-    tableClass="striped hover responsive"
     rowsPerPage={5}
     rowsPerPageOption={[5, 10, 15, 20]}
     initialSort={{ prop: 'username', isAscending: true }}

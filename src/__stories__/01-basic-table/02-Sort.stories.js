@@ -49,7 +49,6 @@ storiesOf(categoryName, module).add('Sort', () => (
   <Datatable
     tableHeaders={header}
     tableBody={body}
-    tableClass="striped hover responsive"
     initialSort={{ prop: 'username', isAscending: true }}
     onSort={onSortFunction}
   />

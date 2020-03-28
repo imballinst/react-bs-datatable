@@ -54,7 +54,6 @@ storiesOf(categoryName, module).add('Filter, sort, and pagination', () => (
   <Datatable
     tableHeaders={header}
     tableBody={body}
-    tableClass="striped hover responsive"
     rowsPerPage={5}
     rowsPerPageOption={[5, 10, 15, 20]}
     initialSort={{ prop: 'username', isAscending: true }}

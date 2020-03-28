@@ -38,9 +38,5 @@ const body = Array.from(new Array(57), () => {
 });
 
 storiesOf(categoryName, module).add('Filter', () => (
-  <Datatable
-    tableHeaders={header}
-    tableBody={body}
-    tableClass="striped hover responsive"
-  />
+  <Datatable tableHeaders={header} tableBody={body} />
 ));

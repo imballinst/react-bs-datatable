@@ -46,7 +46,6 @@ storiesOf(categoryName, module).add('Row on click', () => (
   <Datatable
     tableHeaders={header}
     tableBody={body}
-    tableClass="striped hover responsive"
     onRowClick={onRowClick}
     classes={{
       table: 'custom-table'
