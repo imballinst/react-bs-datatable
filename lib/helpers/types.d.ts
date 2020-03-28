@@ -61,8 +61,6 @@ export declare type TableComponents = {
     PaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
     SortIcon: TableComponentType;
 };
-export declare type RowsPerPageType = number | undefined;
-export declare type RowsPerPageOptionType = number[];
 export declare type AsyncProps = {
     filterText: string;
     sortedProp: SortType;
@@ -72,7 +70,7 @@ export declare type AsyncProps = {
     onSort: (nextProp: string) => {};
     onPaginate: (nextPage: number) => {};
     onFilter: (text: string) => {};
-    onRowsPerPageChange: (numOfPage: RowsPerPageType) => {};
+    onRowsPerPageChange: (numOfPage: number) => {};
 };
 export declare type DatatableProps = {
     /** Initial sort of the table. */
@@ -90,9 +88,9 @@ export declare type DatatableProps = {
     /** Handler for asynchronous filter, sort, and pagination. */
     async?: AsyncProps;
     /** Initial rows per page. */
-    rowsPerPage?: RowsPerPageType;
+    rowsPerPage?: number;
     /** Rows per page option. */
-    rowsPerPageOption?: RowsPerPageOptionType;
+    rowsPerPageOption?: number[];
     /** Labels/placeholders of the table components. */
     labels?: LabelType;
     /** Custom table components. */
@@ -103,7 +101,7 @@ export declare type DatatableProps = {
 export declare type DatatableState = {
     filterable: boolean;
     sortedProp: SortType;
-    rowsPerPage: RowsPerPageType;
+    rowsPerPage?: number;
     currentPage: number;
     filterText: string;
 };
