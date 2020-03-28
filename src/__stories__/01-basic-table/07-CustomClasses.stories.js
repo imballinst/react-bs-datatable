@@ -68,7 +68,7 @@ const customLabels = {
 };
 
 const classes = {
-  table: 'striped hover responsive',
+  table: 'table-striped table-hover',
   theadCol: css`
     .table-datatable__root & {
       &.sortable:hover {
