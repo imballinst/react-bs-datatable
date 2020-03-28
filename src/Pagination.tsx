@@ -1,16 +1,11 @@
 import React, { useCallback } from 'react';
 
 import NavButton from './modules/NavButton';
-import {
-  LabelType,
-  RowsPerPageType,
-  TableClasses,
-  TableComponents
-} from './helpers/types';
+import { LabelType, TableClasses, TableComponents } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
 type PaginationProps = {
-  rowsPerPage: RowsPerPageType;
+  rowsPerPage?: number;
   currentPage: number;
   maxPage?: number;
   onPageNavigate: any;
