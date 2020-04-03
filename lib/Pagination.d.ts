@@ -1,7 +1,7 @@
 /// <reference types="react" />
-import { LabelType, RowsPerPageType, TableClasses, TableComponents } from './helpers/types';
+import { LabelType, TableClasses, TableComponents } from './helpers/types';
 declare type PaginationProps = {
-    rowsPerPage: RowsPerPageType;
+    rowsPerPage?: number;
     currentPage: number;
     maxPage?: number;
     onPageNavigate: any;

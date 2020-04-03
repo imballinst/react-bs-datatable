@@ -39,12 +39,5 @@ const body = Array.from(new Array(57), () => {
 
 storiesOf(categoryName, module).add(
   'Pagination without rows per page options',
-  () => (
-    <Datatable
-      tableHeaders={header}
-      tableBody={body}
-      tableClass="striped hover responsive"
-      rowsPerPage={5}
-    />
-  )
+  () => <Datatable tableHeaders={header} tableBody={body} rowsPerPage={5} />
 );

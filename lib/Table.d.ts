@@ -10,7 +10,7 @@ export declare function useDatatableLifecycle({ initialSort, onSort, onFilter, r
     onChangeFilter: (text: string) => void;
     onPageNavigate: (nextPage: number) => void;
     classes: import("./helpers/types").TableClasses;
-    onRowsPerPageChange: (numOfPage: number | undefined) => void;
+    onRowsPerPageChange: (numOfPage: number) => void;
     onSortChange: (nextProp: string) => void;
     tableClass: string;
     labels: import("./helpers/types").LabelType;

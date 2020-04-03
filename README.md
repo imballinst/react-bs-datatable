@@ -58,9 +58,9 @@ yarn add react-bs-datatable bootstrap-sass font-awesome
 | `classes`           | `Object`              | Custom classes. See [classes prop](#classes).                              | -       |
 | `async`             | `Object`              | Enable asynchronous actions. See [async prop](#async).                     | -       |
 | `labels`            | `Object`              | Custom labels inside the table. See [labels prop](#labels).                | `{}`    |
-| `tableClass`        | `string`              | Classes used in `<table>` element tag.                                     | `''`    |
 | `rowsPerPage`       | `number`              | Initial rows per page.                                                     | -       |
 | `rowsPerPageOption` | `number[]`            | Pagination options.                                                        | -       |
+| `Components`        | `Object`              | Custom table components.                                                   | -       |
 | `onRowClick`        | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                       | -       |
 
 ### tableHeaders
@@ -177,6 +177,59 @@ This prop is used to add custom styles to the table.
 | `entries`           | `string` | The text after rows per page option.     |
 | `noResults`         | `string` | Displayed text if `tableBody` is `[]`.   |
 | `filterPlaceholder` | `string` | Placeholder text for filter input field. |
+
+### Components
+
+We can override Bootstrap's components when we want to, with the types defined as the following:
+
+```tsx
+// Primitive types.
+type FilterGroupProps = {
+  filterText: string;
+  onChangeFilter: (event: any) => void;
+  onClearFilter?: () => void;
+  placeholder?: string;
+  classes: TableClasses;
+};
+type PaginationOptsGroupProps = {
+  labels: LabelType;
+  value?: number;
+  options: number[];
+  onChange: any;
+  classes: TableClasses;
+};
+
+// Component types.
+type TableComponentType = React.ElementType<any> | string;
+type PaginationOptsGroupFunctionComponent = (
+  props: PaginationOptsGroupProps
+) => JSX.Element;
+type FilterGroupFunctionComponent = (props: FilterGroupProps) => JSX.Element;
+
+// Type of the `Components` prop.
+type TableComponents = {
+  // Global.
+  Row: TableComponentType;
+  Col: TableComponentType;
+  Button: TableComponentType;
+  // Table.
+  Table: TableComponentType;
+  TableHead: TableComponentType;
+  TableBody: TableComponentType;
+  TableRow: TableComponentType;
+  TableCell: TableComponentType;
+  // Filter.
+  FilterGroup?: FilterGroupFunctionComponent;
+  // Pagination.
+  ButtonGroup: TableComponentType;
+  // Pagination options.
+  PaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
+  // Icons.
+  SortIcon: TableComponentType;
+};
+```
+
+To see its usage, see the example in [the Storybook](https://imballinst.github.io/react-bs-datatable/?path=/story/advanced-guides--using-material-ui-table).
 
 ### onRowClick
 

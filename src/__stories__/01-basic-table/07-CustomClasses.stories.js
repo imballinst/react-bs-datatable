@@ -68,6 +68,7 @@ const customLabels = {
 };
 
 const classes = {
+  table: 'table-striped table-hover',
   theadCol: css`
     .table-datatable__root & {
       &.sortable:hover {
@@ -94,7 +95,6 @@ storiesOf(categoryName, module).add('Custom classes', () => (
   <Datatable
     tableHeaders={header}
     tableBody={body}
-    tableClass="striped hover responsive"
     rowsPerPage={5}
     rowsPerPageOption={[5, 10, 15, 20]}
     initialSort={{ prop: 'username', isAscending: true }}

@@ -120,7 +120,6 @@ function AsyncTable() {
     <Datatable
       tableHeaders={header}
       tableBody={data}
-      tableClass="striped hover responsive"
       rowsPerPageOption={[5, 10, 15, 20]}
       async={{
         currentPage,

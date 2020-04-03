@@ -192,17 +192,6 @@ storiesOf(categoryName, module).add(
       <Datatable
         tableHeaders={header}
         tableBody={body}
-        tableClass="striped hover responsive"
-        rowsPerPage={5}
-        rowsPerPageOption={[5, 10, 15, 20]}
-        initialSort={{ prop: 'username', isAscending: true }}
-        onSort={onSortFunction}
-      />
-      <hr />
-      <Datatable
-        tableHeaders={header}
-        tableBody={body}
-        tableClass="striped hover responsive"
         rowsPerPage={5}
         rowsPerPageOption={[5, 10, 15, 20]}
         initialSort={{ prop: 'username', isAscending: true }}

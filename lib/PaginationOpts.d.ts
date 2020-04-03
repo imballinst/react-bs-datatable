@@ -1,9 +1,9 @@
 /// <reference types="react" />
-import { LabelType, RowsPerPageType, RowsPerPageOptionType, TableClasses } from './helpers/types';
+import { LabelType, TableClasses } from './helpers/types';
 declare type PaginationOptsGroupProps = {
     labels: LabelType;
-    value: RowsPerPageType;
-    options: RowsPerPageOptionType;
+    value?: number;
+    options: number[];
     onChange: any;
     classes: TableClasses;
 };
@@ -11,8 +11,8 @@ export declare function PaginationOptsGroup({ classes, labels, value, onChange, 
 export declare type PaginationOptsGroupFunctionComponent = (props: PaginationOptsGroupProps) => JSX.Element;
 declare type PaginationOptsProps = {
     labels: LabelType;
-    rowsPerPage?: RowsPerPageType;
-    rowsPerPageOption?: RowsPerPageOptionType;
+    rowsPerPage?: number;
+    rowsPerPageOption?: number[];
     onRowsPerPageChange: any;
     classes: TableClasses;
     CustomPaginationOptsGroup?: PaginationOptsGroupFunctionComponent;

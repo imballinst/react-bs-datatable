@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderType, SortType, RowsPerPageType } from './types';
+import { HeaderType, SortType } from './types';
 
 export function getLastChildren(
   reactElement: React.ReactElement
@@ -114,7 +114,7 @@ export function filterData(
 export function paginateData(
   data: any[],
   currentPage: number,
-  rowsPerPage?: RowsPerPageType
+  rowsPerPage?: number
 ) {
   let paginatedData = [...data];
 

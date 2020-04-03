@@ -1,18 +1,13 @@
 import React from 'react';
 
-import {
-  LabelType,
-  RowsPerPageType,
-  RowsPerPageOptionType,
-  TableClasses
-} from './helpers/types';
+import { LabelType, TableClasses } from './helpers/types';
 import { makeClasses } from './helpers/object';
 import Form from 'react-bootstrap/Form';
 
 type PaginationOptsGroupProps = {
   labels: LabelType;
-  value: RowsPerPageType;
-  options: RowsPerPageOptionType;
+  value?: number;
+  options: number[];
   onChange: any;
   classes: TableClasses;
 };
@@ -71,8 +66,8 @@ export type PaginationOptsGroupFunctionComponent = (
 
 type PaginationOptsProps = {
   labels: LabelType;
-  rowsPerPage?: RowsPerPageType;
-  rowsPerPageOption?: RowsPerPageOptionType;
+  rowsPerPage?: number;
+  rowsPerPageOption?: number[];
   onRowsPerPageChange: any;
   classes: TableClasses;
   CustomPaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
@@ -93,7 +88,7 @@ export default function PaginationOpts({
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
-    let opts: RowsPerPageOptionType = [rowsPerPage];
+    let opts: number[] = [rowsPerPage];
 
     // Make sure there are no duplicates being pushed.
     if (rowsPerPageOption !== undefined) {

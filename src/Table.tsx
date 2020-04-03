@@ -7,7 +7,6 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
 import {
-  RowsPerPageType,
   DatatableProps,
   DatatableState,
   TableComponents
@@ -153,7 +152,7 @@ export function useDatatableLifecycle({
     }
   }
 
-  function onRowsPerPageChange(numOfPage: RowsPerPageType) {
+  function onRowsPerPageChange(numOfPage: number) {
     if (async && async.onRowsPerPageChange) {
       async.onRowsPerPageChange(numOfPage);
     } else {
