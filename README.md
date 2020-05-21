@@ -32,6 +32,7 @@ Head to https://imballinst.github.io/react-bs-datatable to see the list of the f
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
 - [Props](#props)
 - [Next Features or Improvements](#next-features-or-improvements)
 - [Contributing](#contributing)
@@ -44,6 +45,45 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
 
 # With Yarn.
 yarn add react-bs-datatable bootstrap-sass font-awesome
+```
+
+## Usage
+
+```jsx
+import React from 'react';
+import Datatable from 'react-bs-datatable';
+
+// Create table headers consisting of 4 columns.
+const header = [
+  { title: 'Username', prop: 'username' },
+  { title: 'Name', prop: 'realname' },
+  { title: 'Location', prop: 'location' }
+];
+
+// Randomize data of the table columns.
+// Note that the fields are all using the `prop` field of the headers.
+const body = Array.from(new Array(57), () => {
+  const rd = (Math.random() * 10).toFixed(1);
+
+  if (rd > 0.5) {
+    return {
+      username: 'i-am-billy',
+      realname: `Billy ${rd}`,
+      location: 'Mars'
+    };
+  }
+
+  return {
+    username: 'john-nhoj',
+    realname: `John ${rd}`,
+    location: 'Saturn'
+  };
+});
+
+// Then, use it in a component.
+function Component() {
+  return <Datatable tableHeaders={header} tableBody={body} />;
+}
 ```
 
 ## Props
@@ -85,10 +125,7 @@ const tableHeaders = [
 ];
 
 // Here, `tableBody` consists of object with the key "name" and "score".
-const tableBody = [
-  { name: 'Jack', score: 100 },
-  { name: 'Sam', score: 55 }
-];
+const tableBody = [{ name: 'Jack', score: 100 }, { name: 'Sam', score: 55 }];
 ```
 
 ### initialSort
