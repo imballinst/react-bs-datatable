@@ -14,24 +14,11 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 3. Custom table components. Tired of using Bootstrap? I know the lib name is Bootstrap, but maybe you want to change it to something else!
 4. Of course, there may be some breaking changes. Please see the updated docs and Storybook demo for the most up-to-date usages.
 
-## Storybook Demo.
-
-Head to https://imballinst.github.io/react-bs-datatable to see the list of the features in actions.
-
-1. Sort
-2. Filter
-3. Pagination
-4. Custom Labels
-5. Presentational and raw data separation
-6. Custom column sort and column filter function
-7. Custom classes
-8. Create your own table by extending the existing features
-9. Async
-10. Custom Table Components (e.g. using Material UI Components)
-
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
+- [Storybook Demo](#storybook-demo)
 - [Props](#props)
 - [Next Features or Improvements](#next-features-or-improvements)
 - [Contributing](#contributing)
@@ -45,6 +32,60 @@ npm install --save react-bs-datatable bootstrap-sass font-awesome
 # With Yarn.
 yarn add react-bs-datatable bootstrap-sass font-awesome
 ```
+
+## Usage
+
+```jsx
+import React from 'react';
+import Datatable from 'react-bs-datatable';
+
+// Create table headers consisting of 4 columns.
+const header = [
+  { title: 'Username', prop: 'username' },
+  { title: 'Name', prop: 'realname' },
+  { title: 'Location', prop: 'location' }
+];
+
+// Randomize data of the table columns.
+// Note that the fields are all using the `prop` field of the headers.
+const body = Array.from(new Array(57), () => {
+  const rd = (Math.random() * 10).toFixed(1);
+
+  if (rd > 0.5) {
+    return {
+      username: 'i-am-billy',
+      realname: `Billy ${rd}`,
+      location: 'Mars'
+    };
+  }
+
+  return {
+    username: 'john-nhoj',
+    realname: `John ${rd}`,
+    location: 'Saturn'
+  };
+});
+
+// Then, use it in a component.
+function Component() {
+  return <Datatable tableHeaders={header} tableBody={body} />;
+}
+```
+
+## Storybook Demo.
+
+Head to https://imballinst.github.io/react-bs-datatable to see all of the features in action.
+
+1. Sort
+2. Filter
+3. Pagination
+4. Custom Labels
+5. Presentational and raw data separation
+6. Custom column sort and column filter function
+7. Custom classes
+8. Create your own table by extending the existing features
+9. Async
+10. Custom Table Components (e.g. using Material UI Components)
 
 ## Props
 
@@ -85,10 +126,7 @@ const tableHeaders = [
 ];
 
 // Here, `tableBody` consists of object with the key "name" and "score".
-const tableBody = [
-  { name: 'Jack', score: 100 },
-  { name: 'Sam', score: 55 }
-];
+const tableBody = [{ name: 'Jack', score: 100 }, { name: 'Sam', score: 55 }];
 ```
 
 ### initialSort
