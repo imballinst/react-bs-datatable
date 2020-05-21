@@ -14,25 +14,11 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 3. Custom table components. Tired of using Bootstrap? I know the lib name is Bootstrap, but maybe you want to change it to something else!
 4. Of course, there may be some breaking changes. Please see the updated docs and Storybook demo for the most up-to-date usages.
 
-## Storybook Demo.
-
-Head to https://imballinst.github.io/react-bs-datatable to see the list of the features in actions.
-
-1. Sort
-2. Filter
-3. Pagination
-4. Custom Labels
-5. Presentational and raw data separation
-6. Custom column sort and column filter function
-7. Custom classes
-8. Create your own table by extending the existing features
-9. Async
-10. Custom Table Components (e.g. using Material UI Components)
-
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Storybook Demo](#storybook-demo)
 - [Props](#props)
 - [Next Features or Improvements](#next-features-or-improvements)
 - [Contributing](#contributing)
@@ -85,6 +71,21 @@ function Component() {
   return <Datatable tableHeaders={header} tableBody={body} />;
 }
 ```
+
+## Storybook Demo.
+
+Head to https://imballinst.github.io/react-bs-datatable to see all of the features in action.
+
+1. Sort
+2. Filter
+3. Pagination
+4. Custom Labels
+5. Presentational and raw data separation
+6. Custom column sort and column filter function
+7. Custom classes
+8. Create your own table by extending the existing features
+9. Async
+10. Custom Table Components (e.g. using Material UI Components)
 
 ## Props
 
