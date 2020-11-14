@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { CSSProperties } from 'react';
 import { FilterGroupFunctionComponent } from '../Filter';
 import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 export declare type SortType = {
@@ -10,6 +10,10 @@ export declare type HeaderType = {
     title?: string;
     headerCell?: (icon: React.ReactNode, sortedProp: SortType) => React.ReactNode;
     cell?: (row: any) => React.ReactNode;
+    cellProps?: {
+        className?: string | ((row: any) => CSSProperties);
+        style?: CSSProperties | ((row: any) => CSSProperties);
+    };
     filterable?: boolean;
     sortable?: boolean;
 };
