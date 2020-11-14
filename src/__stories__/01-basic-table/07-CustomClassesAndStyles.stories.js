@@ -6,7 +6,7 @@ import { categoryName } from './_base';
 
 import moment from 'moment';
 // In your setup, replace "../../" with "react-bs-datatable".
-import Datatable from '../../';
+import Datatable from '../..';
 
 const header = [
   {
@@ -15,13 +15,31 @@ const header = [
     sortable: true,
     filterable: true
   },
-  { title: 'Name', prop: 'realname', sortable: true },
+  {
+    title: 'Name',
+    prop: 'realname',
+    sortable: true,
+    // Add classes and styles by objects and strings.
+    cellProps: {
+      style: { background: '#fafafa' },
+      className: 'realname-class'
+    }
+  },
   {
     title: 'Name Uppercased',
     prop: 'realnameuppercase',
     cell: row => row.realname.toUpperCase()
   },
-  { title: 'Location', prop: 'location' },
+  {
+    title: 'Location',
+    prop: 'location',
+    // Add classes and styles by function.
+    cellProps: {
+      style: row =>
+        row.location === 'Mars' ? { background: '#fafafa' } : undefined,
+      className: row => (row.location === 'Saturn' ? 'saturn-class' : undefined)
+    }
+  },
   { title: 'Last Updated', prop: 'date', sortable: true }
 ];
 
@@ -91,7 +109,7 @@ const classes = {
   `
 };
 
-storiesOf(categoryName, module).add('Custom classes', () => (
+storiesOf(categoryName, module).add('Custom classes and styles', () => (
   <Datatable
     tableHeaders={header}
     tableBody={body}
