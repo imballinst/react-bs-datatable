@@ -1,6 +1,6 @@
 {
   "name": "react-bs-datatable",
-  "version": "2.1.2-alpha1",
+  "version": "2.1.2-alpha2",
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
   "main": "lib/index.js",
   "scripts": {
