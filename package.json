@@ -63,7 +63,7 @@
     "font-awesome": "^4.7.0",
     "jest": "^24.1.0",
     "moment": "^2.24.0",
-    "node-sass": "4",
+    "node-sass": "4.14.1",
     "react-test-renderer": "^16.8.4",
     "sass-loader": "^7.1.0",
     "sinon": "^7.2.7",
