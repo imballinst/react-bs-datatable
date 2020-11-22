@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { FilterGroupFunctionComponent } from '../Filter';
 import { PaginationOptsGroupFunctionComponent } from '../PaginationOpts';
 
@@ -11,6 +12,10 @@ export type HeaderType = {
   title?: string;
   headerCell?: (icon: React.ReactNode, sortedProp: SortType) => React.ReactNode;
   cell?: (row: any) => React.ReactNode;
+  cellProps?: {
+    className?: string | ((row: any) => string);
+    style?: CSSProperties | ((row: any) => CSSProperties);
+  };
   filterable?: boolean;
   sortable?: boolean;
 };

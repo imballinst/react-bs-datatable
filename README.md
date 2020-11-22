@@ -103,6 +103,7 @@ Head to https://imballinst.github.io/react-bs-datatable to see all of the featur
 | `rowsPerPageOption` | `number[]`            | Pagination options.                                                        | -       |
 | `Components`        | `Object`              | Custom table components.                                                   | -       |
 | `onRowClick`        | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                       | -       |
+| `cellProps`         | `Object`              | Props passed to the cells. See [cellProps prop](#cellProps).               | -       |
 
 ### tableHeaders
 
@@ -126,7 +127,10 @@ const tableHeaders = [
 ];
 
 // Here, `tableBody` consists of object with the key "name" and "score".
-const tableBody = [{ name: 'Jack', score: 100 }, { name: 'Sam', score: 55 }];
+const tableBody = [
+  { name: 'Jack', score: 100 },
+  { name: 'Sam', score: 55 }
+];
 ```
 
 ### initialSort
@@ -281,6 +285,24 @@ function onRowClick(row) {
 // This will trigger an alert, containing the notification text and the JSON string of the row data.
 <Datatable onRowClick={onRowClick} />;
 ```
+
+### cellProps
+
+Currently, the only available props are `className` and `style`. The type of this prop is:
+
+```ts
+export type HeaderType = {
+  // ...
+  cellProps?: {
+    className?: string | ((row: any) => string);
+    style?: CSSProperties | ((row: any) => CSSProperties);
+  };
+};
+```
+
+The `className` can be either a string or a function with single parameter, `row`. This `row` is the row's data. This is useful if we want to change a cell's `className` based on the data inside the row.
+
+The same goes for the `style` prop. The difference is, instead of a string, it returns `CSSProperties` instead. We use it just like we use the `style` prop on JSX.
 
 ## Next Features or Improvements
 

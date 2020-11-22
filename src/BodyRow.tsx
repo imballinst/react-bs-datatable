@@ -30,7 +30,7 @@ export default function BodyRow({
   const row = [];
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
-    const cell = tableHeaders[i].cell;
+    const { cell, cellProps = {} } = tableHeaders[i];
     let value: React.ReactNode = '';
 
     if (cell === undefined) {
@@ -42,7 +42,18 @@ export default function BodyRow({
     row.push(
       <components.TableCell
         key={`col-${rowIdx}${i}`}
-        className={makeClasses('tbody-td', classes.tbodyCol)}
+        className={makeClasses(
+          'tbody-td',
+          classes.tbodyCol,
+          typeof cellProps.className === 'function'
+            ? cellProps.className(data[rowIdx])
+            : cellProps.className
+        )}
+        style={
+          typeof cellProps.style === 'function'
+            ? cellProps.style(data[rowIdx])
+            : cellProps.style
+        }
       >
         {value}
       </components.TableCell>
