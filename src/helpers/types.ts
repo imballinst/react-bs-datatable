@@ -13,7 +13,7 @@ export type HeaderType = {
   headerCell?: (icon: React.ReactNode, sortedProp: SortType) => React.ReactNode;
   cell?: (row: any) => React.ReactNode;
   cellProps?: {
-    className?: string | ((row: any) => CSSProperties);
+    className?: string | ((row: any) => string);
     style?: CSSProperties | ((row: any) => CSSProperties);
   };
   filterable?: boolean;
