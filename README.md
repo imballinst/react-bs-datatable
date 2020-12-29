@@ -103,18 +103,18 @@ Head to https://imballinst.github.io/react-bs-datatable to see all of the featur
 | `rowsPerPageOption` | `number[]`            | Pagination options.                                                        | -       |
 | `Components`        | `Object`              | Custom table components.                                                   | -       |
 | `onRowClick`        | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                       | -       |
-| `cellProps`         | `Object`              | Props passed to the cells. See [cellProps prop](#cellProps).               | -       |
 
 ### tableHeaders
 
-| Field        | Type                                                               | Description                                          |
-| ------------ | ------------------------------------------------------------------ | ---------------------------------------------------- |
-| `prop*`      | `string`                                                           | Column name for the table body.                      |
-| `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop. |
-| `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                         |
-| `filterable` | `boolean`                                                          | Enable/disable filtering on the column.              |
-| `sortable`   | `boolean`                                                          | Enable/disable sorting on the column.                |
-| `title`      | `string`                                                           | Text for the header column.                          |
+| Field        | Type                                                               | Description                                                 |
+| ------------ | ------------------------------------------------------------------ | ----------------------------------------------------------- |
+| `prop*`      | `string`                                                           | Column name for the table body.                             |
+| `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop.        |
+| `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                                |
+| `filterable` | `boolean`                                                          | Enable/disable filtering on the column.                     |
+| `sortable`   | `boolean`                                                          | Enable/disable sorting on the column.                       |
+| `title`      | `string`                                                           | Text for the header column.                                 |
+| `cellProps`  | `Object`                                                           | Props passed to the cells. See [cellProps prop](#cellProps).|
 
 ### tableBody
 
