@@ -76,8 +76,8 @@
     "webpack-cli": "^3.2.3"
   },
   "peerDependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-bootstrap": "^1.0.0"
+    "react": ">= 16.8.4",
+    "react-dom": ">= 16.8.4",
+    "react-bootstrap": ">= 1.0.0"
   }
 }

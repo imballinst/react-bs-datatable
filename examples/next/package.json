@@ -11,7 +11,8 @@
     "moment": "^2.29.1",
     "next": "10.0.5",
     "react": "17.0.1",
-    "react-bs-datatable": "2.1.2",
+    "react-bootstrap": "^1.4.3",
+    "react-bs-datatable": "../../",
     "react-dom": "17.0.1"
   }
 }
