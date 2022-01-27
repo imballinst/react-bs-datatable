@@ -186,7 +186,7 @@ export function useDatatableLifecycle({
   }
 
   let data = tableBody;
-  let maxPage;
+  let maxPage = 1;
   let totalNumberOfResults = tableBody.length;
 
   if (async === undefined) {
@@ -318,7 +318,7 @@ function Datatable(props: DatatableProps) {
             </Components.Col>
           )
         }
-        {(paginationAlwaysVisible || totalNumberOfResults > 0) &&
+        {(paginationAlwaysVisible || maxPage > 1) &&
           <Components.Col
             xs={12}
             sm={6}
@@ -331,7 +331,6 @@ function Datatable(props: DatatableProps) {
               currentPage={currentPage}
               onPageNavigate={onPageNavigate}
               labels={labels}
-              alwaysVisible={paginationAlwaysVisible}
               components={{
                 Button: Components.Button,
                 ButtonGroup: Components.ButtonGroup
