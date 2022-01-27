@@ -252,8 +252,8 @@ export function useDatatableLifecycle({
     labels,
     rowsPerPageOption,
     Components: usedComponents,
-    paginationAlwaysVisible,
-    totalNumberOfResults,
+    shouldShowPagination: paginationAlwaysVisible || maxPage > 1,
+    shouldShowPaginationOptions: paginationAlwaysVisible || totalNumberOfResults > Math.min.apply(Math, rowsPerPageOption),
     onRowClick,
     // States.
     filterable: state.filterable,
@@ -285,8 +285,8 @@ function Datatable(props: DatatableProps) {
     sortedProp,
     maxPage,
     Components,
-    paginationAlwaysVisible,
-    totalNumberOfResults,
+    shouldShowPagination,
+    shouldShowPaginationOptions,
     onRowClick
   } = useDatatableLifecycle(props);
 
@@ -305,7 +305,7 @@ function Datatable(props: DatatableProps) {
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        {(paginationAlwaysVisible || totalNumberOfResults > Math.min.apply(Math, rowsPerPageOption)) && (
+        {shouldShowPaginationOptions && (
             <Components.Col xs={12} sm={2} className={classes.paginationOptsCol}>
               <PaginationOpts
                 classes={classes}
@@ -318,7 +318,7 @@ function Datatable(props: DatatableProps) {
             </Components.Col>
           )
         }
-        {(paginationAlwaysVisible || maxPage > 1) &&
+        {shouldShowPagination &&
           <Components.Col
             xs={12}
             sm={6}
