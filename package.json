@@ -21,8 +21,7 @@
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:types": "tsc --project tsconfig.esm.json --emitDeclarationOnly --declaration --declarationDir lib/types",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "postinstall": "yarn build"
+    "build-storybook": "build-storybook"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
   "jest": {
