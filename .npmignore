@@ -1,6 +1,10 @@
 examples/
-lib/
+src/
 LICENSE
 
+.travis.yml
+.babelrc
+Makefile
+tsconfig*
 .storybook
 .prettierrc
