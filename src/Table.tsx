@@ -37,6 +37,7 @@ export function useDatatableLifecycle({
   tableBody,
   labels = {},
   Components,
+  paginationAlwaysVisible,
   onRowClick
 }: DatatableProps) {
   useEffect(() => {
@@ -186,6 +187,7 @@ export function useDatatableLifecycle({
 
   let data = tableBody;
   let maxPage;
+  let totalNumberOfResults = tableBody.length;
 
   if (async === undefined) {
     data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
@@ -238,6 +240,10 @@ export function useDatatableLifecycle({
     }
   }
 
+  if (paginationAlwaysVisible === undefined) {
+    paginationAlwaysVisible = true;
+  }
+
   return {
     data,
     tableHeaders,
@@ -250,6 +256,8 @@ export function useDatatableLifecycle({
     labels,
     rowsPerPageOption,
     Components: usedComponents,
+    paginationAlwaysVisible,
+    totalNumberOfResults,
     onRowClick,
     // States.
     filterable: state.filterable,
@@ -281,6 +289,8 @@ function Datatable(props: DatatableProps) {
     sortedProp,
     maxPage,
     Components,
+    paginationAlwaysVisible,
+    totalNumberOfResults,
     onRowClick
   } = useDatatableLifecycle(props);
 
@@ -299,34 +309,40 @@ function Datatable(props: DatatableProps) {
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        <Components.Col xs={12} sm={2} className={classes.paginationOptsCol}>
-          <PaginationOpts
-            classes={classes}
-            labels={labels}
-            onRowsPerPageChange={onRowsPerPageChange}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOption={rowsPerPageOption}
-            CustomPaginationOptsGroup={Components.PaginationOptsGroup}
-          />
-        </Components.Col>
-        <Components.Col
-          xs={12}
-          sm={6}
-          className={makeClasses('text-right', classes.paginationCol)}
-        >
-          <Pagination
-            maxPage={maxPage}
-            classes={classes}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onPageNavigate={onPageNavigate}
-            labels={labels}
-            components={{
-              Button: Components.Button,
-              ButtonGroup: Components.ButtonGroup
-            }}
-          />
-        </Components.Col>
+        {(paginationAlwaysVisible || totalNumberOfResults > Math.min.apply(Math, rowsPerPageOption)) && (
+            <Components.Col xs={12} sm={2} className={classes.paginationOptsCol}>
+              <PaginationOpts
+                classes={classes}
+                labels={labels}
+                onRowsPerPageChange={onRowsPerPageChange}
+                rowsPerPage={rowsPerPage}
+                rowsPerPageOption={rowsPerPageOption}
+                CustomPaginationOptsGroup={Components.PaginationOptsGroup}
+              />
+            </Components.Col>
+          )
+        }
+        {(paginationAlwaysVisible || totalNumberOfResults > 0) &&
+          <Components.Col
+            xs={12}
+            sm={6}
+            className={makeClasses('text-right', classes.paginationCol)}
+          >
+            <Pagination
+              maxPage={maxPage}
+              classes={classes}
+              rowsPerPage={rowsPerPage}
+              currentPage={currentPage}
+              onPageNavigate={onPageNavigate}
+              labels={labels}
+              alwaysVisible={paginationAlwaysVisible}
+              components={{
+                Button: Components.Button,
+                ButtonGroup: Components.ButtonGroup
+              }}
+            />
+          </Components.Col>
+        }
       </Components.Row>
       <Components.Row>
         <Components.Col xs={12}>

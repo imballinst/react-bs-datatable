@@ -117,6 +117,8 @@ export type DatatableProps = {
   labels?: LabelType;
   /** Custom table components. */
   Components?: TableComponents;
+  /** Show/hide pagination even if there is only 1 page */
+  paginationAlwaysVisible?: boolean;
   /** On row click event. */
   onRowClick?: OnRowClick;
 };

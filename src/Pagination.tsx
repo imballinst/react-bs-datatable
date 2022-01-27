@@ -8,6 +8,7 @@ type PaginationProps = {
   rowsPerPage?: number;
   currentPage: number;
   maxPage?: number;
+  alwaysVisible?: boolean,
   onPageNavigate: any;
   labels: LabelType;
   classes: TableClasses;
@@ -24,6 +25,7 @@ export default function Pagination({
   labels,
   maxPage,
   classes,
+  alwaysVisible,
   components: { Button, ButtonGroup }
 }: PaginationProps) {
   const paginateHandler = useCallback(
@@ -34,6 +36,10 @@ export default function Pagination({
   );
 
   let renderedElements = null;
+
+  if(!alwaysVisible && maxPage === 1) {
+    return null;
+  }
 
   if (rowsPerPage !== undefined && maxPage !== undefined) {
     const buttons = [];
