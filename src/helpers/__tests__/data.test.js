@@ -1,21 +1,6 @@
-import React from 'react';
-import {
-  getLastChildren,
-  isPropFilterable,
-  sortData,
-  filterData,
-  paginateData
-} from '../data';
+import { isPropFilterable, sortData, filterData, paginateData } from '../data';
 
 describe('data util (src/utils/data)', () => {
-  it('should get last children of a react component; or that object if not', () => {
-    const text = 'testDiv';
-    const aComponent = <div>{text}</div>;
-
-    expect(getLastChildren(aComponent)).toBe(text);
-    expect(getLastChildren(text)).toBe(text);
-  });
-
   it('should determine whether a prop is filterable or not from tableHeader', () => {
     const tableHeader = [
       { prop: 'prop1', filterable: true },

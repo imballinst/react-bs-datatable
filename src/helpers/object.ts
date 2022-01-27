@@ -34,7 +34,7 @@ export function customJoin(
   return `${array.slice(0, -1).join(separator)}${lastSep}${array.slice(-1)}`;
 }
 
-const includedProps = [
+const INCLUDED_PROPS = [
   'classes',
   'async',
   'rowsPerPage',
@@ -46,12 +46,12 @@ export function shouldTableUpdate(
   prevProps: DatatableProps,
   nextProps: DatatableProps
 ) {
-  const checkedPropsLength = includedProps.length;
+  const checkedPropsLength = INCLUDED_PROPS.length;
   let isSame = true;
   let index = 0;
 
   while (isSame && index < checkedPropsLength) {
-    const prop = includedProps[index];
+    const prop = INCLUDED_PROPS[index] as keyof DatatableProps;
 
     if (prevProps[prop] !== nextProps[prop]) {
       if (prop === 'rowsPerPageOption') {

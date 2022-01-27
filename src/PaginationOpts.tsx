@@ -21,7 +21,6 @@ export function PaginationOptsGroup({
 }: PaginationOptsGroupProps) {
   return (
     <Form
-      inline
       className={makeClasses(
         'paginationOpts__root',
         classes.paginationOptsForm
@@ -92,7 +91,7 @@ export default function PaginationOpts({
 
     // Make sure there are no duplicates being pushed.
     if (rowsPerPageOption !== undefined) {
-      rowsPerPageOption.forEach(opt => {
+      rowsPerPageOption.forEach((opt) => {
         if (!opts.includes(opt) && typeof opt === 'number') {
           opts.push(opt);
         }

@@ -60,8 +60,13 @@ export type TableClasses = {
   tbodyCol?: string;
 };
 
-type TableComponentType = React.ElementType<any> | string;
+type TableComponentType = React.ElementType<any>;
 export type TableComponents = {
+  [index: string]:
+    | TableComponentType
+    | FilterGroupFunctionComponent
+    | PaginationOptsGroupFunctionComponent
+    | undefined;
   // Global.
   Row: TableComponentType;
   Col: TableComponentType;

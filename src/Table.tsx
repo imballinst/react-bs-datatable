@@ -44,7 +44,7 @@ export function useDatatableLifecycle({
     if (process.env.NODE_ENV === 'development') {
       if (async !== undefined) {
         // Warn if onSort and/or onFilter is/are also passed down.
-        let str = [];
+        let str: string[] = [];
 
         if (onSort !== undefined) {
           str.push('[onSort]');
@@ -92,7 +92,7 @@ export function useDatatableLifecycle({
     let filterable = async !== undefined && async.onFilter !== undefined;
     let defaultSort = {};
 
-    tableHeaders.forEach(header => {
+    tableHeaders.forEach((header) => {
       if (header.prop === sortObj.prop) {
         if (header.sortable) {
           defaultSort = {
@@ -120,7 +120,7 @@ export function useDatatableLifecycle({
   useEffect(() => {
     // Resets the table if the data passed down is different.
     if (tableBody !== undefined) {
-      setState(oldState => ({
+      setState((oldState) => ({
         ...oldState,
         filterText: '',
         currentPage: 1,
@@ -133,7 +133,7 @@ export function useDatatableLifecycle({
     if (async && async.onFilter) {
       async.onFilter(text);
     } else {
-      setState(oldState => ({
+      setState((oldState) => ({
         ...oldState,
         filterText: text,
         currentPage: 1
@@ -145,7 +145,7 @@ export function useDatatableLifecycle({
     if (async && async.onPaginate) {
       async.onPaginate(nextPage);
     } else {
-      setState(oldState => ({
+      setState((oldState) => ({
         ...oldState,
         currentPage: nextPage
       }));
@@ -156,7 +156,7 @@ export function useDatatableLifecycle({
     if (async && async.onRowsPerPageChange) {
       async.onRowsPerPageChange(numOfPage);
     } else {
-      setState(oldState => ({
+      setState((oldState) => ({
         ...oldState,
         rowsPerPage: numOfPage,
         currentPage: 1
@@ -177,7 +177,7 @@ export function useDatatableLifecycle({
         nextSort.isAscending = !state.sortedProp.isAscending;
       }
 
-      setState(oldState => ({
+      setState((oldState) => ({
         ...oldState,
         sortedProp: nextSort
       }));
@@ -230,11 +230,10 @@ export function useDatatableLifecycle({
   };
 
   if (passedComponents !== undefined) {
-    if (typeof passedComponents === 'object') {
-      for (const key in passedComponents) {
-        // Replace usedComponent fields with the passedComponents fields.
-        usedComponents[key] = passedComponents[key];
-      }
+    const keys = Object.keys(passedComponents) as Array<keyof TableComponents>;
+    for (const key of keys) {
+      // Replace usedComponent fields with the passedComponents fields.
+      usedComponents[key] = passedComponents[key];
     }
   }
 

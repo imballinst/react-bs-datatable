@@ -1,15 +1,4 @@
-import React from 'react';
 import { HeaderType, SortType } from './types';
-
-export function getLastChildren(
-  reactElement: React.ReactElement
-): React.ReactElement {
-  const isReactElement = React.isValidElement(reactElement);
-
-  return isReactElement
-    ? getLastChildren(reactElement.props.children)
-    : reactElement;
-}
 
 export function isPropFilterable(tableHeaders: HeaderType[], prop: string) {
   const headersLength = tableHeaders.length;
@@ -40,11 +29,11 @@ export function sortData(data: any[], sortedProp: SortType, onSort?: any) {
     const sortMultiplier = isAscending ? 1 : -1;
 
     sortedData = sortedData.sort((a, b) => {
-      let quantifiedValue1 = getLastChildren(a[prop]);
-      let quantifiedValue2 = getLastChildren(b[prop]);
+      let quantifiedValue1 = a[prop];
+      let quantifiedValue2 = b[prop];
 
       // if onSort use the onSort[prop] function
-      // this is a handler for custom objects, such as Date
+      // this is a handler for custom objects, such as Date.
       if (onSort && typeof onSort[prop] === 'function') {
         quantifiedValue1 = onSort[prop](quantifiedValue1);
         quantifiedValue2 = onSort[prop](quantifiedValue2);
@@ -72,7 +61,7 @@ export function filterData(
   let filteredData = [...data];
 
   if (filterText !== '') {
-    filteredData = filteredData.filter(element => {
+    filteredData = filteredData.filter((element) => {
       let isElementIncluded = false;
       let i = 0;
 
@@ -84,9 +73,6 @@ export function filterData(
 
         if (isPropFilterable(tableHeaders, prop)) {
           let columnValue = element[prop];
-
-          // Get last children and fill columnValue with empty string if undefined
-          columnValue = getLastChildren(columnValue) || '';
 
           if (onFilter && typeof onFilter[prop] === 'function') {
             columnValue = onFilter[prop](columnValue);

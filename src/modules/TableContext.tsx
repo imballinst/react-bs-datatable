@@ -9,7 +9,7 @@ type TableContextProviderProps = {
 const TableContext = createContext({});
 
 export function useComponentProvider() {
-  return useContext(TableContext);
+  return useContext(TableContext) as TableComponents;
 }
 export function TableComponentsProvider({
   children,
