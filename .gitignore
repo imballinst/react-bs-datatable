@@ -1,7 +1,6 @@
 node_modules/
 .gulp-scss-cache/
 npm-debug.log
-assets/
 *.orig
 stats.json
 *.log
