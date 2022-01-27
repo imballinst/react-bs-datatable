@@ -187,7 +187,7 @@ export function useDatatableLifecycle({
 
   let data = tableBody;
   let maxPage;
-  let totalNumberOfResults = tableBody.length;
+  const totalNumberOfResults = tableBody.length;
 
   if (async === undefined) {
     data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
