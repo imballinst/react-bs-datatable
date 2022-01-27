@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Imballinst/react-bs-datatable.git"
+    "url": "git+https://github.com/imballinst/react-bs-datatable.git"
   },
   "keywords": [
     "react",
@@ -26,9 +26,9 @@
   "author": "Try Ajitiono",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Imballinst/react-bs-datatable/issues"
+    "url": "https://github.com/imballinst/react-bs-datatable/issues"
   },
-  "homepage": "https://github.com/Imballinst/react-bs-datatable#readme",
+  "homepage": "https://github.com/imballinst/react-bs-datatable#readme",
   "devDependencies": {
     "@babel/core": "7.16.12",
     "@babel/preset-env": "7.3.4",
