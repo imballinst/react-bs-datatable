@@ -37,7 +37,7 @@ export function useDatatableLifecycle({
   tableBody,
   labels = {},
   Components,
-  paginationAlwaysVisible,
+  paginationAlwaysVisible = true,
   onRowClick
 }: DatatableProps) {
   useEffect(() => {
@@ -238,10 +238,6 @@ export function useDatatableLifecycle({
         usedComponents[key] = passedComponents[key];
       }
     }
-  }
-
-  if (paginationAlwaysVisible === undefined) {
-    paginationAlwaysVisible = true;
   }
 
   return {
