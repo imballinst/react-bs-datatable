@@ -1,21 +1,24 @@
-import { DatatableProps } from './types';
+import { DatatableProps, Dictionary } from './types';
 
-export function makeClasses(...args: any[]) {
+export function makeClasses(
+  ...args: (string | Dictionary<boolean> | undefined)[]
+) {
   const classes = [];
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (!arg) continue;
 
-    const argType = typeof arg;
-
-    if (argType === 'string' || argType === 'number') {
+    // String.
+    if (typeof arg === 'string') {
       classes.push(arg);
-    } else if (argType === 'object') {
-      for (const key in arg) {
-        if (arg[key]) {
-          classes.push(key);
-        }
+      continue;
+    }
+
+    // Dictionary.
+    for (const key in arg) {
+      if (arg[key]) {
+        classes.push(key);
       }
     }
   }

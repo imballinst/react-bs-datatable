@@ -5,11 +5,11 @@ import { makeClasses } from './helpers/object';
 import Form from 'react-bootstrap/Form';
 
 type PaginationOptsGroupProps = {
-  labels: LabelType;
+  labels?: LabelType;
   value?: number;
   options: number[];
   onChange: any;
-  classes: TableClasses;
+  classes?: TableClasses;
 };
 
 export function PaginationOptsGroup({
@@ -23,15 +23,15 @@ export function PaginationOptsGroup({
     <Form
       className={makeClasses(
         'paginationOpts__root',
-        classes.paginationOptsForm
+        classes?.paginationOptsForm
       )}
     >
       <Form.Group
         controlId="formGroupPagination"
-        className={classes.paginationOptsFormGroup}
+        className={classes?.paginationOptsFormGroup}
       >
-        <span className={classes.paginationOptsFormText}>
-          {labels.show || 'Show'}{' '}
+        <span className={classes?.paginationOptsFormText}>
+          {labels?.show || 'Show'}{' '}
         </span>
         <Form.Control
           name="form-control-pagination"
@@ -39,7 +39,7 @@ export function PaginationOptsGroup({
           as="select"
           placeholder="select"
           onChange={onChange}
-          className={classes.paginationOptsFormControl}
+          className={classes?.paginationOptsFormControl}
         >
           {options.map((option: number | undefined, idx: number) => {
             const optionProps = {
@@ -50,9 +50,9 @@ export function PaginationOptsGroup({
             return <option {...optionProps}>{option}</option>;
           })}
         </Form.Control>
-        <span className={classes.paginationOptsFormText}>
+        <span className={classes?.paginationOptsFormText}>
           {' '}
-          {labels.entries || 'entries'}
+          {labels?.entries || 'entries'}
         </span>
       </Form.Group>
     </Form>
@@ -64,11 +64,11 @@ export type PaginationOptsGroupFunctionComponent = (
 ) => JSX.Element;
 
 type PaginationOptsProps = {
-  labels: LabelType;
+  labels?: LabelType;
   rowsPerPage?: number;
   rowsPerPageOption?: number[];
   onRowsPerPageChange: any;
-  classes: TableClasses;
+  classes?: TableClasses;
   CustomPaginationOptsGroup?: PaginationOptsGroupFunctionComponent;
 };
 
@@ -80,10 +80,6 @@ export default function PaginationOpts({
   classes,
   CustomPaginationOptsGroup
 }: PaginationOptsProps) {
-  function onRowsPerPageChangeHandler(e: any) {
-    onRowsPerPageChange(Number(e.target.value));
-  }
-
   let renderedElements = null;
 
   if (rowsPerPage !== undefined) {
@@ -118,7 +114,7 @@ export default function PaginationOpts({
         <UsedPaginationOpts
           classes={classes}
           labels={labels}
-          onChange={onRowsPerPageChangeHandler}
+          onChange={(e: any) => onRowsPerPageChange(Number(e.target.value))}
           options={opts}
           value={rowsPerPage}
         />

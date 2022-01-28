@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FontAwesome from './modules/FontAwesome';
+import FontAwesome from './components/FontAwesome';
 import { makeClasses } from './helpers/object';
 import {
   HeaderType,
@@ -13,7 +13,7 @@ type TableHeaderProps = {
   tableHeaders: HeaderType[];
   sortedProp: SortType;
   onSortChange: any;
-  classes: TableClasses;
+  classes?: TableClasses;
   components: {
     TableHead: TableComponents['TableHead'];
     TableRow: TableComponents['TableRow'];
@@ -28,10 +28,6 @@ export default function TableHeader({
   classes,
   components: { TableHead, TableRow, TableCell }
 }: TableHeaderProps) {
-  function onSortHandler(prop: string) {
-    return () => onSortChange(prop);
-  }
-
   const headings = [];
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
@@ -43,15 +39,15 @@ export default function TableHeader({
       key: `th-${i}`,
       onClick:
         tableHeaders[i].sortable === true
-          ? onSortHandler(tableHeaders[i].prop)
+          ? () => onSortChange(tableHeaders[i].prop)
           : undefined,
-      className: makeClasses(thClass, classes.theadCol)
+      className: makeClasses(thClass, classes?.theadCol)
     };
     let sortIcon = 'sort';
     let sortIconRender = null;
 
     if (tableHeaders[i].sortable === true) {
-      if (sortedProp !== {} && sortedProp.prop === tableHeaders[i].prop) {
+      if (sortedProp.prop && sortedProp.prop === tableHeaders[i].prop) {
         if (sortedProp.isAscending) {
           sortIcon = 'sort-asc';
         } else {
@@ -71,7 +67,7 @@ export default function TableHeader({
       rendered = (
         <>
           {tableHeaders[i].title}
-          <span className="pull-right">{sortIconRender}</span>
+          <span>{sortIconRender}</span>
         </>
       );
     }
@@ -80,8 +76,8 @@ export default function TableHeader({
   }
 
   return (
-    <TableHead className={makeClasses('thead', classes.thead)}>
-      <TableRow className={makeClasses('thead-tr', classes.theadRow)}>
+    <TableHead className={makeClasses('thead', classes?.thead)}>
+      <TableRow className={makeClasses('thead-tr', classes?.theadRow)}>
         {headings}
       </TableRow>
     </TableHead>

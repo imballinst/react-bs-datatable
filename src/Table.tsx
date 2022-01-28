@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import { sortData, filterData, paginateData } from './helpers/data';
 import Pagination from './Pagination';
@@ -17,8 +17,8 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import FontAwesome from './modules/FontAwesome';
-import { useComponentProvider } from './modules/TableContext';
+import FontAwesome from './components/FontAwesome';
+import { useComponentProvider } from './components/TableContext';
 
 /**
  * Datatable lifecycle convenient function.
@@ -33,9 +33,9 @@ export function useDatatableLifecycle({
   rowsPerPageOption,
   async,
   tableHeaders,
-  classes = {},
+  classes,
   tableBody,
-  labels = {},
+  labels,
   Components,
   onRowClick
 }: DatatableProps) {
@@ -129,60 +129,74 @@ export function useDatatableLifecycle({
     }
   }, [tableBody, rowsPerPage]);
 
-  function onChangeFilter(text: string) {
-    if (async && async.onFilter) {
-      async.onFilter(text);
-    } else {
-      setState((oldState) => ({
-        ...oldState,
-        filterText: text,
-        currentPage: 1
-      }));
-    }
-  }
-
-  function onPageNavigate(nextPage: number) {
-    if (async && async.onPaginate) {
-      async.onPaginate(nextPage);
-    } else {
-      setState((oldState) => ({
-        ...oldState,
-        currentPage: nextPage
-      }));
-    }
-  }
-
-  function onRowsPerPageChange(numOfPage: number) {
-    if (async && async.onRowsPerPageChange) {
-      async.onRowsPerPageChange(numOfPage);
-    } else {
-      setState((oldState) => ({
-        ...oldState,
-        rowsPerPage: numOfPage,
-        currentPage: 1
-      }));
-    }
-  }
-
-  function onSortChange(nextProp: string) {
-    if (async && async.onSort) {
-      async.onSort(nextProp);
-    } else {
-      const nextSort = state.sortedProp;
-
-      if (nextProp !== state.sortedProp.prop) {
-        nextSort.prop = nextProp;
-        nextSort.isAscending = true;
+  const onChangeFilter = useCallback(
+    (text: string) => {
+      if (async && async.onFilter) {
+        async.onFilter(text);
       } else {
-        nextSort.isAscending = !state.sortedProp.isAscending;
+        setState((oldState) => ({
+          ...oldState,
+          filterText: text,
+          currentPage: 1
+        }));
       }
+    },
+    [async]
+  );
 
-      setState((oldState) => ({
-        ...oldState,
-        sortedProp: nextSort
-      }));
-    }
-  }
+  const onPageNavigate = useCallback(
+    (nextPage: number) => {
+      if (async && async.onPaginate) {
+        async.onPaginate(nextPage);
+      } else {
+        setState((oldState) => ({
+          ...oldState,
+          currentPage: nextPage
+        }));
+      }
+    },
+    [async]
+  );
+
+  const onRowsPerPageChange = useCallback(
+    (numOfPage: number) => {
+      if (async && async.onRowsPerPageChange) {
+        async.onRowsPerPageChange(numOfPage);
+      } else {
+        setState((oldState) => ({
+          ...oldState,
+          rowsPerPage: numOfPage,
+          currentPage: 1
+        }));
+      }
+    },
+    [async]
+  );
+
+  const onSortChange = useCallback(
+    (nextProp: string) => {
+      if (async && async.onSort) {
+        async.onSort(nextProp);
+      } else {
+        setState((oldState) => {
+          const nextSort = oldState.sortedProp;
+
+          if (nextProp !== oldState.sortedProp.prop) {
+            nextSort.prop = nextProp;
+            nextSort.isAscending = true;
+          } else {
+            nextSort.isAscending = !oldState.sortedProp.isAscending;
+          }
+
+          return {
+            ...oldState,
+            sortedProp: nextSort
+          };
+        });
+      }
+    },
+    [async]
+  );
 
   let data = tableBody;
   let maxPage;
@@ -200,7 +214,7 @@ export function useDatatableLifecycle({
     maxPage = async.maxPage;
   }
 
-  const tableClass = makeClasses(`table-datatable__root`, classes.table);
+  const tableClass = makeClasses(`table-datatable__root`, classes?.table);
 
   // Default components.
   // If context has keys, then use context. Instead, use Components props.
@@ -286,19 +300,19 @@ function Datatable(props: DatatableProps) {
   return (
     <>
       <Components.Row
-        className={makeClasses('controlRow__root', classes.controlRow)}
+        className={makeClasses('controlRow__root', classes?.controlRow)}
       >
-        <Components.Col xs={12} sm={4} className={classes.filterCol}>
+        <Components.Col xs={12} sm={4} className={classes?.filterCol}>
           <Filter
             filterable={filterable}
             classes={classes}
-            placeholder={labels.filterPlaceholder}
+            placeholder={labels?.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        <Components.Col xs={12} sm={2} className={classes.paginationOptsCol}>
+        <Components.Col xs={12} sm={2} className={classes?.paginationOptsCol}>
           <PaginationOpts
             classes={classes}
             labels={labels}
@@ -311,7 +325,7 @@ function Datatable(props: DatatableProps) {
         <Components.Col
           xs={12}
           sm={6}
-          className={makeClasses('text-right', classes.paginationCol)}
+          className={makeClasses('text-right', classes?.paginationCol)}
         >
           <Pagination
             maxPage={maxPage}

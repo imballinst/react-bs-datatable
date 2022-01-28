@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import NavButton from './modules/NavButton';
+import NavButton from './components/NavButton';
 import { LabelType, TableClasses, TableComponents } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
@@ -9,8 +9,8 @@ type PaginationProps = {
   currentPage: number;
   maxPage?: number;
   onPageNavigate: any;
-  labels: LabelType;
-  classes: TableClasses;
+  labels?: LabelType;
+  classes?: TableClasses;
   components: {
     Button: TableComponents['Button'];
     ButtonGroup: TableComponents['ButtonGroup'];
@@ -26,22 +26,15 @@ export default function Pagination({
   classes,
   components: { Button, ButtonGroup }
 }: PaginationProps) {
-  const paginateHandler = useCallback(
-    (pageNum: number) => {
-      return () => onPageNavigate(pageNum);
-    },
-    [onPageNavigate]
-  );
-
   let renderedElements = null;
 
   if (rowsPerPage !== undefined && maxPage !== undefined) {
     const buttons = [];
 
-    const firstLabel = labels.first || 'First';
-    const prevLabel = labels.prev || 'Prev';
-    const nextLabel = labels.next || 'Next';
-    const lastLabel = labels.last || 'Last';
+    const firstLabel = labels?.first || 'First';
+    const prevLabel = labels?.prev || 'Prev';
+    const nextLabel = labels?.next || 'Next';
+    const lastLabel = labels?.last || 'Last';
 
     const isCurrentPageOutOfBounds = currentPage > maxPage;
     let startNumber;
@@ -66,21 +59,21 @@ export default function Pagination({
     buttons.push(
       <NavButton
         Component={Button}
-        className={classes.paginationButton}
+        className={classes?.paginationButton}
         key={`page-${firstLabel}`}
         pageNumber={1}
         disabled={!hasPrev}
-        onPageNavigate={paginateHandler}
+        onPageNavigate={onPageNavigate}
         label={firstLabel}
       />,
       <NavButton
         Component={Button}
-        className={classes.paginationButton}
+        className={classes?.paginationButton}
         key={`page-${prevLabel}`}
         // If out of bounds, prev button refers to the last page.
         pageNumber={isCurrentPageOutOfBounds ? maxPage : currentPage - 1}
         disabled={!hasPrev}
-        onPageNavigate={paginateHandler}
+        onPageNavigate={onPageNavigate}
         label={prevLabel}
       />
     );
@@ -93,9 +86,9 @@ export default function Pagination({
             key={`page-btn-${i}`}
             pageNumber={startNumber}
             disabled={currentPage === startNumber}
-            onPageNavigate={paginateHandler}
+            onPageNavigate={onPageNavigate}
             label={startNumber}
-            className={classes.paginationButton}
+            className={classes?.paginationButton}
           />
         );
 
@@ -110,10 +103,10 @@ export default function Pagination({
         <NavButton
           Component={Button}
           key={`page-btn-${startNumber}`}
-          className={classes.paginationButton}
+          className={classes?.paginationButton}
           pageNumber={currentPage - 1}
           disabled
-          onPageNavigate={paginateHandler}
+          onPageNavigate={onPageNavigate}
           label={currentPage}
         />
       );
@@ -122,20 +115,20 @@ export default function Pagination({
     buttons.push(
       <NavButton
         Component={Button}
-        className={classes.paginationButton}
+        className={classes?.paginationButton}
         key={`page-${nextLabel}`}
         pageNumber={currentPage + 1}
         disabled={!hasNext}
-        onPageNavigate={paginateHandler}
+        onPageNavigate={onPageNavigate}
         label={nextLabel}
       />,
       <NavButton
         Component={Button}
-        className={classes.paginationButton}
+        className={classes?.paginationButton}
         key={`page-${lastLabel}`}
         pageNumber={maxPage}
         disabled={!hasNext}
-        onPageNavigate={paginateHandler}
+        onPageNavigate={onPageNavigate}
         label={lastLabel}
       />
     );
@@ -144,7 +137,7 @@ export default function Pagination({
       <ButtonGroup
         className={makeClasses(
           'ButtonGroup__root',
-          classes.paginationButtonGroup
+          classes?.paginationButtonGroup
         )}
       >
         {buttons}

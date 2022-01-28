@@ -133,3 +133,7 @@ export type DatatableState = {
   currentPage: number;
   filterText: string;
 };
+
+export type Dictionary<DictionaryValue = string> = {
+  [index: string]: DictionaryValue;
+};

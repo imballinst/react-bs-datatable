@@ -4,14 +4,14 @@ import { TableClasses } from './helpers/types';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import FontAwesome from './modules/FontAwesome';
+import FontAwesome from './components/FontAwesome';
 
 type FilterGroupProps = {
   filterText: string;
   onChangeFilter: (event: any) => void;
   onClearFilter?: () => void;
   placeholder?: string;
-  classes: TableClasses;
+  classes?: TableClasses;
 };
 
 export type FilterGroupFunctionComponent = (
@@ -31,16 +31,16 @@ export function FilterGroup({
   onClearFilter
 }: FilterGroupProps) {
   return (
-    <InputGroup className={classes.filterInputGroup}>
+    <InputGroup className={classes?.filterInputGroup}>
       <Form.Control
         type="text"
         value={filterText}
         placeholder={placeholder}
         onChange={onChangeFilter}
-        className={classes.filterFormControl}
+        className={classes?.filterFormControl}
       />
       <InputGroup.Text>
-        <Button onClick={onClearFilter} className={classes.filterClearButton}>
+        <Button onClick={onClearFilter} className={classes?.filterClearButton}>
           <FontAwesome icon="times" additionalClass="fa-fw" />
         </Button>
       </InputGroup.Text>
