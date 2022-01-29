@@ -31,10 +31,10 @@ export default function Pagination({
   if (rowsPerPage !== undefined && maxPage !== undefined) {
     const buttons = [];
 
-    const firstLabel = labels?.first || 'First';
-    const prevLabel = labels?.prev || 'Prev';
-    const nextLabel = labels?.next || 'Next';
-    const lastLabel = labels?.last || 'Last';
+    const firstLabel = labels?.pagination?.firstPage || 'First';
+    const prevLabel = labels?.pagination?.prevPage || 'Prev';
+    const nextLabel = labels?.pagination?.nextPage || 'Next';
+    const lastLabel = labels?.pagination?.lastPage || 'Last';
 
     const isCurrentPageOutOfBounds = currentPage > maxPage;
     let startNumber;

@@ -26,9 +26,7 @@ const body = Array.from(new Array(57), () => {
       username: 'i-am-billy',
       realname: `Billy ${rd}`,
       location: 'Mars',
-      date: moment()
-        .subtract(1, 'days')
-        .format('Do MMMM YYYY')
+      date: moment().subtract(1, 'days').format('Do MMMM YYYY')
     };
   }
 
@@ -36,9 +34,7 @@ const body = Array.from(new Array(57), () => {
     username: 'john-nhoj',
     realname: `John ${rd}`,
     location: 'Saturn',
-    date: moment()
-      .subtract(2, 'days')
-      .format('Do MMMM YYYY')
+    date: moment().subtract(2, 'days').format('Do MMMM YYYY')
   };
 });
 
@@ -51,13 +47,15 @@ const onSortFunction = {
 };
 
 const customLabels = {
-  first: '<<',
-  last: '>>',
-  prev: '<',
-  next: '>',
-  show: 'Display',
-  entries: 'rows',
-  noResults: 'There is no data to be displayed'
+  pagination: {
+    firstPage: '<<',
+    lastPage: '>>',
+    prevPage: '<',
+    nextPage: '>'
+  },
+  filter: {
+    noResults: 'There is no data to be displayed'
+  }
 };
 
 storiesOf(categoryName, module).add('Custom Labels', () => (
