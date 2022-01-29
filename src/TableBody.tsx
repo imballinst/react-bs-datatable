@@ -4,8 +4,7 @@ import {
   HeaderType,
   LabelType,
   TableClasses,
-  TableComponents,
-  OnRowClick
+  TableComponents
 } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
@@ -19,7 +18,7 @@ type TableBodyProps = {
     TableRow: TableComponents['TableRow'];
     TableCell: TableComponents['TableCell'];
   };
-  onRowClick?: OnRowClick;
+  onRowClick?: (row: any) => void;
 };
 
 export default function TableBody({
@@ -79,7 +78,7 @@ type BodyRowProps = {
     TableRow: TableComponents['TableRow'];
     TableCell: TableComponents['TableCell'];
   };
-  onClick?: OnRowClick;
+  onClick?: (prop: any) => void;
 };
 
 function BodyRow({

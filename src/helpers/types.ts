@@ -40,11 +40,11 @@ export type LabelType = {
   };
   /** This is the labels related to filters. */
   filter?: {
-    /** Change the label when there are no results from the filter text. */
-    noResults?: string;
     /** Change the placeholder label of the filter text input. */
     filterPlaceholder?: string;
   };
+  /** Change the label when there are no results, be it be from normal data or from filter text. */
+  noResults?: string;
 };
 
 export type TableClasses = {

@@ -30,9 +30,9 @@ export function PaginationOptsGroup({
         controlId="formGroupPagination"
         className={classes?.paginationOptsFormGroup}
       >
-        <span className={classes?.paginationOptsFormText}>
+        <Form.Label className={classes?.paginationOptsFormText}>
           {labels?.paginationOptions?.beforeSelect || 'Rows per page'}
-        </span>
+        </Form.Label>
         <Form.Select
           name="form-control-pagination"
           defaultValue={value}
