@@ -32,7 +32,7 @@ export function PaginationOptsGroup({
         className={classes.paginationOptsFormGroup}
       >
         <span className={classes.paginationOptsFormText}>
-          {labels.show || 'Show'}{' '}
+          {labels.show || 'Show'}
         </span>
         <Form.Control
           name="form-control-pagination"
@@ -52,7 +52,6 @@ export function PaginationOptsGroup({
           })}
         </Form.Control>
         <span className={classes.paginationOptsFormText}>
-          {' '}
           {labels.entries || 'entries'}
         </span>
       </Form.Group>

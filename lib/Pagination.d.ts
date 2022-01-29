@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { LabelType, TableClasses, TableComponents } from './helpers/types';
 declare type PaginationProps = {
     rowsPerPage?: number;
