@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { TableComponents } from '../helpers/types';
 
 type NavButtonProps = {

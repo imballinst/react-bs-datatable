@@ -4,7 +4,7 @@ import NavButton from './components/NavButton';
 import { LabelType, TableClasses, TableComponents } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
-type PaginationProps = {
+export type PaginationProps = {
   rowsPerPage?: number;
   currentPage: number;
   maxPage?: number;

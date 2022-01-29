@@ -18,7 +18,7 @@ import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FontAwesome from './components/FontAwesome';
-import { useComponentProvider } from './components/TableContext';
+import { useDatatableWrapper } from './components/DatatableWrapper';
 
 /**
  * Datatable lifecycle convenient function.
@@ -218,7 +218,7 @@ export function useDatatableLifecycle({
 
   // Default components.
   // If context has keys, then use context. Instead, use Components props.
-  const context = useComponentProvider();
+  const context = useDatatableWrapper();
   const passedComponents =
     Object.keys(context).length > 0 ? context : Components;
 
@@ -306,7 +306,7 @@ function Datatable(props: DatatableProps) {
           xs={12}
           lg={4}
           className={makeClasses(
-            'd-flex justify-content-start align-items-end',
+            'd-flex justify-content-start align-items-end mb-xs-2 mb-sm-2 mb-md-2 mb-lg-0',
             classes?.filterCol
           )}
         >

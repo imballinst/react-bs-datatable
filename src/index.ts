@@ -5,7 +5,7 @@ import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import Filter from './Filter';
 import Table, { useDatatableLifecycle } from './Table';
-import { TableComponentsProvider } from './components/TableContext';
+import { DatatableWrapper } from './components/DatatableWrapper';
 import { shouldTableUpdate } from './helpers/object';
 
 export default Table;
@@ -19,6 +19,6 @@ export {
   TableBody,
   Filter,
   useDatatableLifecycle,
-  TableComponentsProvider,
+  DatatableWrapper,
   shouldTableUpdate
 };

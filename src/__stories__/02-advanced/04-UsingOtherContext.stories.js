@@ -12,7 +12,7 @@ import { categoryName } from './_base';
 
 import moment from 'moment';
 // In your setup, replace "../../" with "react-bs-datatable".
-import Datatable, { TableComponentsProvider } from '../../';
+import Datatable, { DatatableWrapper } from '../../';
 import {
   Table,
   TableBody,
@@ -54,9 +54,7 @@ const body = Array.from(new Array(57), () => {
       username: 'i-am-billy',
       realname: `Billy ${rd}`,
       location: 'Mars',
-      date: moment()
-        .subtract(1, 'days')
-        .format('Do MMMM YYYY')
+      date: moment().subtract(1, 'days').format('Do MMMM YYYY')
     };
   }
 
@@ -64,9 +62,7 @@ const body = Array.from(new Array(57), () => {
     username: 'john-nhoj',
     realname: `John ${rd}`,
     location: 'Saturn',
-    date: moment()
-      .subtract(2, 'days')
-      .format('Do MMMM YYYY')
+    date: moment().subtract(2, 'days').format('Do MMMM YYYY')
   };
 });
 
@@ -120,7 +116,7 @@ const classes = {
 storiesOf(categoryName, module).add(
   'Using Context to Pass Material UI Components',
   () => (
-    <TableComponentsProvider
+    <DatatableWrapper
       Components={{
         Row(props) {
           return <Grid container spacing={2} {...props} />;
@@ -178,7 +174,7 @@ storiesOf(categoryName, module).add(
                   />
                 }
               >
-                {options.map(opt => (
+                {options.map((opt) => (
                   <MenuItem value={opt} key={opt}>
                     {opt}
                   </MenuItem>
@@ -197,6 +193,6 @@ storiesOf(categoryName, module).add(
         initialSort={{ prop: 'username', isAscending: true }}
         onSort={onSortFunction}
       />
-    </TableComponentsProvider>
+    </DatatableWrapper>
   )
 );

@@ -4,7 +4,7 @@ import { LabelType, TableClasses } from './helpers/types';
 import { makeClasses } from './helpers/object';
 import Form from 'react-bootstrap/Form';
 
-type PaginationOptsGroupProps = {
+export type PaginationOptsGroupProps = {
   labels?: LabelType;
   value?: number;
   options: number[];
