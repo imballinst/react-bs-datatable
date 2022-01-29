@@ -23,7 +23,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "preversion": "yarn test",
-    "prepublish": "yarn build",
+    "prepublish": "rm -rf lib && yarn build",
     "v:alphamajor": "npm version premajor --preid alpha",
     "v:alphaminor": "npm version preminor --preid alpha",
     "v:alphapatch": "npm version prepatch --preid alpha",
