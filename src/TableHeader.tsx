@@ -43,19 +43,19 @@ export default function TableHeader({
           : undefined,
       className: makeClasses(thClass, classes?.theadCol)
     };
-    let sortIcon = 'sort';
+    let sortIcon: 'sort' | 'sortUp' | 'sortDown' = 'sort';
     let sortIconRender = null;
 
     if (tableHeaders[i].sortable === true) {
       if (sortedProp.prop && sortedProp.prop === tableHeaders[i].prop) {
         if (sortedProp.isAscending) {
-          sortIcon = 'sort-asc';
+          sortIcon = 'sortUp';
         } else {
-          sortIcon = 'sort-desc';
+          sortIcon = 'sortDown';
         }
       }
 
-      sortIconRender = <FontAwesome icon={sortIcon} additionalClass="fa-fw" />;
+      sortIconRender = <FontAwesome icon={sortIcon} className="fa-fw" />;
     }
 
     const headerCell = tableHeaders[i].headerCell;

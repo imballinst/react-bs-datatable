@@ -40,7 +40,7 @@ export function FilterGroup({
         className={classes?.filterFormControl}
       />
       <Button onClick={onClearFilter} className={classes?.filterClearButton}>
-        <FontAwesome icon="times" additionalClass="fa-fw" />
+        <FontAwesome icon="times" className="fa-fw" />
       </Button>
     </InputGroup>
   );

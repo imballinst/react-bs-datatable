@@ -1,17 +1,29 @@
 import React from 'react';
+import {
+  faSort,
+  faSortUp,
+  faSortDown,
+  faTimes
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { makeClasses } from '../helpers/object';
 
-type FontAwesomeProps = {
-  icon: string;
-  additionalClass: string;
+const ICONS = {
+  sort: faSort,
+  sortUp: faSortUp,
+  sortDown: faSortDown,
+  times: faTimes
 };
 
-export default function FontAwesome({
-  icon,
-  additionalClass
-}: FontAwesomeProps) {
-  const faIconString = `fa-${icon}`;
-  const faClass = makeClasses('fa', faIconString, additionalClass);
+type FontAwesomeProps = {
+  icon: keyof typeof ICONS;
+  className?: string;
+};
 
-  return <i className={faClass} aria-hidden="true" />;
+export default function FontAwesome({ icon, className }: FontAwesomeProps) {
+  const faIconString = `fa-${icon}`;
+  const faClass = makeClasses('fas', faIconString, className);
+
+  return <FontAwesomeIcon className={faClass} icon={ICONS[icon]} />;
 }
