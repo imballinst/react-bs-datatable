@@ -23,7 +23,11 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "preversion": "yarn test",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "v:alphamajor": "npm version premajor --preid alpha",
+    "v:alphaminor": "npm version preminor --preid alpha",
+    "v:alphapatch": "npm version prepatch --preid alpha",
+    "v:prebump": "npm version prerelease"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
   "jest": {
