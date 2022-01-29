@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { TableComponents } from '../helpers/types';
 declare type NavButtonProps = {
     pageNumber: number;

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 declare type FontAwesomeProps = {
     icon: string;
     additionalClass: string;

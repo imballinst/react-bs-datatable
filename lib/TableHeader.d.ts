@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { HeaderType, SortType, TableClasses, TableComponents } from './helpers/types';
 declare type TableHeaderProps = {
     tableHeaders: HeaderType[];

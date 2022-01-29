@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { LabelType, TableClasses } from './helpers/types';
 declare type PaginationOptsGroupProps = {
     labels: LabelType;

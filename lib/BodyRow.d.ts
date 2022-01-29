@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { HeaderType, TableClasses, TableComponents, OnRowClick } from './helpers/types';
 declare type BodyRowProps = {
     tableHeaders: HeaderType[];
