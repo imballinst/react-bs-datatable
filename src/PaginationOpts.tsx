@@ -51,9 +51,9 @@ export function PaginationOptsGroup({
           })}
         </Form.Select>
         {labels?.paginationOptions?.afterSelect && (
-          <span className={classes?.paginationOptsFormText}>
+          <Form.Text className={classes?.paginationOptsFormText}>
             {labels?.paginationOptions?.afterSelect}
-          </span>
+          </Form.Text>
         )}
       </Form.Group>
     </Form>
