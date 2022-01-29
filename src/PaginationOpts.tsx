@@ -31,9 +31,9 @@ export function PaginationOptsGroup({
         className={classes?.paginationOptsFormGroup}
       >
         <span className={classes?.paginationOptsFormText}>
-          {labels?.show || 'Show'}{' '}
+          {labels?.paginationOptions?.beforeSelect || 'Rows per page'}
         </span>
-        <Form.Control
+        <Form.Select
           name="form-control-pagination"
           defaultValue={value}
           as="select"
@@ -41,7 +41,7 @@ export function PaginationOptsGroup({
           onChange={onChange}
           className={classes?.paginationOptsFormControl}
         >
-          {options.map((option: number | undefined, idx: number) => {
+          {options.map((option: number) => {
             const optionProps = {
               key: `page-opt-${option}`,
               value: option
@@ -49,11 +49,12 @@ export function PaginationOptsGroup({
 
             return <option {...optionProps}>{option}</option>;
           })}
-        </Form.Control>
-        <span className={classes?.paginationOptsFormText}>
-          {' '}
-          {labels?.entries || 'entries'}
-        </span>
+        </Form.Select>
+        {labels?.paginationOptions?.afterSelect && (
+          <span className={classes?.paginationOptsFormText}>
+            {labels?.paginationOptions?.afterSelect}
+          </span>
+        )}
       </Form.Group>
     </Form>
   );

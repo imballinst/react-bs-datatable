@@ -23,7 +23,7 @@ export default function NavButton({
   const btnProps = {
     ...props,
     disabled,
-    onClick: onPageNavigate(pageNumber),
+    onClick: () => onPageNavigate(pageNumber),
     className
   };
 

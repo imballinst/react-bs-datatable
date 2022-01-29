@@ -39,11 +39,9 @@ export function FilterGroup({
         onChange={onChangeFilter}
         className={classes?.filterFormControl}
       />
-      <InputGroup.Text>
-        <Button onClick={onClearFilter} className={classes?.filterClearButton}>
-          <FontAwesome icon="times" additionalClass="fa-fw" />
-        </Button>
-      </InputGroup.Text>
+      <Button onClick={onClearFilter} className={classes?.filterClearButton}>
+        <FontAwesome icon="times" additionalClass="fa-fw" />
+      </Button>
     </InputGroup>
   );
 }

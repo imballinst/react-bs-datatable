@@ -20,17 +20,31 @@ export type HeaderType = {
   sortable?: boolean;
 };
 
-export type OnRowClick = (value: any) => void;
-
 export type LabelType = {
-  first?: string;
-  last?: string;
-  prev?: string;
-  next?: string;
-  show?: string;
-  entries?: string;
-  noResults?: string;
-  filterPlaceholder?: string;
+  /** This is the labels related to the pagination. */
+  pagination?: {
+    /** Change the label of the button that if clicked, the paging will go to first page. */
+    firstPage?: string;
+    /** Change the label of the button that if clicked, the paging will go to last page. */
+    lastPage?: string;
+    /** Change the label of the button that if clicked, the paging will go to previous page. */
+    prevPage?: string;
+    /** Change the label of the button that if clicked, the paging will go to next page. */
+    nextPage?: string;
+  };
+  paginationOptions?: {
+    /** Change the label that is shown before the select input. */
+    beforeSelect?: string;
+    /** Change the label that is shown after the select input. */
+    afterSelect?: string;
+  };
+  /** This is the labels related to filters. */
+  filter?: {
+    /** Change the label when there are no results from the filter text. */
+    noResults?: string;
+    /** Change the placeholder label of the filter text input. */
+    filterPlaceholder?: string;
+  };
 };
 
 export type TableClasses = {
@@ -123,7 +137,7 @@ export type DatatableProps = {
   /** Custom table components. */
   Components?: TableComponents;
   /** On row click event. */
-  onRowClick?: OnRowClick;
+  onRowClick?: (value: any) => void;
 };
 
 export type DatatableState = {

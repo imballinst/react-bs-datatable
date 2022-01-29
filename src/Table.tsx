@@ -302,17 +302,27 @@ function Datatable(props: DatatableProps) {
       <Components.Row
         className={makeClasses('controlRow__root', classes?.controlRow)}
       >
-        <Components.Col xs={12} sm={4} className={classes?.filterCol}>
+        <Components.Col
+          className={makeClasses(
+            'd-flex justify-content-start align-items-end',
+            classes?.filterCol
+          )}
+        >
           <Filter
             filterable={filterable}
             classes={classes}
-            placeholder={labels?.filterPlaceholder}
+            placeholder={labels?.filter?.filterPlaceholder}
             onChangeFilter={onChangeFilter}
             filterText={filterText}
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        <Components.Col xs={12} sm={2} className={classes?.paginationOptsCol}>
+        <Components.Col
+          className={makeClasses(
+            'd-flex justify-content-center align-items-end',
+            classes?.paginationOptsCol
+          )}
+        >
           <PaginationOpts
             classes={classes}
             labels={labels}
@@ -323,9 +333,10 @@ function Datatable(props: DatatableProps) {
           />
         </Components.Col>
         <Components.Col
-          xs={12}
-          sm={6}
-          className={makeClasses('text-right', classes?.paginationCol)}
+          className={makeClasses(
+            'd-flex justify-content-end align-items-end',
+            classes?.paginationCol
+          )}
         >
           <Pagination
             maxPage={maxPage}
