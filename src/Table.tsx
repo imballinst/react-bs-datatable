@@ -293,7 +293,7 @@ function Datatable(props: DatatableProps) {
           xs={12}
           lg={4}
           className={makeClasses(
-            'd-flex justify-content-start align-items-end',
+            'd-flex justify-content-start align-items-end mb-xs-2 mb-sm-2 mb-md-2 mb-lg-0',
             classes?.filterCol
           )}
         >
