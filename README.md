@@ -7,6 +7,8 @@
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
+**WARNING**: The current major version of this library only supports React Bootstrap v1 (which uses Bootstrap v4). React Bootstrap v2 will only be supported in the next major version of this library. To see the progress of the next major version's branch, please visit [this branch](https://github.com/imballinst/react-bs-datatable/tree/update-peer-deps).
+
 ## What's new in v2?
 
 1. TypeScript! The Table comes out with the `*.d.ts` files. You should be more type-safe now.
@@ -27,10 +29,10 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ```bash
 # With NPM.
-npm install --save react-bs-datatable bootstrap-sass font-awesome
+npm install --save react-bs-datatable bootstrap@4 font-awesome react-bootstrap@1
 
 # With Yarn.
-yarn add react-bs-datatable bootstrap-sass font-awesome
+yarn add react-bs-datatable bootstrap@4 font-awesome react-bootstrap@1
 ```
 
 ## Usage
@@ -89,32 +91,33 @@ Head to https://imballinst.github.io/react-bs-datatable to see all of the featur
 
 ## Props
 
-| Prop                | Type                  | Description                                                                | Default |
-| ------------------- | --------------------- | -------------------------------------------------------------------------- | ------- |
-| `tableHeaders*`     | `Array`               | Table headers. See [tableHeaders prop](#tableHeaders).                     | -       |
-| `tableBody*`        | `Array`               | Table body. See [tableBody prop](#tableBody).                              | -       |
-| `initialSort`       | `Object`              | Initial sort. See [initialSort prop](#initialSort).                        | -       |
-| `onSort`            | `Object`              | Object containing custom sort functions. See [onSort prop](#onSort).       | -       |
-| `onFilter`          | `Object`              | Object containing custom filter functions. See [onFilter prop](#onFilter). | -       |
-| `classes`           | `Object`              | Custom classes. See [classes prop](#classes).                              | -       |
-| `async`             | `Object`              | Enable asynchronous actions. See [async prop](#async).                     | -       |
-| `labels`            | `Object`              | Custom labels inside the table. See [labels prop](#labels).                | `{}`    |
-| `rowsPerPage`       | `number`              | Initial rows per page.                                                     | -       |
-| `rowsPerPageOption` | `number[]`            | Pagination options.                                                        | -       |
-| `Components`        | `Object`              | Custom table components.                                                   | -       |
-| `onRowClick`        | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                       | -       |
+| Prop                      | Type                  | Description                                                                           | Default |
+| ------------------------- | --------------------- | ------------------------------------------------------------------------------------- | ------- |
+| `tableHeaders*`           | `Array`               | Table headers. See [tableHeaders prop](#tableHeaders).                                | -       |
+| `tableBody*`              | `Array`               | Table body. See [tableBody prop](#tableBody).                                         | -       |
+| `initialSort`             | `Object`              | Initial sort. See [initialSort prop](#initialSort).                                   | -       |
+| `onSort`                  | `Object`              | Object containing custom sort functions. See [onSort prop](#onSort).                  | -       |
+| `onFilter`                | `Object`              | Object containing custom filter functions. See [onFilter prop](#onFilter).            | -       |
+| `classes`                 | `Object`              | Custom classes. See [classes prop](#classes).                                         | -       |
+| `async`                   | `Object`              | Enable asynchronous actions. See [async prop](#async).                                | -       |
+| `labels`                  | `Object`              | Custom labels inside the table. See [labels prop](#labels).                           | `{}`    |
+| `rowsPerPage`             | `number`              | Initial rows per page.                                                                | -       |
+| `rowsPerPageOption`       | `number[]`            | Pagination options.                                                                   | -       |
+| `Components`              | `Object`              | Custom table components.                                                              | -       |
+| `onRowClick`              | `(data: any) => void` | Row click event. See [onRowClick prop](#onRowClick).                                  | -       |
+| `paginationAlwaysVisible` | `boolean`             | Determines whether pagination and pagination options should always be visible or not. | -       |
 
 ### tableHeaders
 
-| Field        | Type                                                               | Description                                                 |
-| ------------ | ------------------------------------------------------------------ | ----------------------------------------------------------- |
-| `prop*`      | `string`                                                           | Column name for the table body.                             |
-| `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop.        |
-| `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                                |
-| `filterable` | `boolean`                                                          | Enable/disable filtering on the column.                     |
-| `sortable`   | `boolean`                                                          | Enable/disable sorting on the column.                       |
-| `title`      | `string`                                                           | Text for the header column.                                 |
-| `cellProps`  | `Object`                                                           | Props passed to the cells. See [cellProps prop](#cellProps).|
+| Field        | Type                                                               | Description                                                  |
+| ------------ | ------------------------------------------------------------------ | ------------------------------------------------------------ |
+| `prop*`      | `string`                                                           | Column name for the table body.                              |
+| `headerCell` | `(icon: React.ReactNode, sortedProp: SortType) => React.ReactNode` | Render a custom header cell. Overrides `title` prop.         |
+| `cell`       | `(row: any) => React.ReactNode`                                    | Render a custom column cell.                                 |
+| `filterable` | `boolean`                                                          | Enable/disable filtering on the column.                      |
+| `sortable`   | `boolean`                                                          | Enable/disable sorting on the column.                        |
+| `title`      | `string`                                                           | Text for the header column.                                  |
+| `cellProps`  | `Object`                                                           | Props passed to the cells. See [cellProps prop](#cellProps). |
 
 ### tableBody
 

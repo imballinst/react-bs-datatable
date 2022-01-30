@@ -1,6 +1,6 @@
 {
   "name": "react-bs-datatable",
-  "version": "2.2.0",
+  "version": "2.2.1-alpha.0",
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
   "main": "lib/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "yarn eslint",
     "eslint": "eslint --fix ./src/.",
     "webpack": "webpack",
-    "build": "tsc && git add -A",
+    "build": "rm -rf lib && tsc",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -80,7 +80,7 @@
   },
   "peerDependencies": {
     "react": ">= 16.8.4",
-    "react-bootstrap": ">= 1.0.0",
+    "react-bootstrap": "1.x",
     "react-dom": ">= 16.8.4"
   }
 }
