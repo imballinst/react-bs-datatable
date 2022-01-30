@@ -1,85 +1,42 @@
 import React from 'react';
-
-import { TableClasses } from './helpers/types';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { InputGroup, Form, Button } from 'react-bootstrap';
 import FontAwesome from './components/FontAwesome';
 
-type FilterGroupProps = {
-  filterText: string;
-  onChangeFilter: (event: any) => void;
-  onClearFilter?: () => void;
-  placeholder?: string;
-  classes?: TableClasses;
-};
-
-export type FilterGroupFunctionComponent = (
-  props: FilterGroupProps
-) => JSX.Element;
-
-interface FilterProps extends FilterGroupProps {
-  filterable: boolean;
-  CustomFilterGroup?: FilterGroupFunctionComponent;
+export interface FilterClasses {
+  col?: string;
+  inputGroup?: string;
+  formControl?: string;
+  clearButton?: string;
 }
 
-export function FilterGroup({
-  classes,
+export interface FilterProps {
+  filterText: string;
+  onChangeFilter: (nextFilterText: string) => void;
+  placeholder?: string;
+  classes?: FilterClasses;
+}
+
+export function Filter({
   filterText,
-  placeholder,
+  placeholder = 'Enter text...',
   onChangeFilter,
-  onClearFilter
-}: FilterGroupProps) {
+  classes
+}: FilterProps) {
   return (
-    <InputGroup className={classes?.filterInputGroup}>
+    <InputGroup className={classes?.inputGroup}>
       <Form.Control
         type="text"
         value={filterText}
         placeholder={placeholder}
-        onChange={onChangeFilter}
-        className={classes?.filterFormControl}
+        onChange={(e) => onChangeFilter(e.target.value)}
+        className={classes?.formControl}
       />
-      <Button onClick={onClearFilter} className={classes?.filterClearButton}>
+      <Button
+        onClick={() => onChangeFilter('')}
+        className={classes?.clearButton}
+      >
         <FontAwesome icon="times" className="fa-fw" />
       </Button>
     </InputGroup>
   );
 }
-
-function Filter({
-  filterable,
-  filterText,
-  placeholder = 'Enter text...',
-  onChangeFilter,
-  classes,
-  CustomFilterGroup
-}: FilterProps) {
-  // Event handlers.
-  function onInputChange(e: any) {
-    onChangeFilter(e.target.value);
-  }
-
-  function onClearFilter() {
-    onChangeFilter('');
-  }
-
-  let filterRender = null;
-
-  if (filterable) {
-    const UsedFilterGroup = CustomFilterGroup || FilterGroup;
-
-    filterRender = (
-      <UsedFilterGroup
-        classes={classes}
-        filterText={filterText}
-        placeholder={placeholder}
-        onChangeFilter={onInputChange}
-        onClearFilter={onClearFilter}
-      />
-    );
-  }
-
-  return filterRender;
-}
-
-export default React.memo(Filter);

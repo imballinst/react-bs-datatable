@@ -8,6 +8,16 @@ import {
 } from './helpers/types';
 import { makeClasses } from './helpers/object';
 
+interface TableBodyProps<T> {
+  tableBody: T[];
+  /** Labels/placeholders of the table components. */
+  labels?: {
+    noResults?: string;
+  };
+  /** On row click event. */
+  onRowClick?: (value: any) => void;
+}
+
 type TableBodyProps = {
   tableHeaders: HeaderType[];
   labels?: LabelType;

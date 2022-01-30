@@ -1,43 +1,54 @@
 import React, { useCallback } from 'react';
 
-import NavButton from './components/NavButton';
-import { LabelType, TableClasses, TableComponents } from './helpers/types';
 import { makeClasses } from './helpers/object';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
-export type PaginationProps = {
+/** This is the labels related to the pagination. */
+export interface PaginationLabels {
+  /** Change the label of the button that if clicked, the paging will go to first page. */
+  firstPage?: string;
+  /** Change the label of the button that if clicked, the paging will go to last page. */
+  lastPage?: string;
+  /** Change the label of the button that if clicked, the paging will go to previous page. */
+  prevPage?: string;
+  /** Change the label of the button that if clicked, the paging will go to next page. */
+  nextPage?: string;
+}
+
+export interface PaginationClasses {
+  button?: string;
+  buttonGroup?: string;
+}
+
+export interface PaginationProps {
   rowsPerPage?: number;
   currentPage: number;
   maxPage?: number;
-  onPageNavigate: any;
-  labels?: LabelType;
-  classes?: TableClasses;
-  components: {
-    Button: TableComponents['Button'];
-    ButtonGroup: TableComponents['ButtonGroup'];
-  };
-};
+  onClick: (nextPage: number) => void;
+  labels?: PaginationLabels;
+  classes?: PaginationClasses;
+}
 
 export default function Pagination({
   rowsPerPage,
   currentPage,
-  onPageNavigate,
+  onClick,
   labels,
   maxPage,
-  classes,
-  components: { Button, ButtonGroup }
+  classes
 }: PaginationProps) {
   let renderedElements = null;
 
   if (rowsPerPage !== undefined && maxPage !== undefined) {
     const buttons = [];
 
-    const firstLabel = labels?.pagination?.firstPage || 'First';
-    const prevLabel = labels?.pagination?.prevPage || 'Prev';
-    const nextLabel = labels?.pagination?.nextPage || 'Next';
-    const lastLabel = labels?.pagination?.lastPage || 'Last';
+    const firstLabel = labels?.firstPage || 'First';
+    const prevLabel = labels?.prevPage || 'Prev';
+    const nextLabel = labels?.nextPage || 'Next';
+    const lastLabel = labels?.lastPage || 'Last';
 
     const isCurrentPageOutOfBounds = currentPage > maxPage;
-    let startNumber;
+    let startNumber: number;
     let i = 0;
     let hasPrev = true;
     let hasNext = true;
@@ -57,39 +68,38 @@ export default function Pagination({
     }
 
     buttons.push(
-      <NavButton
-        Component={Button}
-        className={classes?.paginationButton}
+      <Button
+        className={classes?.button}
         key={`page-${firstLabel}`}
-        pageNumber={1}
+        onClick={() => onClick(Number(1))}
         disabled={!hasPrev}
-        onPageNavigate={onPageNavigate}
-        label={firstLabel}
-      />,
-      <NavButton
-        Component={Button}
-        className={classes?.paginationButton}
+      >
+        {firstLabel}
+      </Button>,
+      <Button
+        className={classes?.button}
         key={`page-${prevLabel}`}
         // If out of bounds, prev button refers to the last page.
-        pageNumber={isCurrentPageOutOfBounds ? maxPage : currentPage - 1}
+        onClick={() =>
+          onClick(Number(isCurrentPageOutOfBounds ? maxPage : currentPage - 1))
+        }
         disabled={!hasPrev}
-        onPageNavigate={onPageNavigate}
-        label={prevLabel}
-      />
+      >
+        {prevLabel}
+      </Button>
     );
 
     if (!isCurrentPageOutOfBounds) {
       while (i < 3 && startNumber <= maxPage) {
         buttons.push(
-          <NavButton
-            Component={Button}
+          <Button
             key={`page-btn-${i}`}
-            pageNumber={startNumber}
+            onClick={() => onClick(Number(startNumber))}
             disabled={currentPage === startNumber}
-            onPageNavigate={onPageNavigate}
-            label={startNumber}
-            className={classes?.paginationButton}
-          />
+            className={classes?.button}
+          >
+            {startNumber}
+          </Button>
         );
 
         i += 1;
@@ -100,45 +110,39 @@ export default function Pagination({
       // This is intentional so the user knows that no data in there.
       hasNext = false;
       buttons.push(
-        <NavButton
-          Component={Button}
+        <Button
           key={`page-btn-${startNumber}`}
-          className={classes?.paginationButton}
-          pageNumber={currentPage - 1}
+          className={classes?.button}
+          onClick={() => onClick(Number(currentPage - 1))}
           disabled
-          onPageNavigate={onPageNavigate}
-          label={currentPage}
-        />
+        >
+          {currentPage}
+        </Button>
       );
     }
 
     buttons.push(
-      <NavButton
-        Component={Button}
-        className={classes?.paginationButton}
+      <Button
+        className={classes?.button}
         key={`page-${nextLabel}`}
-        pageNumber={currentPage + 1}
+        onClick={() => onClick(Number(currentPage + 1))}
         disabled={!hasNext}
-        onPageNavigate={onPageNavigate}
-        label={nextLabel}
-      />,
-      <NavButton
-        Component={Button}
-        className={classes?.paginationButton}
+      >
+        {nextLabel}
+      </Button>,
+      <Button
+        className={classes?.button}
         key={`page-${lastLabel}`}
-        pageNumber={maxPage}
+        onClick={() => onClick(Number(maxPage))}
         disabled={!hasNext}
-        onPageNavigate={onPageNavigate}
-        label={lastLabel}
-      />
+      >
+        {lastLabel}
+      </Button>
     );
 
     renderedElements = (
       <ButtonGroup
-        className={makeClasses(
-          'ButtonGroup__root',
-          classes?.paginationButtonGroup
-        )}
+        className={makeClasses('ButtonGroup__root', classes?.buttonGroup)}
       >
         {buttons}
       </ButtonGroup>

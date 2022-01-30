@@ -14,6 +14,7 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 - [ ] Updated Storybook. Previously, this library still used `storiesOf`, but now it is using Component Story Format (CSF), which was available starting from Storybook v5.
 - [x] Lots of optimizations, bundle size in particular. As reported by [Bundlephobia](https://bundlephobia.com/package/react-bs-datatable@3.0.0-alpha.6) for the Alpha version, the minified size is down to just a quarter of what it was, whereas the minified + gzip is down to a third of what it was.
 - [x] Replaced `font-awesome` CSS with the [React components of Font Awesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react). This allowed us to enable tree shaking, which resulted in the optimization point above.
+- [ ] Drop support for all other libraries. This library will now only support Bootstrap tables.
 
 To see the current state of `react-bs-datatable` prerelease version, please visit this Sandbox: https://codesandbox.io/s/react-bs-datatable-3-zq7xe.
 

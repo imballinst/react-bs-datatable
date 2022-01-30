@@ -1,33 +1,37 @@
-import React from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import FontAwesome from './components/FontAwesome';
 import { makeClasses } from './helpers/object';
-import {
-  HeaderType,
-  SortType,
-  TableClasses,
-  TableComponents
-} from './helpers/types';
+import { SortType } from './helpers/types';
 
-type TableHeaderProps = {
-  tableHeaders: HeaderType[];
-  sortedProp: SortType;
-  onSortChange: any;
-  classes?: TableClasses;
-  components: {
-    TableHead: TableComponents['TableHead'];
-    TableRow: TableComponents['TableRow'];
-    TableCell: TableComponents['TableCell'];
+export interface TableHeaderClasses {
+  th?: string;
+  thead?: string;
+  tr?: string;
+}
+
+export interface HeaderType<T> {
+  prop: string;
+  title?: string;
+  headerCell?: (icon: ReactNode, sortedProp: SortType) => ReactNode;
+  cell?: (row: T) => ReactNode;
+  cellProps?: {
+    className?: string | ((row: T) => string);
+    style?: CSSProperties | ((row: T) => CSSProperties);
   };
-};
+  isFilterable?: boolean;
+  isSortable?: boolean;
+}
 
-export default function TableHeader({
+export interface TableHeaderProps<T> {
+  tableHeaders: HeaderType<T>[];
+  classes?: TableHeaderClasses;
+}
+
+export default function TableHeader<T>({
   tableHeaders,
-  sortedProp,
-  onSortChange,
-  classes,
-  components: { TableHead, TableRow, TableCell }
-}: TableHeaderProps) {
+  classes
+}: TableHeaderProps<T>) {
   const headings = [];
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
@@ -41,7 +45,7 @@ export default function TableHeader({
         tableHeaders[i].sortable === true
           ? () => onSortChange(tableHeaders[i].prop)
           : undefined,
-      className: makeClasses(thClass, classes?.theadCol)
+      className: makeClasses(thClass, classes?.th)
     };
     let sortIcon: 'sort' | 'sortUp' | 'sortDown' = 'sort';
     let sortIconRender = null;
@@ -72,14 +76,12 @@ export default function TableHeader({
       );
     }
 
-    headings.push(<TableCell {...thProps}>{rendered}</TableCell>);
+    headings.push(<th {...thProps}>{rendered}</th>);
   }
 
   return (
-    <TableHead className={makeClasses('thead', classes?.thead)}>
-      <TableRow className={makeClasses('thead-tr', classes?.theadRow)}>
-        {headings}
-      </TableRow>
-    </TableHead>
+    <thead className={makeClasses('thead', classes?.thead)}>
+      <tr className={makeClasses('thead-tr', classes?.tr)}>{headings}</tr>
+    </thead>
   );
 }

@@ -220,7 +220,9 @@ export function useDatatableLifecycle({
   // If context has keys, then use context. Instead, use Components props.
   const context = useDatatableWrapper();
   const passedComponents =
-    Object.keys(context).length > 0 ? context : Components;
+    Object.keys(context?.Components || {}).length > 0
+      ? context?.Components
+      : Components;
 
   let usedComponents: TableComponents = {
     // Global.
