@@ -80,7 +80,7 @@
   },
   "peerDependencies": {
     "react": ">= 16.8.4",
-    "react-bootstrap": ">= 1.0.0",
+    "react-bootstrap": "1.x",
     "react-dom": ">= 16.8.4"
   }
 }
