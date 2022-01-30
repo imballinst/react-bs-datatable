@@ -41,6 +41,11 @@ yarn add react-bs-datatable bootstrap@4 font-awesome react-bootstrap@1
 import React from 'react';
 import Datatable from 'react-bs-datatable';
 
+// Import the Bootstrap CSS.
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Import Font Awesome CSS for the icons.
+import 'font-awesome/css/font-awesome.min.css';
+
 // Create table headers consisting of 4 columns.
 const header = [
   { title: 'Username', prop: 'username' },
