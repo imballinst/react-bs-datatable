@@ -1,23 +1,13 @@
-import { isPropFilterable, sortData, filterData, paginateData } from '../data';
+import { sortData, filterData, paginateData } from '../data';
 
 describe('data util (src/utils/data)', () => {
-  it('should determine whether a prop is filterable or not from tableHeader', () => {
-    const tableHeader = [
-      { prop: 'prop1', filterable: true },
-      { prop: 'prop2', filterable: false }
-    ];
-
-    expect(isPropFilterable(tableHeader, 'prop1')).toBe(true);
-    expect(isPropFilterable(tableHeader, 'prop2')).toBe(false);
-  });
-
   it('should sort data correctly', () => {
     const firstData = { prop1: 1 };
     const secondData = { prop1: 2 };
     const data = [firstData, secondData];
 
-    const sortedPropFirst = { prop: 'prop1', isAscending: true };
-    const sortedPropSecond = { prop: 'prop1', isAscending: false };
+    const sortedPropFirst = { prop: 'prop1', order: 'asc' } as const;
+    const sortedPropSecond = { prop: 'prop1', order: 'desc' } as const;
 
     const sortFirstData = sortData(data, sortedPropFirst, undefined);
     const sortSecondData = sortData(data, sortedPropSecond, undefined);
@@ -60,7 +50,9 @@ describe('data util (src/utils/data)', () => {
     expect(filterSecondData[0]).toBe(secondData);
 
     // With filter function
-    const filterFunction = { prop1: val => (val === 1 ? 'hehehe' : 'hahaha') };
+    const filterFunction = {
+      prop1: (val) => (val === 1 ? 'hehehe' : 'hahaha')
+    };
 
     filteredTextFirst = 'hehehe';
     filteredTextSecond = 'hahaha';
@@ -83,7 +75,7 @@ describe('data util (src/utils/data)', () => {
   });
 
   it('should paginate data correctly', () => {
-    const tableData = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], val => {
+    const tableData = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (val) => {
       const objectedNum = { propNum: val };
 
       return objectedNum;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-import { makeClasses } from './helpers/object';
+import { makeClasses } from '../helpers/object';
+import { useDatatableWrapper } from './DatatableWrapper';
 
 export interface PaginationOptionsClasses {
-  col?: string;
   form?: string;
   formGroup?: string;
   formText?: string;
@@ -21,19 +21,24 @@ export interface PaginationOptionsLabels {
 
 export interface PaginationOptsProps {
   labels?: PaginationOptionsLabels;
-  options: number[];
-  onChange: (nextOption: number) => void;
-  value: number;
   classes?: PaginationOptionsClasses;
+  alwaysShowPagination?: boolean;
 }
 
 export default function PaginationOpts({
   labels,
-  options,
-  onChange,
-  value,
-  classes
+  classes,
+  alwaysShowPagination = true
 }: PaginationOptsProps) {
+  const { onRowsPerPageChange, rowsPerPageOptions, rowsPerPageState, data } =
+    useDatatableWrapper();
+
+  if (!alwaysShowPagination || data.length > Math.min(...rowsPerPageOptions)) {
+    // Hide pagination if pagination is meant to not always be shown and the max page is 1,
+    // or if rows per page is -1.
+    return null;
+  }
+
   return (
     <Form className={makeClasses('paginationOpts__root', classes?.form)}>
       <Form.Group
@@ -45,13 +50,13 @@ export default function PaginationOpts({
         </Form.Label>
         <Form.Select
           name="form-control-pagination"
-          value={value}
+          value={rowsPerPageState}
           as="select"
           placeholder="select"
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={(e) => onRowsPerPageChange(Number(e.target.value))}
           className={classes?.formControl}
         >
-          {options.map((option: number) => {
+          {rowsPerPageOptions.map((option: number) => {
             const optionProps = {
               key: `page-opt-${option}`,
               value: option

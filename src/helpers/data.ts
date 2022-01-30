@@ -1,104 +1,85 @@
-import { HeaderType, SortType } from './types';
+import { ColumnProcessObj, HeaderType, SortType, TableRow } from './types';
 
-export function isPropFilterable(tableHeaders: HeaderType[], prop: string) {
-  const headersLength = tableHeaders.length;
-  let i = 0;
-  let found = false;
-  let isFilterable = false;
+export function sortData<TTableRowType extends TableRow>(
+  data: TTableRowType[],
+  sortedProp: SortType,
+  sortValueObj?: ColumnProcessObj<(row: TTableRowType) => number | string>
+) {
+  const sortedData = [...data];
 
-  while (!found && i < headersLength) {
-    if (tableHeaders[i].prop === prop) {
-      found = true;
+  const { prop, order } = sortedProp;
+  const sortMultiplier = order === 'asc' ? 1 : -1;
 
-      if (tableHeaders[i].filterable === true) {
-        isFilterable = true;
-      }
+  sortedData.sort((a, b) => {
+    let quantifiedValue1 = a[prop];
+    let quantifiedValue2 = b[prop];
+
+    if (sortValueObj?.[prop]) {
+      quantifiedValue1 = sortValueObj[prop](quantifiedValue1);
+      quantifiedValue2 = sortValueObj[prop](quantifiedValue2);
     }
 
-    i += 1;
-  }
+    if (quantifiedValue1 < quantifiedValue2) {
+      return -1 * sortMultiplier;
+    } else if (quantifiedValue1 > quantifiedValue2) {
+      return 1 * sortMultiplier;
+    }
 
-  return isFilterable;
-}
-
-export function sortData(data: any[], sortedProp: SortType, onSort?: any) {
-  let sortedData = [...data];
-
-  if (sortedProp.prop !== undefined) {
-    const { prop, isAscending } = sortedProp;
-    const sortMultiplier = isAscending ? 1 : -1;
-
-    sortedData = sortedData.sort((a, b) => {
-      let quantifiedValue1 = a[prop];
-      let quantifiedValue2 = b[prop];
-
-      // if onSort use the onSort[prop] function
-      // this is a handler for custom objects, such as Date.
-      if (onSort && typeof onSort[prop] === 'function') {
-        quantifiedValue1 = onSort[prop](quantifiedValue1);
-        quantifiedValue2 = onSort[prop](quantifiedValue2);
-      }
-
-      if (quantifiedValue1 < quantifiedValue2) {
-        return -1 * sortMultiplier;
-      } else if (quantifiedValue1 > quantifiedValue2) {
-        return 1 * sortMultiplier;
-      }
-
-      return 0;
-    });
-  }
+    return 0;
+  });
 
   return sortedData;
 }
 
-export function filterData(
-  data: any[],
-  tableHeaders: HeaderType[],
+export function filterData<TTableRowType extends TableRow>(
+  data: TTableRowType[],
+  tableHeaders: HeaderType<TTableRowType>[],
   filterText: string,
-  onFilter?: any
+  filterValueObj?: ColumnProcessObj<(row: TTableRowType) => number | string>
 ) {
-  let filteredData = [...data];
-
-  if (filterText !== '') {
-    filteredData = filteredData.filter((element) => {
-      let isElementIncluded = false;
-      let i = 0;
-
-      const elementProps = Object.keys(element);
-      const elementPropLength = elementProps.length;
-
-      while (!isElementIncluded && i < elementPropLength) {
-        const prop = elementProps[i];
-
-        if (isPropFilterable(tableHeaders, prop)) {
-          let columnValue = element[prop];
-
-          if (onFilter && typeof onFilter[prop] === 'function') {
-            columnValue = onFilter[prop](columnValue);
-          } else if (typeof columnValue !== 'string') {
-            // Convert to string if it is not a string
-            columnValue = columnValue.toString();
-          }
-
-          columnValue = columnValue.toLowerCase();
-
-          // If filterText is string/substring of columnValue
-          isElementIncluded = columnValue.includes(filterText.toLowerCase());
-        }
-
-        i += 1;
-      }
-
-      return isElementIncluded;
-    });
+  if (filterText === '') {
+    return data;
   }
 
-  return filteredData;
+  const lowercased = filterText.toLowerCase();
+
+  return data.filter((element) => {
+    let isElementIncluded = false;
+    let i = 0;
+
+    const elementProps = Object.keys(element);
+    const elementPropLength = elementProps.length;
+
+    while (!isElementIncluded && i < elementPropLength) {
+      const prop = elementProps[i];
+
+      if (isPropFilterable(tableHeaders, prop)) {
+        let columnValue = element[prop];
+
+        if (filterValueObj?.[prop]) {
+          columnValue = filterValueObj[prop](columnValue);
+        } else if (typeof columnValue !== 'string') {
+          // Convert to string if it is not a string
+          columnValue = columnValue.toString();
+        }
+
+        columnValue = columnValue.toLowerCase();
+        isElementIncluded = columnValue.includes(lowercased);
+
+        if (isElementIncluded) {
+          break;
+        }
+      }
+
+      i += 1;
+    }
+
+    return isElementIncluded;
+  });
 }
 
-export function paginateData(
-  data: any[],
+export function paginateData<TTableRowType extends TableRow>(
+  data: TTableRowType[],
   currentPage: number,
   rowsPerPage?: number
 ) {
@@ -112,4 +93,29 @@ export function paginateData(
   }
 
   return paginatedData;
+}
+
+// Helper functions.
+function isPropFilterable<TTableRowType extends TableRow>(
+  tableHeaders: HeaderType<TTableRowType>[],
+  prop: string
+) {
+  const headersLength = tableHeaders.length;
+  let i = 0;
+  let found = false;
+  let isFilterable = false;
+
+  while (!found && i < headersLength) {
+    if (tableHeaders[i].prop === prop) {
+      found = true;
+
+      if (tableHeaders[i].isFilterable === true) {
+        isFilterable = true;
+      }
+    }
+
+    i += 1;
+  }
+
+  return isFilterable;
 }

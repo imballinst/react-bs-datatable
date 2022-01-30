@@ -1,9 +1,8 @@
 import React from 'react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
-import FontAwesome from './components/FontAwesome';
+import FontAwesome from './FontAwesome';
 
 export interface FilterClasses {
-  col?: string;
   inputGroup?: string;
   formControl?: string;
   clearButton?: string;

@@ -1,22 +1,12 @@
-import React, {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useState
-} from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { filterData, paginateData, sortData } from '../helpers/data';
-import { HeaderType } from '../TableHeader';
+import { createCtx } from '../helpers/react';
+import { ColumnProcessObj, SortType } from '../helpers/types';
+import { HeaderType } from '../helpers/types';
 
-export interface SortType {
-  prop: string;
-  order: 'asc' | 'desc';
-}
-
-interface FilterProps<T> {
+interface FilterProps<TTableRowType> {
   // Uncontrolled.
-  filterFn?: (row: T) => boolean;
+  filterValueObj?: ColumnProcessObj<(row: TTableRowType) => string>;
   // Controlled.
   state?: {
     filter: string;
@@ -24,9 +14,9 @@ interface FilterProps<T> {
   asyncFn?: (nextState: string) => void;
 }
 
-interface SortProps<T> {
+interface SortProps<TTableRowType> {
   // Uncontrolled.
-  sortFn?: (a: T, b: T) => 0 | -1 | 1;
+  sortValueObj?: ColumnProcessObj<(row: TTableRowType) => string>;
   // Controlled.
   state?: SortType;
   asyncFn?: (nextState: SortType) => void;
@@ -42,6 +32,7 @@ interface PaginationProps {
 }
 
 interface PaginationOptionsProps {
+  paginationAlwaysVisible?: boolean;
   // Controlled.
   state?: {
     rowsPerPage: number;
@@ -51,7 +42,9 @@ interface PaginationOptionsProps {
 }
 
 // Context types.
-interface DatatableWrapperContextType<T> {
+interface DatatableWrapperContextType<TTableRowType> {
+  // Things passed to other components.
+  headers: HeaderType<TTableRowType>[];
   // Filter.
   isFilterable: boolean;
   filterState: string;
@@ -68,23 +61,20 @@ interface DatatableWrapperContextType<T> {
   onRowsPerPageChange: (nextState: number) => void;
   // Data.
   maxPage: number;
-  data: T[];
+  data: TTableRowType[];
 }
 
-const DatatableWrapperContext =
-  createContext<DatatableWrapperContextType<any> | undefined>(undefined);
+const [useCtx, Provider] = createCtx<DatatableWrapperContextType<any>>();
 
-export function useDatatableWrapper() {
-  return useContext(DatatableWrapperContext);
-}
+export const useDatatableWrapper = useCtx;
 
 // Main wrapper.
-export interface DatatableWrapperProps<T> {
+export interface DatatableWrapperProps<TTableRowType> {
   children: ReactNode;
-  headers: HeaderType<T>[];
-  body: T[];
-  filterProps?: FilterProps<T>;
-  sortProps?: SortProps<T>;
+  headers: HeaderType<TTableRowType>[];
+  body: TTableRowType[];
+  filterProps?: FilterProps<TTableRowType>;
+  sortProps?: SortProps<TTableRowType>;
   paginationProps?: PaginationProps;
   paginationOptionsProps?: PaginationOptionsProps;
 }
@@ -101,7 +91,7 @@ interface DatatableState {
   filter: string;
 }
 
-export function DatatableWrapper<T = any>({
+export function DatatableWrapper<TTableRowType = any>({
   filterProps,
   headers,
   body,
@@ -109,7 +99,7 @@ export function DatatableWrapper<T = any>({
   paginationProps,
   paginationOptionsProps,
   children
-}: DatatableWrapperProps<T>) {
+}: DatatableWrapperProps<TTableRowType>) {
   const [state, setState] = useState<DatatableState>(() => {
     const defaultSort: SortType = { order: 'asc', prop: '' };
     let isFilterable = filterProps !== undefined;
@@ -155,7 +145,7 @@ export function DatatableWrapper<T = any>({
 
   const onFilterChange = useCallback(
     (text: string) => {
-      if (typeof filterProps?.asyncFn === 'function') {
+      if (filterProps?.asyncFn) {
         filterProps.asyncFn(text);
       } else {
         setState((oldState) => ({
@@ -170,7 +160,7 @@ export function DatatableWrapper<T = any>({
 
   const onPaginationChange = useCallback(
     (nextPage: number) => {
-      if (typeof paginationProps?.asyncFn === 'function') {
+      if (paginationProps?.asyncFn) {
         paginationProps.asyncFn(nextPage);
       } else {
         setState((oldState) => ({
@@ -184,7 +174,7 @@ export function DatatableWrapper<T = any>({
 
   const onRowsPerPageChange = useCallback(
     (numOfPage: number) => {
-      if (typeof paginationOptionsProps?.asyncFn === 'function') {
+      if (paginationOptionsProps?.asyncFn) {
         paginationOptionsProps.asyncFn(numOfPage);
       } else {
         setState((oldState) => ({
@@ -199,7 +189,7 @@ export function DatatableWrapper<T = any>({
 
   const onSortChange = useCallback(
     (nextSort: SortType) => {
-      if (typeof sortProps?.asyncFn === 'function') {
+      if (sortProps?.asyncFn) {
         sortProps.asyncFn(nextSort);
       } else {
         setState((oldState) => ({
@@ -212,13 +202,13 @@ export function DatatableWrapper<T = any>({
   );
 
   let data = body;
-  let maxPage = -1;
+  let maxPage = 1;
 
   if (paginationProps?.state?.maxPage === undefined) {
     const { filter, sort, pagination } = state;
 
-    data = filterData(body, headers, filter, filterProps?.filterFn);
-    data = sortData(data, sort, sortProps?.sortFn);
+    data = filterData(body, headers, filter, filterProps?.filterValueObj);
+    data = sortData(data, sort, sortProps?.sortValueObj);
 
     if (pagination.rowsPerPage !== -1) {
       // Pagination needs.
@@ -230,8 +220,9 @@ export function DatatableWrapper<T = any>({
   }
 
   return (
-    <DatatableWrapperContext.Provider
+    <Provider
       value={{
+        headers,
         // Filter.
         isFilterable: state.isFilterable,
         filterState: state.filter,
@@ -252,6 +243,6 @@ export function DatatableWrapper<T = any>({
       }}
     >
       {children}
-    </DatatableWrapperContext.Provider>
+    </Provider>
   );
 }
