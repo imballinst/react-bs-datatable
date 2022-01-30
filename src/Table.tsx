@@ -37,6 +37,7 @@ export function useDatatableLifecycle({
   tableBody,
   labels = {},
   Components,
+  paginationAlwaysVisible = true,
   onRowClick
 }: DatatableProps) {
   useEffect(() => {
@@ -185,7 +186,8 @@ export function useDatatableLifecycle({
   }
 
   let data = tableBody;
-  let maxPage;
+  let maxPage = 1;
+  const totalNumberOfResults = tableBody.length;
 
   if (async === undefined) {
     data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
@@ -250,6 +252,8 @@ export function useDatatableLifecycle({
     labels,
     rowsPerPageOption,
     Components: usedComponents,
+    shouldShowPagination: paginationAlwaysVisible || maxPage > 1,
+    shouldShowPaginationOptions: paginationAlwaysVisible || totalNumberOfResults > Math.min.apply(Math, rowsPerPageOption),
     onRowClick,
     // States.
     filterable: state.filterable,
@@ -281,6 +285,8 @@ function Datatable(props: DatatableProps) {
     sortedProp,
     maxPage,
     Components,
+    shouldShowPagination,
+    shouldShowPaginationOptions,
     onRowClick
   } = useDatatableLifecycle(props);
 
@@ -306,45 +312,49 @@ function Datatable(props: DatatableProps) {
             CustomFilterGroup={Components.FilterGroup}
           />
         </Components.Col>
-        <Components.Col
-          xs={12}
-          sm={4}
-          lg={4}
-          className={makeClasses(
-            'd-flex justify-content-lg-center justify-content-xs-start align-items-end',
-            classes?.paginationOptsCol
-          )}
-        >
-          <PaginationOpts
-            classes={classes}
-            labels={labels}
-            onRowsPerPageChange={onRowsPerPageChange}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOption={rowsPerPageOption}
-            CustomPaginationOptsGroup={Components.PaginationOptsGroup}
-          />
-        </Components.Col>
-        <Components.Col
-          sm={8}
-          lg={4}
-          className={makeClasses(
-            'd-flex justify-content-end align-items-end',
-            classes?.paginationCol
-          )}
-        >
-          <Pagination
-            maxPage={maxPage}
-            classes={classes}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onPageNavigate={onPageNavigate}
-            labels={labels}
-            components={{
-              Button: Components.Button,
-              ButtonGroup: Components.ButtonGroup
-            }}
-          />
-        </Components.Col>
+        {shouldShowPaginationOptions && (
+          <Components.Col
+            xs={12}
+            sm={4}
+            lg={4}
+            className={makeClasses(
+              'd-flex justify-content-lg-center justify-content-xs-start align-items-end',
+              classes?.paginationOptsCol
+            )}
+          >
+            <PaginationOpts
+              classes={classes}
+              labels={labels}
+              onRowsPerPageChange={onRowsPerPageChange}
+              rowsPerPage={rowsPerPage}
+              rowsPerPageOption={rowsPerPageOption}
+              CustomPaginationOptsGroup={Components.PaginationOptsGroup}
+            />
+          </Components.Col>
+        )}
+        {shouldShowPagination && (
+          <Components.Col
+            sm={8}
+            lg={4}
+            className={makeClasses(
+              'd-flex justify-content-end align-items-end',
+              classes?.paginationCol
+            )}
+          >
+            <Pagination
+              maxPage={maxPage}
+              classes={classes}
+              rowsPerPage={rowsPerPage}
+              currentPage={currentPage}
+              onPageNavigate={onPageNavigate}
+              labels={labels}
+              components={{
+                Button: Components.Button,
+                ButtonGroup: Components.ButtonGroup
+              }}
+            />
+          </Components.Col>
+        )}
       </Components.Row>
       <Components.Row>
         <Components.Col xs={12}>
