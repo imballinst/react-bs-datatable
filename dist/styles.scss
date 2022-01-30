@@ -14,5 +14,10 @@
 
   .paginationOpts__root {
     justify-content: center;
+
+    .form-group .form-control {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
   }
 }

@@ -71,10 +71,10 @@ export declare type AsyncProps = {
     rowsPerPage: number;
     currentPage: number;
     maxPage: number;
-    onSort: (nextProp: string) => {};
-    onPaginate: (nextPage: number) => {};
-    onFilter: (text: string) => {};
-    onRowsPerPageChange: (numOfPage: number) => {};
+    onSort: (nextProp: string) => void;
+    onPaginate: (nextPage: number) => void;
+    onFilter: (text: string) => void;
+    onRowsPerPageChange: (numOfPage: number) => void;
 };
 export declare type DatatableProps = {
     /** Initial sort of the table. */
