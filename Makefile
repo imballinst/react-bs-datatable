@@ -3,7 +3,7 @@ COMMIT_HASH := $(shell git log --pretty=format:'%h' -n 1)
 # Publishes the Storybook to gh-pages.
 publish-storybook:
 	# Checkout to master branch.
-	git checkout master
+	git checkout main
 	# Build Storybook.
 	yarn build-storybook
 	# Checkout to gh-pages branch.
@@ -18,6 +18,6 @@ publish-storybook:
 	git c -m "Update gh-pages $(COMMIT_HASH)"
 	git push origin gh-pages
 	# Back to master after publishing.
-	git checkout master
+	git checkout main
 
 .PHONY: publish-storybook
