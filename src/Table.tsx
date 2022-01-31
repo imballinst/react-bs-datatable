@@ -191,10 +191,12 @@ export function useDatatableLifecycle({
     data = filterData(tableBody, tableHeaders, state.filterText, onFilter);
     data = sortData(data, state.sortedProp, onSort);
 
+    const filteredDataLength = data.length;
+
     if (state.rowsPerPage) {
       // Pagination needs.
       data = paginateData(data, state.currentPage, state.rowsPerPage);
-      maxPage = Math.ceil(tableBody.length / state.rowsPerPage);
+      maxPage = Math.ceil(filteredDataLength / state.rowsPerPage);
     }
   } else {
     maxPage = async.maxPage;
