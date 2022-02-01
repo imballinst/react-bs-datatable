@@ -10,7 +10,7 @@ interface TableBodyClasses {
   tr?: string;
 }
 
-interface TableBodyProps<TTableRowType extends TableRowType> {
+export interface TableBodyProps<TTableRowType extends TableRowType> {
   /** Labels/placeholders of the table components. */
   labels?: {
     noResults?: string;

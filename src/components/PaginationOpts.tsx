@@ -39,8 +39,7 @@ export default function PaginationOpts({
 
   if (
     !alwaysShowPagination ||
-    (rowsPerPageOptions.length &&
-      filteredDataLength <= Math.min(...rowsPerPageOptions))
+    filteredDataLength <= Math.min(...rowsPerPageOptions)
   ) {
     // Hide pagination if pagination is meant to not always be shown and the max page is 1,
     // or if rows per page is -1.

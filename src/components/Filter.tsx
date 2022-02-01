@@ -36,6 +36,7 @@ export function Filter({
       <Button
         onClick={() => onFilterChange('')}
         className={classes?.clearButton}
+        aria-label="Clear filter"
       >
         <FontAwesome icon="times" className="fa-fw" />
       </Button>
