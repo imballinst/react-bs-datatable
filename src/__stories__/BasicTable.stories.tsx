@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
+import { parse } from 'date-fns';
 
 import json from './resources/story-data.json';
 import { StoryHeaderType } from './resources/types';
 import TableHeader from '../components/TableHeader';
 import TableBody from '../components/TableBody';
-import { DatatableWrapper } from '../components/DatatableWrapper';
+import {
+  DatatableWrapper,
+  DatatableWrapperProps
+} from '../components/DatatableWrapper';
 import { TableColumnType } from '../helpers/types';
 import { Filter } from '../components/Filter';
 import PaginationOpts from '../components/PaginationOpts';
@@ -22,7 +26,12 @@ export default {
   argTypes: {
     sortableFields: {
       options: ['name', 'username', 'location', 'date', 'score'],
-      defaultValue: [],
+      control: {
+        type: 'inline-check'
+      }
+    },
+    filterableFields: {
+      options: ['name', 'username', 'location', 'date', 'score'],
       control: {
         type: 'inline-check'
       }
@@ -61,18 +70,33 @@ const HEADERS: TableColumnType<StoryHeaderType>[] = [
   }
 ];
 
-function StoryTable({ sortableFields }: { sortableFields: string[] }) {
+type Row = typeof json[number];
+
+const SORT_PROPS: DatatableWrapperProps<Row>['sortProps'] = {
+  sortValueObj: {
+    date: (row) => parse(row.date, 'MMMM dd, yyyy', new Date()).getTime()
+  }
+};
+
+function StoryTable({
+  sortableFields,
+  filterableFields
+}: {
+  sortableFields: string[];
+  filterableFields: string[];
+}) {
   const headers = useMemo(
     () =>
       HEADERS.map((header) => ({
         ...header,
-        isSortable: sortableFields.includes(header.prop)
+        isSortable: sortableFields?.includes(header.prop),
+        isFilterable: filterableFields?.includes(header.prop)
       })),
-    [sortableFields]
+    [sortableFields, filterableFields]
   );
 
   return (
-    <DatatableWrapper body={json} headers={headers}>
+    <DatatableWrapper body={json} headers={headers} sortProps={SORT_PROPS}>
       <Row>
         <Col>
           <Filter />

@@ -9,6 +9,11 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts", "src/index.ts"]
+  "include": ["src", "scripts"],
+  "exclude": ["src/**/*.test.ts", "src/index.ts"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

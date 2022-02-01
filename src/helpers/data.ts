@@ -8,7 +8,7 @@ import {
 export function sortData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   sortedProp: SortType,
-  sortValueObj?: ColumnProcessObj<(row: TTableRowType) => number | string>
+  sortValueObj?: ColumnProcessObj<TTableRowType>
 ) {
   const sortedData = [...data];
 
@@ -40,7 +40,7 @@ export function filterData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   tableHeaders: Record<string, TableColumnType<TTableRowType>>,
   filterText: string,
-  filterValueObj?: ColumnProcessObj<(row: TTableRowType) => number | string>
+  filterValueObj?: ColumnProcessObj<TTableRowType>
 ) {
   if (filterText === '') {
     return data;

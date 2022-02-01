@@ -1,5 +1,6 @@
 import { writeFile } from 'fs/promises';
 import path from 'path';
+import { format } from 'date-fns';
 
 const NAMES = [
   'Aaren',
@@ -105,26 +106,27 @@ const NAMES = [
   'Yetty'
 ];
 const PLANETS = ['Earth', 'Mars', 'Saturn', 'Jupyter', 'Venus'];
+const NUMBER_OF_ENTRIES = 60;
 
 main();
 
 async function main() {
-  const data = Array.from(new Array(60), () => ({
-    ...getNameAndUsername(),
+  const data = Array.from(new Array(NUMBER_OF_ENTRIES), (_, idx) => ({
+    ...getNameAndUsername(idx),
     date: getRandomDateWithinOneMonth(),
     score: getRandomScore(),
     location: getRandomPlanet()
   }));
   await writeFile(
-    path.join(__dirname, '../src/__stories__/data/story-data.json'),
+    path.join(__dirname, '../src/__stories__/resources/story-data.json'),
     JSON.stringify(data),
     'utf-8'
   );
 }
 
 // Helper functions.
-function getNameAndUsername() {
-  const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+function getNameAndUsername(idx: number) {
+  const name = NAMES[Math.floor(idx * (NAMES.length / NUMBER_OF_ENTRIES))];
   return {
     name,
     username: `${name.toLowerCase()}-${getRandomScore()}`
@@ -134,7 +136,7 @@ function getNameAndUsername() {
 function getRandomDateWithinOneMonth() {
   // 1 day times a certain number.
   const dayMultiplier = 86400000 * Math.ceil(Math.random() * 60);
-  return new Date(Date.now() + dayMultiplier).toISOString();
+  return format(new Date(Date.now() + dayMultiplier), 'MMMM dd, yyyy');
 }
 
 function getRandomScore() {

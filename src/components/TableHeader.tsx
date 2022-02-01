@@ -37,7 +37,7 @@ export default function TableHeader<T extends TableRowType>({
       if (sortState.prop && sortState.prop === prop) {
         if (sortState.order === 'asc') {
           sortIcon = 'sortUp';
-          nextSort.prop = 'desc';
+          nextSort.order = 'desc';
         } else {
           sortIcon = 'sortDown';
         }

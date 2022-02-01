@@ -19,4 +19,6 @@ export interface TableColumnType<T> {
 }
 
 export type TableRowType<T = any> = Record<string, T>;
-export type ColumnProcessObj<T> = Record<string, T>;
+export type ColumnProcessObj<T> = Partial<
+  Record<keyof T, (row: T) => string | number>
+>;

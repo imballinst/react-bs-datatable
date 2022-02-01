@@ -13,7 +13,7 @@ import { TableColumnType } from '../helpers/types';
 
 interface FilterProps<TTableRowType> {
   // Uncontrolled.
-  filterValueObj?: ColumnProcessObj<(row: TTableRowType) => string>;
+  filterValueObj?: ColumnProcessObj<TTableRowType>;
   // Controlled.
   state?: {
     filter: string;
@@ -23,7 +23,7 @@ interface FilterProps<TTableRowType> {
 
 interface SortProps<TTableRowType> {
   // Uncontrolled.
-  sortValueObj?: ColumnProcessObj<(row: TTableRowType) => string>;
+  sortValueObj?: ColumnProcessObj<TTableRowType>;
   // Controlled.
   state?: SortType;
   asyncFn?: (nextState: SortType) => void;
@@ -107,38 +107,43 @@ export function DatatableWrapper<TTableRowType = any>({
   paginationOptionsProps,
   children
 }: DatatableWrapperProps<TTableRowType>) {
-  const [state, setState] = useState<DatatableState>(() => {
-    const defaultSort: SortType = { order: 'asc', prop: '' };
-    let isFilterable = filterProps !== undefined;
-
-    for (const header of headers) {
-      // Get the first table header with the sort attribute.
-      if (
-        defaultSort.prop === '' &&
-        header.prop === sortProps?.state?.prop &&
-        header.isSortable
-      ) {
-        defaultSort.prop = header.prop;
-      }
-
-      if (header.isFilterable) {
-        isFilterable = true;
-      }
-    }
-
-    // Define initial state.
-    return {
-      isFilterable,
-      filter: filterProps?.state?.filter || '',
-      sort: defaultSort,
-      pagination: {
-        currentPage: paginationProps?.state?.page || 1,
-        rowsPerPage: paginationOptionsProps?.state?.rowsPerPage || -1,
-        rowsPerPageOptions: paginationOptionsProps?.state?.options || []
-      }
-    };
+  const [state, setState] = useState<DatatableState>(
+    getDefaultDatatableState({
+      filterProps,
+      headers,
+      sortProps,
+      paginationProps,
+      paginationOptionsProps
+    })
+  );
+  const tableHeadersRecordRef = useRef(convertArrayToRecord(headers, 'prop'));
+  // Store this in a ref because we might need it in case `headers` change.
+  // Though, we don't want to put these into `useEffect` because they most likely
+  // change over time.
+  const controlPropsRef = useRef({
+    filterProps,
+    sortProps,
+    paginationProps,
+    paginationOptionsProps
   });
-  const tableHeadersRecord = useRef(convertArrayToRecord(headers, 'prop'));
+
+  useEffect(() => {
+    // Resets the table if the headers passed down is different.
+    if (headers !== undefined) {
+      // Re-set the ref.
+      tableHeadersRecordRef.current = convertArrayToRecord(headers, 'prop');
+      // Re-set the initial state.
+      setState(
+        getDefaultDatatableState({
+          filterProps: controlPropsRef.current.filterProps,
+          headers,
+          sortProps: controlPropsRef.current.sortProps,
+          paginationProps: controlPropsRef.current.paginationProps,
+          paginationOptionsProps: controlPropsRef.current.paginationOptionsProps
+        })
+      );
+    }
+  }, [headers]);
 
   useEffect(() => {
     // Resets the table if the data passed down is different.
@@ -224,7 +229,7 @@ export function DatatableWrapper<TTableRowType = any>({
     if (state.isFilterable) {
       data = filterData(
         body,
-        tableHeadersRecord.current,
+        tableHeadersRecordRef.current,
         filter,
         filterProps?.filterValueObj
       );
@@ -267,4 +272,50 @@ export function DatatableWrapper<TTableRowType = any>({
       {children}
     </Provider>
   );
+}
+
+// Helper functions.
+function getDefaultDatatableState<TTableRowType>({
+  filterProps,
+  paginationOptionsProps,
+  paginationProps,
+  sortProps,
+  headers
+}: Pick<
+  DatatableWrapperProps<TTableRowType>,
+  | 'filterProps'
+  | 'paginationOptionsProps'
+  | 'paginationProps'
+  | 'sortProps'
+  | 'headers'
+>) {
+  const defaultSort: SortType = { order: 'asc', prop: '' };
+  let isFilterable = filterProps !== undefined;
+
+  for (const header of headers) {
+    // Get the first table header with the sort attribute.
+    if (
+      defaultSort.prop === '' &&
+      header.prop === sortProps?.state?.prop &&
+      header.isSortable
+    ) {
+      defaultSort.prop = header.prop;
+    }
+
+    if (header.isFilterable) {
+      isFilterable = true;
+    }
+  }
+
+  // Define initial state.
+  return {
+    isFilterable,
+    filter: filterProps?.state?.filter || '',
+    sort: defaultSort,
+    pagination: {
+      currentPage: paginationProps?.state?.page || 1,
+      rowsPerPage: paginationOptionsProps?.state?.rowsPerPage || -1,
+      rowsPerPageOptions: paginationOptionsProps?.state?.options || []
+    }
+  };
 }
