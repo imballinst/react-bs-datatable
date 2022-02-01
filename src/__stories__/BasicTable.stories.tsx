@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
 import { parse } from 'date-fns';
 
 import json from './resources/story-data.json';
-import { StoryHeaderType } from './resources/types';
+import { StoryBodyType } from './resources/types';
 import TableHeader from '../components/TableHeader';
 import TableBody from '../components/TableBody';
 import {
@@ -25,13 +25,35 @@ export default {
   component: StoryTable,
   argTypes: {
     sortableFields: {
-      options: ['name', 'username', 'location', 'date', 'score'],
+      name: 'Sortable Fields',
+      options: ['Name', 'Username', 'Location', 'Last Update', 'Score'],
+      defaultValue: ['Name', 'Username', 'Last Update', 'Score'],
       control: {
         type: 'inline-check'
       }
     },
     filterableFields: {
-      options: ['name', 'username', 'location', 'date', 'score'],
+      name: 'Filterable fields',
+      options: ['Name', 'Username', 'Location', 'Last Update', 'Score'],
+      defaultValue: ['Name', 'Username', 'Location'],
+      control: {
+        type: 'inline-check'
+      }
+    },
+    alwaysShowPagination: {
+      name: 'Always show pagination',
+      defaultValue: true,
+      type: 'boolean'
+    },
+    rowsPerPage: {
+      name: 'Rows per page',
+      defaultValue: 10,
+      type: 'number'
+    },
+    rowsPerPageOptions: {
+      name: 'Rows per page options',
+      defaultValue: [5, 10, 15, 20],
+      options: [5, 10, 15, 20],
       control: {
         type: 'inline-check'
       }
@@ -43,11 +65,24 @@ const Template: ComponentStory<typeof StoryTable> = (args) => (
   <StoryTable {...args} />
 );
 
-export const Pair = Template.bind({});
-Pair.args = {};
+export const Basic = Template.bind({});
+Basic.storyName = 'Basic';
+Basic.args = {};
+
+export const CustomLabels = Template.bind({});
+CustomLabels.storyName = 'With labels';
+CustomLabels.args = {};
 
 // Components.
-const HEADERS: TableColumnType<StoryHeaderType>[] = [
+const PROP_TO_OPTION_NAME: Record<keyof StoryBodyType, string> = {
+  name: 'Name',
+  username: 'Username',
+  location: 'Location',
+  date: 'Last Update',
+  score: 'Score'
+};
+
+const HEADERS: TableColumnType<StoryBodyType>[] = [
   {
     prop: 'name',
     title: 'Name'
@@ -70,9 +105,7 @@ const HEADERS: TableColumnType<StoryHeaderType>[] = [
   }
 ];
 
-type Row = typeof json[number];
-
-const SORT_PROPS: DatatableWrapperProps<Row>['sortProps'] = {
+const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
   sortValueObj: {
     date: (row) => parse(row.date, 'MMMM dd, yyyy', new Date()).getTime()
   }
@@ -80,32 +113,44 @@ const SORT_PROPS: DatatableWrapperProps<Row>['sortProps'] = {
 
 function StoryTable({
   sortableFields,
-  filterableFields
+  filterableFields,
+  rowsPerPage = -1,
+  rowsPerPageOptions = [],
+  alwaysShowPagination = true
 }: {
   sortableFields: string[];
   filterableFields: string[];
+  rowsPerPage?: number;
+  rowsPerPageOptions?: number[];
+  alwaysShowPagination?: boolean;
 }) {
-  const headers = useMemo(
-    () =>
-      HEADERS.map((header) => ({
-        ...header,
-        isSortable: sortableFields?.includes(header.prop),
-        isFilterable: filterableFields?.includes(header.prop)
-      })),
-    [sortableFields, filterableFields]
-  );
+  const headers = HEADERS.map((header) => ({
+    ...header,
+    isSortable: sortableFields?.includes(PROP_TO_OPTION_NAME[header.prop]),
+    isFilterable: filterableFields?.includes(PROP_TO_OPTION_NAME[header.prop])
+  }));
 
   return (
-    <DatatableWrapper body={json} headers={headers} sortProps={SORT_PROPS}>
-      <Row>
-        <Col>
+    <DatatableWrapper
+      body={json}
+      headers={headers}
+      sortProps={SORT_PROPS}
+      paginationOptionsProps={{
+        state: {
+          rowsPerPage,
+          options: rowsPerPageOptions
+        }
+      }}
+    >
+      <Row className="mb-4">
+        <Col className="d-flex flex-col justify-content-end align-items-end">
           <Filter />
         </Col>
         <Col>
-          <PaginationOpts alwaysShowPagination={false} />
+          <PaginationOpts alwaysShowPagination={alwaysShowPagination} />
         </Col>
-        <Col>
-          <Pagination alwaysShowPagination={false} />
+        <Col className="d-flex flex-col justify-content-end align-items-end">
+          <Pagination alwaysShowPagination={alwaysShowPagination} />
         </Col>
       </Row>
       <Table>

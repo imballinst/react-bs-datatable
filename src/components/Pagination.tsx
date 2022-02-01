@@ -32,10 +32,10 @@ export default function Pagination({
   classes,
   alwaysShowPagination = true
 }: PaginationProps) {
-  const { currentPageState, rowsPerPageState, maxPage, onPaginationChange } =
+  const { currentPageState, maxPage, onPaginationChange } =
     useDatatableWrapper();
 
-  if ((!alwaysShowPagination && maxPage === 1) || rowsPerPageState !== -1) {
+  if (!alwaysShowPagination || maxPage === 1) {
     // Hide pagination if pagination is meant to not always be shown and the max page is 1,
     // or if rows per page is -1.
     return null;

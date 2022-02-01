@@ -1,4 +1,4 @@
-export interface StoryHeaderType {
+export interface StoryBodyType {
   name: string;
   username: string;
   date: string;

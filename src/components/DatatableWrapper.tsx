@@ -39,7 +39,6 @@ interface PaginationProps {
 }
 
 interface PaginationOptionsProps {
-  paginationAlwaysVisible?: boolean;
   // Controlled.
   state?: {
     rowsPerPage: number;
@@ -68,6 +67,7 @@ interface DatatableWrapperContextType<TTableRowType> {
   onRowsPerPageChange: (nextState: number) => void;
   // Data.
   maxPage: number;
+  filteredDataLength: number;
   data: TTableRowType[];
 }
 
@@ -221,6 +221,7 @@ export function DatatableWrapper<TTableRowType = any>({
   );
 
   let data = body;
+  let filteredDataLength = data.length;
   let maxPage = 1;
 
   if (paginationProps?.state?.maxPage === undefined) {
@@ -233,6 +234,7 @@ export function DatatableWrapper<TTableRowType = any>({
         filter,
         filterProps?.filterValueObj
       );
+      filteredDataLength = data.length;
     }
 
     data = sortData(data, sort, sortProps?.sortValueObj);
@@ -266,6 +268,7 @@ export function DatatableWrapper<TTableRowType = any>({
         onRowsPerPageChange,
         // Data.
         maxPage,
+        filteredDataLength,
         data
       }}
     >
