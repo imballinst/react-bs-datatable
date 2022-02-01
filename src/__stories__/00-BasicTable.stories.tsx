@@ -228,16 +228,30 @@ function StoryTable({
       }}
     >
       <Row className="mb-4">
-        <Col className="d-flex flex-col justify-content-end align-items-end">
+        <Col
+          xs={12}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
           <Filter placeholder={filterPlaceholder} />
         </Col>
-        <Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-center align-items-center"
+        >
           <PaginationOpts
             alwaysShowPagination={alwaysShowPagination}
             labels={{ afterSelect, beforeSelect }}
           />
         </Col>
-        <Col className="d-flex flex-col justify-content-end align-items-end">
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
           <Pagination
             alwaysShowPagination={alwaysShowPagination}
             labels={{ firstPage, lastPage, nextPage, prevPage }}
