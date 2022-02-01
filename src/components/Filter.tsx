@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
+import { useDatatableWrapper } from './DatatableWrapper';
 import FontAwesome from './FontAwesome';
 
 export interface FilterClasses {
@@ -9,29 +10,31 @@ export interface FilterClasses {
 }
 
 export interface FilterProps {
-  filterText: string;
-  onChangeFilter: (nextFilterText: string) => void;
   placeholder?: string;
   classes?: FilterClasses;
 }
 
 export function Filter({
-  filterText,
   placeholder = 'Enter text...',
-  onChangeFilter,
   classes
 }: FilterProps) {
+  const { filterState, onFilterChange, isFilterable } = useDatatableWrapper();
+
+  if (!isFilterable) {
+    return null;
+  }
+
   return (
     <InputGroup className={classes?.inputGroup}>
       <Form.Control
         type="text"
-        value={filterText}
+        value={filterState}
         placeholder={placeholder}
-        onChange={(e) => onChangeFilter(e.target.value)}
+        onChange={(e) => onFilterChange(e.target.value)}
         className={classes?.formControl}
       />
       <Button
-        onClick={() => onChangeFilter('')}
+        onClick={() => onFilterChange('')}
         className={classes?.clearButton}
       >
         <FontAwesome icon="times" className="fa-fw" />

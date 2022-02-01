@@ -1,3 +1,5 @@
+import { TableRowType } from './types';
+
 export function makeClasses(
   ...args: (string | Record<string, boolean> | undefined)[]
 ) {
@@ -22,4 +24,17 @@ export function makeClasses(
   }
 
   return classes.join(' ');
+}
+
+export function convertArrayToRecord<ElementType extends TableRowType>(
+  array: ElementType[],
+  propId: keyof ElementType
+) {
+  const record: Record<string, ElementType> = {};
+
+  for (const element of array) {
+    record[element[propId]] = element;
+  }
+
+  return record;
 }

@@ -3,7 +3,7 @@ import { useDatatableWrapper } from './DatatableWrapper';
 
 import FontAwesome from './FontAwesome';
 import { makeClasses } from '../helpers/object';
-import { HeaderType, SortType } from '../helpers/types';
+import { TableColumnType, SortType, TableRowType } from '../helpers/types';
 
 export interface TableHeaderClasses {
   th?: string;
@@ -12,11 +12,11 @@ export interface TableHeaderClasses {
 }
 
 export interface TableHeaderProps<T> {
-  tableHeaders: HeaderType<T>[];
+  tableHeaders: TableColumnType<T>[];
   classes?: TableHeaderClasses;
 }
 
-export default function TableHeader<T>({
+export default function TableHeader<T extends TableRowType>({
   tableHeaders,
   classes
 }: TableHeaderProps<T>) {
@@ -29,7 +29,7 @@ export default function TableHeader<T>({
       'thead-th': true,
       sortable: isSortable === true
     });
-    const nextSort: SortType = { order: 'asc', prop: prop };
+    const nextSort: SortType = { order: 'asc', prop: prop.toString() };
     let sortIcon: 'sort' | 'sortUp' | 'sortDown' = 'sort';
     let sortIconRender = null;
 

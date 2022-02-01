@@ -1,4 +1,10 @@
 import { sortData, filterData, paginateData } from '../data';
+import { TableColumnType } from '../types';
+
+interface TestObject {
+  prop1: number;
+  prop2: number;
+}
 
 describe('data util (src/utils/data)', () => {
   it('should sort data correctly', () => {
@@ -21,12 +27,12 @@ describe('data util (src/utils/data)', () => {
 
   it('should filter data correctly', () => {
     // Initialization
-    const tableHeader = [
-      { prop: 'prop1', filterable: true },
-      { prop: 'prop2', filterable: false }
+    const tableHeader: TableColumnType<TestObject>[] = [
+      { prop: 'prop1', isFilterable: true },
+      { prop: 'prop2', isFilterable: false }
     ];
-    const firstData = { prop1: 1 };
-    const secondData = { prop1: 2 };
+    const firstData = { prop1: 1, prop2: 123 };
+    const secondData = { prop1: 2, prop2: 123 };
     const data = [firstData, secondData];
 
     // Without filter function

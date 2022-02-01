@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HeaderType, TableRow } from '../helpers/types';
+import { TableColumnType, TableRowType } from '../helpers/types';
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 
@@ -10,7 +10,7 @@ interface TableBodyClasses {
   tr?: string;
 }
 
-interface TableBodyProps<TTableRowType extends TableRow> {
+interface TableBodyProps<TTableRowType extends TableRowType> {
   /** Labels/placeholders of the table components. */
   labels?: {
     noResults?: string;
@@ -20,7 +20,7 @@ interface TableBodyProps<TTableRowType extends TableRow> {
   onRowClick?: (row: TTableRowType) => void;
 }
 
-export default function TableBody<TTableRowType extends TableRow>({
+export default function TableBody<TTableRowType extends TableRowType>({
   labels,
   classes,
   onRowClick
@@ -58,15 +58,15 @@ export default function TableBody<TTableRowType extends TableRow>({
 // Helper components.
 // Body row is only used for this file, so it's better to localize it
 // in the same file.
-type BodyRowProps<TTableRowType extends TableRow> = {
-  headers: HeaderType<TTableRowType>[];
+type BodyRowProps<TTableRowType extends TableRowType> = {
+  headers: TableColumnType<TTableRowType>[];
   data: TTableRowType[];
   rowIdx: number;
   classes?: TableBodyClasses;
   onClick?: (row: TTableRowType) => void;
 };
 
-function BodyRow<TTableRowType extends TableRow>({
+function BodyRow<TTableRowType extends TableRowType>({
   headers,
   data,
   rowIdx,

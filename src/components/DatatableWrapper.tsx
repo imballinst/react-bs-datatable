@@ -1,8 +1,15 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { filterData, paginateData, sortData } from '../helpers/data';
+import { convertArrayToRecord } from '../helpers/object';
 import { createCtx } from '../helpers/react';
 import { ColumnProcessObj, SortType } from '../helpers/types';
-import { HeaderType } from '../helpers/types';
+import { TableColumnType } from '../helpers/types';
 
 interface FilterProps<TTableRowType> {
   // Uncontrolled.
@@ -44,7 +51,7 @@ interface PaginationOptionsProps {
 // Context types.
 interface DatatableWrapperContextType<TTableRowType> {
   // Things passed to other components.
-  headers: HeaderType<TTableRowType>[];
+  headers: TableColumnType<TTableRowType>[];
   // Filter.
   isFilterable: boolean;
   filterState: string;
@@ -71,7 +78,7 @@ export const useDatatableWrapper = useCtx;
 // Main wrapper.
 export interface DatatableWrapperProps<TTableRowType> {
   children: ReactNode;
-  headers: HeaderType<TTableRowType>[];
+  headers: TableColumnType<TTableRowType>[];
   body: TTableRowType[];
   filterProps?: FilterProps<TTableRowType>;
   sortProps?: SortProps<TTableRowType>;
@@ -131,13 +138,14 @@ export function DatatableWrapper<TTableRowType = any>({
       }
     };
   });
+  const tableHeadersRecord = useRef(convertArrayToRecord(headers, 'prop'));
 
   useEffect(() => {
     // Resets the table if the data passed down is different.
     if (body !== undefined) {
       setState((oldState) => ({
         ...oldState,
-        filterText: '',
+        filter: '',
         currentPage: 1
       }));
     }
@@ -150,7 +158,7 @@ export function DatatableWrapper<TTableRowType = any>({
       } else {
         setState((oldState) => ({
           ...oldState,
-          filterText: text,
+          filter: text,
           currentPage: 1
         }));
       }
@@ -165,7 +173,10 @@ export function DatatableWrapper<TTableRowType = any>({
       } else {
         setState((oldState) => ({
           ...oldState,
-          currentPage: nextPage
+          pagination: {
+            ...oldState.pagination,
+            currentPage: nextPage
+          }
         }));
       }
     },
@@ -179,8 +190,11 @@ export function DatatableWrapper<TTableRowType = any>({
       } else {
         setState((oldState) => ({
           ...oldState,
-          rowsPerPage: numOfPage,
-          currentPage: 1
+          pagination: {
+            ...oldState.pagination,
+            rowsPerPage: numOfPage,
+            currentPage: 1
+          }
         }));
       }
     },
@@ -207,7 +221,15 @@ export function DatatableWrapper<TTableRowType = any>({
   if (paginationProps?.state?.maxPage === undefined) {
     const { filter, sort, pagination } = state;
 
-    data = filterData(body, headers, filter, filterProps?.filterValueObj);
+    if (state.isFilterable) {
+      data = filterData(
+        body,
+        tableHeadersRecord.current,
+        filter,
+        filterProps?.filterValueObj
+      );
+    }
+
     data = sortData(data, sort, sortProps?.sortValueObj);
 
     if (pagination.rowsPerPage !== -1) {
@@ -215,7 +237,7 @@ export function DatatableWrapper<TTableRowType = any>({
       maxPage = Math.ceil(data.length / pagination.rowsPerPage);
       data = paginateData(data, pagination.currentPage, pagination.rowsPerPage);
     }
-  } else if (paginationProps?.state?.maxPage) {
+  } else {
     maxPage = paginationProps?.state?.maxPage;
   }
 

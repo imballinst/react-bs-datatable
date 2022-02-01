@@ -16,12 +16,13 @@
   "scripts": {
     "test": "jest",
     "jest": "jest --watch",
-    "build": "concurrently yarn:build:*",
+    "build": "rm -rf lib && concurrently yarn:build:*",
     "build:esm": "tsc --project tsconfig.esm.json",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:types": "tsc --project tsconfig.esm.json --emitDeclarationOnly --declaration --declarationDir lib/types",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "generate-story-data": "ts-node ./scripts/generate-story-data.ts",
     "preversion": "yarn test && rm -rf lib && yarn build",
     "v:alphamajor": "npm version premajor --preid alpha",
     "v:alphaminor": "npm version preminor --preid alpha",
@@ -58,11 +59,11 @@
     "concurrently": "7.0.0",
     "emotion": "10.0.14",
     "jest": "27.4.7",
-    "moment": "2.24.0",
     "prettier": "2.5.1",
     "react": "17.0.2",
     "react-bootstrap": "2.1.1",
     "react-dom": "17.0.2",
+    "ts-node": "10.4.0",
     "typescript": "4.5.5"
   },
   "peerDependencies": {
@@ -74,5 +75,8 @@
     "react-bootstrap": "2.x",
     "react-dom": "17.x"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": "16"
+  }
 }

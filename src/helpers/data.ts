@@ -1,6 +1,11 @@
-import { ColumnProcessObj, HeaderType, SortType, TableRow } from './types';
+import {
+  ColumnProcessObj,
+  TableColumnType,
+  SortType,
+  TableRowType
+} from './types';
 
-export function sortData<TTableRowType extends TableRow>(
+export function sortData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   sortedProp: SortType,
   sortValueObj?: ColumnProcessObj<(row: TTableRowType) => number | string>
@@ -31,9 +36,9 @@ export function sortData<TTableRowType extends TableRow>(
   return sortedData;
 }
 
-export function filterData<TTableRowType extends TableRow>(
+export function filterData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
-  tableHeaders: HeaderType<TTableRowType>[],
+  tableHeaders: Record<string, TableColumnType<TTableRowType>>,
   filterText: string,
   filterValueObj?: ColumnProcessObj<(row: TTableRowType) => number | string>
 ) {
@@ -53,7 +58,7 @@ export function filterData<TTableRowType extends TableRow>(
     while (!isElementIncluded && i < elementPropLength) {
       const prop = elementProps[i];
 
-      if (isPropFilterable(tableHeaders, prop)) {
+      if (tableHeaders[prop].isFilterable) {
         let columnValue = element[prop];
 
         if (filterValueObj?.[prop]) {
@@ -78,7 +83,7 @@ export function filterData<TTableRowType extends TableRow>(
   });
 }
 
-export function paginateData<TTableRowType extends TableRow>(
+export function paginateData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   currentPage: number,
   rowsPerPage?: number
@@ -93,29 +98,4 @@ export function paginateData<TTableRowType extends TableRow>(
   }
 
   return paginatedData;
-}
-
-// Helper functions.
-function isPropFilterable<TTableRowType extends TableRow>(
-  tableHeaders: HeaderType<TTableRowType>[],
-  prop: string
-) {
-  const headersLength = tableHeaders.length;
-  let i = 0;
-  let found = false;
-  let isFilterable = false;
-
-  while (!found && i < headersLength) {
-    if (tableHeaders[i].prop === prop) {
-      found = true;
-
-      if (tableHeaders[i].isFilterable === true) {
-        isFilterable = true;
-      }
-    }
-
-    i += 1;
-  }
-
-  return isFilterable;
 }

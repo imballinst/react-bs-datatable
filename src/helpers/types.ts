@@ -5,8 +5,8 @@ export interface SortType {
   order: 'asc' | 'desc';
 }
 
-export interface HeaderType<T> {
-  prop: string;
+export interface TableColumnType<T> {
+  prop: keyof T;
   title?: string;
   headerCell?: (icon: ReactNode, sortedProp: SortType) => ReactNode;
   cell?: (row: T) => ReactNode;
@@ -18,5 +18,5 @@ export interface HeaderType<T> {
   isSortable?: boolean;
 }
 
-export type TableRow<T = any> = Record<string, T>;
+export type TableRowType<T = any> = Record<string, T>;
 export type ColumnProcessObj<T> = Record<string, T>;
