@@ -4,14 +4,17 @@ import { Col, Row, Table } from 'react-bootstrap';
 import { parse } from 'date-fns';
 
 import json from './resources/story-data.json';
-import { StoryBodyType } from './resources/types';
+import {
+  StoryBodyType,
+  STORY_HEADERS,
+  STORY_PROP_TO_OPTION_NAME
+} from './resources/types';
 import TableHeader from '../components/TableHeader';
 import TableBody, { TableBodyProps } from '../components/TableBody';
 import {
   DatatableWrapper,
   DatatableWrapperProps
 } from '../components/DatatableWrapper';
-import { TableColumnType } from '../helpers/types';
 import { Filter } from '../components/Filter';
 import PaginationOpts from '../components/PaginationOpts';
 import Pagination from '../components/Pagination';
@@ -138,37 +141,6 @@ RowOnClick.argTypes = {
 };
 
 // Components.
-const PROP_TO_OPTION_NAME: Record<keyof StoryBodyType, string> = {
-  name: 'Name',
-  username: 'Username',
-  location: 'Location',
-  date: 'Last Update',
-  score: 'Score'
-};
-
-const HEADERS: TableColumnType<StoryBodyType>[] = [
-  {
-    prop: 'name',
-    title: 'Name'
-  },
-  {
-    prop: 'username',
-    title: 'Username'
-  },
-  {
-    prop: 'location',
-    title: 'Location'
-  },
-  {
-    prop: 'date',
-    title: 'Last Update'
-  },
-  {
-    prop: 'score',
-    title: 'Score'
-  }
-];
-
 const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
   sortValueObj: {
     date: (row) => parse(row.date, 'MMMM dd, yyyy', new Date()).getTime()
@@ -212,10 +184,14 @@ function StoryTable({
   // For on click row event.
   rowOnClickText?: string;
 }) {
-  const headers = HEADERS.map((header) => ({
+  const headers = STORY_HEADERS.map((header) => ({
     ...header,
-    isSortable: sortableFields?.includes(PROP_TO_OPTION_NAME[header.prop]),
-    isFilterable: filterableFields?.includes(PROP_TO_OPTION_NAME[header.prop])
+    isSortable: sortableFields?.includes(
+      STORY_PROP_TO_OPTION_NAME[header.prop]
+    ),
+    isFilterable: filterableFields?.includes(
+      STORY_PROP_TO_OPTION_NAME[header.prop]
+    )
   }));
   let rowOnClick: TableBodyProps<StoryBodyType>['onRowClick'];
 
@@ -245,7 +221,7 @@ function StoryTable({
       headers={headers}
       sortProps={SORT_PROPS}
       paginationOptionsProps={{
-        state: {
+        initialState: {
           rowsPerPage,
           options: rowsPerPageOptions
         }

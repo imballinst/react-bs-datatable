@@ -12,17 +12,31 @@ export interface FilterClasses {
 export interface FilterProps {
   placeholder?: string;
   classes?: FilterClasses;
+  // Controlled props.
+  controlledProps?: {
+    filter: string;
+    onFilter: (nextFilter: string) => void;
+  };
 }
 
 export function Filter({
   placeholder = 'Enter text...',
-  classes
+  classes,
+  controlledProps
 }: FilterProps) {
-  const { filterState, onFilterChange, isFilterable } = useDatatableWrapper();
+  const {
+    filterState: filterStateContext,
+    onFilterChange: onFilterChangeContext,
+    isFilterable
+  } = useDatatableWrapper();
 
   if (!isFilterable) {
     return null;
   }
+
+  // Controlled has the bigger priority.
+  const onFilterChange = controlledProps?.onFilter || onFilterChangeContext;
+  const filterState = controlledProps?.filter || filterStateContext;
 
   return (
     <InputGroup className={classes?.inputGroup}>

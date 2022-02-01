@@ -25,24 +25,37 @@ export interface PaginationProps {
   labels?: PaginationLabels;
   classes?: PaginationClasses;
   alwaysShowPagination?: boolean;
+  controlledProps?: {
+    currentPage: number;
+    maxPage: number;
+    onPaginationChange: (nextPage: number) => void;
+  };
 }
 
 export default function Pagination({
   labels,
   classes,
-  alwaysShowPagination = true
+  alwaysShowPagination = true,
+  controlledProps
 }: PaginationProps) {
-  const { currentPageState, maxPage, onPaginationChange } =
-    useDatatableWrapper();
+  const {
+    currentPageState: currentPageStateContext,
+    maxPage: maxPageContext,
+    onPaginationChange: onPaginationChangeContext
+  } = useDatatableWrapper();
 
-  if (!alwaysShowPagination || maxPage === 1) {
-    // Hide pagination if pagination is meant to not always be shown and the max page is 1,
-    // or if rows per page is -1.
-    return null;
-  }
+  // Controlled has the bigger priority.
+  const currentPageState =
+    controlledProps?.currentPage || currentPageStateContext;
+  const maxPage = controlledProps?.maxPage || maxPageContext;
+  const onPaginationChange =
+    controlledProps?.onPaginationChange || onPaginationChangeContext;
+
+  // Hide pagination if pagination is meant to not always be shown and the max page is 1,
+  // or if rows per page is -1.
+  const hidePagination = !alwaysShowPagination || maxPage === 1;
 
   const buttons = [];
-
   const firstLabel = labels?.firstPage || 'First';
   const prevLabel = labels?.prevPage || 'Prev';
   const nextLabel = labels?.nextPage || 'Next';
@@ -145,7 +158,9 @@ export default function Pagination({
 
   return (
     <ButtonGroup
-      className={makeClasses('ButtonGroup__root', classes?.buttonGroup)}
+      className={makeClasses('ButtonGroup__root', classes?.buttonGroup, {
+        invisible: hidePagination
+      })}
     >
       {buttons}
     </ButtonGroup>

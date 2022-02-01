@@ -14,14 +14,23 @@ export interface TableHeaderClasses {
 export interface TableHeaderProps<T> {
   tableHeaders: TableColumnType<T>[];
   classes?: TableHeaderClasses;
+  controlledProps?: {
+    onSortChange: (nextSort: SortType) => void;
+    sortState: SortType;
+  };
 }
 
 export default function TableHeader<T extends TableRowType>({
   tableHeaders,
-  classes
+  classes,
+  controlledProps
 }: TableHeaderProps<T>) {
   const headings = [];
-  const { onSortChange, sortState } = useDatatableWrapper();
+  const { onSortChange: onSortChangeContext, sortState: sortStateContext } =
+    useDatatableWrapper();
+
+  const onSortChange = controlledProps?.onSortChange || onSortChangeContext;
+  const sortState = controlledProps?.sortState || sortStateContext;
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
     const { isSortable, prop, title, headerCell } = tableHeaders[i];

@@ -23,31 +23,49 @@ export interface PaginationOptsProps {
   labels?: PaginationOptionsLabels;
   classes?: PaginationOptionsClasses;
   alwaysShowPagination?: boolean;
+  controlledProps?: {
+    rowsPerPage: number;
+    rowsPerPageOptions: number[];
+    filteredDataLength: number;
+    onRowsPerPageChange: (nextRowsPerPage: number) => void;
+  };
 }
 
 export default function PaginationOpts({
   labels,
   classes,
-  alwaysShowPagination = true
+  alwaysShowPagination = true,
+  controlledProps
 }: PaginationOptsProps) {
   const {
-    onRowsPerPageChange,
-    rowsPerPageOptions,
-    rowsPerPageState,
-    filteredDataLength
+    onRowsPerPageChange: onRowsPerPageChangeContext,
+    rowsPerPageOptions: rowsPerPageOptionsContext,
+    rowsPerPageState: rowsPerPageStateContext,
+    filteredDataLength: filteredDataLengthContext
   } = useDatatableWrapper();
 
-  if (
+  // Controlled has the bigger priority.
+  const rowsPerPageOptions =
+    controlledProps?.rowsPerPageOptions || rowsPerPageOptionsContext;
+  const rowsPerPageState =
+    controlledProps?.rowsPerPage || rowsPerPageStateContext;
+  const filteredDataLength =
+    controlledProps?.filteredDataLength || filteredDataLengthContext;
+  const onRowsPerPageChange =
+    controlledProps?.onRowsPerPageChange || onRowsPerPageChangeContext;
+
+  // Hide pagination if pagination is meant to not always be shown or
+  // if the filtered data length is less than the minimum rows per page option.
+  const hidePaginationOptions =
     !alwaysShowPagination ||
-    filteredDataLength <= Math.min(...rowsPerPageOptions)
-  ) {
-    // Hide pagination if pagination is meant to not always be shown and the max page is 1,
-    // or if rows per page is -1.
-    return null;
-  }
+    filteredDataLength <= Math.min(...rowsPerPageOptions);
 
   return (
-    <Form className={makeClasses('paginationOpts__root', classes?.form)}>
+    <Form
+      className={makeClasses('paginationOpts__root', classes?.form, {
+        invisible: hidePaginationOptions
+      })}
+    >
       <Form.Group
         controlId="formGroupPagination"
         className={classes?.formGroup}

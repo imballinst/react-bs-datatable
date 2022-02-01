@@ -14,37 +14,31 @@ import { TableColumnType } from '../helpers/types';
 interface FilterProps<TTableRowType> {
   // Uncontrolled.
   filterValueObj?: ColumnProcessObj<TTableRowType>;
-  // Controlled.
-  state?: {
+  initialState?: {
     filter: string;
   };
-  asyncFn?: (nextState: string) => void;
 }
 
 interface SortProps<TTableRowType> {
   // Uncontrolled.
   sortValueObj?: ColumnProcessObj<TTableRowType>;
-  // Controlled.
-  state?: SortType;
-  asyncFn?: (nextState: SortType) => void;
+  initialState?: SortType;
 }
 
 interface PaginationProps {
-  // Controlled.
-  state?: {
+  // Uncontrolled.
+  initialState?: {
     page?: number;
     maxPage?: number;
   };
-  asyncFn?: (nextState: number) => void;
 }
 
 interface PaginationOptionsProps {
-  // Controlled.
-  state?: {
+  // Uncontrolled.
+  initialState?: {
     rowsPerPage: number;
     options: number[];
   };
-  asyncFn?: (nextState: number) => void;
 }
 
 // Context types.
@@ -99,9 +93,9 @@ interface DatatableState {
 }
 
 export function DatatableWrapper<TTableRowType = any>({
-  filterProps,
   headers,
   body,
+  filterProps,
   sortProps,
   paginationProps,
   paginationOptionsProps,
@@ -156,96 +150,63 @@ export function DatatableWrapper<TTableRowType = any>({
     }
   }, [body]);
 
-  const onFilterChange = useCallback(
-    (text: string) => {
-      if (filterProps?.asyncFn) {
-        filterProps.asyncFn(text);
-      } else {
-        setState((oldState) => ({
-          ...oldState,
-          filter: text,
-          currentPage: 1
-        }));
-      }
-    },
-    [filterProps?.asyncFn]
-  );
+  const onFilterChange = useCallback((text: string) => {
+    setState((oldState) => ({
+      ...oldState,
+      filter: text,
+      currentPage: 1
+    }));
+  }, []);
 
-  const onPaginationChange = useCallback(
-    (nextPage: number) => {
-      if (paginationProps?.asyncFn) {
-        paginationProps.asyncFn(nextPage);
-      } else {
-        setState((oldState) => ({
-          ...oldState,
-          pagination: {
-            ...oldState.pagination,
-            currentPage: nextPage
-          }
-        }));
+  const onPaginationChange = useCallback((nextPage: number) => {
+    setState((oldState) => ({
+      ...oldState,
+      pagination: {
+        ...oldState.pagination,
+        currentPage: nextPage
       }
-    },
-    [paginationProps?.asyncFn]
-  );
+    }));
+  }, []);
 
-  const onRowsPerPageChange = useCallback(
-    (numOfPage: number) => {
-      if (paginationOptionsProps?.asyncFn) {
-        paginationOptionsProps.asyncFn(numOfPage);
-      } else {
-        setState((oldState) => ({
-          ...oldState,
-          pagination: {
-            ...oldState.pagination,
-            rowsPerPage: numOfPage,
-            currentPage: 1
-          }
-        }));
+  const onRowsPerPageChange = useCallback((numOfPage: number) => {
+    setState((oldState) => ({
+      ...oldState,
+      pagination: {
+        ...oldState.pagination,
+        rowsPerPage: numOfPage,
+        currentPage: 1
       }
-    },
-    [paginationOptionsProps?.asyncFn]
-  );
+    }));
+  }, []);
 
-  const onSortChange = useCallback(
-    (nextSort: SortType) => {
-      if (sortProps?.asyncFn) {
-        sortProps.asyncFn(nextSort);
-      } else {
-        setState((oldState) => ({
-          ...oldState,
-          sort: nextSort
-        }));
-      }
-    },
-    [sortProps?.asyncFn]
-  );
+  const onSortChange = useCallback((nextSort: SortType) => {
+    setState((oldState) => ({
+      ...oldState,
+      sort: nextSort
+    }));
+  }, []);
 
+  const { filter, sort, pagination } = state;
   let data = body;
   let filteredDataLength = data.length;
   let maxPage = 1;
 
-  if (paginationProps?.state?.maxPage === undefined) {
-    const { filter, sort, pagination } = state;
+  if (state.isFilterable) {
+    data = filterData(
+      body,
+      tableHeadersRecordRef.current,
+      filter,
+      filterProps?.filterValueObj
+    );
+    filteredDataLength = data.length;
+  }
 
-    if (state.isFilterable) {
-      data = filterData(
-        body,
-        tableHeadersRecordRef.current,
-        filter,
-        filterProps?.filterValueObj
-      );
-      filteredDataLength = data.length;
-    }
+  data = sortData(data, sort, sortProps?.sortValueObj);
 
-    data = sortData(data, sort, sortProps?.sortValueObj);
-
-    if (pagination.rowsPerPage !== -1) {
-      // Pagination needs.
-      maxPage = Math.ceil(data.length / pagination.rowsPerPage);
-      data = paginateData(data, pagination.currentPage, pagination.rowsPerPage);
-    }
-  } else {
-    maxPage = paginationProps?.state?.maxPage;
+  if (pagination.rowsPerPage !== -1) {
+    // Pagination needs.
+    maxPage = Math.ceil(data.length / pagination.rowsPerPage);
+    data = paginateData(data, pagination.currentPage, pagination.rowsPerPage);
   }
 
   return (
@@ -299,7 +260,7 @@ function getDefaultDatatableState<TTableRowType>({
     // Get the first table header with the sort attribute.
     if (
       defaultSort.prop === '' &&
-      header.prop === sortProps?.state?.prop &&
+      header.prop === sortProps?.initialState?.prop &&
       header.isSortable
     ) {
       defaultSort.prop = header.prop;
@@ -313,12 +274,12 @@ function getDefaultDatatableState<TTableRowType>({
   // Define initial state.
   return {
     isFilterable,
-    filter: filterProps?.state?.filter || '',
+    filter: filterProps?.initialState?.filter || '',
     sort: defaultSort,
     pagination: {
-      currentPage: paginationProps?.state?.page || 1,
-      rowsPerPage: paginationOptionsProps?.state?.rowsPerPage || -1,
-      rowsPerPageOptions: paginationOptionsProps?.state?.options || []
+      currentPage: paginationProps?.initialState?.page || 1,
+      rowsPerPage: paginationOptionsProps?.initialState?.rowsPerPage || -1,
+      rowsPerPageOptions: paginationOptionsProps?.initialState?.options || []
     }
   };
 }
