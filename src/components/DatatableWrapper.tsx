@@ -212,10 +212,10 @@ export function DatatableWrapper<TTableRowType = any>({
 
     if (pagination.rowsPerPage !== -1) {
       // Pagination needs.
+      maxPage = Math.ceil(data.length / pagination.rowsPerPage);
       data = paginateData(data, pagination.currentPage, pagination.rowsPerPage);
-      maxPage = Math.ceil(body.length / pagination.rowsPerPage);
     }
-  } else {
+  } else if (paginationProps?.state?.maxPage) {
     maxPage = paginationProps?.state?.maxPage;
   }
 
