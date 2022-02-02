@@ -1,5 +1,6 @@
 examples/
 src/
+scripts/
 LICENSE
 
 .travis.yml
@@ -7,4 +8,4 @@ LICENSE
 Makefile
 tsconfig*
 .storybook
-.prettierrc
+.prettierrc.json
