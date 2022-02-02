@@ -311,10 +311,10 @@ react-bootstrap@2.1.1:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
-react-bs-datatable@3:
-  version "3.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/react-bs-datatable/-/react-bs-datatable-3.0.0-alpha.4.tgz#03b0031e6c70694d27cf86333ea3cfd61fa72591"
-  integrity sha512-M3nA3npLBAHb0ublzZnxIRRMQSnTnkBvxVJdrQwI8VkHV3sks1aiOvbUY9YAfg7zg2EIqtlrX8lzl3BYtWy3qQ==
+react-bs-datatable@3.0.0-alpha.7:
+  version "3.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/react-bs-datatable/-/react-bs-datatable-3.0.0-alpha.7.tgz#0bece6cd2c1b64faa0527a1a7babd67a8ab2d4e3"
+  integrity sha512-t6FXbBXrJaGjPRD7hb5+Wf9zLOGBYUf6nJUb4m7OvTvproee/e1TV+xOOkJIsKTw3JlVF1R5w9SI6DK/IflQGw==
 
 react-dom@17.0.2:
   version "17.0.2"

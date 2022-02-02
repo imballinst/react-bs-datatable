@@ -1,94 +1,66 @@
-import React, { useState } from 'react';
-import moment from 'moment';
-import Datatable from 'react-bs-datatable';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
-const header = [
-  {
-    title: 'Username (filterable)',
-    prop: 'username',
-    sortable: true,
-    filterable: true
-  },
-  {
-    title: 'Score',
-    prop: 'score',
-    sortable: true,
-    // Add classes and styles by objects and strings.
-    cellProps: {
-      style: { background: 'blue', color: '#fff' },
-      className: 'realname-class'
-    }
-  },
-  {
-    title: 'Location',
-    prop: 'location',
-    // Add classes and styles by function.
-    cellProps: {
-      style: row =>
-        row.location === 'Mars' ? { background: '#fafafa' } : undefined,
-      className: row => (row.location === 'Saturn' ? 'saturn-class' : undefined)
-    }
-  },
-  { title: 'Last Updated', prop: 'date', sortable: true }
+// Create table headers consisting of 4 columns.
+const headers = [
+  { title: 'Username', prop: 'username' },
+  { title: 'Name', prop: 'realname' },
+  { title: 'Location', prop: 'location' }
 ];
 
+// Randomize data of the table columns.
+// Note that the fields are all using the `prop` field of the headers.
 const body = Array.from(new Array(57), () => {
-  const rd = Number((Math.random() * 10).toFixed(2));
+  const rd = (Math.random() * 10).toFixed(1);
 
   if (rd > 0.5) {
     return {
       username: 'i-am-billy',
-      score: rd,
-      location: 'Mars',
-      date: moment()
-        .subtract(1, 'days')
-        .format('Do MMMM YYYY')
+      realname: `Billy ${rd}`,
+      location: 'Mars'
     };
   }
 
   return {
     username: 'john-nhoj',
     realname: `John ${rd}`,
-    location: 'Saturn',
-    date: moment()
-      .subtract(2, 'days')
-      .format('Do MMMM YYYY')
+    location: 'Saturn'
   };
 });
 
-const onSortFunction = {
-  date(columnValue) {
-    // Convert the string date format to UTC timestamp
-    // So the table could sort it by number instead of by string
-    return moment(columnValue, 'Do MMMM YYYY').valueOf();
-  }
-};
-
-function onRowClick(data) {
-  console.log(`You clicked on the row ${data.username} ${data.score}`);
-  alert(`You clicked on the row ${data.username} ${data.score}`);
-}
-
-export default function App() {
-  const [counter, setCounter] = useState(0);
-
+// Then, use it in a component.
+export default function Component() {
   return (
-    <>
-      {counter}
-      <button onClick={() => setCounter(old => (old += 1))}>Increment</button>
-      <hr />
-      <Datatable
-        tableHeaders={header}
-        tableBody={body}
-        rowsPerPage={5}
-        rowsPerPageOption={[5, 10, 15, 20]}
-        initialSort={{ prop: 'username', isAscending: true }}
-        onSort={onSortFunction}
-        onRowClick={onRowClick}
-        classes={{
-          table: 'table-striped table-hover custom-table'
-        }}
-      />
-    </>
+    <DatatableWrapper body={body} headers={headers}>
+      <Row className="mb-4">
+        <Col
+          xs={12}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
+          <Filter />
+        </Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-center align-items-center"
+        >
+          <PaginationOpts />
+        </Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
+          <Pagination />
+        </Col>
+      </Row>
+      <Table>
+        <TableHeader tableHeaders={headers} />
+        <TableBody />
+      </Table>
+    </DatatableWrapper>
   );
 }
