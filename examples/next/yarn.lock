@@ -346,7 +346,7 @@ react-bootstrap@2.1.1:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
-react-bs-datatable@3.0.0-alpha.8:
+react-bs-datatable@^3.0.0-alpha.8:
   version "3.0.0-alpha.8"
   resolved "https://registry.yarnpkg.com/react-bs-datatable/-/react-bs-datatable-3.0.0-alpha.8.tgz#5fef72deebff0b6940743054d08b32fd921a6333"
   integrity sha512-8hxy14E00zKg5yI2lSJkbxmY0EZpvAnsvlMwtne2fgE7ICWiJ0I83d8UEdNASeDsCp90Vv+5ft5giS4pqowslg==

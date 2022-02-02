@@ -4,8 +4,15 @@
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
   "type": "module",
   "main": "lib/cjs/index.js",
+  "esnext": "lib/esm/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "default": "./lib/esm/index.js"
+    }
+  },
   "scripts": {
     "test": "jest",
     "jest": "jest --watch",

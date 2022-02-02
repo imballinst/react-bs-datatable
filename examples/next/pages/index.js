@@ -1,6 +1,14 @@
 import React from 'react';
-import {} from 'react-bs-datatable';
 import 'bootstrap/dist/css/bootstrap.css';
+import {
+  DatatableWrapper,
+  Filter,
+  Pagination,
+  PaginationOpts,
+  TableBody,
+  TableHeader
+} from 'react-bs-datatable';
+import { Col, Row, Table } from 'react-bootstrap';
 
 // Create table headers consisting of 4 columns.
 const headers = [
@@ -30,7 +38,7 @@ const body = Array.from(new Array(57), () => {
 });
 
 // Then, use it in a component.
-export default function Component() {
+export default function App() {
   return (
     <DatatableWrapper body={body} headers={headers}>
       <Row className="mb-4">
