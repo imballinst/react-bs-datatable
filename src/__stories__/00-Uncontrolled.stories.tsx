@@ -24,7 +24,7 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Basic',
+  title: 'Uncontrolled',
   component: StoryTable
 } as ComponentMeta<typeof StoryTable>;
 

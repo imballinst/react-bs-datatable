@@ -61,7 +61,6 @@ export default function Pagination({
   const nextLabel = labels?.nextPage || 'Next';
   const lastLabel = labels?.lastPage || 'Last';
 
-  const isCurrentPageOutOfBounds = currentPageState > maxPage;
   let startNumber: number;
   let i = 0;
   let hasPrev = true;
@@ -85,7 +84,7 @@ export default function Pagination({
     <Button
       className={classes?.button}
       key={`page-${firstLabel}`}
-      onClick={() => onPaginationChange(Number(1))}
+      onClick={() => onPaginationChange(1)}
       disabled={!hasPrev}
     >
       {firstLabel}
@@ -94,54 +93,37 @@ export default function Pagination({
       className={classes?.button}
       key={`page-${prevLabel}`}
       // If out of bounds, prev button refers to the last page.
-      onClick={() =>
-        onPaginationChange(
-          Number(isCurrentPageOutOfBounds ? maxPage : currentPageState - 1)
-        )
-      }
+      onClick={() => onPaginationChange(currentPageState - 1)}
       disabled={!hasPrev}
     >
       {prevLabel}
     </Button>
   );
 
-  if (!isCurrentPageOutOfBounds) {
-    while (i < 3 && startNumber <= maxPage) {
-      buttons.push(
-        <Button
-          key={`page-btn-${i}`}
-          onClick={() => onPaginationChange(Number(startNumber))}
-          disabled={currentPageState === startNumber}
-          className={classes?.button}
-        >
-          {startNumber}
-        </Button>
-      );
+  const pageNumbers: number[] = [];
 
-      i += 1;
-      startNumber += 1;
-    }
-  } else {
-    // If current page is more than maxPage, we disable the button.
-    // This is intentional so the user knows that no data in there.
-    hasNext = false;
-    buttons.push(
-      <Button
-        key={`page-btn-${startNumber}`}
-        className={classes?.button}
-        onClick={() => onPaginationChange(Number(currentPageState - 1))}
-        disabled
-      >
-        {currentPageState}
-      </Button>
-    );
+  while (i < 3 && startNumber <= maxPage) {
+    pageNumbers.push(startNumber);
+    // Increment all.
+    i += 1;
+    startNumber += 1;
   }
 
   buttons.push(
+    ...pageNumbers.map((pageNumber) => (
+      <Button
+        key={`page-btn-${pageNumber}`}
+        onClick={() => onPaginationChange(pageNumber)}
+        disabled={currentPageState === pageNumber}
+        className={classes?.button}
+      >
+        {pageNumber}
+      </Button>
+    )),
     <Button
       className={classes?.button}
       key={`page-${nextLabel}`}
-      onClick={() => onPaginationChange(Number(currentPageState + 1))}
+      onClick={() => onPaginationChange(currentPageState + 1)}
       disabled={!hasNext}
     >
       {nextLabel}
@@ -149,7 +131,7 @@ export default function Pagination({
     <Button
       className={classes?.button}
       key={`page-${lastLabel}`}
-      onClick={() => onPaginationChange(Number(maxPage))}
+      onClick={() => onPaginationChange(maxPage)}
       disabled={!hasNext}
     >
       {lastLabel}
