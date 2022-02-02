@@ -10,7 +10,7 @@
     "resolveJsonModule": true
   },
   "include": ["src", "scripts"],
-  "exclude": ["src/**/*.test.ts", "src/index.ts"],
+  "exclude": ["src/index.ts"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"

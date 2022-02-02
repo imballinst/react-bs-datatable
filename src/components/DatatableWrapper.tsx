@@ -21,7 +21,7 @@ interface FilterProps<TTableRowType> {
 
 interface SortProps<TTableRowType> {
   // Uncontrolled.
-  sortValueObj?: ColumnProcessObj<TTableRowType>;
+  sortValueObj?: ColumnProcessObj<TTableRowType, number>;
   initialState?: SortType;
 }
 

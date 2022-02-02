@@ -8,20 +8,21 @@ import {
 export function sortData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   sortedProp: SortType,
-  sortValueObj?: ColumnProcessObj<TTableRowType>
+  sortValueObj?: ColumnProcessObj<TTableRowType, number>
 ) {
   const sortedData = [...data];
 
   const { prop, order } = sortedProp;
   const sortMultiplier = order === 'asc' ? 1 : -1;
+  const sortFn = sortValueObj?.[prop];
 
   sortedData.sort((a, b) => {
     let quantifiedValue1 = a[prop];
     let quantifiedValue2 = b[prop];
 
-    if (sortValueObj?.[prop]) {
-      quantifiedValue1 = sortValueObj[prop](quantifiedValue1);
-      quantifiedValue2 = sortValueObj[prop](quantifiedValue2);
+    if (sortFn) {
+      quantifiedValue1 = sortFn(`${quantifiedValue1}`);
+      quantifiedValue2 = sortFn(`${quantifiedValue2}`);
     }
 
     if (quantifiedValue1 < quantifiedValue2) {
@@ -57,12 +58,13 @@ export function filterData<TTableRowType extends TableRowType>(
 
     while (!isElementIncluded && i < elementPropLength) {
       const prop = elementProps[i];
+      const filterFn = filterValueObj?.[prop];
 
       if (tableHeaders[prop].isFilterable) {
         let columnValue = element[prop];
 
-        if (filterValueObj?.[prop]) {
-          columnValue = filterValueObj[prop](columnValue);
+        if (filterFn) {
+          columnValue = filterFn(columnValue);
         } else if (typeof columnValue !== 'string') {
           // Convert to string if it is not a string
           columnValue = columnValue.toString();

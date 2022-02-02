@@ -143,7 +143,7 @@ RowOnClick.argTypes = {
 // Components.
 const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
   sortValueObj: {
-    date: (row) => parse(row.date, 'MMMM dd, yyyy', new Date()).getTime()
+    date: (date) => parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
   }
 };
 

@@ -1,5 +1,6 @@
 import { sortData, filterData, paginateData } from '../data';
-import { TableColumnType } from '../types';
+import { convertArrayToRecord } from '../object';
+import { ColumnProcessObj, TableColumnType } from '../types';
 
 interface TestObject {
   prop1: number;
@@ -27,10 +28,12 @@ describe('data util (src/utils/data)', () => {
 
   it('should filter data correctly', () => {
     // Initialization
-    const tableHeader: TableColumnType<TestObject>[] = [
+    const tableHeaders: TableColumnType<TestObject>[] = [
       { prop: 'prop1', isFilterable: true },
       { prop: 'prop2', isFilterable: false }
     ];
+    const tableHeadersDictionary = convertArrayToRecord(tableHeaders, 'prop');
+
     const firstData = { prop1: 1, prop2: 123 };
     const secondData = { prop1: 2, prop2: 123 };
     const data = [firstData, secondData];
@@ -41,13 +44,13 @@ describe('data util (src/utils/data)', () => {
 
     let filterFirstData = filterData(
       data,
-      tableHeader,
+      tableHeadersDictionary,
       filteredTextFirst,
       undefined
     );
     let filterSecondData = filterData(
       data,
-      tableHeader,
+      tableHeadersDictionary,
       filteredTextSecond,
       undefined
     );
@@ -56,7 +59,7 @@ describe('data util (src/utils/data)', () => {
     expect(filterSecondData[0]).toBe(secondData);
 
     // With filter function
-    const filterFunction = {
+    const filterFunction: ColumnProcessObj<TestObject> = {
       prop1: (val) => (val === 1 ? 'hehehe' : 'hahaha')
     };
 
@@ -65,13 +68,13 @@ describe('data util (src/utils/data)', () => {
 
     filterFirstData = filterData(
       data,
-      tableHeader,
+      tableHeadersDictionary,
       filteredTextFirst,
       filterFunction
     );
     filterSecondData = filterData(
       data,
-      tableHeader,
+      tableHeadersDictionary,
       filteredTextSecond,
       filterFunction
     );

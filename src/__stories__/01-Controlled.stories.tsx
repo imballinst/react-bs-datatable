@@ -207,7 +207,7 @@ interface FetchResponse<T> {
 // Mock data.
 const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
   sortValueObj: {
-    date: (row) => parse(row.date, 'MMMM dd, yyyy', new Date()).getTime()
+    date: (date) => parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
   }
 };
 const HEADERS_DICTIONARY = convertArrayToRecord(HEADERS, 'prop');
