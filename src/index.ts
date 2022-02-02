@@ -1,24 +1,8 @@
-import { sortData, filterData, paginateData } from './helpers/data';
-import Pagination from './Pagination';
-import PaginationOpts from './PaginationOpts';
-import TableHeader from './TableHeader';
-import TableBody from './TableBody';
-import Filter from './Filter';
-import Table, { useDatatableLifecycle } from './Table';
-import { TableComponentsProvider } from './components/TableContext';
-import { shouldTableUpdate } from './helpers/object';
+export * from './components/DatatableWrapper';
+export * from './components/Filter';
+export * from './components/Pagination';
+export * from './components/PaginationOpts';
+export * from './components/TableBody';
+export * from './components/TableHeader';
 
-export default Table;
-export {
-  sortData,
-  filterData,
-  paginateData,
-  Pagination,
-  PaginationOpts,
-  TableHeader,
-  TableBody,
-  Filter,
-  useDatatableLifecycle,
-  TableComponentsProvider,
-  shouldTableUpdate
-};
+export * from './helpers/types';

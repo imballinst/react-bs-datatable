@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
     "lib": ["esnext", "dom"],
-    "allowJs": false,
-    "skipLibCheck": true,
     "strict": true,
-    "jsx": "react",
-    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "isolatedModules": true,
-    "strictNullChecks": true,
-    "declaration": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "src/**/*.test.ts"]
+  "include": ["src", "scripts"],
+  "exclude": ["src/**/*.test.ts", "src/index.ts"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
