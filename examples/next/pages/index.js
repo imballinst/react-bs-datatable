@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import {
   DatatableWrapper,
   Filter,
@@ -12,7 +11,7 @@ import { Col, Row, Table } from 'react-bootstrap';
 
 // Create table headers consisting of 4 columns.
 const headers = [
-  { title: 'Username', prop: 'username' },
+  { title: 'Username', prop: 'username', isFilterable: true },
   { title: 'Name', prop: 'realname' },
   { title: 'Location', prop: 'location' }
 ];
