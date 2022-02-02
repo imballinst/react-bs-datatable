@@ -20,7 +20,7 @@ export interface TableHeaderProps<T> {
   };
 }
 
-export default function TableHeader<T extends TableRowType>({
+export function TableHeader<T extends TableRowType>({
   tableHeaders,
   classes,
   controlledProps

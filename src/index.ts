@@ -1,8 +1,25 @@
-export * from './components/DatatableWrapper';
-export * from './components/Filter';
-export * from './components/Pagination';
-export * from './components/PaginationOpts';
-export * from './components/TableBody';
-export * from './components/TableHeader';
+export {
+  DatatableWrapper,
+  DatatableWrapperProps
+} from './components/DatatableWrapper';
+export { Filter, FilterClasses, FilterProps } from './components/Filter';
+export {
+  Pagination,
+  PaginationClasses,
+  PaginationLabels,
+  PaginationProps
+} from './components/Pagination';
+export {
+  PaginationOpts,
+  PaginationOptsProps,
+  PaginationOptionsClasses,
+  PaginationOptionsLabels
+} from './components/PaginationOpts';
+export { TableBody, TableBodyProps } from './components/TableBody';
+export {
+  TableHeader,
+  TableHeaderClasses,
+  TableHeaderProps
+} from './components/TableHeader';
 
-export * from './helpers/types';
+export { ColumnProcessObj, SortType } from './helpers/types';

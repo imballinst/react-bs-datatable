@@ -1,4 +1,5 @@
 import React from 'react';
+import {} from 'react-bs-datatable';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // Create table headers consisting of 4 columns.

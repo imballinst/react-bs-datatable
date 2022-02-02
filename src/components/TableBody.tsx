@@ -20,7 +20,7 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   onRowClick?: (row: TTableRowType) => void;
 }
 
-export default function TableBody<TTableRowType extends TableRowType>({
+export function TableBody<TTableRowType extends TableRowType>({
   labels,
   classes,
   onRowClick

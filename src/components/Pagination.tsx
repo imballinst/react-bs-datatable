@@ -32,7 +32,7 @@ export interface PaginationProps {
   };
 }
 
-export default function Pagination({
+export function Pagination({
   labels,
   classes,
   alwaysShowPagination = true,

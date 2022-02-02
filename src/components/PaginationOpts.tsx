@@ -31,7 +31,7 @@ export interface PaginationOptsProps {
   };
 }
 
-export default function PaginationOpts({
+export function PaginationOpts({
   labels,
   classes,
   alwaysShowPagination = true,

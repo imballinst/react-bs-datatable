@@ -9,15 +9,15 @@ import {
   STORY_HEADERS,
   STORY_PROP_TO_OPTION_NAME
 } from './resources/types';
-import TableHeader from '../components/TableHeader';
-import TableBody, { TableBodyProps } from '../components/TableBody';
+import { TableHeader } from '../components/TableHeader';
+import { TableBody, TableBodyProps } from '../components/TableBody';
 import {
   DatatableWrapper,
   DatatableWrapperProps
 } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
-import PaginationOpts from '../components/PaginationOpts';
-import Pagination from '../components/Pagination';
+import { PaginationOpts } from '../components/PaginationOpts';
+import { Pagination } from '../components/Pagination';
 
 export default {
   /* 👇 The title prop is optional.
