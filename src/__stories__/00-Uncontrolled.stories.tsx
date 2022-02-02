@@ -239,7 +239,7 @@ function StoryTable({
           xs={12}
           sm={6}
           lg={4}
-          className="d-flex flex-col justify-content-center align-items-center"
+          className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
         >
           <PaginationOpts
             alwaysShowPagination={alwaysShowPagination}
