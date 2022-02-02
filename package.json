@@ -27,6 +27,9 @@
     "v:alphamajor": "npm version premajor --preid alpha",
     "v:alphaminor": "npm version preminor --preid alpha",
     "v:alphapatch": "npm version prepatch --preid alpha",
+    "v:betamajor": "npm version premajor --preid beta",
+    "v:betaminor": "npm version preminor --preid beta",
+    "v:betapatch": "npm version prepatch --preid beta",
     "v:prebump": "npm version prerelease"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
