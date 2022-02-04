@@ -57,7 +57,7 @@ export function PaginationOpts({
   // Hide pagination if pagination is meant to not always be shown or
   // if the filtered data length is less than the minimum rows per page option.
   const hidePaginationOptions =
-    !alwaysShowPagination ||
+    !alwaysShowPagination &&
     filteredDataLength <= Math.min(...rowsPerPageOptions);
 
   return (
@@ -74,7 +74,7 @@ export function PaginationOpts({
           {labels?.beforeSelect || 'Rows per page'}
         </Form.Label>
         <Form.Select
-          name="form-control-pagination"
+          name="table-pagination-options"
           value={rowsPerPageState}
           as="select"
           placeholder="select"

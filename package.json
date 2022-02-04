@@ -24,9 +24,6 @@
     "v:prebump": "npm version prerelease"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
-  "jest": {
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|ts)$"
-  },
   "author": "Try Ajitiono",
   "license": "MIT",
   "homepage": "https://github.com/imballinst/react-bs-datatable#readme",
@@ -42,6 +39,11 @@
     "@storybook/addon-essentials": "6.4.14",
     "@storybook/addon-links": "6.4.14",
     "@storybook/react": "6.4.14",
+    "@storybook/testing-react": "1.2.3",
+    "@swc/core": "1.2.136",
+    "@swc/jest": "0.2.17",
+    "@testing-library/jest-dom": "5.16.2",
+    "@testing-library/react": "12.1.2",
     "@types/jest": "27.4.0",
     "@types/node": "17.0.12",
     "@types/react": "17.0.38",

@@ -166,8 +166,8 @@ function StoryTable({
   // For on click row event.
   rowOnClickText
 }: {
-  sortableFields: string[];
-  filterableFields: string[];
+  sortableFields?: string[];
+  filterableFields?: string[];
   rowsPerPage?: number;
   rowsPerPageOptions?: number[];
   alwaysShowPagination?: boolean;

@@ -145,7 +145,10 @@ export function DatatableWrapper<TTableRowType = any>({
       setState((oldState) => ({
         ...oldState,
         filter: '',
-        currentPage: 1
+        pagination: {
+          ...oldState.pagination,
+          currentPage: 1
+        }
       }));
     }
   }, [body]);
@@ -154,7 +157,10 @@ export function DatatableWrapper<TTableRowType = any>({
     setState((oldState) => ({
       ...oldState,
       filter: text,
-      currentPage: 1
+      pagination: {
+        ...oldState.pagination,
+        currentPage: 1
+      }
     }));
   }, []);
 
@@ -198,6 +204,7 @@ export function DatatableWrapper<TTableRowType = any>({
       filter,
       filterProps?.filterValueObj
     );
+
     filteredDataLength = data.length;
   }
 

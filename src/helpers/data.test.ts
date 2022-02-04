@@ -1,6 +1,6 @@
-import { sortData, filterData, paginateData } from '../data';
-import { convertArrayToRecord } from '../object';
-import { ColumnProcessObj, TableColumnType } from '../types';
+import { sortData, filterData, paginateData } from './data';
+import { convertArrayToRecord } from './object';
+import { ColumnProcessObj, TableColumnType } from './types';
 
 interface TestObject {
   prop1: number;

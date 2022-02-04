@@ -42,6 +42,8 @@ export function Filter({
     <InputGroup className={classes?.inputGroup}>
       <Form.Control
         type="text"
+        name="table-filter"
+        aria-label="Filter table columns"
         value={filterState}
         placeholder={placeholder}
         onChange={(e) => onFilterChange(e.target.value)}

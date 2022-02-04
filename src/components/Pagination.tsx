@@ -53,7 +53,7 @@ export function Pagination({
 
   // Hide pagination if pagination is meant to not always be shown and the max page is 1,
   // or if rows per page is -1.
-  const hidePagination = !alwaysShowPagination || maxPage === 1;
+  const hidePagination = !alwaysShowPagination && maxPage === 1;
 
   const buttons = [];
   const firstLabel = labels?.firstPage || 'First';
