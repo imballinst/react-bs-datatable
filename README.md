@@ -1,9 +1,10 @@
 # React Bootstrap Datatable
 
-[![Build Status](https://travis-ci.org/Imballinst/react-bs-datatable.svg?branch=master)](https://travis-ci.org/Imballinst/react-bs-datatable)
+[![minzipped size](https://img.shields.io/bundlephobia/minzip/react-bs-datatable)](https://bundlephobia.com/package/react-bs-datatable)
+
 [![npm version](https://badge.fury.io/js/react-bs-datatable.svg)](https://badge.fury.io/js/react-bs-datatable)
 
-[![NPM](https://nodei.co/npm/react-bs-datatable.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-bs-datatable/)
+[![downloads per week](https://img.shields.io/npm/dw/react-bs-datatable)](https://www.npmjs.com/package/react-bs-datatable)
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
@@ -18,6 +19,7 @@ This is the v3 version of the library. To see the v2 version of README, please v
 - [x] Replaced `font-awesome` CSS with the [React components of Font Awesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react). This allowed us to enable tree shaking, which resulted in the optimization point above.
 - [x] Drop support for all other libraries. This library will now only support Bootstrap tables.
 - [ ] Auto generate component APIs.
+- [ ] Migration guide.
 
 To see the current state of `react-bs-datatable` prerelease version, please visit this Sandbox: https://codesandbox.io/s/react-bs-datatable-3-zq7xe.
 
