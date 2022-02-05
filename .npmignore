@@ -1,7 +1,7 @@
 examples/
 src/
 scripts/
-LICENSE
+.github/
 
 .travis.yml
 .babelrc
@@ -9,3 +9,5 @@ Makefile
 tsconfig*
 .storybook
 .prettierrc.json
+setupTests.ts
+jest.config.js
