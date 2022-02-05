@@ -7,7 +7,7 @@
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
-**WARNING**: The current major version of this library only supports React Bootstrap v1 (which uses Bootstrap v4). React Bootstrap v2 will only be supported in the next major version of this library. To see the progress of the next major version's branch, please visit [this branch](https://github.com/imballinst/react-bs-datatable/tree/update-peer-deps).
+**WARNING**: The current major version of this library only supports React Bootstrap v1 (which uses Bootstrap v4). React Bootstrap v2 will only be supported in the next major version of this library. To see the progress of the next major version's branch, please visit [this branch](https://github.com/imballinst/react-bs-datatable/tree/next).
 
 ## What's new in v2?
 
@@ -29,10 +29,10 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 ```bash
 # With NPM.
-npm install --save react-bs-datatable bootstrap@4 font-awesome react-bootstrap@1
+npm install --save react-bs-datatable@2 bootstrap@4 font-awesome react-bootstrap@1
 
 # With Yarn.
-yarn add react-bs-datatable bootstrap@4 font-awesome react-bootstrap@1
+yarn add react-bs-datatable@2 bootstrap@4 font-awesome react-bootstrap@1
 ```
 
 ## Usage
