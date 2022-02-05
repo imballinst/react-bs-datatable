@@ -4,11 +4,8 @@ import { Col, Row, Table } from 'react-bootstrap';
 import { parse } from 'date-fns';
 
 import json from './resources/story-data.json';
-import {
-  StoryBodyType,
-  STORY_HEADERS,
-  STORY_PROP_TO_OPTION_NAME
-} from './resources/types';
+import { StoryBodyType } from './resources/types';
+import { STORY_HEADERS, STORY_PROP_TO_OPTION_NAME } from './resources/shared';
 import { TableHeader } from '../components/TableHeader';
 import { TableBody, TableBodyProps } from '../components/TableBody';
 import {

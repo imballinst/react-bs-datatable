@@ -1,26 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
-import { parse } from 'date-fns';
 
-import json from './resources/story-data.json';
+import { FetchParams, FetchResponse, StoryBodyType } from './resources/types';
 import {
-  StoryBodyType,
-  STORY_HEADERS,
-  STORY_PROP_TO_OPTION_NAME
-} from './resources/types';
+  CONTROLLED_HEADERS,
+  fetchControlledMockData
+} from './resources/shared-controlled';
 import { TableHeader } from '../components/TableHeader';
-import { TableBody, TableBodyProps } from '../components/TableBody';
-import {
-  DatatableWrapper,
-  DatatableWrapperProps
-} from '../components/DatatableWrapper';
+import { TableBody } from '../components/TableBody';
+import { DatatableWrapper } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
 import { PaginationOpts } from '../components/PaginationOpts';
 import { Pagination } from '../components/Pagination';
 import { SortType, TableColumnType } from '../helpers/types';
-import { filterData, sortData } from '../helpers/data';
-import { convertArrayToRecord } from '../helpers/object';
 
 export default {
   /* 👇 The title prop is optional.
@@ -32,19 +25,16 @@ export default {
 } as ComponentMeta<typeof AsyncStoryTable>;
 
 // Async.
-const SORTABLE_FIELDS = ['Name', 'Username', 'Last Update', 'Score'];
-const FILTERABLE_FIELDS = ['Name', 'Username', 'Location'];
-
-const HEADERS = STORY_HEADERS.map((header) => ({
-  ...header,
-  isSortable: SORTABLE_FIELDS.includes(STORY_PROP_TO_OPTION_NAME[header.prop]),
-  isFilterable: FILTERABLE_FIELDS.includes(
-    STORY_PROP_TO_OPTION_NAME[header.prop]
-  )
-}));
-
-const AsyncTemplate: ComponentStory<typeof AsyncStoryTable> = () => (
-  <AsyncStoryTable fetchFn={fetchMockData} headers={HEADERS} />
+const AsyncTemplate: ComponentStory<typeof AsyncStoryTable> = ({
+  fetchFn,
+  headers,
+  ...args
+}) => (
+  <AsyncStoryTable
+    fetchFn={fetchFn || fetchControlledMockData}
+    headers={headers || CONTROLLED_HEADERS}
+    {...args}
+  />
 );
 
 export const Async = AsyncTemplate.bind({});
@@ -80,12 +70,19 @@ export const AsyncPokemon = AsyncPokemonTemplate.bind({});
 AsyncPokemon.storyName = 'Async example (with Pokémon API)';
 
 // Components.
+const DEFAULT_ROWS_PER_PAGE = 10;
+const DEFAULT_ROWS_PER_PAGE_OPTIONS = [5, 10, 15, 20];
+
 function AsyncStoryTable<TTableRowType = any>({
   fetchFn,
-  headers
+  headers,
+  rowsPerPage: rowsPerPageProp = DEFAULT_ROWS_PER_PAGE,
+  rowsPerPageOptions: rowsPerPageOptionsProp = DEFAULT_ROWS_PER_PAGE_OPTIONS
 }: {
   fetchFn: (params: FetchParams) => Promise<FetchResponse<TTableRowType>>;
   headers: TableColumnType<TTableRowType>[];
+  rowsPerPage?: number;
+  rowsPerPageOptions?: number[];
 }) {
   const [data, setData] = useState<TTableRowType[]>([]);
   const [filteredDataLength, setFilteredDataLength] = useState(0);
@@ -95,19 +92,20 @@ function AsyncStoryTable<TTableRowType = any>({
     order: 'asc'
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageProp);
   const [maxPage, setMaxPage] = useState(1);
 
   const onFilter = useCallback((text) => {
     setFilter(text);
+    setCurrentPage(1);
   }, []);
 
-  const onSortChange = useCallback((nextProp) => {
+  const onSortChange = useCallback((nextProp: SortType) => {
     setSortState((oldState) => {
       const nextSort = { ...oldState };
 
-      if (nextProp !== oldState.prop) {
-        nextSort.prop = nextProp;
+      if (nextProp.prop !== oldState.prop) {
+        nextSort.prop = nextProp.prop;
         nextSort.order = 'asc';
       } else {
         nextSort.order = 'desc';
@@ -123,6 +121,7 @@ function AsyncStoryTable<TTableRowType = any>({
 
   const onRowsPerPageChange = useCallback((rowsPerPage) => {
     setRowsPerPage(rowsPerPage);
+    setCurrentPage(1);
   }, []);
 
   // Simulate API hit.
@@ -163,7 +162,7 @@ function AsyncStoryTable<TTableRowType = any>({
             controlledProps={{
               filteredDataLength,
               onRowsPerPageChange,
-              rowsPerPageOptions: [5, 10, 15, 20],
+              rowsPerPageOptions: rowsPerPageOptionsProp,
               rowsPerPage
             }}
           />
@@ -181,7 +180,7 @@ function AsyncStoryTable<TTableRowType = any>({
       </Row>
       <Table>
         <TableHeader
-          tableHeaders={HEADERS}
+          tableHeaders={CONTROLLED_HEADERS}
           controlledProps={{ sortState, onSortChange }}
         />
         <TableBody />
@@ -190,71 +189,11 @@ function AsyncStoryTable<TTableRowType = any>({
   );
 }
 
-// Helper functions.
-interface FetchParams {
-  filter: string;
-  sortState: SortType;
-  currentPage: number;
-  rowsPerPage: number;
-}
-
-interface FetchResponse<T> {
-  data: T[];
-  maxPage: number;
-  filteredDataLength: number;
-}
-
-// Mock data.
-const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
-  sortValueObj: {
-    date: (date) => parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
-  }
-};
-const HEADERS_DICTIONARY = convertArrayToRecord(HEADERS, 'prop');
-
-async function fetchMockData({
-  rowsPerPage,
-  filter,
-  sortState,
-  currentPage
-}: FetchParams): Promise<FetchResponse<StoryBodyType>> {
-  return new Promise((res) => {
-    setTimeout(() => {
-      let newData = json;
-      let newMaxPage = 1;
-      let newFilteredDataLength = newData.length;
-
-      // Filter the data.
-      if (filter !== '') {
-        newData = filterData(newData, HEADERS_DICTIONARY, filter);
-        newFilteredDataLength = newData.length;
-      }
-
-      // Paginate the data.
-      newMaxPage = Math.ceil(newData.length / rowsPerPage);
-      newData = newData.slice(
-        (currentPage - 1) * rowsPerPage,
-        currentPage * rowsPerPage
-      );
-
-      // Sort the data using a helper function.
-      newData = sortData(newData, sortState, SORT_PROPS?.sortValueObj);
-
-      res({
-        data: newData,
-        maxPage: newMaxPage,
-        filteredDataLength: newFilteredDataLength
-      });
-    }, 500);
-  });
-}
-
 // Mock data but using Pokémon API.
 async function fetchPokemonData({
   rowsPerPage,
   currentPage
 }: FetchParams): Promise<FetchResponse<PokemonBodyType>> {
-  console.log(rowsPerPage, currentPage);
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${rowsPerPage}&offset=${
       (currentPage - 1) * rowsPerPage
