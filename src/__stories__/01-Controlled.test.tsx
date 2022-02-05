@@ -14,8 +14,8 @@ import {
 } from './resources/shared-controlled';
 import { TableColumnType } from '../helpers/types';
 
-// TODO(imballinst): learn how to use the timer mock,
-// as explained in https://github.com/threepointone/react-act-examples/blob/master/sync.md#timers.
+// TODO(imballinst): probably better if we use MSW
+// instead of the `setTimeout` with `new Promise`.
 describe('Controlled', () => {
   test('normal use case', async () => {
     const {
