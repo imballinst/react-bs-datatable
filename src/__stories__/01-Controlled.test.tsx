@@ -47,7 +47,7 @@ describe('Controlled', () => {
 
     // Test go to the last pagination.
     fireEvent.click(lastBtnElement);
-    await act(async () => await sleep(350));
+    await act(async () => await sleep(200));
 
     await waitFor(() => expect(firstBtnElement).not.toBeDisabled());
     await waitFor(() => expect(lastBtnElement).toBeDisabled());
@@ -60,7 +60,7 @@ describe('Controlled', () => {
     // Try filtering. It should go back to the first page.
     let filterElement = getByPlaceholderText('Enter text...');
     fireEvent.change(filterElement, { target: { value: 'aaren' } });
-    await act(async () => await sleep(350));
+    await act(async () => await sleep(200));
 
     await waitFor(() => expect(firstBtnElement).toBeDisabled());
 
@@ -85,7 +85,7 @@ describe('Controlled', () => {
     // Reset the filter first by clicking the "X" clear filter button.
     let clearFilterButton = getByLabelText('Clear filter');
     fireEvent.click(clearFilterButton);
-    await act(async () => await sleep(350));
+    await act(async () => await sleep(200));
 
     firstNumButtonElement = queryByText('1');
     secondNumButtonElement = queryByText('2');
@@ -107,14 +107,14 @@ describe('Controlled', () => {
     // Sort descending the first column (since it's the initial state).
     let nameTh = getByText('Name', { selector: 'th' });
     fireEvent.click(nameTh);
-    await act(async () => await sleep(350));
+    await act(async () => await sleep(200));
 
     expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
 
     // Try sorting the other columns.
     let usernameTh = getByText('Username', { selector: 'th' });
     fireEvent.click(usernameTh);
-    await act(async () => await sleep(350));
+    await act(async () => await sleep(200));
 
     // The clicked header should have its sort state.
     expect(usernameTh.getAttribute('data-sort-order')).toBe('asc');
