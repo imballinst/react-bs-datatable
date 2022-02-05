@@ -28,6 +28,21 @@ jobs:
       - run: yarn
       - run: yarn test
       - run: yarn build
+
+  storybook:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - name: Setup node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: yarn
+      - run: yarn
       # Build Storybook.
       - run: yarn build-storybook
       # Deploy Storybook.
