@@ -264,13 +264,14 @@ function getDefaultDatatableState<TTableRowType>({
   let isFilterable = filterProps !== undefined;
 
   for (const header of headers) {
-    // Get the first table header with the sort attribute.
+    // Set the default sort header.
     if (
-      defaultSort.prop === '' &&
-      header.prop === sortProps?.initialState?.prop &&
-      header.isSortable
+      // If the sorted prop is still "empty", then we assign it with the current header.
+      (defaultSort.prop === '' && header.isSortable) ||
+      // Or, if the header prop matches the initial state, then set it as well.
+      header.prop === sortProps?.initialState?.prop
     ) {
-      defaultSort.prop = header.prop;
+      defaultSort.prop = header.prop.toString();
     }
 
     if (header.isFilterable) {

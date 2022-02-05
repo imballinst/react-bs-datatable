@@ -140,6 +140,7 @@ export function Pagination({
 
   return (
     <ButtonGroup
+      aria-label="Pagination button group"
       className={makeClasses('ButtonGroup__root', classes?.buttonGroup, {
         invisible: hidePagination
       })}

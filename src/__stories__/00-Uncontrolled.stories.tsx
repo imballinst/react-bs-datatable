@@ -164,7 +164,8 @@ function StoryTable({
   // For custom rendering of score column.
   scoreCellColumnColor,
   // For on click row event.
-  rowOnClickText
+  rowOnClickText,
+  rowOnClickFn
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -183,6 +184,7 @@ function StoryTable({
   scoreCellColumnColor?: string;
   // For on click row event.
   rowOnClickText?: string;
+  rowOnClickFn?: (name: string) => void;
 }) {
   const headers = STORY_HEADERS.map((header) => ({
     ...header,
@@ -213,6 +215,8 @@ function StoryTable({
         `Clicked row containing name ${row.name}.\n\nYou inputted the text: ${rowOnClickText}.`
       );
     };
+  } else if (rowOnClickFn) {
+    rowOnClick = (row) => rowOnClickFn(row.name);
   }
 
   return (

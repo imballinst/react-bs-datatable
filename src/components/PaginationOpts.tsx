@@ -5,7 +5,6 @@ import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 
 export interface PaginationOptionsClasses {
-  form?: string;
   formGroup?: string;
   formText?: string;
   formControl?: string;
@@ -61,41 +60,37 @@ export function PaginationOpts({
     filteredDataLength <= Math.min(...rowsPerPageOptions);
 
   return (
-    <Form
-      className={makeClasses('paginationOpts__root', classes?.form, {
+    <Form.Group
+      controlId="formGroupPagination"
+      className={makeClasses('paginationOpts__root', classes?.formGroup, {
         invisible: hidePaginationOptions
       })}
     >
-      <Form.Group
-        controlId="formGroupPagination"
-        className={classes?.formGroup}
+      <Form.Label className={classes?.formText}>
+        {labels?.beforeSelect || 'Rows per page'}
+      </Form.Label>
+      <Form.Select
+        name="table-pagination-options"
+        value={rowsPerPageState}
+        as="select"
+        placeholder="select"
+        onChange={(e) => onRowsPerPageChange(Number(e.target.value))}
+        className={classes?.formControl}
       >
-        <Form.Label className={classes?.formText}>
-          {labels?.beforeSelect || 'Rows per page'}
-        </Form.Label>
-        <Form.Select
-          name="table-pagination-options"
-          value={rowsPerPageState}
-          as="select"
-          placeholder="select"
-          onChange={(e) => onRowsPerPageChange(Number(e.target.value))}
-          className={classes?.formControl}
-        >
-          {rowsPerPageOptions.map((option: number) => {
-            const optionProps = {
-              key: `page-opt-${option}`,
-              value: option
-            };
+        {rowsPerPageOptions.map((option: number) => {
+          const optionProps = {
+            key: `page-opt-${option}`,
+            value: option
+          };
 
-            return <option {...optionProps}>{option}</option>;
-          })}
-        </Form.Select>
-        {labels?.afterSelect && (
-          <Form.Text className={classes?.formText}>
-            {labels?.afterSelect}
-          </Form.Text>
-        )}
-      </Form.Group>
-    </Form>
+          return <option {...optionProps}>{option}</option>;
+        })}
+      </Form.Select>
+      {labels?.afterSelect && (
+        <Form.Text className={classes?.formText}>
+          {labels?.afterSelect}
+        </Form.Text>
+      )}
+    </Form.Group>
   );
 }

@@ -39,11 +39,12 @@ export function TableHeader<T extends TableRowType>({
       sortable: isSortable === true
     });
     const nextSort: SortType = { order: 'asc', prop: prop.toString() };
+    const isCurrentSort = sortState.prop === prop;
     let sortIcon: 'sort' | 'sortUp' | 'sortDown' = 'sort';
     let sortIconRender = null;
 
     if (isSortable) {
-      if (sortState.prop && sortState.prop === prop) {
+      if (sortState.prop && isCurrentSort) {
         if (sortState.order === 'asc') {
           sortIcon = 'sortUp';
           nextSort.order = 'desc';
@@ -68,11 +69,19 @@ export function TableHeader<T extends TableRowType>({
       );
     }
 
-    const thProps = {
+    const thProps: Record<string, any> = {
       key: `th-${i}`,
-      onClick: isSortable ? () => onSortChange(nextSort) : undefined,
       className: makeClasses(thClass, classes?.th)
     };
+
+    if (isSortable) {
+      thProps.onClick = () => onSortChange(nextSort);
+      thProps.role = 'button';
+
+      if (isCurrentSort) {
+        thProps['data-sort-order'] = sortState.order;
+      }
+    }
 
     headings.push(<th {...thProps}>{rendered}</th>);
   }
