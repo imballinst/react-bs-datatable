@@ -7,6 +7,8 @@
 
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
+This is the v3 version of the library. To see the v2 version of README, please visit the [v1 branch](https://github.com/imballinst/react-bs-datatable/tree/v1).
+
 ## What's new in v3?
 
 - [x] New build and publish system. Previously, this library used Webpack for bundling etc.—now it only uses `tsc` to compile the TypeScript files to output all files to the `lib` folder.
