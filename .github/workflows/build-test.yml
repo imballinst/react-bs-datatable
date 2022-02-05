@@ -30,7 +30,6 @@ jobs:
       - run: yarn build
       # Build Storybook.
       - run: yarn build-storybook
-        if: ${{ github.ref == 'refs/heads/main' }}
       # Deploy Storybook.
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
