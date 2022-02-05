@@ -1,14 +1,21 @@
 import React, {
+  MutableRefObject,
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState
 } from 'react';
 import { filterData, paginateData, sortData } from '../helpers/data';
 import { convertArrayToRecord } from '../helpers/object';
 import { createCtx } from '../helpers/react';
-import { ColumnProcessObj, SortType } from '../helpers/types';
+import {
+  CheckboxState,
+  ColumnProcessObj,
+  SortType,
+  TableRowType
+} from '../helpers/types';
 import { TableColumnType } from '../helpers/types';
 
 interface FilterProps<TTableRowType> {
@@ -41,6 +48,11 @@ interface PaginationOptionsProps {
   };
 }
 
+interface CheckboxProps {
+  // Uncontrolled.
+  initialState?: Record<string, CheckboxState>;
+}
+
 // Context types.
 interface DatatableWrapperContextType<TTableRowType> {
   // Things passed to other components.
@@ -59,6 +71,14 @@ interface DatatableWrapperContextType<TTableRowType> {
   rowsPerPageState: number;
   rowsPerPageOptions: number[];
   onRowsPerPageChange: (nextState: number) => void;
+  // Checkbox.
+  checkboxState: Record<string, CheckboxState>;
+  onCheckboxChange: (params: {
+    column: string;
+    nextCheckboxState: CheckboxState;
+    tableHeaderCheckbox: HTMLInputElement;
+  }) => void;
+  checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
   // Data.
   maxPage: number;
   filteredDataLength: number;
@@ -78,6 +98,7 @@ export interface DatatableWrapperProps<TTableRowType> {
   sortProps?: SortProps<TTableRowType>;
   paginationProps?: PaginationProps;
   paginationOptionsProps?: PaginationOptionsProps;
+  checkboxProps?: CheckboxProps;
 }
 
 interface DatatableState {
@@ -90,6 +111,7 @@ interface DatatableState {
     rowsPerPageOptions: number[];
   };
   filter: string;
+  checkbox: Record<string, CheckboxState>;
 }
 
 export function DatatableWrapper<TTableRowType = any>({
@@ -99,6 +121,7 @@ export function DatatableWrapper<TTableRowType = any>({
   sortProps,
   paginationProps,
   paginationOptionsProps,
+  checkboxProps,
   children
 }: DatatableWrapperProps<TTableRowType>) {
   const [state, setState] = useState<DatatableState>(
@@ -107,7 +130,8 @@ export function DatatableWrapper<TTableRowType = any>({
       headers,
       sortProps,
       paginationProps,
-      paginationOptionsProps
+      paginationOptionsProps,
+      checkboxProps
     })
   );
   const tableHeadersRecordRef = useRef(convertArrayToRecord(headers, 'prop'));
@@ -118,7 +142,12 @@ export function DatatableWrapper<TTableRowType = any>({
     filterProps,
     sortProps,
     paginationProps,
-    paginationOptionsProps
+    paginationOptionsProps,
+    checkboxProps
+  });
+  const checkboxRefs = useTableHeaderCheckbox({
+    headers,
+    initialStates: checkboxProps?.initialState
   });
 
   useEffect(() => {
@@ -133,7 +162,9 @@ export function DatatableWrapper<TTableRowType = any>({
           headers,
           sortProps: controlPropsRef.current.sortProps,
           paginationProps: controlPropsRef.current.paginationProps,
-          paginationOptionsProps: controlPropsRef.current.paginationOptionsProps
+          paginationOptionsProps:
+            controlPropsRef.current.paginationOptionsProps,
+          checkboxProps: controlPropsRef.current.checkboxProps
         })
       );
     }
@@ -192,48 +223,90 @@ export function DatatableWrapper<TTableRowType = any>({
     }));
   }, []);
 
-  const { filter, sort, pagination } = state;
-  let data = body;
-  let filteredDataLength = data.length;
-  let maxPage = 1;
+  const onCheckboxChange = useCallback(
+    ({
+      column,
+      nextCheckboxState,
+      tableHeaderCheckbox
+    }: {
+      column: string;
+      nextCheckboxState: CheckboxState;
+      tableHeaderCheckbox: HTMLInputElement;
+    }) => {
+      // We put this here because it'll be easier to switch between
+      // controlled and uncontrolled this way.
+      tableHeaderCheckbox.indeterminate =
+        nextCheckboxState.state === 'some-selected';
 
-  if (state.isFilterable) {
-    data = filterData(
-      body,
-      tableHeadersRecordRef.current,
-      filter,
-      filterProps?.filterValueObj
-    );
+      setState((oldState) => ({
+        ...oldState,
+        checkbox: {
+          ...oldState.checkbox,
+          [column]: nextCheckboxState
+        }
+      }));
+    },
+    []
+  );
 
-    filteredDataLength = data.length;
-  }
+  const { filter, sort, pagination, isFilterable } = state;
+  const { data, filteredDataLength, maxPage } = useMemo(() => {
+    let newData = body;
+    let newFilteredDataLength = newData.length;
+    let newMaxPage = 1;
 
-  data = sortData(data, sort, sortProps?.sortValueObj);
+    if (isFilterable) {
+      newData = filterData(
+        body,
+        tableHeadersRecordRef.current,
+        filter,
+        filterProps?.filterValueObj
+      );
 
-  if (pagination.rowsPerPage !== -1) {
-    // Pagination needs.
-    maxPage = Math.ceil(data.length / pagination.rowsPerPage);
-    data = paginateData(data, pagination.currentPage, pagination.rowsPerPage);
-  }
+      newFilteredDataLength = newData.length;
+    }
+
+    newData = sortData(newData, sort, sortProps?.sortValueObj);
+
+    if (pagination.rowsPerPage !== -1) {
+      // Pagination needs.
+      newMaxPage = Math.ceil(newData.length / pagination.rowsPerPage);
+      newData = paginateData(
+        newData,
+        pagination.currentPage,
+        pagination.rowsPerPage
+      );
+    }
+
+    return {
+      data: newData,
+      maxPage: newMaxPage,
+      filteredDataLength: newFilteredDataLength
+    };
+  }, [body, filter, sort, pagination, isFilterable]);
 
   return (
     <Provider
       value={{
         headers,
         // Filter.
-        isFilterable: state.isFilterable,
-        filterState: state.filter,
+        isFilterable: isFilterable,
+        filterState: filter,
         onFilterChange,
         // Sort.
-        sortState: state.sort,
+        sortState: sort,
         onSortChange,
         // Pagination.
-        currentPageState: state.pagination.currentPage,
+        currentPageState: pagination.currentPage,
         onPaginationChange,
         // Pagination options.
-        rowsPerPageState: state.pagination.rowsPerPage,
-        rowsPerPageOptions: state.pagination.rowsPerPageOptions,
+        rowsPerPageState: pagination.rowsPerPage,
+        rowsPerPageOptions: pagination.rowsPerPageOptions,
         onRowsPerPageChange,
+        // Checkbox.
+        checkboxState: state.checkbox,
+        onCheckboxChange,
+        checkboxRefs,
         // Data.
         maxPage,
         filteredDataLength,
@@ -246,11 +319,12 @@ export function DatatableWrapper<TTableRowType = any>({
 }
 
 // Helper functions.
-function getDefaultDatatableState<TTableRowType>({
+function getDefaultDatatableState<TTableRowType = TableRowType>({
   filterProps,
   paginationOptionsProps,
   paginationProps,
   sortProps,
+  checkboxProps,
   headers
 }: Pick<
   DatatableWrapperProps<TTableRowType>,
@@ -258,20 +332,30 @@ function getDefaultDatatableState<TTableRowType>({
   | 'paginationOptionsProps'
   | 'paginationProps'
   | 'sortProps'
+  | 'checkboxProps'
   | 'headers'
 >) {
   const defaultSort: SortType = { order: 'asc', prop: '' };
+  const checkbox: Record<string, CheckboxState> =
+    checkboxProps?.initialState || {};
   let isFilterable = filterProps !== undefined;
 
   for (const header of headers) {
+    const prop = header.prop.toString();
+
     // Set the default sort header.
     if (
       // If the sorted prop is still "empty", then we assign it with the current header.
       (defaultSort.prop === '' && header.isSortable) ||
       // Or, if the header prop matches the initial state, then set it as well.
-      header.prop === sortProps?.initialState?.prop
+      prop === sortProps?.initialState?.prop
     ) {
-      defaultSort.prop = header.prop.toString();
+      defaultSort.prop = prop;
+    }
+
+    // Set the default checkbox values, if not provided from `checkboxProps`.
+    if (checkboxProps?.initialState === undefined) {
+      checkbox[prop] = { state: 'none-selected', selected: new Set() };
     }
 
     if (header.isFilterable) {
@@ -288,6 +372,33 @@ function getDefaultDatatableState<TTableRowType>({
       currentPage: paginationProps?.initialState?.page || 1,
       rowsPerPage: paginationOptionsProps?.initialState?.rowsPerPage || -1,
       rowsPerPageOptions: paginationOptionsProps?.initialState?.options || []
-    }
+    },
+    checkbox
   };
+}
+
+function useTableHeaderCheckbox<TTableColumnType>({
+  headers,
+  initialStates
+}: {
+  headers: TableColumnType<TTableColumnType>[];
+  initialStates?: Record<string, CheckboxState>;
+}) {
+  const checkboxRefs = useRef<Record<string, HTMLInputElement>>({});
+
+  useEffect(() => {
+    if (initialStates) {
+      for (const header of headers) {
+        const prop = header.prop.toString();
+        const checkbox = checkboxRefs.current[prop];
+
+        if (checkbox !== null) {
+          checkbox.indeterminate =
+            initialStates[prop].state === 'some-selected';
+        }
+      }
+    }
+  }, [headers, initialStates]);
+
+  return checkboxRefs;
 }

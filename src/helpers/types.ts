@@ -5,6 +5,11 @@ export interface SortType {
   order: 'asc' | 'desc';
 }
 
+export interface CheckboxState {
+  selected: Set<string>;
+  state: 'none-selected' | 'some-selected' | 'all-selected';
+}
+
 export interface TableColumnType<T> {
   prop: keyof T;
   title?: string;
@@ -16,6 +21,7 @@ export interface TableColumnType<T> {
   };
   isFilterable?: boolean;
   isSortable?: boolean;
+  checkbox?: { idProp: string };
 }
 
 export type TableRowType<T = any> = Record<string, T>;
