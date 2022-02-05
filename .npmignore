@@ -1,0 +1,11 @@
+examples/
+src/
+scripts/
+LICENSE
+
+.travis.yml
+.babelrc
+Makefile
+tsconfig*
+.storybook
+.prettierrc.json

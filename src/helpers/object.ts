@@ -1,21 +1,24 @@
-import { DatatableProps } from './types';
+import { TableRowType } from './types';
 
-export function makeClasses(...args: any[]) {
+export function makeClasses(
+  ...args: (string | Record<string, boolean> | undefined)[]
+) {
   const classes = [];
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (!arg) continue;
 
-    const argType = typeof arg;
-
-    if (argType === 'string' || argType === 'number') {
+    // String.
+    if (typeof arg === 'string') {
       classes.push(arg);
-    } else if (argType === 'object') {
-      for (const key in arg) {
-        if (arg[key]) {
-          classes.push(key);
-        }
+      continue;
+    }
+
+    // Dictionary.
+    for (const key in arg) {
+      if (arg[key]) {
+        classes.push(key);
       }
     }
   }
@@ -23,51 +26,15 @@ export function makeClasses(...args: any[]) {
   return classes.join(' ');
 }
 
-export function customJoin(
-  array: string[],
-  separator: string,
-  lastSeparator: string = ''
+export function convertArrayToRecord<ElementType extends TableRowType>(
+  array: ElementType[],
+  propId: keyof ElementType
 ) {
-  const lastSep =
-    array.length === 2 ? lastSeparator : `${separator}${lastSeparator}`;
+  const record: Record<string, ElementType> = {};
 
-  return `${array.slice(0, -1).join(separator)}${lastSep}${array.slice(-1)}`;
-}
-
-const includedProps = [
-  'classes',
-  'async',
-  'rowsPerPage',
-  'rowsPerPageOption',
-  'tableBody'
-];
-
-export function shouldTableUpdate(
-  prevProps: DatatableProps,
-  nextProps: DatatableProps
-) {
-  const checkedPropsLength = includedProps.length;
-  let isSame = true;
-  let index = 0;
-
-  while (isSame && index < checkedPropsLength) {
-    const prop = includedProps[index];
-
-    if (prevProps[prop] !== nextProps[prop]) {
-      if (prop === 'rowsPerPageOption') {
-        // First, check if defined -- defaults to empty array.
-        const prevOptions = prevProps[prop] || [];
-        const nextOptions = nextProps[prop] || [];
-
-        // Then, check if they have same length.
-        isSame = prevOptions.length === nextOptions.length;
-      } else {
-        isSame = false;
-      }
-    }
-
-    index += 1;
+  for (const element of array) {
+    record[element[propId]] = element;
   }
 
-  return isSame;
+  return record;
 }

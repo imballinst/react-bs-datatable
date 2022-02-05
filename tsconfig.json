@@ -1,26 +1,19 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
-    "sourceMap": true,
-    "allowJs": false,
-    "jsx": "react",
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "lib", "**/__tests__/*"]
+  "include": ["src", "scripts", "./setupTests.ts", ".storybook/preview.ts"],
+  "exclude": ["src/index.ts"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
