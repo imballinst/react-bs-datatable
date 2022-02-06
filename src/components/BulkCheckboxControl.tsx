@@ -77,11 +77,7 @@ export function BulkCheckboxControl({
     rendered = (
       <>
         {previouslyUpdatedCheckbox?.selected.size} rows selected.{' '}
-        <a
-          role="button"
-          onClick={() => onClick('add-all')}
-          className={linkClasses}
-        >
+        <a role="button" onClick={() => onClick('add')} className={linkClasses}>
           Select all rows
         </a>
       </>

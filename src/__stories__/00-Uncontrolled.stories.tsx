@@ -212,11 +212,7 @@ function StoryTable({
       checkbox: { idProp: 'name', className: 'table-checkbox' },
       alignment: { horizontal: 'center' }
     });
-    checkboxControl = (
-      <div>
-        <BulkCheckboxControl />
-      </div>
-    );
+    checkboxControl = <BulkCheckboxControl />;
   }
 
   if (scoreCellColumnColor) {
