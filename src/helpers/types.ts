@@ -117,8 +117,6 @@ export type ColumnProcessObj<TColumnType, TReturnType = string> = Partial<
 >;
 
 /**
- * @internal
- *
  * This is used for the `extend` keyword in the components.
  */
 export type TableRowType<T = any> = Record<string, T>;

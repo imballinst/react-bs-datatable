@@ -1,6 +1,6 @@
 {
   "json": "api/docs.json",
-  "entryPoints": ["src"],
+  "entryPoints": ["./src"],
   "entryPointStrategy": "expand",
   "cleanOutputDir": true,
   "tsconfig": "./tsconfig.json",

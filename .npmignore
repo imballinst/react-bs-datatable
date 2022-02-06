@@ -2,6 +2,7 @@ examples/
 src/
 scripts/
 .github/
+api/
 
 .travis.yml
 .babelrc

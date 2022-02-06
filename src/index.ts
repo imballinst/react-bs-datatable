@@ -35,5 +35,6 @@ export type {
   SortType,
   CheckboxState,
   CheckboxOnChange,
-  TableColumnType
+  TableColumnType,
+  TableRowType
 } from './helpers/types';
