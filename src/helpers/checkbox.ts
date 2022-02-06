@@ -1,21 +1,26 @@
 import { CheckboxState } from './types';
 
-export function getNextCheckboxState({
-  checkboxState,
-  prop,
-  data,
-  filteredDataLength,
-  idProp
-}: {
+export interface GetNextCheckboxStateParams {
   checkboxState: Record<string, CheckboxState>;
   prop: string;
   data: any | any[];
   filteredDataLength: number;
   idProp: string;
-}) {
+  type: 'add-all' | 'remove-all' | 'add' | 'remove';
+}
+
+export function getNextCheckboxState({
+  checkboxState,
+  prop,
+  data,
+  filteredDataLength,
+  idProp,
+  type
+}: GetNextCheckboxStateParams) {
   const nextCheckboxState = { ...checkboxState[prop] };
 
   // None selected.
+  // This one is easy, just add all of them.
   if (checkboxState[prop].state === 'none-selected') {
     const newSet = new Set<string>();
 
@@ -35,15 +40,16 @@ export function getNextCheckboxState({
   }
 
   // Some, or all selected.
+  // This is a bit tricky, because we need to consider whether we want to add or remove.
   const newSet = new Set<string>(checkboxState[prop].selected);
 
   if (Array.isArray(data)) {
     for (const row of data) {
       const value = row[idProp];
-      addOrRemoveFromSet(newSet, value);
+      addOrRemoveFromSet(newSet, value, type);
     }
   } else {
-    addOrRemoveFromSet(newSet, data[idProp]);
+    addOrRemoveFromSet(newSet, data[idProp], type);
   }
 
   nextCheckboxState.selected = newSet;
@@ -58,9 +64,13 @@ export function getNextCheckboxState({
 }
 
 // Helper functions.
-function addOrRemoveFromSet(set: Set<string>, value: any) {
+function addOrRemoveFromSet(
+  set: Set<string>,
+  value: any,
+  type: GetNextCheckboxStateParams['type']
+) {
   // Depending on the checkbox state, delete or add.
-  if (set.has(value)) {
+  if (type === 'remove' || type === 'remove-all') {
     set.delete(value);
   } else {
     set.add(value);

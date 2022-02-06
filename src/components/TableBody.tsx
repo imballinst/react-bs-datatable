@@ -94,13 +94,15 @@ export function TableBody<TTableRowType extends TableRowType>({
                 checked={checkboxState[prop].selected.has(idValue)}
                 onChange={() => {
                   onCheckboxChange({
-                    column: prop,
+                    prop,
+                    idProp: checkbox.idProp,
                     nextCheckboxState: getNextCheckboxState({
                       checkboxState,
                       data: data[rowIdx],
                       idProp: checkbox.idProp,
                       filteredDataLength,
-                      prop
+                      prop,
+                      type: isSelected ? 'remove' : 'add'
                     }),
                     checkboxRefs
                   });

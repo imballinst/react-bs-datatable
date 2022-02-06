@@ -74,12 +74,14 @@ interface DatatableWrapperContextType<TTableRowType> {
   onRowsPerPageChange: (nextState: number) => void;
   // Checkbox.
   checkboxState: Record<string, CheckboxState>;
+  previouslyModifiedCheckbox: PreviouslyModifiedCheckbox;
   onCheckboxChange: CheckboxOnChange;
   checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
   // Data.
   maxPage: number;
   filteredDataLength: number;
   data: TTableRowType[];
+  body: TTableRowType[];
 }
 
 const [useCtx, Provider] = createCtx<DatatableWrapperContextType<any>>();
@@ -98,6 +100,11 @@ export interface DatatableWrapperProps<TTableRowType> {
   checkboxProps?: CheckboxProps;
 }
 
+interface PreviouslyModifiedCheckbox {
+  idProp: string;
+  prop: string;
+}
+
 interface DatatableState {
   isFilterable: boolean;
   sort: SortType;
@@ -109,6 +116,7 @@ interface DatatableState {
   };
   filter: string;
   checkbox: Record<string, CheckboxState>;
+  previouslyModifiedCheckbox: PreviouslyModifiedCheckbox;
 }
 
 export function DatatableWrapper<TTableRowType = any>({
@@ -221,17 +229,21 @@ export function DatatableWrapper<TTableRowType = any>({
   }, []);
 
   const onCheckboxChange: CheckboxOnChange = useCallback(
-    ({ column, nextCheckboxState, checkboxRefs }) => {
+    ({ prop, nextCheckboxState, checkboxRefs, idProp }) => {
       // We put this here because it'll be easier to switch between
       // controlled and uncontrolled this way.
-      checkboxRefs.current[column].indeterminate =
+      checkboxRefs.current[prop].indeterminate =
         nextCheckboxState.state === 'some-selected';
 
       setState((oldState) => ({
         ...oldState,
         checkbox: {
           ...oldState.checkbox,
-          [column]: nextCheckboxState
+          [prop]: nextCheckboxState
+        },
+        previouslyModifiedCheckbox: {
+          idProp,
+          prop
         }
       }));
     },
@@ -294,11 +306,13 @@ export function DatatableWrapper<TTableRowType = any>({
         onRowsPerPageChange,
         // Checkbox.
         checkboxState: state.checkbox,
+        previouslyModifiedCheckbox: state.previouslyModifiedCheckbox,
         onCheckboxChange,
         checkboxRefs,
         // Data.
         maxPage,
         filteredDataLength,
+        body,
         data
       }}
     >
@@ -323,7 +337,7 @@ function getDefaultDatatableState<TTableRowType = TableRowType>({
   | 'sortProps'
   | 'checkboxProps'
   | 'headers'
->) {
+>): DatatableState {
   const defaultSort: SortType = { order: 'asc', prop: '' };
   const checkbox: Record<string, CheckboxState> =
     checkboxProps?.initialState || {};
@@ -362,7 +376,11 @@ function getDefaultDatatableState<TTableRowType = TableRowType>({
       rowsPerPage: paginationOptionsProps?.initialState?.rowsPerPage || -1,
       rowsPerPageOptions: paginationOptionsProps?.initialState?.options || []
     },
-    checkbox
+    checkbox,
+    previouslyModifiedCheckbox: {
+      idProp: '',
+      prop: ''
+    }
   };
 }
 

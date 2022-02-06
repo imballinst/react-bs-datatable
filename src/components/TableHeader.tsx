@@ -11,7 +11,10 @@ import {
   CheckboxState,
   CheckboxOnChange
 } from '../helpers/types';
-import { getNextCheckboxState } from '../helpers/checkbox';
+import {
+  getNextCheckboxState,
+  GetNextCheckboxStateParams
+} from '../helpers/checkbox';
 
 export interface TableHeaderClasses {
   th?: string;
@@ -109,11 +112,31 @@ export function TableHeader<T extends TableRowType>({
     let rendered;
 
     if (checkbox) {
+      let numberOfSelectedRowsInCurrentPage = 0;
+      let nextCheckboxType: GetNextCheckboxStateParams['type'];
+
+      for (const row of data) {
+        if (checkboxState[prop].selected.has(row[checkbox.idProp])) {
+          numberOfSelectedRowsInCurrentPage += 1;
+        }
+      }
+
+      if (numberOfSelectedRowsInCurrentPage === data.length) {
+        nextCheckboxType = 'remove-all';
+      } else {
+        nextCheckboxType = 'add-all';
+      }
+
       // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
+      // TODO(imballinst): show the number of currently selected rows in the label.
       rendered = (
         <Form.Group controlId={`table-selection-all`}>
           <Form.Label className="visually-hidden">
-            Add or remove visible rows from selection
+            {nextCheckboxType === 'add-all'
+              ? `Add ${
+                  data.length - numberOfSelectedRowsInCurrentPage
+                } rows to selection`
+              : `Remove ${numberOfSelectedRowsInCurrentPage} rows from selection`}
           </Form.Label>
           <Form.Check
             type="checkbox"
@@ -128,13 +151,15 @@ export function TableHeader<T extends TableRowType>({
             }}
             onChange={() => {
               onCheckboxChange({
-                column: prop,
+                prop,
+                idProp: checkbox.idProp,
                 nextCheckboxState: getNextCheckboxState({
                   checkboxState,
                   data,
                   idProp: checkbox.idProp,
                   filteredDataLength,
-                  prop
+                  prop,
+                  type: nextCheckboxType
                 }),
                 checkboxRefs
               });

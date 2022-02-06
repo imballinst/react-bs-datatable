@@ -11,7 +11,8 @@ export interface CheckboxState {
 }
 
 export type CheckboxOnChange = (params: {
-  column: string;
+  prop: string;
+  idProp: string;
   nextCheckboxState: CheckboxState;
   checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
 }) => void;
