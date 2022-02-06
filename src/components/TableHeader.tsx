@@ -1,14 +1,15 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import { useDatatableWrapper } from './DatatableWrapper';
 
+import { useDatatableWrapper } from './DatatableWrapper';
 import FontAwesome from './FontAwesome';
 import { makeClasses } from '../helpers/object';
 import {
   TableColumnType,
   SortType,
   TableRowType,
-  CheckboxState
+  CheckboxState,
+  CheckboxOnChange
 } from '../helpers/types';
 import { getNextCheckboxState } from '../helpers/checkbox';
 
@@ -24,11 +25,7 @@ export interface TableHeaderProps<T> {
   controlledProps?: {
     onSortChange: (nextSort: SortType) => void;
     sortState: SortType;
-    onCheckboxChange: (params: {
-      column: string;
-      nextCheckboxState: CheckboxState;
-      tableHeaderCheckbox: HTMLInputElement;
-    }) => void;
+    onCheckboxChange: CheckboxOnChange;
     checkboxState: Record<string, CheckboxState>;
   };
 }
@@ -45,6 +42,7 @@ export function TableHeader<T extends TableRowType>({
     onCheckboxChange: onCheckboxChangeContext,
     checkboxState: checkboxStateContext,
     checkboxRefs,
+    filteredDataLength,
     data
   } = useDatatableWrapper();
 
@@ -60,7 +58,8 @@ export function TableHeader<T extends TableRowType>({
       prop: headerProp,
       title,
       headerCell,
-      checkbox
+      checkbox,
+      alignment
     } = tableHeaders[i];
     const prop = headerProp.toString();
 
@@ -72,7 +71,16 @@ export function TableHeader<T extends TableRowType>({
     const isCurrentSort = sortState.prop === prop;
     const thProps: Record<string, any> = {
       key: `th-${i}`,
-      className: makeClasses(thClass, classes?.th)
+      className: makeClasses(
+        thClass,
+        classes?.th,
+        // Alignment.
+        {
+          'text-start': alignment?.horizontal === 'left',
+          'text-center': alignment?.horizontal === 'center',
+          'text-end': alignment?.horizontal === 'right'
+        }
+      )
     };
     let sortIcon: 'sort' | 'sortUp' | 'sortDown' = 'sort';
     let sortIconRender = null;
@@ -102,9 +110,16 @@ export function TableHeader<T extends TableRowType>({
 
     if (checkbox) {
       rendered = (
-        <Form.Control
+        <Form.Check
           type="checkbox"
           name="table-selection"
+          className={checkbox.className}
+          checked={checkboxState[prop].state === 'all-selected'}
+          ref={(node: HTMLInputElement | null) => {
+            if (node !== null) {
+              checkboxRefs.current[prop] = node;
+            }
+          }}
           onChange={() => {
             onCheckboxChange({
               column: prop,
@@ -112,9 +127,10 @@ export function TableHeader<T extends TableRowType>({
                 checkboxState,
                 data,
                 idProp: checkbox.idProp,
+                filteredDataLength,
                 prop
               }),
-              tableHeaderCheckbox: checkboxRefs.current[prop]
+              checkboxRefs
             });
           }}
         />

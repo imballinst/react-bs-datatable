@@ -4,7 +4,7 @@ import { Col, Row, Table } from 'react-bootstrap';
 import { parse } from 'date-fns';
 
 import json from './resources/story-data.json';
-import { StoryBodyType } from './resources/types';
+import { StoryColumnType } from './resources/types';
 import { STORY_HEADERS, STORY_PROP_TO_OPTION_NAME } from './resources/shared';
 import { TableHeader } from '../components/TableHeader';
 import { TableBody, TableBodyProps } from '../components/TableBody';
@@ -15,6 +15,7 @@ import {
 import { Filter } from '../components/Filter';
 import { PaginationOpts } from '../components/PaginationOpts';
 import { Pagination } from '../components/Pagination';
+import { TableColumnType } from '../helpers/types';
 
 export default {
   /* 👇 The title prop is optional.
@@ -49,7 +50,12 @@ FilterSortPagination.argTypes = {
     }
   },
   alwaysShowPagination: {
-    name: 'Always show pagination',
+    name: 'Always show pagination?',
+    defaultValue: true,
+    type: 'boolean'
+  },
+  hasCheckbox: {
+    name: 'Has checkbox?',
     defaultValue: true,
     type: 'boolean'
   },
@@ -138,7 +144,7 @@ RowOnClick.argTypes = {
 };
 
 // Components.
-const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
+const SORT_PROPS: DatatableWrapperProps<StoryColumnType>['sortProps'] = {
   sortValueObj: {
     date: (date) => parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
   }
@@ -150,6 +156,7 @@ function StoryTable({
   rowsPerPage = -1,
   rowsPerPageOptions = [],
   alwaysShowPagination = true,
+  hasCheckbox,
   // Custom labels.
   filterPlaceholder,
   afterSelect,
@@ -169,6 +176,7 @@ function StoryTable({
   rowsPerPage?: number;
   rowsPerPageOptions?: number[];
   alwaysShowPagination?: boolean;
+  hasCheckbox?: boolean;
   // Custom labels.
   filterPlaceholder?: string;
   afterSelect?: string;
@@ -183,16 +191,26 @@ function StoryTable({
   rowOnClickText?: string;
   rowOnClickFn?: (name: string) => void;
 }) {
-  const headers = STORY_HEADERS.map((header) => ({
-    ...header,
-    isSortable: sortableFields?.includes(
-      STORY_PROP_TO_OPTION_NAME[header.prop]
-    ),
-    isFilterable: filterableFields?.includes(
-      STORY_PROP_TO_OPTION_NAME[header.prop]
-    )
-  }));
-  let rowOnClick: TableBodyProps<StoryBodyType>['onRowClick'];
+  const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
+    (header) => ({
+      ...header,
+      isSortable: sortableFields?.includes(
+        STORY_PROP_TO_OPTION_NAME[header.prop]
+      ),
+      isFilterable: filterableFields?.includes(
+        STORY_PROP_TO_OPTION_NAME[header.prop]
+      )
+    })
+  );
+  let rowOnClick: TableBodyProps<StoryColumnType>['onRowClick'];
+
+  if (hasCheckbox) {
+    headers.push({
+      prop: 'checkbox',
+      checkbox: { idProp: 'name', className: 'table-checkbox' },
+      alignment: { horizontal: 'center' }
+    });
+  }
 
   if (scoreCellColumnColor) {
     const header = headers.find((h) => h.prop === 'score');

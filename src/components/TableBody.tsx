@@ -1,7 +1,11 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-import { CheckboxState, TableRowType } from '../helpers/types';
+import {
+  CheckboxOnChange,
+  CheckboxState,
+  TableRowType
+} from '../helpers/types';
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 import { getNextCheckboxState } from '../helpers/checkbox';
@@ -22,11 +26,7 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   onRowClick?: (row: TTableRowType) => void;
   controlledProps?: {
     checkboxState: Record<string, CheckboxState>;
-    onCheckboxChange: (params: {
-      column: string;
-      nextCheckboxState: CheckboxState;
-      tableHeaderCheckbox: HTMLInputElement;
-    }) => void;
+    onCheckboxChange: CheckboxOnChange;
   };
 }
 
@@ -41,7 +41,8 @@ export function TableBody<TTableRowType extends TableRowType>({
     headers,
     onCheckboxChange: onCheckboxChangeContext,
     checkboxState: checkboxStateContext,
-    checkboxRefs
+    checkboxRefs,
+    filteredDataLength
   } = useDatatableWrapper();
   const body = [];
   const dataLength = data.length;
@@ -66,27 +67,33 @@ export function TableBody<TTableRowType extends TableRowType>({
           cell,
           cellProps = {},
           prop: rawProp,
-          checkbox
+          checkbox,
+          alignment
         } = headers[colIdx];
         const prop = rawProp.toString();
         let value: React.ReactNode = '';
 
         if (checkbox) {
           // Render checkbox.
+          const idValue = data[rowIdx][checkbox.idProp];
+
           value = (
-            <Form.Control
+            <Form.Check
               type="checkbox"
               name="table-selection"
+              className={checkbox.className}
+              checked={checkboxState[prop].selected.has(idValue)}
               onChange={() => {
                 onCheckboxChange({
                   column: prop,
                   nextCheckboxState: getNextCheckboxState({
                     checkboxState,
-                    data: data[rowIdx][prop],
+                    data: data[rowIdx],
                     idProp: checkbox.idProp,
+                    filteredDataLength,
                     prop
                   }),
-                  tableHeaderCheckbox: checkboxRefs.current[prop]
+                  checkboxRefs
                 });
               }}
             />
@@ -106,6 +113,12 @@ export function TableBody<TTableRowType extends TableRowType>({
             className={makeClasses(
               'tbody-td',
               classes?.td,
+              // Alignment.
+              {
+                'text-start': alignment?.horizontal === 'left',
+                'text-center': alignment?.horizontal === 'center',
+                'text-end': alignment?.horizontal === 'right'
+              },
               typeof cellProps.className === 'function'
                 ? cellProps.className(data[rowIdx])
                 : cellProps.className

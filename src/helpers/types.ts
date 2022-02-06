@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, MutableRefObject, ReactNode } from 'react';
 
 export interface SortType {
   prop: string;
@@ -9,6 +9,12 @@ export interface CheckboxState {
   selected: Set<string>;
   state: 'none-selected' | 'some-selected' | 'all-selected';
 }
+
+export type CheckboxOnChange = (params: {
+  column: string;
+  nextCheckboxState: CheckboxState;
+  checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
+}) => void;
 
 export interface TableColumnType<T> {
   prop: keyof T;
@@ -21,7 +27,11 @@ export interface TableColumnType<T> {
   };
   isFilterable?: boolean;
   isSortable?: boolean;
-  checkbox?: { idProp: string };
+  checkbox?: { idProp: string; className?: string };
+  alignment?: {
+    // TODO(imballinst): consider if we need vertical alignment as well or not.
+    horizontal?: 'left' | 'right' | 'center';
+  };
 }
 
 export type TableRowType<T = any> = Record<string, T>;

@@ -4,15 +4,18 @@ export function getNextCheckboxState({
   checkboxState,
   prop,
   data,
+  filteredDataLength,
   idProp
 }: {
   checkboxState: Record<string, CheckboxState>;
   prop: string;
   data: any | any[];
+  filteredDataLength: number;
   idProp: string;
 }) {
   const nextCheckboxState = { ...checkboxState[prop] };
 
+  // None selected.
   if (checkboxState[prop].state === 'none-selected') {
     const newSet = new Set<string>();
 
@@ -21,28 +24,35 @@ export function getNextCheckboxState({
         newSet.add(row[idProp]);
       }
     } else {
-      newSet.add(idProp);
+      newSet.add(data[idProp]);
     }
 
     nextCheckboxState.selected = newSet;
     nextCheckboxState.state =
-      newSet.size === data.length ? 'all-selected' : 'some-selected';
-  } else {
-    const newSet = new Set<string>(checkboxState[prop].selected);
+      newSet.size === filteredDataLength ? 'all-selected' : 'some-selected';
 
-    if (Array.isArray(data)) {
-      for (const row of data) {
-        const value = row[idProp];
-        addOrRemoveFromSet(newSet, value);
-      }
-    } else {
-      addOrRemoveFromSet(newSet, data);
-    }
-
-    nextCheckboxState.selected = newSet;
-    nextCheckboxState.state =
-      newSet.size === 0 ? 'none-selected' : 'some-selected';
+    return nextCheckboxState;
   }
+
+  // Some, or all selected.
+  const newSet = new Set<string>(checkboxState[prop].selected);
+
+  if (Array.isArray(data)) {
+    for (const row of data) {
+      const value = row[idProp];
+      addOrRemoveFromSet(newSet, value);
+    }
+  } else {
+    addOrRemoveFromSet(newSet, data[idProp]);
+  }
+
+  nextCheckboxState.selected = newSet;
+  nextCheckboxState.state =
+    newSet.size === 0
+      ? 'none-selected'
+      : newSet.size === filteredDataLength
+      ? 'all-selected'
+      : 'some-selected';
 
   return nextCheckboxState;
 }

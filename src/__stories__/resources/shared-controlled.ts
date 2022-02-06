@@ -5,13 +5,13 @@ import { DatatableWrapperProps } from '../../components/DatatableWrapper';
 import { filterData, sortData } from '../../helpers/data';
 import { convertArrayToRecord } from '../../helpers/object';
 import { STORY_HEADERS, STORY_PROP_TO_OPTION_NAME } from './shared';
-import { FetchParams, FetchResponse, StoryBodyType } from './types';
+import { FetchParams, FetchResponse, StoryColumnType } from './types';
 import { TableColumnType } from '../../helpers/types';
 
 const SORTABLE_FIELDS = ['Name', 'Username', 'Last Update', 'Score'];
 const FILTERABLE_FIELDS = ['Name', 'Username', 'Location'];
 
-export const CONTROLLED_HEADERS: TableColumnType<StoryBodyType>[] =
+export const CONTROLLED_HEADERS: TableColumnType<StoryColumnType>[] =
   STORY_HEADERS.map((header) => ({
     ...header,
     isSortable: SORTABLE_FIELDS.includes(
@@ -22,7 +22,7 @@ export const CONTROLLED_HEADERS: TableColumnType<StoryBodyType>[] =
     )
   }));
 
-const SORT_PROPS: DatatableWrapperProps<StoryBodyType>['sortProps'] = {
+const SORT_PROPS: DatatableWrapperProps<StoryColumnType>['sortProps'] = {
   sortValueObj: {
     date: (date) => parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
   }
@@ -35,7 +35,7 @@ export async function fetchControlledMockData({
   filter,
   sortState,
   currentPage
-}: FetchParams): Promise<FetchResponse<StoryBodyType>> {
+}: FetchParams): Promise<FetchResponse<StoryColumnType>> {
   return new Promise((res) => {
     setTimeout(() => {
       let newData = json;

@@ -11,6 +11,7 @@ import { filterData, paginateData, sortData } from '../helpers/data';
 import { convertArrayToRecord } from '../helpers/object';
 import { createCtx } from '../helpers/react';
 import {
+  CheckboxOnChange,
   CheckboxState,
   ColumnProcessObj,
   SortType,
@@ -73,11 +74,7 @@ interface DatatableWrapperContextType<TTableRowType> {
   onRowsPerPageChange: (nextState: number) => void;
   // Checkbox.
   checkboxState: Record<string, CheckboxState>;
-  onCheckboxChange: (params: {
-    column: string;
-    nextCheckboxState: CheckboxState;
-    tableHeaderCheckbox: HTMLInputElement;
-  }) => void;
+  onCheckboxChange: CheckboxOnChange;
   checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
   // Data.
   maxPage: number;
@@ -223,19 +220,11 @@ export function DatatableWrapper<TTableRowType = any>({
     }));
   }, []);
 
-  const onCheckboxChange = useCallback(
-    ({
-      column,
-      nextCheckboxState,
-      tableHeaderCheckbox
-    }: {
-      column: string;
-      nextCheckboxState: CheckboxState;
-      tableHeaderCheckbox: HTMLInputElement;
-    }) => {
+  const onCheckboxChange: CheckboxOnChange = useCallback(
+    ({ column, nextCheckboxState, checkboxRefs }) => {
       // We put this here because it'll be easier to switch between
       // controlled and uncontrolled this way.
-      tableHeaderCheckbox.indeterminate =
+      checkboxRefs.current[column].indeterminate =
         nextCheckboxState.state === 'some-selected';
 
       setState((oldState) => ({
@@ -354,7 +343,7 @@ function getDefaultDatatableState<TTableRowType = TableRowType>({
     }
 
     // Set the default checkbox values, if not provided from `checkboxProps`.
-    if (checkboxProps?.initialState === undefined) {
+    if (header.checkbox && checkboxProps?.initialState === undefined) {
       checkbox[prop] = { state: 'none-selected', selected: new Set() };
     }
 
