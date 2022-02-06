@@ -7,6 +7,18 @@ import { CheckboxOnChange, CheckboxState } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
 /**
+ * This is an interface for customizing the classes for
+ * the `BulkCheckboxControl` component.
+ */
+export interface BulkCheckboxControlClasses {
+  /**
+   * The class for the "Select all" or "Deselect all" text.
+   * This defaults to `link-primary text-decoration-none`.
+   */
+  selectRemoveAllText?: string;
+}
+
+/**
  * This is an interface for `BulkCheckboxControl` component props.
  */
 export interface BulkCheckboxControlProps {
@@ -14,7 +26,7 @@ export interface BulkCheckboxControlProps {
   controlledProps?: {
     /** The checkbox state. */
     checkboxState?: Record<string, CheckboxState>;
-    /** The checkbox handler. */
+    /** The function fired when any checkbox in the table changes. */
     onCheckboxChange?: CheckboxOnChange;
     /**
      * The filtered data length. When not using filter control,
@@ -23,13 +35,7 @@ export interface BulkCheckboxControlProps {
     filteredDataLength?: number;
   };
   /** Custom classes for the component. */
-  classes?: {
-    /**
-     * The class for the "Select all" or "Deselect all" text.
-     * This defaults to `link-primary text-decoration-none`.
-     */
-    selectRemoveAllText?: string;
-  };
+  classes?: BulkCheckboxControlClasses;
 }
 
 /**
