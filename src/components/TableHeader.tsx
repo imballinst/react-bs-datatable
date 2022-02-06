@@ -29,6 +29,7 @@ export interface TableHeaderProps<T> {
     onSortChange: (nextSort: SortType) => void;
     sortState: SortType;
     onCheckboxChange: CheckboxOnChange;
+    filteredDataLength: number;
     checkboxState: Record<string, CheckboxState>;
   };
 }
@@ -45,7 +46,7 @@ export function TableHeader<T extends TableRowType>({
     onCheckboxChange: onCheckboxChangeContext,
     checkboxState: checkboxStateContext,
     checkboxRefs,
-    filteredDataLength,
+    filteredDataLength: filteredDataLengthContext,
     data
   } = useDatatableWrapper();
 
@@ -54,6 +55,8 @@ export function TableHeader<T extends TableRowType>({
   const onCheckboxChange =
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
+  const filteredDataLength =
+    controlledProps?.filteredDataLength || filteredDataLengthContext;
 
   for (let i = 0; i < tableHeaders.length; i += 1) {
     const {

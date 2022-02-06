@@ -27,4 +27,7 @@ export type {
   TableHeaderProps
 } from './components/TableHeader';
 
+export { BulkCheckboxControl } from './components/BulkCheckboxControl';
+export type { BulkCheckboxControlProps } from './components/BulkCheckboxControl';
+
 export type { ColumnProcessObj, SortType } from './helpers/types';

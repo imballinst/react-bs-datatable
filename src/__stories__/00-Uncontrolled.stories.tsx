@@ -16,6 +16,7 @@ import { Filter } from '../components/Filter';
 import { PaginationOpts } from '../components/PaginationOpts';
 import { Pagination } from '../components/Pagination';
 import { TableColumnType } from '../helpers/types';
+import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
 
 export default {
   /* 👇 The title prop is optional.
@@ -203,6 +204,7 @@ function StoryTable({
     })
   );
   let rowOnClick: TableBodyProps<StoryColumnType>['onRowClick'];
+  let checkboxControl;
 
   if (hasCheckbox) {
     headers.push({
@@ -210,6 +212,11 @@ function StoryTable({
       checkbox: { idProp: 'name', className: 'table-checkbox' },
       alignment: { horizontal: 'center' }
     });
+    checkboxControl = (
+      <div>
+        <BulkCheckboxControl />
+      </div>
+    );
   }
 
   if (scoreCellColumnColor) {
@@ -275,6 +282,9 @@ function StoryTable({
             alwaysShowPagination={alwaysShowPagination}
             labels={{ firstPage, lastPage, nextPage, prevPage }}
           />
+        </Col>
+        <Col xs={12} className="mt-2">
+          {checkboxControl}
         </Col>
       </Row>
       <Table>

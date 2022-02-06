@@ -10,16 +10,21 @@ export interface BulkCheckboxControlProps {
   controlledProps?: {
     checkboxState: Record<string, CheckboxState>;
     onCheckboxChange: CheckboxOnChange;
+    filteredDataLength: number;
+  };
+  classes?: {
+    selectRemoveAll?: string;
   };
 }
 
 export function BulkCheckboxControl({
-  controlledProps
+  controlledProps,
+  classes
 }: BulkCheckboxControlProps) {
   const {
     checkboxState: checkboxStateContext,
     onCheckboxChange: onCheckboxChangeContext,
-    filteredDataLength,
+    filteredDataLength: filteredDataLengthContext,
     previouslyModifiedCheckbox,
     checkboxRefs,
     body
@@ -28,8 +33,12 @@ export function BulkCheckboxControl({
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
   const onCheckboxChange =
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
+  const filteredDataLength =
+    controlledProps?.filteredDataLength || filteredDataLengthContext;
 
-  const state = checkboxState[previouslyModifiedCheckbox.prop]?.state;
+  const previouslyUpdatedCheckbox =
+    checkboxState[previouslyModifiedCheckbox.prop];
+  const state = previouslyUpdatedCheckbox?.state;
   let rendered;
 
   function onClick(type: GetNextCheckboxStateParams['type']) {
@@ -48,26 +57,38 @@ export function BulkCheckboxControl({
     });
   }
 
+  const linkClasses =
+    classes?.selectRemoveAll || 'link-primary text-decoration-none';
+
   if (state === 'all-selected') {
     rendered = (
       <>
         All {filteredDataLength} rows selected.{' '}
-        <a role="button" onClick={() => onClick('remove-all')}>
+        <a
+          role="button"
+          onClick={() => onClick('remove-all')}
+          className={linkClasses}
+        >
           Deselect all
         </a>
-        .
       </>
     );
   } else if (state === 'some-selected') {
     rendered = (
       <>
-        {filteredDataLength} rows selected.{' '}
-        <a role="button" onClick={() => onClick('add-all')}>
+        {previouslyUpdatedCheckbox?.selected.size} rows selected.{' '}
+        <a
+          role="button"
+          onClick={() => onClick('add-all')}
+          className={linkClasses}
+        >
           Select all rows
         </a>
-        .
       </>
     );
+  } else {
+    // Zero-width space.
+    rendered = <span>&#8203;</span>;
   }
 
   return (

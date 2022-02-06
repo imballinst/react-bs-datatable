@@ -27,6 +27,7 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   controlledProps?: {
     checkboxState: Record<string, CheckboxState>;
     onCheckboxChange: CheckboxOnChange;
+    filteredDataLength: number;
   };
 }
 
@@ -41,8 +42,8 @@ export function TableBody<TTableRowType extends TableRowType>({
     headers,
     onCheckboxChange: onCheckboxChangeContext,
     checkboxState: checkboxStateContext,
-    checkboxRefs,
-    filteredDataLength
+    filteredDataLength: filteredDataLengthContext,
+    checkboxRefs
   } = useDatatableWrapper();
   const body = [];
   const dataLength = data.length;
@@ -57,6 +58,8 @@ export function TableBody<TTableRowType extends TableRowType>({
   const onCheckboxChange =
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
+  const filteredDataLength =
+    controlledProps?.filteredDataLength || filteredDataLengthContext;
 
   if (dataLength > 0) {
     for (let rowIdx = 0; rowIdx < dataLength; rowIdx++) {
