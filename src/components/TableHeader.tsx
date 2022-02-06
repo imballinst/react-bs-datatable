@@ -109,31 +109,38 @@ export function TableHeader<T extends TableRowType>({
     let rendered;
 
     if (checkbox) {
+      // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
       rendered = (
-        <Form.Check
-          type="checkbox"
-          name="table-selection"
-          className={checkbox.className}
-          checked={checkboxState[prop].state === 'all-selected'}
-          ref={(node: HTMLInputElement | null) => {
-            if (node !== null) {
-              checkboxRefs.current[prop] = node;
-            }
-          }}
-          onChange={() => {
-            onCheckboxChange({
-              column: prop,
-              nextCheckboxState: getNextCheckboxState({
-                checkboxState,
-                data,
-                idProp: checkbox.idProp,
-                filteredDataLength,
-                prop
-              }),
-              checkboxRefs
-            });
-          }}
-        />
+        <Form.Group controlId={`table-selection-all`}>
+          <Form.Label className="visually-hidden">
+            Add or remove visible rows from selection
+          </Form.Label>
+          <Form.Check
+            type="checkbox"
+            name="table-selection"
+            value="all"
+            className={checkbox.className}
+            checked={checkboxState[prop].state === 'all-selected'}
+            ref={(node: HTMLInputElement | null) => {
+              if (node !== null) {
+                checkboxRefs.current[prop] = node;
+              }
+            }}
+            onChange={() => {
+              onCheckboxChange({
+                column: prop,
+                nextCheckboxState: getNextCheckboxState({
+                  checkboxState,
+                  data,
+                  idProp: checkbox.idProp,
+                  filteredDataLength,
+                  prop
+                }),
+                checkboxRefs
+              });
+            }}
+          />
+        </Form.Group>
       );
     } else if (headerCell) {
       rendered = headerCell(sortIconRender, sortState);

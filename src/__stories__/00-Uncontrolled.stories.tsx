@@ -31,7 +31,7 @@ const Template: ComponentStory<typeof StoryTable> = (args) => (
 );
 
 export const FilterSortPagination = Template.bind({});
-FilterSortPagination.storyName = 'Filter, sort, pagination';
+FilterSortPagination.storyName = 'Filter, sort, pagination, checkbox';
 FilterSortPagination.argTypes = {
   sortableFields: {
     name: 'Sortable Fields',

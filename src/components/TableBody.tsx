@@ -76,27 +76,37 @@ export function TableBody<TTableRowType extends TableRowType>({
         if (checkbox) {
           // Render checkbox.
           const idValue = data[rowIdx][checkbox.idProp];
+          const isSelected = checkboxState[prop].selected.has(idValue);
 
+          // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
           value = (
-            <Form.Check
-              type="checkbox"
-              name="table-selection"
-              className={checkbox.className}
-              checked={checkboxState[prop].selected.has(idValue)}
-              onChange={() => {
-                onCheckboxChange({
-                  column: prop,
-                  nextCheckboxState: getNextCheckboxState({
-                    checkboxState,
-                    data: data[rowIdx],
-                    idProp: checkbox.idProp,
-                    filteredDataLength,
-                    prop
-                  }),
-                  checkboxRefs
-                });
-              }}
-            />
+            <Form.Group
+              controlId={`table-selection-${data[rowIdx][checkbox.idProp]}`}
+            >
+              <Form.Label className="visually-hidden">
+                {isSelected ? 'Remove' : 'Add'} {idValue} from selection
+              </Form.Label>
+              <Form.Check
+                type="checkbox"
+                name="table-selection"
+                value={data[rowIdx][checkbox.idProp]}
+                className={checkbox.className}
+                checked={checkboxState[prop].selected.has(idValue)}
+                onChange={() => {
+                  onCheckboxChange({
+                    column: prop,
+                    nextCheckboxState: getNextCheckboxState({
+                      checkboxState,
+                      data: data[rowIdx],
+                      idProp: checkbox.idProp,
+                      filteredDataLength,
+                      prop
+                    }),
+                    checkboxRefs
+                  });
+                }}
+              />
+            </Form.Group>
           );
         } else {
           // Render normally.

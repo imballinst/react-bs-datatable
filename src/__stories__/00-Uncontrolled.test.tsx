@@ -1,7 +1,12 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import { FilterSortPagination } from './00-Uncontrolled.stories';
+import {
+  FilterSortPagination,
+  CustomLabels,
+  CustomCellRender,
+  RowOnClick
+} from './00-Uncontrolled.stories';
 
 describe('Filter, sort, pagination', () => {
   const DEFAULT_PROPS = {
@@ -98,7 +103,7 @@ describe('Filter, sort, pagination', () => {
   });
 
   test('filtering an unfilterable column: score', () => {
-    const { getByLabelText, getByText, getByPlaceholderText } = render(
+    const { getByText, getByPlaceholderText } = render(
       <FilterSortPagination {...DEFAULT_PROPS} />
     );
 
@@ -126,6 +131,19 @@ describe('Filter, sort, pagination', () => {
     expect(paginationButtonGroupElement).toHaveClass('invisible');
     expect(paginationOptsElement.parentElement).toHaveClass('invisible');
   });
+
+  test('checkbox states: none selected, some selected, all selected', () => {
+    const { getByText, getByPlaceholderText } = render(
+      <FilterSortPagination {...DEFAULT_PROPS} hasCheckbox />
+    );
+
+    let filterElement = getByPlaceholderText('Enter text...');
+    fireEvent.change(filterElement, { target: { value: '27' } });
+
+    let noResultsShown = getByText('No results to be shown.');
+
+    expect(noResultsShown).toBeInTheDocument();
+  });
 });
 
 describe('Custom labels', () => {
@@ -139,7 +157,7 @@ describe('Custom labels', () => {
 
   test('change labels for filter placeholder, pagination opts, and pagination', () => {
     const { getByText, getByPlaceholderText } = render(
-      <FilterSortPagination
+      <CustomLabels
         {...DEFAULT_PROPS}
         filterPlaceholder="Filter text..."
         beforeSelect="Show"
@@ -174,7 +192,7 @@ describe('Custom cell render', () => {
 
   test('custom score cell color when number is below 50', () => {
     const { getByRole } = render(
-      <FilterSortPagination {...DEFAULT_PROPS} scoreCellColumnColor={BGCOLOR} />
+      <CustomCellRender {...DEFAULT_PROPS} scoreCellColumnColor={BGCOLOR} />
     );
 
     const tableElement = getByRole('table');
@@ -221,7 +239,7 @@ describe('Custom row on click', () => {
 
   test('custom score cell color when number is below 50', () => {
     const { getByRole } = render(
-      <FilterSortPagination {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
+      <RowOnClick {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
     );
 
     const tableElement = getByRole('table');
