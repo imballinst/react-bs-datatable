@@ -125,9 +125,9 @@ export function TableHeader<T extends TableRowType>({
       }
 
       if (numberOfSelectedRowsInCurrentPage === data.length) {
-        nextCheckboxType = 'remove-all';
+        nextCheckboxType = 'remove';
       } else {
-        nextCheckboxType = 'add-all';
+        nextCheckboxType = 'add';
       }
 
       // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
@@ -135,7 +135,7 @@ export function TableHeader<T extends TableRowType>({
       rendered = (
         <Form.Group controlId={`table-selection-all`}>
           <Form.Label className="visually-hidden">
-            {nextCheckboxType === 'add-all'
+            {nextCheckboxType === 'add'
               ? `Add ${
                   data.length - numberOfSelectedRowsInCurrentPage
                 } rows to selection`
