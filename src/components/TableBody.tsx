@@ -10,27 +10,59 @@ import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 import { getNextCheckboxState } from '../helpers/checkbox';
 
-export interface TableBodyClasses {
-  tbody?: string;
-  td?: string;
-  tr?: string;
+/** This is an interface to customize the pagination options labels. */
+export interface TableBodyLabels {
+  /**
+   * The text shown when there is no result, which can be because of
+   * no data (empty array), or no matching found for the filtered text.
+   */
+  noResults?: string;
 }
 
+/**
+ * This is an interface for customizing the classes for
+ * the `TableBody` component.
+ */
+export interface TableBodyClasses {
+  /** The class for the `tbody` tag. */
+  tbody?: string;
+  /** The class for the `tr` tags inside `tbody`. */
+  tr?: string;
+  /** The class for the `td` tags inside each `tr` tag. */
+  td?: string;
+}
+
+/**
+ * This is an interface for `TableBody` component props.
+ */
 export interface TableBodyProps<TTableRowType extends TableRowType> {
-  /** Labels/placeholders of the table components. */
-  labels?: {
-    noResults?: string;
-  };
+  /** Customize the labels of the `TableBody` component. */
+  labels?: TableBodyLabels;
+  /** Customize the classes of the `TableBody` component. */
   classes?: TableBodyClasses;
-  /** On row click event. */
+  /** The function fired when any of the rows is clicked. */
   onRowClick?: (row: TTableRowType) => void;
+  /** Props to make the component controlled. */
   controlledProps?: {
+    /**
+     * A record, which key is the column prop name and the value
+     * is of type `CheckboxState`.
+     */
     checkboxState?: Record<string, CheckboxState>;
+    /** The function fired when any checkbox in the table changes. */
     onCheckboxChange?: CheckboxOnChange;
+    /**
+     * The filtered data length. When not using filter control,
+     * then this should equal to the table body's length.
+     */
     filteredDataLength?: number;
   };
 }
 
+/**
+ * Renders the table body, which is a `tbody` tag along with the rest of the elements,
+ * such as `tr` and `td` tags.
+ */
 export function TableBody<TTableRowType extends TableRowType>({
   labels,
   classes,

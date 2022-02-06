@@ -19,6 +19,9 @@ export interface FilterClasses {
   clearButton?: string;
 }
 
+/**
+ * This is an interface for `Filter` component props.
+ */
 export interface FilterProps {
   /**
    * Customize the string for the text filter placeholder.

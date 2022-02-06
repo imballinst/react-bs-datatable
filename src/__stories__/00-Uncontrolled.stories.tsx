@@ -13,7 +13,7 @@ import {
   DatatableWrapperProps
 } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
-import { PaginationOpts } from '../components/PaginationOpts';
+import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
 import { TableColumnType } from '../helpers/types';
 import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
@@ -263,7 +263,7 @@ function StoryTable({
           lg={4}
           className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
         >
-          <PaginationOpts
+          <PaginationOptions
             alwaysShowPagination={alwaysShowPagination}
             labels={{ afterSelect, beforeSelect }}
           />

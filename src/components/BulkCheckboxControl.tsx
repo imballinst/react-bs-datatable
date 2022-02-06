@@ -24,7 +24,10 @@ export interface BulkCheckboxControlClasses {
 export interface BulkCheckboxControlProps {
   /** Props to make the component controlled. */
   controlledProps?: {
-    /** The checkbox state. */
+    /**
+     * A record, which key is the column prop name and the value
+     * is of type `CheckboxState`.
+     */
     checkboxState?: Record<string, CheckboxState>;
     /** The function fired when any checkbox in the table changes. */
     onCheckboxChange?: CheckboxOnChange;

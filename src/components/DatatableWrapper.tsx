@@ -142,10 +142,18 @@ interface DatatableWrapperContextType<TTableRowType> {
 
 const [useCtx, Provider] = createCtx<DatatableWrapperContextType<any>>();
 
+/**
+ * @internal
+ *
+ * This is an internal hook to use in all table components.
+ */
 export const useDatatableWrapper = useCtx;
 
-// Main wrapper.
+/**
+ * The props that can be passed to the `DatatableWrapper` component.
+ */
 export interface DatatableWrapperProps<TTableRowType> {
+  /** The rest of the table, including its controls. */
   children: ReactNode;
   headers: TableColumnType<TTableRowType>[];
   body: TTableRowType[];
@@ -156,11 +164,22 @@ export interface DatatableWrapperProps<TTableRowType> {
   checkboxProps?: TableCheckboxParameters;
 }
 
+/**
+ * @internal
+ *
+ * This is an interface to represent the previously modified checkbox. This is used
+ * for the "Select all" and "Deselect all" interaction.
+ */
 interface PreviouslyModifiedCheckbox {
   idProp: string;
   prop: string;
 }
 
+/**
+ * @internal
+ *
+ * This is an interface to represent the uncontrolled datatable state.
+ */
 interface DatatableState {
   isFilterable: boolean;
   sort: SortType;

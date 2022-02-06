@@ -4,34 +4,69 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 
-/** This is the labels related to the pagination. */
+/** This is an interface to customize the pagination labels. */
 export interface PaginationLabels {
-  /** Change the label of the button that if clicked, the paging will go to first page. */
+  /** The "First" button label. Defaults to "First". */
   firstPage?: string;
-  /** Change the label of the button that if clicked, the paging will go to last page. */
+  /** The "Last" button label. Defaults to "Last". */
   lastPage?: string;
-  /** Change the label of the button that if clicked, the paging will go to previous page. */
+  /** The "Prev" button label. Defaults to "Prev". */
   prevPage?: string;
-  /** Change the label of the button that if clicked, the paging will go to next page. */
+  /** The "Next" button label. Defaults to "Next". */
   nextPage?: string;
 }
 
+/**
+ * This is an interface for customizing the classes for
+ * the `Pagination` component.
+ */
 export interface PaginationClasses {
+  /** The class for each of the pagination button. */
   button?: string;
+  /** The class for the pagination button group. */
   buttonGroup?: string;
 }
 
+/**
+ * This is an interface for `Pagination` component props.
+ */
 export interface PaginationProps {
+  /** Customize the labels of the `Pagination` component. */
   labels?: PaginationLabels;
+  /** Customize the classes of the `Pagination` component. */
   classes?: PaginationClasses;
+  /**
+   * Determine whether the pagination button group should be always visible or not.
+   * When set to `false`, the pagination will be hidden when there is only 1 page.
+   * To prevent layout shifts, `visibility: hidden` will be applied instead of
+   * `display: none` style. Defaults to `true`.
+   */
   alwaysShowPagination?: boolean;
+  /** Props to make the component controlled. */
   controlledProps?: {
+    /** The currently active page. */
     currentPage?: number;
+    /**
+     * This is used to determine * the last numbered button in the
+     * pagination button group. This also determines the next page number
+     * when the "Last" button is clicked.
+     */
     maxPage?: number;
+    /** The function fired when any of the pagination buttons is clicked. */
     onPaginationChange?: (nextPage: number) => void;
   };
 }
 
+/**
+ * Renders a control for the pagination. It consists of "First", "Prev",
+ * "Next", and "Last" buttons. Additionally, between the "Prev" and "Next" buttons,
+ * there will be at maximum 3 numbered buttons, indicating the pages to navigate.
+ *
+ * The currently active page will always be disabled, as well as the "First" or "Last"
+ * buttons if the `currentPage` represents the first page and last page, respectively.
+ *
+ * When `alwaysShowPagination` is set to `false`, then this component will be visually hidden.
+ */
 export function Pagination({
   labels,
   classes,

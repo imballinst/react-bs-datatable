@@ -11,12 +11,12 @@ export type {
   PaginationProps
 } from './components/Pagination';
 
-export { PaginationOpts } from './components/PaginationOpts';
+export { PaginationOptions } from './components/PaginationOptions';
 export type {
-  PaginationOptsProps,
+  PaginationOptionsProps,
   PaginationOptionsClasses,
   PaginationOptionsLabels
-} from './components/PaginationOpts';
+} from './components/PaginationOptions';
 
 export { TableBody } from './components/TableBody';
 export type { TableBodyProps, TableBodyClasses } from './components/TableBody';
