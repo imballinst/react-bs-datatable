@@ -1,5 +1,6 @@
 {
-  "json": "api/docs.json",
+  "out": "api/",
+  "readme": "none",
   "entryPoints": ["./src"],
   "entryPointStrategy": "expand",
   "cleanOutputDir": true,

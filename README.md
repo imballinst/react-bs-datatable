@@ -14,7 +14,7 @@ This is the v3 version of the library. To see the v2 version of README, please v
 - [x] Lots of optimizations, bundle size in particular. As reported by [Bundlephobia](https://bundlephobia.com/package/react-bs-datatable@3.0.0-alpha.6) for the Alpha version, the minified size is down to just a quarter of what it was, whereas the minified + gzip is down to a third of what it was.
 - [x] Replaced `font-awesome` CSS with the [React components of Font Awesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react). This allowed us to enable tree shaking, which resulted in the optimization point above.
 - [x] Drop support for all other libraries. This library will now only support Bootstrap tables.
-- [ ] Auto generate component APIs.
+- [x] Auto generate component APIs.
 - [ ] Migration guide.
 
 To see the current state of `react-bs-datatable` prerelease version, please visit this Sandbox: https://codesandbox.io/s/react-bs-datatable-3-zq7xe.
@@ -189,9 +189,9 @@ function TableComponent() {
 
 Head to https://imballinst.github.io/react-bs-datatable to see all of the features in action.
 
-## API
+## API Reference
 
-Still todo. Need to auto-generate from the TypeScript with typedoc.
+Visit the [API reference](./api/README.md) for more details.
 
 ## Contributing
 

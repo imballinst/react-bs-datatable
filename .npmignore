@@ -12,3 +12,4 @@ tsconfig*
 .prettierrc.json
 setupTests.ts
 jest.config.js
+typedoc.json
