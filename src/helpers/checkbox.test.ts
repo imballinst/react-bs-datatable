@@ -16,7 +16,8 @@ test('getNextCheckboxState', () => {
     checkboxState,
     idProp: 'id',
     prop: 'checkbox',
-    data: [{ id: 'hello' }, { id: 'world' }]
+    data: [{ id: 'hello' }, { id: 'world' }],
+    type: 'add'
   });
 
   expect(result.selected.size).toBe(2);
@@ -30,7 +31,8 @@ test('getNextCheckboxState', () => {
     checkboxState: { checkbox: result },
     idProp: 'id',
     prop: 'checkbox',
-    data: [{ id: 'hello' }, { id: 'world' }]
+    data: [{ id: 'hello' }, { id: 'world' }],
+    type: 'remove'
   });
 
   expect(result.selected.size).toBe(0);
@@ -50,7 +52,8 @@ test('getNextCheckboxState', () => {
       { id: 'this' },
       { id: 'is' },
       { id: 'javascript' }
-    ]
+    ],
+    type: 'add'
   });
 
   expect(result.selected.size).toBe(5);
@@ -68,7 +71,8 @@ test('getNextCheckboxState', () => {
     checkboxState: { checkbox: result },
     idProp: 'id',
     prop: 'checkbox',
-    data: { id: 'javascript' }
+    data: { id: 'javascript' },
+    type: 'remove'
   });
 
   expect(result.selected.size).toBe(4);
@@ -85,7 +89,8 @@ test('getNextCheckboxState', () => {
     checkboxState: { checkbox: result },
     idProp: 'id',
     prop: 'checkbox',
-    data: [{ id: 'hello' }, { id: 'world' }, { id: 'this' }, { id: 'is' }]
+    data: [{ id: 'hello' }, { id: 'world' }, { id: 'this' }, { id: 'is' }],
+    type: 'remove'
   });
 
   expect(result.selected.size).toBe(0);

@@ -6,7 +6,7 @@ export interface GetNextCheckboxStateParams {
   data: any | any[];
   filteredDataLength: number;
   idProp: string;
-  type: 'add-all' | 'remove-all' | 'add' | 'remove';
+  type: 'add' | 'remove';
 }
 
 export function getNextCheckboxState({
@@ -70,7 +70,7 @@ function addOrRemoveFromSet(
   type: GetNextCheckboxStateParams['type']
 ) {
   // Depending on the checkbox state, delete or add.
-  if (type === 'remove' || type === 'remove-all') {
+  if (type === 'remove') {
     set.delete(value);
   } else {
     set.add(value);

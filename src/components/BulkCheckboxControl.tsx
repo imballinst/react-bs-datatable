@@ -66,7 +66,7 @@ export function BulkCheckboxControl({
         All {filteredDataLength} rows selected.{' '}
         <a
           role="button"
-          onClick={() => onClick('remove-all')}
+          onClick={() => onClick('remove')}
           className={linkClasses}
         >
           Deselect all rows
