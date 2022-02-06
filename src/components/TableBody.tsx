@@ -87,7 +87,9 @@ export function TableBody<TTableRowType extends TableRowType>({
               controlId={`table-selection-${data[rowIdx][checkbox.idProp]}`}
             >
               <Form.Label className="visually-hidden">
-                {isSelected ? 'Remove' : 'Add'} {idValue} from selection
+                {isSelected
+                  ? `Remove ${idValue} from selection`
+                  : `Add ${idValue} to selection`}
               </Form.Label>
               <Form.Check
                 type="checkbox"

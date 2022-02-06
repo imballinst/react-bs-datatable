@@ -69,7 +69,7 @@ export function BulkCheckboxControl({
           onClick={() => onClick('remove-all')}
           className={linkClasses}
         >
-          Deselect all
+          Deselect all rows
         </a>
       </>
     );

@@ -133,16 +133,66 @@ describe('Filter, sort, pagination', () => {
   });
 
   test('checkbox states: none selected, some selected, all selected', () => {
-    const { getByText, getByPlaceholderText } = render(
+    const { getByText, getByLabelText, debug } = render(
       <FilterSortPagination {...DEFAULT_PROPS} hasCheckbox />
     );
 
-    let filterElement = getByPlaceholderText('Enter text...');
-    fireEvent.change(filterElement, { target: { value: '27' } });
+    let tableHeaderCheckbox = getByLabelText('Add 8 rows to selection');
+    fireEvent.click(tableHeaderCheckbox);
 
-    let noResultsShown = getByText('No results to be shown.');
+    let bulkControlElement = getByText(/8 rows selected\./);
+    let anchorBulkControlElement = getByText(/Select all rows/, {
+      selector: 'a'
+    });
 
-    expect(noResultsShown).toBeInTheDocument();
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    // De-select one row.
+    let aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/7 rows selected\./);
+    anchorBulkControlElement = getByText(/Select all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+
+    // Select all rows.
+    fireEvent.click(anchorBulkControlElement);
+
+    bulkControlElement = getByText(/All 60 rows selected\./);
+    anchorBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).toBeChecked();
+
+    // Deselect one row.
+    aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/59 rows selected\./);
+    anchorBulkControlElement = getByText(/Select all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    // Select Aaren again.
+    aarenCheckbox = getByLabelText(/Add Aaren to selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/All 60 rows selected\./);
+    anchorBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).toBeChecked();
   });
 });
 
