@@ -10,7 +10,7 @@ import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 import { getNextCheckboxState } from '../helpers/checkbox';
 
-interface TableBodyClasses {
+export interface TableBodyClasses {
   tbody?: string;
   td?: string;
   tr?: string;
@@ -25,9 +25,9 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   /** On row click event. */
   onRowClick?: (row: TTableRowType) => void;
   controlledProps?: {
-    checkboxState: Record<string, CheckboxState>;
-    onCheckboxChange: CheckboxOnChange;
-    filteredDataLength: number;
+    checkboxState?: Record<string, CheckboxState>;
+    onCheckboxChange?: CheckboxOnChange;
+    filteredDataLength?: number;
   };
 }
 

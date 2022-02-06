@@ -35,8 +35,9 @@ export interface TableColumnType<T> {
   };
 }
 
-export type TableRowType<T = any> = Record<string, T>;
-
 export type ColumnProcessObj<TColumnType, TReturnType = string> = Partial<
   Record<keyof TColumnType, (column: string | number) => TReturnType>
 >;
+
+/** @internal */
+export type TableRowType<T = any> = Record<string, T>;

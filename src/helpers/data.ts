@@ -40,8 +40,7 @@ export function sortData<TTableRowType extends TableRowType>(
 export function filterData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   tableHeaders: Record<string, TableColumnType<TTableRowType>>,
-  filterText: string,
-  filterValueObj?: ColumnProcessObj<TTableRowType>
+  filterText: string
 ) {
   if (filterText === '') {
     return data;
@@ -58,15 +57,12 @@ export function filterData<TTableRowType extends TableRowType>(
 
     while (!isElementIncluded && i < elementPropLength) {
       const prop = elementProps[i];
-      const filterFn = filterValueObj?.[prop];
 
       if (tableHeaders[prop].isFilterable) {
         let columnValue = element[prop];
 
-        if (filterFn) {
-          columnValue = filterFn(columnValue);
-        } else if (typeof columnValue !== 'string') {
-          // Convert to string if it is not a string
+        if (typeof columnValue !== 'string') {
+          // Convert to string if it is not a string.
           columnValue = columnValue.toString();
         }
 

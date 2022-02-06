@@ -6,17 +6,40 @@ import {
 import { CheckboxOnChange, CheckboxState } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
+/**
+ * This is an interface for `BulkCheckboxControl` component props.
+ */
 export interface BulkCheckboxControlProps {
+  /** Props to make the component controlled. */
   controlledProps?: {
-    checkboxState: Record<string, CheckboxState>;
-    onCheckboxChange: CheckboxOnChange;
-    filteredDataLength: number;
+    /** The checkbox state. */
+    checkboxState?: Record<string, CheckboxState>;
+    /** The checkbox handler. */
+    onCheckboxChange?: CheckboxOnChange;
+    /**
+     * The filtered data length. When not using filter control,
+     * then this should equal to the table body's length.
+     */
+    filteredDataLength?: number;
   };
+  /** Custom classes for the component. */
   classes?: {
-    selectRemoveAll?: string;
+    /**
+     * The class for the "Select all" or "Deselect all" text.
+     * This defaults to `link-primary text-decoration-none`.
+     */
+    selectRemoveAllText?: string;
   };
 }
 
+/**
+ * Renders a control for selection or deselection of all rows. This is
+ * only useful when pagination and checkbox are both enabled. When only
+ * some (or none) of the rows are checked, then this will render the
+ * number of checked rows, as well as the "Select all" button.
+ * On the other hand, when all rows are selected, then it will
+ * change to "Deselect all" button.
+ */
 export function BulkCheckboxControl({
   controlledProps,
   classes
@@ -57,29 +80,35 @@ export function BulkCheckboxControl({
     });
   }
 
-  const linkClasses =
-    classes?.selectRemoveAll || 'link-primary text-decoration-none';
+  const buttonClassName =
+    classes?.selectRemoveAllText || 'text-primary p-0 border-0 bg-transparent';
 
   if (state === 'all-selected') {
     rendered = (
       <>
         All {filteredDataLength} rows selected.{' '}
-        <a
-          role="button"
+        <button
+          type="button"
+          tabIndex={0}
           onClick={() => onClick('remove')}
-          className={linkClasses}
+          className={buttonClassName}
         >
           Deselect all rows
-        </a>
+        </button>
       </>
     );
   } else if (state === 'some-selected') {
     rendered = (
       <>
         {previouslyUpdatedCheckbox?.selected.size} rows selected.{' '}
-        <a role="button" onClick={() => onClick('add')} className={linkClasses}>
+        <button
+          type="button"
+          tabIndex={0}
+          onClick={() => onClick('add')}
+          className={buttonClassName}
+        >
           Select all rows
-        </a>
+        </button>
       </>
     );
   } else {

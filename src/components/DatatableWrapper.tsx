@@ -19,42 +19,98 @@ import {
 } from '../helpers/types';
 import { TableColumnType } from '../helpers/types';
 
-interface FilterProps<TTableRowType> {
-  // Uncontrolled.
-  filterValueObj?: ColumnProcessObj<TTableRowType>;
+/**
+ * This is the additional parameters for the filter function.
+ * Only applicable for uncontrolled table mode.
+ */
+export interface TableFilterParameters {
+  /** The initial states for the table. */
   initialState?: {
+    /** The initial text filter state. */
     filter: string;
   };
 }
 
-interface SortProps<TTableRowType> {
-  // Uncontrolled.
+/**
+ * This is the additional parameters for the filter function.
+ * Only applicable for uncontrolled table mode.
+ */
+export interface TableSortParameters<TTableRowType> {
+  /**
+   * An object with the key being the table columns' prop and
+   * the value being the value converter for the column.
+   * This is most useful when we want to sort something by number
+   * instead of by text.
+   *
+   * For example, we want to convert a date format
+   * as the following: "Jan 22, 2022". Since string sorting will result
+   * in a wrong result, then we need to convert it first, e.g. using `date-fns`.
+   * After we parse the column's formatted date, only then we can get its
+   * number value.
+   *
+   * ```ts
+   * {
+   *   sortValueObject: {
+   *     date: (column: string) => parse(column).getTime()
+   *   }
+   * }
+   * ```
+   *
+   * The object above will cause all rows in the `date` column to be sorted
+   * by number (milliseconds) instead of by formatted date string.
+   */
   sortValueObj?: ColumnProcessObj<TTableRowType, number>;
+  /** The initial states for the table. */
   initialState?: SortType;
 }
 
-interface PaginationProps {
-  // Uncontrolled.
+/**
+ * This is the additional parameters for the filter function.
+ * Only applicable for uncontrolled table mode.
+ */
+export interface TablePaginationParameters {
+  /** The initial states for the table. */
   initialState?: {
-    page?: number;
-    maxPage?: number;
+    /** The initial currently active page. */
+    page: number;
+    /**
+     * The initial maximum page. This is used to determine
+     * the last numbered button in the pagination button group.
+     * This also determines the next page number when the
+     * "Last" button is clicked.
+     */
+    maxPage: number;
   };
 }
 
-interface PaginationOptionsProps {
-  // Uncontrolled.
+/**
+ * This is the additional parameters for the filter function.
+ * Only applicable for uncontrolled table mode.
+ */
+export interface TablePaginationOptionsParameters {
+  /** The initial states for the table. */
   initialState?: {
+    /** Number of rows per page to be shown. */
     rowsPerPage: number;
+    /** Rows per page options that will be shown in the dropdown. */
     options: number[];
   };
 }
 
-interface CheckboxProps {
-  // Uncontrolled.
+/**
+ * This is the additional parameters for the filter function.
+ * Only applicable for uncontrolled table mode.
+ */
+export interface TableCheckboxParameters {
+  /** The initial states for the table. */
   initialState?: Record<string, CheckboxState>;
 }
 
-// Context types.
+/**
+ * @internal
+ *
+ * This is the values stored in the `DatatableWrapper` context.
+ */
 interface DatatableWrapperContextType<TTableRowType> {
   // Things passed to other components.
   headers: TableColumnType<TTableRowType>[];
@@ -93,11 +149,11 @@ export interface DatatableWrapperProps<TTableRowType> {
   children: ReactNode;
   headers: TableColumnType<TTableRowType>[];
   body: TTableRowType[];
-  filterProps?: FilterProps<TTableRowType>;
-  sortProps?: SortProps<TTableRowType>;
-  paginationProps?: PaginationProps;
-  paginationOptionsProps?: PaginationOptionsProps;
-  checkboxProps?: CheckboxProps;
+  filterProps?: TableFilterParameters;
+  sortProps?: TableSortParameters<TTableRowType>;
+  paginationProps?: TablePaginationParameters;
+  paginationOptionsProps?: TablePaginationOptionsParameters;
+  checkboxProps?: TableCheckboxParameters;
 }
 
 interface PreviouslyModifiedCheckbox {
@@ -257,13 +313,7 @@ export function DatatableWrapper<TTableRowType = any>({
     let newMaxPage = 1;
 
     if (isFilterable) {
-      newData = filterData(
-        body,
-        tableHeadersRecordRef.current,
-        filter,
-        filterProps?.filterValueObj
-      );
-
+      newData = filterData(body, tableHeadersRecordRef.current, filter);
       newFilteredDataLength = newData.length;
     }
 

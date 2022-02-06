@@ -23,10 +23,10 @@ export interface PaginationOptsProps {
   classes?: PaginationOptionsClasses;
   alwaysShowPagination?: boolean;
   controlledProps?: {
-    rowsPerPage: number;
-    rowsPerPageOptions: number[];
-    filteredDataLength: number;
-    onRowsPerPageChange: (nextRowsPerPage: number) => void;
+    rowsPerPage?: number;
+    rowsPerPageOptions?: number[];
+    filteredDataLength?: number;
+    onRowsPerPageChange?: (nextRowsPerPage: number) => void;
   };
 }
 

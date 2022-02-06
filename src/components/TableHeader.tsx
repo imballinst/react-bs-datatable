@@ -26,11 +26,11 @@ export interface TableHeaderProps<T> {
   tableHeaders: TableColumnType<T>[];
   classes?: TableHeaderClasses;
   controlledProps?: {
-    onSortChange: (nextSort: SortType) => void;
-    sortState: SortType;
-    onCheckboxChange: CheckboxOnChange;
-    filteredDataLength: number;
-    checkboxState: Record<string, CheckboxState>;
+    onSortChange?: (nextSort: SortType) => void;
+    sortState?: SortType;
+    onCheckboxChange?: CheckboxOnChange;
+    filteredDataLength?: number;
+    checkboxState?: Record<string, CheckboxState>;
   };
 }
 

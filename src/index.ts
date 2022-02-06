@@ -19,7 +19,7 @@ export type {
 } from './components/PaginationOpts';
 
 export { TableBody } from './components/TableBody';
-export type { TableBodyProps } from './components/TableBody';
+export type { TableBodyProps, TableBodyClasses } from './components/TableBody';
 
 export { TableHeader } from './components/TableHeader';
 export type {
@@ -30,4 +30,10 @@ export type {
 export { BulkCheckboxControl } from './components/BulkCheckboxControl';
 export type { BulkCheckboxControlProps } from './components/BulkCheckboxControl';
 
-export type { ColumnProcessObj, SortType } from './helpers/types';
+export type {
+  ColumnProcessObj,
+  SortType,
+  CheckboxState,
+  CheckboxOnChange,
+  TableColumnType
+} from './helpers/types';

@@ -14,8 +14,8 @@ export interface FilterProps {
   classes?: FilterClasses;
   // Controlled props.
   controlledProps?: {
-    filter: string;
-    onFilter: (nextFilter: string) => void;
+    filter?: string;
+    onFilter?: (nextFilter: string) => void;
   };
 }
 

@@ -26,9 +26,9 @@ export interface PaginationProps {
   classes?: PaginationClasses;
   alwaysShowPagination?: boolean;
   controlledProps?: {
-    currentPage: number;
-    maxPage: number;
-    onPaginationChange: (nextPage: number) => void;
+    currentPage?: number;
+    maxPage?: number;
+    onPaginationChange?: (nextPage: number) => void;
   };
 }
 

@@ -16,10 +16,10 @@ const ICONS = {
   times: faTimes
 };
 
-type FontAwesomeProps = {
+interface FontAwesomeProps {
   icon: keyof typeof ICONS;
   className?: string;
-};
+}
 
 export default function FontAwesome({ icon, className }: FontAwesomeProps) {
   const faIconString = `fa-${icon}`;

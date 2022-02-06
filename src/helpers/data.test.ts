@@ -38,45 +38,18 @@ describe('data util (src/utils/data)', () => {
     const secondData = { prop1: 2, prop2: 123 };
     const data = [firstData, secondData];
 
-    // Without filter function
     let filteredTextFirst = '1';
     let filteredTextSecond = '2';
 
     let filterFirstData = filterData(
       data,
       tableHeadersDictionary,
-      filteredTextFirst,
-      undefined
+      filteredTextFirst
     );
     let filterSecondData = filterData(
       data,
       tableHeadersDictionary,
-      filteredTextSecond,
-      undefined
-    );
-
-    expect(filterFirstData[0]).toBe(firstData);
-    expect(filterSecondData[0]).toBe(secondData);
-
-    // With filter function
-    const filterFunction: ColumnProcessObj<TestObject> = {
-      prop1: (val) => (val === 1 ? 'hehehe' : 'hahaha')
-    };
-
-    filteredTextFirst = 'hehehe';
-    filteredTextSecond = 'hahaha';
-
-    filterFirstData = filterData(
-      data,
-      tableHeadersDictionary,
-      filteredTextFirst,
-      filterFunction
-    );
-    filterSecondData = filterData(
-      data,
-      tableHeadersDictionary,
-      filteredTextSecond,
-      filterFunction
+      filteredTextSecond
     );
 
     expect(filterFirstData[0]).toBe(firstData);

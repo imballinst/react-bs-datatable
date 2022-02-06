@@ -181,7 +181,11 @@ function AsyncStoryTable<TTableRowType = any>({
       <Table>
         <TableHeader
           tableHeaders={CONTROLLED_HEADERS}
-          controlledProps={{ sortState, onSortChange }}
+          controlledProps={{
+            sortState,
+            onSortChange,
+            filteredDataLength
+          }}
         />
         <TableBody />
       </Table>
