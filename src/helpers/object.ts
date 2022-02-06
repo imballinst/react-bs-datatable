@@ -1,5 +1,11 @@
 import { TableRowType } from './types';
 
+/**
+ * @internal
+ *
+ * This is a function to create a `className` string prop given
+ * a list of arguments. Inspired by the `classnames` library.
+ */
 export function makeClasses(
   ...args: (string | Record<string, boolean> | undefined)[]
 ) {
@@ -26,6 +32,11 @@ export function makeClasses(
   return classes.join(' ');
 }
 
+/**
+ * @internal
+ *
+ * This function converts an array to record, just for utility purposes.
+ */
 export function convertArrayToRecord<ElementType extends TableRowType>(
   array: ElementType[],
   propId: keyof ElementType

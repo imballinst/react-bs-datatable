@@ -28,11 +28,11 @@ describe('data util (src/utils/data)', () => {
 
   it('should filter data correctly', () => {
     // Initialization
-    const tableHeaders: TableColumnType<TestObject>[] = [
+    const headers: TableColumnType<TestObject>[] = [
       { prop: 'prop1', isFilterable: true },
       { prop: 'prop2', isFilterable: false }
     ];
-    const tableHeadersDictionary = convertArrayToRecord(tableHeaders, 'prop');
+    const headersDictionary = convertArrayToRecord(headers, 'prop');
 
     const firstData = { prop1: 1, prop2: 123 };
     const secondData = { prop1: 2, prop2: 123 };
@@ -43,12 +43,12 @@ describe('data util (src/utils/data)', () => {
 
     let filterFirstData = filterData(
       data,
-      tableHeadersDictionary,
+      headersDictionary,
       filteredTextFirst
     );
     let filterSecondData = filterData(
       data,
-      tableHeadersDictionary,
+      headersDictionary,
       filteredTextSecond
     );
 

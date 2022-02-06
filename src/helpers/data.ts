@@ -5,6 +5,11 @@ import {
   TableRowType
 } from './types';
 
+/**
+ * @internal
+ *
+ * This is the sort function used in the uncontrolled table mode.
+ */
 export function sortData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   sortedProp: SortType,
@@ -37,9 +42,14 @@ export function sortData<TTableRowType extends TableRowType>(
   return sortedData;
 }
 
+/**
+ * @internal
+ *
+ * This is the filter function used in the uncontrolled table mode.
+ */
 export function filterData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
-  tableHeaders: Record<string, TableColumnType<TTableRowType>>,
+  headers: Record<string, TableColumnType<TTableRowType>>,
   filterText: string
 ) {
   if (filterText === '') {
@@ -58,7 +68,7 @@ export function filterData<TTableRowType extends TableRowType>(
     while (!isElementIncluded && i < elementPropLength) {
       const prop = elementProps[i];
 
-      if (tableHeaders[prop].isFilterable) {
+      if (headers[prop].isFilterable) {
         let columnValue = element[prop];
 
         if (typeof columnValue !== 'string') {
@@ -81,6 +91,11 @@ export function filterData<TTableRowType extends TableRowType>(
   });
 }
 
+/**
+ * @internal
+ *
+ * This is the paginate function used in the uncontrolled table mode.
+ */
 export function paginateData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   currentPage: number,

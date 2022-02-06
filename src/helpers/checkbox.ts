@@ -1,5 +1,11 @@
 import { CheckboxState } from './types';
 
+/**
+ * @internal
+ *
+ * This is an interface for the `getNextCheckboxState` function. Exported
+ * for ease-of-use to get the matching type for the passed parameter.
+ */
 export interface GetNextCheckboxStateParams {
   checkboxState: Record<string, CheckboxState>;
   prop: string;
@@ -9,6 +15,12 @@ export interface GetNextCheckboxStateParams {
   type: 'add' | 'remove';
 }
 
+/**
+ * @internal
+ *
+ * This function is used to get the next checkbox state. This function is separated
+ * because the checkbox state is used in both `TableHeader` and `TableBody` components.
+ */
 export function getNextCheckboxState({
   checkboxState,
   prop,

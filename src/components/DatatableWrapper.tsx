@@ -214,7 +214,7 @@ export function DatatableWrapper<TTableRowType = any>({
       checkboxProps
     })
   );
-  const tableHeadersRecordRef = useRef(convertArrayToRecord(headers, 'prop'));
+  const headersRecordRef = useRef(convertArrayToRecord(headers, 'prop'));
   // Store this in a ref because we might need it in case `headers` change.
   // Though, we don't want to put these into `useEffect` because they most likely
   // change over time.
@@ -234,7 +234,7 @@ export function DatatableWrapper<TTableRowType = any>({
     // Resets the table if the headers passed down is different.
     if (headers !== undefined) {
       // Re-set the ref.
-      tableHeadersRecordRef.current = convertArrayToRecord(headers, 'prop');
+      headersRecordRef.current = convertArrayToRecord(headers, 'prop');
       // Re-set the initial state.
       setState(
         getDefaultDatatableState({
@@ -332,7 +332,7 @@ export function DatatableWrapper<TTableRowType = any>({
     let newMaxPage = 1;
 
     if (isFilterable) {
-      newData = filterData(body, tableHeadersRecordRef.current, filter);
+      newData = filterData(body, headersRecordRef.current, filter);
       newFilteredDataLength = newData.length;
     }
 
