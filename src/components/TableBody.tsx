@@ -1,8 +1,14 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 
-import { TableColumnType, TableRowType } from '../helpers/types';
+import {
+  CheckboxOnChange,
+  CheckboxState,
+  TableRowType
+} from '../helpers/types';
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
+import { getNextCheckboxState } from '../helpers/checkbox';
 
 interface TableBodyClasses {
   tbody?: string;
@@ -18,28 +24,141 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   classes?: TableBodyClasses;
   /** On row click event. */
   onRowClick?: (row: TTableRowType) => void;
+  controlledProps?: {
+    checkboxState: Record<string, CheckboxState>;
+    onCheckboxChange: CheckboxOnChange;
+    filteredDataLength: number;
+  };
 }
 
 export function TableBody<TTableRowType extends TableRowType>({
   labels,
   classes,
-  onRowClick
+  onRowClick: onRowClickProp,
+  controlledProps
 }: TableBodyProps<TTableRowType>) {
-  const { data, headers } = useDatatableWrapper();
+  const {
+    data,
+    headers,
+    onCheckboxChange: onCheckboxChangeContext,
+    checkboxState: checkboxStateContext,
+    filteredDataLength: filteredDataLengthContext,
+    checkboxRefs
+  } = useDatatableWrapper();
   const body = [];
   const dataLength = data.length;
+  const headersLength = headers.length;
+
+  function onRowClick(rowIdx: number) {
+    if (typeof onRowClickProp === 'function') {
+      onRowClickProp(data[rowIdx]);
+    }
+  }
+
+  const onCheckboxChange =
+    controlledProps?.onCheckboxChange || onCheckboxChangeContext;
+  const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
+  const filteredDataLength =
+    controlledProps?.filteredDataLength || filteredDataLengthContext;
 
   if (dataLength > 0) {
-    for (let i = 0; i < dataLength; i += 1) {
+    for (let rowIdx = 0; rowIdx < dataLength; rowIdx++) {
+      const row = [];
+
+      for (let colIdx = 0; colIdx < headersLength; colIdx++) {
+        const {
+          cell,
+          cellProps = {},
+          prop: rawProp,
+          checkbox,
+          alignment
+        } = headers[colIdx];
+        const prop = rawProp.toString();
+        let value: React.ReactNode = '';
+
+        if (checkbox) {
+          // Render checkbox.
+          const idValue = data[rowIdx][checkbox.idProp];
+          const isSelected = checkboxState[prop].selected.has(idValue);
+
+          // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
+          value = (
+            <Form.Group
+              controlId={`table-selection-${data[rowIdx][checkbox.idProp]}`}
+            >
+              <Form.Label className="visually-hidden">
+                {isSelected
+                  ? `Remove ${idValue} from selection`
+                  : `Add ${idValue} to selection`}
+              </Form.Label>
+              <Form.Check
+                type="checkbox"
+                name="table-selection"
+                value={data[rowIdx][checkbox.idProp]}
+                className={checkbox.className}
+                checked={checkboxState[prop].selected.has(idValue)}
+                onChange={() => {
+                  onCheckboxChange({
+                    prop,
+                    idProp: checkbox.idProp,
+                    nextCheckboxState: getNextCheckboxState({
+                      checkboxState,
+                      data: data[rowIdx],
+                      idProp: checkbox.idProp,
+                      filteredDataLength,
+                      prop,
+                      type: isSelected ? 'remove' : 'add'
+                    }),
+                    checkboxRefs
+                  });
+                }}
+              />
+            </Form.Group>
+          );
+        } else {
+          // Render normally.
+          if (cell === undefined) {
+            value = data[rowIdx][prop];
+          } else {
+            value = cell(data[rowIdx]);
+          }
+        }
+
+        row.push(
+          <td
+            key={`col-${rowIdx}${colIdx}`}
+            className={makeClasses(
+              'tbody-td',
+              classes?.td,
+              // Alignment.
+              {
+                'text-start': alignment?.horizontal === 'left',
+                'text-center': alignment?.horizontal === 'center',
+                'text-end': alignment?.horizontal === 'right'
+              },
+              typeof cellProps.className === 'function'
+                ? cellProps.className(data[rowIdx])
+                : cellProps.className
+            )}
+            style={
+              typeof cellProps.style === 'function'
+                ? cellProps.style(data[rowIdx])
+                : cellProps.style
+            }
+          >
+            {value}
+          </td>
+        );
+      }
+
       body.push(
-        <BodyRow
-          key={`row-${i}`}
-          classes={classes}
-          headers={headers}
-          data={data}
-          onClick={onRowClick}
-          rowIdx={i}
-        />
+        <tr
+          key={rowIdx}
+          className={makeClasses('tbody-tr', classes?.tr)}
+          onClick={() => onRowClick(rowIdx)}
+        >
+          {row}
+        </tr>
       );
     }
   } else {
@@ -53,68 +172,4 @@ export function TableBody<TTableRowType extends TableRowType>({
   }
 
   return <tbody className={makeClasses('tbody', classes?.tbody)}>{body}</tbody>;
-}
-
-// Helper components.
-// Body row is only used for this file, so it's better to localize it
-// in the same file.
-type BodyRowProps<TTableRowType extends TableRowType> = {
-  headers: TableColumnType<TTableRowType>[];
-  data: TTableRowType[];
-  rowIdx: number;
-  classes?: TableBodyClasses;
-  onClick?: (row: TTableRowType) => void;
-};
-
-function BodyRow<TTableRowType extends TableRowType>({
-  headers,
-  data,
-  rowIdx,
-  classes,
-  onClick
-}: BodyRowProps<TTableRowType>) {
-  const row = [];
-
-  for (let i = 0; i < headers.length; i += 1) {
-    const { cell, cellProps = {} } = headers[i];
-    let value: React.ReactNode = '';
-
-    if (cell === undefined) {
-      value = data[rowIdx][headers[i].prop];
-    } else {
-      value = cell(data[rowIdx]);
-    }
-
-    row.push(
-      <td
-        key={`col-${rowIdx}${i}`}
-        className={makeClasses(
-          'tbody-td',
-          classes?.td,
-          typeof cellProps.className === 'function'
-            ? cellProps.className(data[rowIdx])
-            : cellProps.className
-        )}
-        style={
-          typeof cellProps.style === 'function'
-            ? cellProps.style(data[rowIdx])
-            : cellProps.style
-        }
-      >
-        {value}
-      </td>
-    );
-  }
-
-  function onRowClick() {
-    if (typeof onClick === 'function') {
-      onClick(data[rowIdx]);
-    }
-  }
-
-  return (
-    <tr className={makeClasses('tbody-tr', classes?.tr)} onClick={onRowClick}>
-      {row}
-    </tr>
-  );
 }

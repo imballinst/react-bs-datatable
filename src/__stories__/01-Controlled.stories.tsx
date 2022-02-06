@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
 
-import { FetchParams, FetchResponse, StoryBodyType } from './resources/types';
+import { FetchParams, FetchResponse, StoryColumnType } from './resources/types';
 import {
   CONTROLLED_HEADERS,
   fetchControlledMockData

@@ -1,15 +1,17 @@
 import { TableColumnType } from '../../helpers/types';
-import { StoryBodyType } from './types';
+import { StoryColumnType } from './types';
 
-export const STORY_PROP_TO_OPTION_NAME: Record<keyof StoryBodyType, string> = {
-  name: 'Name',
-  username: 'Username',
-  location: 'Location',
-  date: 'Last Update',
-  score: 'Score'
-};
+export const STORY_PROP_TO_OPTION_NAME: Record<keyof StoryColumnType, string> =
+  {
+    name: 'Name',
+    username: 'Username',
+    location: 'Location',
+    date: 'Last Update',
+    score: 'Score',
+    checkbox: ''
+  };
 
-export const STORY_HEADERS: TableColumnType<StoryBodyType>[] = [
+export const STORY_HEADERS: TableColumnType<StoryColumnType>[] = [
   {
     prop: 'name',
     title: 'Name'

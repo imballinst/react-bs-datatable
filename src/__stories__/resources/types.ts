@@ -1,11 +1,13 @@
 import { SortType } from '../../helpers/types';
 
-export interface StoryBodyType {
+export interface StoryColumnType {
   name: string;
   username: string;
   date: string;
   score: number;
   location: string;
+  // This is only for the headers and not used in the body whatsoever.
+  checkbox?: boolean;
 }
 
 export interface FetchParams {

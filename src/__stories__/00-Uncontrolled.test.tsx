@@ -1,7 +1,12 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import { FilterSortPagination } from './00-Uncontrolled.stories';
+import {
+  FilterSortPagination,
+  CustomLabels,
+  CustomCellRender,
+  RowOnClick
+} from './00-Uncontrolled.stories';
 
 describe('Filter, sort, pagination', () => {
   const DEFAULT_PROPS = {
@@ -98,7 +103,7 @@ describe('Filter, sort, pagination', () => {
   });
 
   test('filtering an unfilterable column: score', () => {
-    const { getByLabelText, getByText, getByPlaceholderText } = render(
+    const { getByText, getByPlaceholderText } = render(
       <FilterSortPagination {...DEFAULT_PROPS} />
     );
 
@@ -126,6 +131,69 @@ describe('Filter, sort, pagination', () => {
     expect(paginationButtonGroupElement).toHaveClass('invisible');
     expect(paginationOptsElement.parentElement).toHaveClass('invisible');
   });
+
+  test('checkbox states: none selected, some selected, all selected', () => {
+    const { getByText, getByLabelText, debug } = render(
+      <FilterSortPagination {...DEFAULT_PROPS} hasCheckbox />
+    );
+
+    let tableHeaderCheckbox = getByLabelText('Add 8 rows to selection');
+    fireEvent.click(tableHeaderCheckbox);
+
+    let bulkControlElement = getByText(/8 rows selected\./);
+    let anchorBulkControlElement = getByText(/Select all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    // De-select one row.
+    let aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/7 rows selected\./);
+    anchorBulkControlElement = getByText(/Select all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+
+    // Select all rows.
+    fireEvent.click(anchorBulkControlElement);
+
+    bulkControlElement = getByText(/All 60 rows selected\./);
+    anchorBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).toBeChecked();
+
+    // Deselect one row.
+    aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/59 rows selected\./);
+    anchorBulkControlElement = getByText(/Select all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    // Select Aaren again.
+    aarenCheckbox = getByLabelText(/Add Aaren to selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/All 60 rows selected\./);
+    anchorBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'a'
+    });
+
+    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(tableHeaderCheckbox).toBeChecked();
+  });
 });
 
 describe('Custom labels', () => {
@@ -139,7 +207,7 @@ describe('Custom labels', () => {
 
   test('change labels for filter placeholder, pagination opts, and pagination', () => {
     const { getByText, getByPlaceholderText } = render(
-      <FilterSortPagination
+      <CustomLabels
         {...DEFAULT_PROPS}
         filterPlaceholder="Filter text..."
         beforeSelect="Show"
@@ -174,7 +242,7 @@ describe('Custom cell render', () => {
 
   test('custom score cell color when number is below 50', () => {
     const { getByRole } = render(
-      <FilterSortPagination {...DEFAULT_PROPS} scoreCellColumnColor={BGCOLOR} />
+      <CustomCellRender {...DEFAULT_PROPS} scoreCellColumnColor={BGCOLOR} />
     );
 
     const tableElement = getByRole('table');
@@ -221,7 +289,7 @@ describe('Custom row on click', () => {
 
   test('custom score cell color when number is below 50', () => {
     const { getByRole } = render(
-      <FilterSortPagination {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
+      <RowOnClick {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
     );
 
     const tableElement = getByRole('table');
