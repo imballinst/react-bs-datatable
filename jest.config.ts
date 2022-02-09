@@ -1,5 +1,5 @@
 /** @type {import('@jest/types').Config.InitialOptions} */
-module.exports = {
+export default {
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   setupFilesAfterEnv: ['./setupTests.ts'],
   // Disable this to test all test files.

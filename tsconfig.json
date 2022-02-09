@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": ["esnext", "dom"],
     "strict": true,
     "jsx": "react-jsx",
@@ -11,6 +10,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["src", "scripts", "./setupTests.ts", ".storybook/preview.ts"],
+  "include": ["src", "scripts", "./setupTests.ts", ".storybook"],
   "exclude": ["src/index.ts"]
 }
