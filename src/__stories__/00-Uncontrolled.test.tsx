@@ -133,7 +133,7 @@ describe('Filter, sort, pagination', () => {
   });
 
   test('checkbox states: none selected, some selected, all selected', () => {
-    const { getByText, getByLabelText, debug } = render(
+    const { getByText, getByLabelText } = render(
       <FilterSortPagination {...DEFAULT_PROPS} hasCheckbox />
     );
 
@@ -141,11 +141,11 @@ describe('Filter, sort, pagination', () => {
     fireEvent.click(tableHeaderCheckbox);
 
     let bulkControlElement = getByText(/8 rows selected\./);
-    let anchorBulkControlElement = getByText(/Select all rows/, {
-      selector: 'a'
+    let buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
     });
 
-    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
     expect(tableHeaderCheckbox).not.toBeChecked();
 
     // De-select one row.
@@ -153,21 +153,21 @@ describe('Filter, sort, pagination', () => {
     fireEvent.click(aarenCheckbox);
 
     bulkControlElement = getByText(/7 rows selected\./);
-    anchorBulkControlElement = getByText(/Select all rows/, {
-      selector: 'a'
+    buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
     });
 
-    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
 
     // Select all rows.
-    fireEvent.click(anchorBulkControlElement);
+    fireEvent.click(buttonBulkControlElement);
 
     bulkControlElement = getByText(/All 60 rows selected\./);
-    anchorBulkControlElement = getByText(/Deselect all rows/, {
-      selector: 'a'
+    buttonBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'button'
     });
 
-    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
     expect(tableHeaderCheckbox).toBeChecked();
 
     // Deselect one row.
@@ -175,11 +175,11 @@ describe('Filter, sort, pagination', () => {
     fireEvent.click(aarenCheckbox);
 
     bulkControlElement = getByText(/59 rows selected\./);
-    anchorBulkControlElement = getByText(/Select all rows/, {
-      selector: 'a'
+    buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
     });
 
-    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
     expect(tableHeaderCheckbox).not.toBeChecked();
 
     // Select Aaren again.
@@ -187,11 +187,11 @@ describe('Filter, sort, pagination', () => {
     fireEvent.click(aarenCheckbox);
 
     bulkControlElement = getByText(/All 60 rows selected\./);
-    anchorBulkControlElement = getByText(/Deselect all rows/, {
-      selector: 'a'
+    buttonBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'button'
     });
 
-    expect(bulkControlElement).toContainElement(anchorBulkControlElement);
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
     expect(tableHeaderCheckbox).toBeChecked();
   });
 });
