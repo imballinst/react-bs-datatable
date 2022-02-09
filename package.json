@@ -15,6 +15,7 @@
     "build": "rm -rf lib && concurrently yarn:build:*",
     "build:esm": "tsc --project tsconfig.esm.json",
     "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:doc": "typedoc --options typedoc.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "preversion": "yarn test && rm -rf lib && yarn build",
@@ -25,9 +26,8 @@
     "v:betaminor": "npm version preminor --preid beta",
     "v:betapatch": "npm version prepatch --preid beta",
     "v:prebump": "npm version prerelease",
-    "typedoc": "typedoc --options typedoc.json",
     "generate-story-data": "yarn workspace scripts generate-story-data",
-    "check-unstaged-files": "yarn workspace scripts check-unstaged-files"
+    "check-latest-docs": "yarn build:doc && yarn workspace scripts check-latest-docs"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
   "author": "Try Ajitiono",
