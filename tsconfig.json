@@ -11,11 +11,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["src", "scripts", "./setupTests.ts", ".storybook/preview.ts"],
-  "exclude": ["src/index.ts"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "include": ["src", "scripts", "./setupTests.ts", ".storybook"],
+  "exclude": ["src/index.ts"]
 }
