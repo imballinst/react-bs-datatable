@@ -5,6 +5,10 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
+  "private": true,
+  "workspaces": [
+    "scripts"
+  ],
   "scripts": {
     "test": "jest",
     "jest": "jest --watch",
@@ -22,8 +26,8 @@
     "v:betapatch": "npm version prepatch --preid beta",
     "v:prebump": "npm version prerelease",
     "typedoc": "typedoc --options typedoc.json",
-    "generate-story-data": "ts-node ./scripts/generate-story-data.ts",
-    "check-unstaged-files": "node --loader ts-node/esm --experimental-specifier-resolution=node ./scripts/check-unstaged-files.ts"
+    "generate-story-data": "yarn workspace scripts generate-story-data",
+    "check-unstaged-files": "yarn workspace scripts check-unstaged-files"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
   "author": "Try Ajitiono",

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "esnext",
     "lib": ["esnext", "dom"],
     "strict": true,
     "jsx": "react-jsx",
@@ -12,9 +13,4 @@
   },
   "include": ["src", "scripts", "./setupTests.ts", ".storybook/preview.ts"],
   "exclude": ["src/index.ts"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
 }

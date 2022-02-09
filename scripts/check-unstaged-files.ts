@@ -1,8 +1,7 @@
+import { execa } from 'execa';
 import { setFailed } from '@actions/core';
 
 (async () => {
-  const { execa } = await import('execa');
-
   const { stdout } = await execa('git', ['diff', '--name-only']);
   const arrayOfDirs = stdout.split('\n');
   const hasApiDocsChanges = arrayOfDirs.find((dir) => dir.startsWith('api'));
