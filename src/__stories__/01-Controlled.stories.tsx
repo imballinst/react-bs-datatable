@@ -11,7 +11,7 @@ import { TableHeader } from '../components/TableHeader';
 import { TableBody } from '../components/TableBody';
 import { DatatableWrapper } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
-import { PaginationOpts } from '../components/PaginationOpts';
+import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
 import { SortType, TableColumnType } from '../helpers/types';
 
@@ -158,7 +158,7 @@ function AsyncStoryTable<TTableRowType = any>({
           lg={4}
           className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
         >
-          <PaginationOpts
+          <PaginationOptions
             controlledProps={{
               filteredDataLength,
               onRowsPerPageChange,
@@ -180,8 +180,12 @@ function AsyncStoryTable<TTableRowType = any>({
       </Row>
       <Table>
         <TableHeader
-          tableHeaders={CONTROLLED_HEADERS}
-          controlledProps={{ sortState, onSortChange }}
+          headers={CONTROLLED_HEADERS}
+          controlledProps={{
+            sortState,
+            onSortChange,
+            filteredDataLength
+          }}
         />
         <TableBody />
       </Table>

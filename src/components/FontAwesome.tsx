@@ -16,11 +16,16 @@ const ICONS = {
   times: faTimes
 };
 
-type FontAwesomeProps = {
+interface FontAwesomeProps {
   icon: keyof typeof ICONS;
   className?: string;
-};
+}
 
+/**
+ * @internal
+ *
+ * This is an internal component to render various font awesome icons.
+ */
 export default function FontAwesome({ icon, className }: FontAwesomeProps) {
   const faIconString = `fa-${icon}`;
   const faClass = makeClasses('fas', faIconString, className);

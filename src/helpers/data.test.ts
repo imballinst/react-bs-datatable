@@ -28,55 +28,28 @@ describe('data util (src/utils/data)', () => {
 
   it('should filter data correctly', () => {
     // Initialization
-    const tableHeaders: TableColumnType<TestObject>[] = [
+    const headers: TableColumnType<TestObject>[] = [
       { prop: 'prop1', isFilterable: true },
       { prop: 'prop2', isFilterable: false }
     ];
-    const tableHeadersDictionary = convertArrayToRecord(tableHeaders, 'prop');
+    const headersDictionary = convertArrayToRecord(headers, 'prop');
 
     const firstData = { prop1: 1, prop2: 123 };
     const secondData = { prop1: 2, prop2: 123 };
     const data = [firstData, secondData];
 
-    // Without filter function
     let filteredTextFirst = '1';
     let filteredTextSecond = '2';
 
     let filterFirstData = filterData(
       data,
-      tableHeadersDictionary,
-      filteredTextFirst,
-      undefined
+      headersDictionary,
+      filteredTextFirst
     );
     let filterSecondData = filterData(
       data,
-      tableHeadersDictionary,
-      filteredTextSecond,
-      undefined
-    );
-
-    expect(filterFirstData[0]).toBe(firstData);
-    expect(filterSecondData[0]).toBe(secondData);
-
-    // With filter function
-    const filterFunction: ColumnProcessObj<TestObject> = {
-      prop1: (val) => (val === 1 ? 'hehehe' : 'hahaha')
-    };
-
-    filteredTextFirst = 'hehehe';
-    filteredTextSecond = 'hahaha';
-
-    filterFirstData = filterData(
-      data,
-      tableHeadersDictionary,
-      filteredTextFirst,
-      filterFunction
-    );
-    filterSecondData = filterData(
-      data,
-      tableHeadersDictionary,
-      filteredTextSecond,
-      filterFunction
+      headersDictionary,
+      filteredTextSecond
     );
 
     expect(filterFirstData[0]).toBe(firstData);

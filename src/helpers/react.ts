@@ -1,6 +1,11 @@
 import { createContext, useContext } from 'react';
 
-// Reference: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/.
+/**
+ * @internal
+ *
+ * This is a function to create a typed React context safely.
+ * Reference: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/.
+ */
 export function createCtx<A extends {} | null>() {
   const ctx = createContext<A | undefined>(undefined);
   function useCtx() {

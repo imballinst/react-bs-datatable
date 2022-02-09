@@ -2,7 +2,11 @@ examples/
 src/
 scripts/
 .github/
+api/
+# This is the "dumping" space for all kinds of generator.
+out/
 
+*.log
 .travis.yml
 .babelrc
 Makefile
@@ -11,3 +15,4 @@ tsconfig*
 .prettierrc.json
 setupTests.ts
 jest.config.js
+typedoc.json

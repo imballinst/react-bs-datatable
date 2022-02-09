@@ -16,26 +16,53 @@ import {
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
 
+/**
+ * This is an interface for customizing the classes for
+ * the `TableHeaderClasses` component.
+ */
 export interface TableHeaderClasses {
-  th?: string;
+  /** The class for the `thead` tag. */
   thead?: string;
+  /** The class for the `tr` tags inside `tbody`. */
   tr?: string;
+  /** The class for the `th` tags inside each `tr` tag. */
+  th?: string;
 }
 
+/**
+ * This is an interface for `TableHeader` component props.
+ */
 export interface TableHeaderProps<T> {
-  tableHeaders: TableColumnType<T>[];
+  /** The list of table headers that are going to be rendered. */
+  headers: TableColumnType<T>[];
+  /** Customize the classes of the `TableHeader` component. */
   classes?: TableHeaderClasses;
+  /** Props to make the component controlled. */
   controlledProps?: {
-    onSortChange: (nextSort: SortType) => void;
-    sortState: SortType;
-    onCheckboxChange: CheckboxOnChange;
-    filteredDataLength: number;
-    checkboxState: Record<string, CheckboxState>;
+    /** The function fired when the table sort state changes. */
+    onSortChange?: (nextSort: SortType) => void;
+    /** The current sort state of the table. */
+    sortState?: SortType;
+    /** The function fired when any checkbox in the table changes. */
+    onCheckboxChange?: CheckboxOnChange;
+    /**
+     * The filtered data length. When not using filter control,
+     * then this should equal to the table body's length.
+     */
+    filteredDataLength?: number;
+    /**
+     * A record, which key is the column prop name and the value
+     * is of type `CheckboxState`.
+     */
+    checkboxState?: Record<string, CheckboxState>;
   };
 }
 
+/**
+ * Renders a list of table headers.
+ */
 export function TableHeader<T extends TableRowType>({
-  tableHeaders,
+  headers,
   classes,
   controlledProps
 }: TableHeaderProps<T>) {
@@ -58,7 +85,7 @@ export function TableHeader<T extends TableRowType>({
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
 
-  for (let i = 0; i < tableHeaders.length; i += 1) {
+  for (let i = 0; i < headers.length; i += 1) {
     const {
       isSortable,
       prop: headerProp,
@@ -66,7 +93,7 @@ export function TableHeader<T extends TableRowType>({
       headerCell,
       checkbox,
       alignment
-    } = tableHeaders[i];
+    } = headers[i];
     const prop = headerProp.toString();
 
     const thClass = makeClasses({

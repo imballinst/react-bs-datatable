@@ -5,6 +5,11 @@ import {
   TableRowType
 } from './types';
 
+/**
+ * @internal
+ *
+ * This is the sort function used in the uncontrolled table mode.
+ */
 export function sortData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   sortedProp: SortType,
@@ -37,11 +42,15 @@ export function sortData<TTableRowType extends TableRowType>(
   return sortedData;
 }
 
+/**
+ * @internal
+ *
+ * This is the filter function used in the uncontrolled table mode.
+ */
 export function filterData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
-  tableHeaders: Record<string, TableColumnType<TTableRowType>>,
-  filterText: string,
-  filterValueObj?: ColumnProcessObj<TTableRowType>
+  headers: Record<string, TableColumnType<TTableRowType>>,
+  filterText: string
 ) {
   if (filterText === '') {
     return data;
@@ -58,15 +67,12 @@ export function filterData<TTableRowType extends TableRowType>(
 
     while (!isElementIncluded && i < elementPropLength) {
       const prop = elementProps[i];
-      const filterFn = filterValueObj?.[prop];
 
-      if (tableHeaders[prop].isFilterable) {
+      if (headers[prop].isFilterable) {
         let columnValue = element[prop];
 
-        if (filterFn) {
-          columnValue = filterFn(columnValue);
-        } else if (typeof columnValue !== 'string') {
-          // Convert to string if it is not a string
+        if (typeof columnValue !== 'string') {
+          // Convert to string if it is not a string.
           columnValue = columnValue.toString();
         }
 
@@ -85,6 +91,11 @@ export function filterData<TTableRowType extends TableRowType>(
   });
 }
 
+/**
+ * @internal
+ *
+ * This is the paginate function used in the uncontrolled table mode.
+ */
 export function paginateData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   currentPage: number,

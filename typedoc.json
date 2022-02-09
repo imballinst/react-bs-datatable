@@ -1,0 +1,10 @@
+{
+  "out": "api",
+  "readme": "none",
+  "entryPoints": ["./src"],
+  "entryPointStrategy": "expand",
+  "cleanOutputDir": true,
+  "tsconfig": "./tsconfig.json",
+  "exclude": ["src/__stories__/**/*", "**/*.test.(ts|tsx)"],
+  "excludeInternal": true
+}
