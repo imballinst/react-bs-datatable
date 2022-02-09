@@ -44,7 +44,7 @@ The helper type to declare the checkbox onChange handler safely.
 
 #### Defined in
 
-[helpers/types.ts:36](https://github.com/imballinst/react-bs-datatable/blob/43c9b27/src/helpers/types.ts#L36)
+[helpers/types.ts:36](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/helpers/types.ts#L36)
 
 ___
 
@@ -68,7 +68,7 @@ can make the sort result incorrect, e.g. sorting formatted dates.
 
 #### Defined in
 
-[helpers/types.ts:115](https://github.com/imballinst/react-bs-datatable/blob/43c9b27/src/helpers/types.ts#L115)
+[helpers/types.ts:115](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/helpers/types.ts#L115)
 
 ___
 
@@ -86,4 +86,4 @@ This is used for the `extend` keyword in the components.
 
 #### Defined in
 
-[helpers/types.ts:122](https://github.com/imballinst/react-bs-datatable/blob/43c9b27/src/helpers/types.ts#L122)
+[helpers/types.ts:122](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/helpers/types.ts#L122)

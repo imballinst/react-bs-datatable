@@ -39,4 +39,4 @@ Renders a list of table headers.
 
 #### Defined in
 
-[components/TableHeader.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/43c9b27/src/components/TableHeader.tsx#L64)
+[components/TableHeader.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/components/TableHeader.tsx#L64)
