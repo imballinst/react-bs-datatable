@@ -11,6 +11,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["src", "scripts", "./setupTests.ts", ".storybook/preview.ts"],
+  "include": ["src", "scripts", "./setupTests.ts", ".storybook"],
   "exclude": ["src/index.ts"],
 }
