@@ -1,0 +1,4864 @@
+{
+	"id": 0,
+	"name": "react-bs-datatable",
+	"kind": 1,
+	"flags": {},
+	"originalName": "",
+	"children": [
+		{
+			"id": 1,
+			"name": "components/BulkCheckboxControl",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 5,
+					"name": "BulkCheckboxControlClasses",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for customizing the classes for\nthe `BulkCheckboxControl` component."
+					},
+					"children": [
+						{
+							"id": 6,
+							"name": "selectRemoveAllText",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the \"Select all\" or \"Deselect all\" text.\nThis defaults to `link-primary text-decoration-none`."
+							},
+							"sources": [
+								{
+									"fileName": "components/BulkCheckboxControl.tsx",
+									"line": 18,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								6
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/BulkCheckboxControl.tsx",
+							"line": 13,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 7,
+					"name": "BulkCheckboxControlProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for `BulkCheckboxControl` component props."
+					},
+					"children": [
+						{
+							"id": 13,
+							"name": "classes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Custom classes for the component."
+							},
+							"sources": [
+								{
+									"fileName": "components/BulkCheckboxControl.tsx",
+									"line": 41,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 5,
+								"name": "BulkCheckboxControlClasses"
+							}
+						},
+						{
+							"id": 8,
+							"name": "controlledProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Props to make the component controlled."
+							},
+							"sources": [
+								{
+									"fileName": "components/BulkCheckboxControl.tsx",
+									"line": 26,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 9,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 10,
+											"name": "checkboxState",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "A record, which key is the column prop name and the value\nis of type `CheckboxState`."
+											},
+											"sources": [
+												{
+													"fileName": "components/BulkCheckboxControl.tsx",
+													"line": 31,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"typeArguments": [
+													{
+														"type": "intrinsic",
+														"name": "string"
+													},
+													{
+														"type": "reference",
+														"id": 222,
+														"name": "CheckboxState"
+													}
+												],
+												"qualifiedName": "Record",
+												"package": "typescript",
+												"name": "Record"
+											}
+										},
+										{
+											"id": 12,
+											"name": "filteredDataLength",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The filtered data length. When not using filter control,\nthen this should equal to the table body's length."
+											},
+											"sources": [
+												{
+													"fileName": "components/BulkCheckboxControl.tsx",
+													"line": 38,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 11,
+											"name": "onCheckboxChange",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The function fired when any checkbox in the table changes."
+											},
+											"sources": [
+												{
+													"fileName": "components/BulkCheckboxControl.tsx",
+													"line": 33,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"id": 225,
+												"name": "CheckboxOnChange"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												10,
+												12,
+												11
+											]
+										}
+									]
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								13,
+								8
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/BulkCheckboxControl.tsx",
+							"line": 24,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 2,
+					"name": "BulkCheckboxControl",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/BulkCheckboxControl.tsx",
+							"line": 52,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 3,
+							"name": "BulkCheckboxControl",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Renders a control for selection or deselection of all rows. This is\nonly useful when pagination and checkbox are both enabled. When only\nsome (or none) of the rows are checked, then this will render the\nnumber of checked rows, as well as the \"Select all\" button.\nOn the other hand, when all rows are selected, then it will\nchange to \"Deselect all\" button."
+							},
+							"parameters": [
+								{
+									"id": 4,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 7,
+										"name": "BulkCheckboxControlProps"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react",
+								"name": "Element"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						5,
+						7
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						2
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/BulkCheckboxControl.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 14,
+			"name": "components/DatatableWrapper",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 44,
+					"name": "DatatableWrapperProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "The props that can be passed to the `DatatableWrapper` component."
+					},
+					"children": [
+						{
+							"id": 47,
+							"name": "body",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 159,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 53,
+									"name": "TTableRowType"
+								}
+							}
+						},
+						{
+							"id": 52,
+							"name": "checkboxProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 164,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 40,
+								"name": "TableCheckboxParameters"
+							}
+						},
+						{
+							"id": 45,
+							"name": "children",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "The rest of the table, including its controls."
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 157,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "React.ReactNode",
+								"package": "@types/react",
+								"name": "ReactNode"
+							}
+						},
+						{
+							"id": 48,
+							"name": "filterProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 160,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 19,
+								"name": "TableFilterParameters"
+							}
+						},
+						{
+							"id": 46,
+							"name": "headers",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 158,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 234,
+									"typeArguments": [
+										{
+											"type": "reference",
+											"id": 53,
+											"name": "TTableRowType"
+										}
+									],
+									"name": "TableColumnType"
+								}
+							}
+						},
+						{
+							"id": 51,
+							"name": "paginationOptionsProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 163,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 35,
+								"name": "TablePaginationOptionsParameters"
+							}
+						},
+						{
+							"id": 50,
+							"name": "paginationProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 162,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 30,
+								"name": "TablePaginationParameters"
+							}
+						},
+						{
+							"id": 49,
+							"name": "sortProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 161,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 23,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"id": 53,
+										"name": "TTableRowType"
+									}
+								],
+								"name": "TableSortParameters"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								47,
+								52,
+								45,
+								48,
+								46,
+								51,
+								50,
+								49
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 155,
+							"character": 17
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 53,
+							"name": "TTableRowType",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						}
+					]
+				},
+				{
+					"id": 40,
+					"name": "TableCheckboxParameters",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is the additional parameters for the filter function.\nOnly applicable for uncontrolled table mode."
+					},
+					"children": [
+						{
+							"id": 41,
+							"name": "initialState",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial states for the table."
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 106,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "reference",
+										"id": 222,
+										"name": "CheckboxState"
+									}
+								],
+								"qualifiedName": "Record",
+								"package": "typescript",
+								"name": "Record"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								41
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 104,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 19,
+					"name": "TableFilterParameters",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is the additional parameters for the filter function.\nOnly applicable for uncontrolled table mode."
+					},
+					"children": [
+						{
+							"id": 20,
+							"name": "initialState",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial states for the table."
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 28,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 21,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 22,
+											"name": "filter",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"comment": {
+												"shortText": "The initial text filter state."
+											},
+											"sources": [
+												{
+													"fileName": "components/DatatableWrapper.tsx",
+													"line": 30,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												22
+											]
+										}
+									]
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								20
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 26,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 35,
+					"name": "TablePaginationOptionsParameters",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is the additional parameters for the filter function.\nOnly applicable for uncontrolled table mode."
+					},
+					"children": [
+						{
+							"id": 36,
+							"name": "initialState",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial states for the table."
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 92,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 37,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 39,
+											"name": "options",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"comment": {
+												"shortText": "Rows per page options that will be shown in the dropdown."
+											},
+											"sources": [
+												{
+													"fileName": "components/DatatableWrapper.tsx",
+													"line": 96,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "intrinsic",
+													"name": "number"
+												}
+											}
+										},
+										{
+											"id": 38,
+											"name": "rowsPerPage",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"comment": {
+												"shortText": "Number of rows per page to be shown."
+											},
+											"sources": [
+												{
+													"fileName": "components/DatatableWrapper.tsx",
+													"line": 94,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												39,
+												38
+											]
+										}
+									]
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								36
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 90,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 30,
+					"name": "TablePaginationParameters",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is the additional parameters for the filter function.\nOnly applicable for uncontrolled table mode."
+					},
+					"children": [
+						{
+							"id": 31,
+							"name": "initialState",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial states for the table."
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 73,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 32,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 34,
+											"name": "maxPage",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"comment": {
+												"shortText": "The initial maximum page. This is used to determine\nthe last numbered button in the pagination button group.\nThis also determines the next page number when the\n\"Last\" button is clicked."
+											},
+											"sources": [
+												{
+													"fileName": "components/DatatableWrapper.tsx",
+													"line": 82,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 33,
+											"name": "page",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"comment": {
+												"shortText": "The initial currently active page."
+											},
+											"sources": [
+												{
+													"fileName": "components/DatatableWrapper.tsx",
+													"line": 75,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												34,
+												33
+											]
+										}
+									]
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								31
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 71,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 23,
+					"name": "TableSortParameters",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is the additional parameters for the filter function.\nOnly applicable for uncontrolled table mode."
+					},
+					"children": [
+						{
+							"id": 28,
+							"name": "initialState",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial states for the table."
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 64,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 219,
+								"name": "SortType"
+							}
+						},
+						{
+							"id": 24,
+							"name": "sortValueObj",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "An object with the key being the table columns' prop and\nthe value being the value converter for the column.\nThis is most useful when we want to sort something by number\ninstead of by text.",
+								"text": "For example, we want to convert a date format\nas the following: \"Jan 22, 2022\". Since string sorting will result\nin a wrong result, then we need to convert it first, e.g. using `date-fns`.\nAfter we parse the column's formatted date, only then we can get its\nnumber value.\n\n```ts\n{\n  sortValueObject: {\n    date: (column: string) => parse(column).getTime()\n  }\n}\n```\n\nThe object above will cause all rows in the `date` column to be sorted\nby number (milliseconds) instead of by formatted date string.\n"
+							},
+							"sources": [
+								{
+									"fileName": "components/DatatableWrapper.tsx",
+									"line": 62,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"typeArguments": [
+											{
+												"type": "typeOperator",
+												"operator": "keyof",
+												"target": {
+													"type": "reference",
+													"id": 29,
+													"name": "TTableRowType"
+												}
+											},
+											{
+												"type": "reflection",
+												"declaration": {
+													"id": 25,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"signatures": [
+														{
+															"id": 26,
+															"name": "__type",
+															"kind": 4096,
+															"kindString": "Call signature",
+															"flags": {},
+															"parameters": [
+																{
+																	"id": 27,
+																	"name": "column",
+																	"kind": 32768,
+																	"kindString": "Parameter",
+																	"flags": {},
+																	"type": {
+																		"type": "union",
+																		"types": [
+																			{
+																				"type": "intrinsic",
+																				"name": "string"
+																			},
+																			{
+																				"type": "intrinsic",
+																				"name": "number"
+																			}
+																		]
+																	}
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "number"
+															}
+														}
+													]
+												}
+											}
+										],
+										"qualifiedName": "Record",
+										"package": "typescript",
+										"name": "Record"
+									}
+								],
+								"qualifiedName": "Partial",
+								"package": "typescript",
+								"name": "Partial"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								28,
+								24
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 38,
+							"character": 17
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 29,
+							"name": "TTableRowType",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						}
+					]
+				},
+				{
+					"id": 15,
+					"name": "DatatableWrapper",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/DatatableWrapper.tsx",
+							"line": 197,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 16,
+							"name": "DatatableWrapper",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 17,
+									"name": "TTableRowType",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"default": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 18,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 44,
+										"typeArguments": [
+											{
+												"type": "reference",
+												"id": 17,
+												"name": "TTableRowType"
+											}
+										],
+										"name": "DatatableWrapperProps"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react",
+								"name": "Element"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						44,
+						40,
+						19,
+						35,
+						30,
+						23
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						15
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/DatatableWrapper.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 54,
+			"name": "components/Filter",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 58,
+					"name": "FilterClasses",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for customizing the classes for\nthe `Filter` component."
+					},
+					"children": [
+						{
+							"id": 61,
+							"name": "clearButton",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the clear button."
+							},
+							"sources": [
+								{
+									"fileName": "components/Filter.tsx",
+									"line": 19,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 60,
+							"name": "input",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the text input."
+							},
+							"sources": [
+								{
+									"fileName": "components/Filter.tsx",
+									"line": 17,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 59,
+							"name": "inputGroup",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the input group, which covers the\ntext input and the clear button."
+							},
+							"sources": [
+								{
+									"fileName": "components/Filter.tsx",
+									"line": 15,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								61,
+								60,
+								59
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/Filter.tsx",
+							"line": 10,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 62,
+					"name": "FilterProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for `Filter` component props."
+					},
+					"children": [
+						{
+							"id": 64,
+							"name": "classes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Custom classes for the component."
+							},
+							"sources": [
+								{
+									"fileName": "components/Filter.tsx",
+									"line": 32,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 58,
+								"name": "FilterClasses"
+							}
+						},
+						{
+							"id": 65,
+							"name": "controlledProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Props to make the component controlled."
+							},
+							"sources": [
+								{
+									"fileName": "components/Filter.tsx",
+									"line": 34,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 66,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 67,
+											"name": "filter",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The text filter."
+											},
+											"sources": [
+												{
+													"fileName": "components/Filter.tsx",
+													"line": 36,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 68,
+											"name": "onFilter",
+											"kind": 2048,
+											"kindString": "Method",
+											"flags": {
+												"isOptional": true
+											},
+											"sources": [
+												{
+													"fileName": "components/Filter.tsx",
+													"line": 38,
+													"character": 4
+												}
+											],
+											"signatures": [
+												{
+													"id": 69,
+													"name": "onFilter",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"comment": {
+														"shortText": "The function fired when the text filter changes."
+													},
+													"parameters": [
+														{
+															"id": 70,
+															"name": "nextFilter",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											]
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												67
+											]
+										},
+										{
+											"title": "Methods",
+											"kind": 2048,
+											"children": [
+												68
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 63,
+							"name": "placeholder",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the string for the text filter placeholder.\nBy default, the text is \"Enter text...\"."
+							},
+							"sources": [
+								{
+									"fileName": "components/Filter.tsx",
+									"line": 30,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								64,
+								65,
+								63
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/Filter.tsx",
+							"line": 25,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 55,
+					"name": "Filter",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/Filter.tsx",
+							"line": 47,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 56,
+							"name": "Filter",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Renders a control for the text filtering. This component is\nonly rendered when at least one of the headers have `isFilterable`\nprop. Otherwise, this component will return `null`."
+							},
+							"parameters": [
+								{
+									"id": 57,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 62,
+										"name": "FilterProps"
+									}
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": null
+									},
+									{
+										"type": "reference",
+										"qualifiedName": "global.JSX.Element",
+										"package": "@types/react",
+										"name": "Element"
+									}
+								]
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						58,
+						62
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						55
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/Filter.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 71,
+			"name": "components/FontAwesome",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "components/FontAwesome.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 75,
+			"name": "components/Pagination",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 84,
+					"name": "PaginationClasses",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for customizing the classes for\nthe `Pagination` component."
+					},
+					"children": [
+						{
+							"id": 85,
+							"name": "button",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for each of the pagination button."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 25,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 86,
+							"name": "buttonGroup",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the pagination button group."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 27,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								85,
+								86
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/Pagination.tsx",
+							"line": 23,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 79,
+					"name": "PaginationLabels",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface to customize the pagination labels."
+					},
+					"children": [
+						{
+							"id": 80,
+							"name": "firstPage",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The \"First\" button label. Defaults to \"First\"."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 10,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 81,
+							"name": "lastPage",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The \"Last\" button label. Defaults to \"Last\"."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 12,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 83,
+							"name": "nextPage",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The \"Next\" button label. Defaults to \"Next\"."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 16,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 82,
+							"name": "prevPage",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The \"Prev\" button label. Defaults to \"Prev\"."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 14,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								80,
+								81,
+								83,
+								82
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/Pagination.tsx",
+							"line": 8,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 87,
+					"name": "PaginationProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for `Pagination` component props."
+					},
+					"children": [
+						{
+							"id": 90,
+							"name": "alwaysShowPagination",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Determine whether the pagination button group should be always visible or not.\nWhen set to `false`, the pagination will be hidden when there is only 1 page.\nTo prevent layout shifts, `visibility: hidden` will be applied instead of\n`display: none` style. Defaults to `true`."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 44,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						},
+						{
+							"id": 89,
+							"name": "classes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the classes of the `Pagination` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 37,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 84,
+								"name": "PaginationClasses"
+							}
+						},
+						{
+							"id": 91,
+							"name": "controlledProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Props to make the component controlled."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 46,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 92,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 93,
+											"name": "currentPage",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The currently active page."
+											},
+											"sources": [
+												{
+													"fileName": "components/Pagination.tsx",
+													"line": 48,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 94,
+											"name": "maxPage",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "This is used to determine * the last numbered button in the\npagination button group. This also determines the next page number\nwhen the \"Last\" button is clicked."
+											},
+											"sources": [
+												{
+													"fileName": "components/Pagination.tsx",
+													"line": 54,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 95,
+											"name": "onPaginationChange",
+											"kind": 2048,
+											"kindString": "Method",
+											"flags": {
+												"isOptional": true
+											},
+											"sources": [
+												{
+													"fileName": "components/Pagination.tsx",
+													"line": 56,
+													"character": 4
+												}
+											],
+											"signatures": [
+												{
+													"id": 96,
+													"name": "onPaginationChange",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"comment": {
+														"shortText": "The function fired when any of the pagination buttons is clicked."
+													},
+													"parameters": [
+														{
+															"id": 97,
+															"name": "nextPage",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "intrinsic",
+																"name": "number"
+															}
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											]
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												93,
+												94
+											]
+										},
+										{
+											"title": "Methods",
+											"kind": 2048,
+											"children": [
+												95
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 88,
+							"name": "labels",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the labels of the `Pagination` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/Pagination.tsx",
+									"line": 35,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 79,
+								"name": "PaginationLabels"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								90,
+								89,
+								91,
+								88
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/Pagination.tsx",
+							"line": 33,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 76,
+					"name": "Pagination",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/Pagination.tsx",
+							"line": 70,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 77,
+							"name": "Pagination",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Renders a control for the pagination. It consists of \"First\", \"Prev\",\n\"Next\", and \"Last\" buttons. Additionally, between the \"Prev\" and \"Next\" buttons,\nthere will be at maximum 3 numbered buttons, indicating the pages to navigate.",
+								"text": "The currently active page will always be disabled, as well as the \"First\" or \"Last\"\nbuttons if the `currentPage` represents the first page and last page, respectively.\n\nWhen `alwaysShowPagination` is set to `false`, then this component will be visually hidden.\n"
+							},
+							"parameters": [
+								{
+									"id": 78,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 87,
+										"name": "PaginationProps"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react",
+								"name": "Element"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						84,
+						79,
+						87
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						76
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/Pagination.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 98,
+			"name": "components/PaginationOptions",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 105,
+					"name": "PaginationOptionsClasses",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for customizing the classes for\nthe `PaginationOptions` component."
+					},
+					"children": [
+						{
+							"id": 108,
+							"name": "formControl",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the select input."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 35,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 106,
+							"name": "formGroup",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the pagination options group, which covers\nthe `beforeSelect` label, the select input, and the `afterSelect` text."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 31,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 107,
+							"name": "formText",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `beforeSelect` and `afterSelect` labels."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 33,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								108,
+								106,
+								107
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/PaginationOptions.tsx",
+							"line": 26,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 102,
+					"name": "PaginationOptionsLabels",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface to customize the pagination options labels."
+					},
+					"children": [
+						{
+							"id": 104,
+							"name": "afterSelect",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Change the label that is shown after the select input.\nDefaults to `undefined`. This probably should be used if the form group\nis a horizontal form instead of vertical (e.g. using `flex-direction: row`)."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 19,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 103,
+							"name": "beforeSelect",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Change the label that is shown before the select input.\nDefaults to \"Rows per page\"."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 13,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								104,
+								103
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/PaginationOptions.tsx",
+							"line": 8,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 109,
+					"name": "PaginationOptionsProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for `PaginationOptions` component props."
+					},
+					"children": [
+						{
+							"id": 112,
+							"name": "alwaysShowPagination",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Determine whether the pagination button group should be always visible or not.\nWhen set to `false`, the pagination will be hidden when there is only 1 page.\nTo prevent layout shifts, `visibility: hidden` will be applied instead of\n`display: none` style. Defaults to `true`."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 52,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						},
+						{
+							"id": 111,
+							"name": "classes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the classes of the `PaginationOptions` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 45,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 105,
+								"name": "PaginationOptionsClasses"
+							}
+						},
+						{
+							"id": 113,
+							"name": "controlledProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Props to make the component controlled."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 54,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 114,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 117,
+											"name": "filteredDataLength",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The filtered data length. When not using filter control,\nthen this should equal to the table body's length."
+											},
+											"sources": [
+												{
+													"fileName": "components/PaginationOptions.tsx",
+													"line": 63,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 115,
+											"name": "rowsPerPage",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "Number of rows shown per page."
+											},
+											"sources": [
+												{
+													"fileName": "components/PaginationOptions.tsx",
+													"line": 56,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 116,
+											"name": "rowsPerPageOptions",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "Number of rows shown per page options."
+											},
+											"sources": [
+												{
+													"fileName": "components/PaginationOptions.tsx",
+													"line": 58,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "intrinsic",
+													"name": "number"
+												}
+											}
+										},
+										{
+											"id": 118,
+											"name": "onRowsPerPageChange",
+											"kind": 2048,
+											"kindString": "Method",
+											"flags": {
+												"isOptional": true
+											},
+											"sources": [
+												{
+													"fileName": "components/PaginationOptions.tsx",
+													"line": 65,
+													"character": 4
+												}
+											],
+											"signatures": [
+												{
+													"id": 119,
+													"name": "onRowsPerPageChange",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"comment": {
+														"shortText": "The function fired when any of the pagination option is changed."
+													},
+													"parameters": [
+														{
+															"id": 120,
+															"name": "nextRowsPerPage",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "intrinsic",
+																"name": "number"
+															}
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											]
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												117,
+												115,
+												116
+											]
+										},
+										{
+											"title": "Methods",
+											"kind": 2048,
+											"children": [
+												118
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 110,
+							"name": "labels",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the labels of the `PaginationOptions` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/PaginationOptions.tsx",
+									"line": 43,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 102,
+								"name": "PaginationOptionsLabels"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								112,
+								111,
+								113,
+								110
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/PaginationOptions.tsx",
+							"line": 41,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 99,
+					"name": "PaginationOptions",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/PaginationOptions.tsx",
+							"line": 80,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 100,
+							"name": "PaginationOptions",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Renders a control for the pagination options. It will show a form group, consisting of\na select input, as well as a label/text before and after the input. By default,\nit renders \"Rows per page\" as a label, which refers to the select input. There is no\ntext after the select input, unless specified in the `labels.afterSelect` prop.",
+								"text": "The options available in the select input are the ones specified from the `DatatableWrapper`,\nor the ones passed in this component's prop `controlledProps.rowsPerPageOptions`.\n\nWhen `alwaysShowPagination` is set to `false`, then this component will be visually hidden.\n"
+							},
+							"parameters": [
+								{
+									"id": 101,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 109,
+										"name": "PaginationOptionsProps"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react",
+								"name": "Element"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						105,
+						102,
+						109
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						99
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/PaginationOptions.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 121,
+			"name": "components/TableBody",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 128,
+					"name": "TableBodyClasses",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for customizing the classes for\nthe `TableBody` component."
+					},
+					"children": [
+						{
+							"id": 129,
+							"name": "tbody",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `tbody` tag."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 28,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 131,
+							"name": "td",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `td` tags inside each `tr` tag."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 32,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 130,
+							"name": "tr",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `tr` tags inside `tbody`."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 30,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								129,
+								131,
+								130
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/TableBody.tsx",
+							"line": 26,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 126,
+					"name": "TableBodyLabels",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface to customize the pagination options labels."
+					},
+					"children": [
+						{
+							"id": 127,
+							"name": "noResults",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The text shown when there is no result, which can be because of\nno data (empty array), or no matching found for the filtered text."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 19,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								127
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/TableBody.tsx",
+							"line": 14,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 132,
+					"name": "TableBodyProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for `TableBody` component props."
+					},
+					"children": [
+						{
+							"id": 134,
+							"name": "classes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the classes of the `TableBody` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 42,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 128,
+								"name": "TableBodyClasses"
+							}
+						},
+						{
+							"id": 138,
+							"name": "controlledProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Props to make the component controlled."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 46,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 139,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 140,
+											"name": "checkboxState",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "A record, which key is the column prop name and the value\nis of type `CheckboxState`."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableBody.tsx",
+													"line": 51,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"typeArguments": [
+													{
+														"type": "intrinsic",
+														"name": "string"
+													},
+													{
+														"type": "reference",
+														"id": 222,
+														"name": "CheckboxState"
+													}
+												],
+												"qualifiedName": "Record",
+												"package": "typescript",
+												"name": "Record"
+											}
+										},
+										{
+											"id": 142,
+											"name": "filteredDataLength",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The filtered data length. When not using filter control,\nthen this should equal to the table body's length."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableBody.tsx",
+													"line": 58,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 141,
+											"name": "onCheckboxChange",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The function fired when any checkbox in the table changes."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableBody.tsx",
+													"line": 53,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"id": 225,
+												"name": "CheckboxOnChange"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												140,
+												142,
+												141
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 133,
+							"name": "labels",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the labels of the `TableBody` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 40,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 126,
+								"name": "TableBodyLabels"
+							}
+						},
+						{
+							"id": 135,
+							"name": "onRowClick",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "components/TableBody.tsx",
+									"line": 44,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 136,
+									"name": "onRowClick",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "The function fired when any of the rows is clicked."
+									},
+									"parameters": [
+										{
+											"id": 137,
+											"name": "row",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 143,
+												"name": "TTableRowType"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								134,
+								138,
+								133
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								135
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/TableBody.tsx",
+							"line": 38,
+							"character": 17
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 143,
+							"name": "TTableRowType",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"id": 270,
+								"name": "TableRowType"
+							}
+						}
+					]
+				},
+				{
+					"id": 122,
+					"name": "TableBody",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/TableBody.tsx",
+							"line": 66,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 123,
+							"name": "TableBody",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Renders the table body, which is a `tbody` tag along with the rest of the elements,\nsuch as `tr` and `td` tags."
+							},
+							"typeParameter": [
+								{
+									"id": 124,
+									"name": "TTableRowType",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 270,
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "any"
+											}
+										],
+										"name": "TableRowType"
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 125,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 132,
+										"typeArguments": [
+											{
+												"type": "reference",
+												"id": 124,
+												"name": "TTableRowType"
+											}
+										],
+										"name": "TableBodyProps"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react",
+								"name": "Element"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						128,
+						126,
+						132
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						122
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/TableBody.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 144,
+			"name": "components/TableHeader",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 149,
+					"name": "TableHeaderClasses",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for customizing the classes for\nthe `TableHeaderClasses` component."
+					},
+					"children": [
+						{
+							"id": 152,
+							"name": "th",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `th` tags inside each `tr` tag."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableHeader.tsx",
+									"line": 29,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 150,
+							"name": "thead",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `thead` tag."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableHeader.tsx",
+									"line": 25,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 151,
+							"name": "tr",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The class for the `tr` tags inside `tbody`."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableHeader.tsx",
+									"line": 27,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								152,
+								150,
+								151
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/TableHeader.tsx",
+							"line": 23,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 153,
+					"name": "TableHeaderProps",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "This is an interface for `TableHeader` component props."
+					},
+					"children": [
+						{
+							"id": 155,
+							"name": "classes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Customize the classes of the `TableHeader` component."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableHeader.tsx",
+									"line": 39,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 149,
+								"name": "TableHeaderClasses"
+							}
+						},
+						{
+							"id": 156,
+							"name": "controlledProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Props to make the component controlled."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableHeader.tsx",
+									"line": 41,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 157,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 164,
+											"name": "checkboxState",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "A record, which key is the column prop name and the value\nis of type `CheckboxState`."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableHeader.tsx",
+													"line": 57,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"typeArguments": [
+													{
+														"type": "intrinsic",
+														"name": "string"
+													},
+													{
+														"type": "reference",
+														"id": 222,
+														"name": "CheckboxState"
+													}
+												],
+												"qualifiedName": "Record",
+												"package": "typescript",
+												"name": "Record"
+											}
+										},
+										{
+											"id": 163,
+											"name": "filteredDataLength",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The filtered data length. When not using filter control,\nthen this should equal to the table body's length."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableHeader.tsx",
+													"line": 52,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 162,
+											"name": "onCheckboxChange",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The function fired when any checkbox in the table changes."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableHeader.tsx",
+													"line": 47,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"id": 225,
+												"name": "CheckboxOnChange"
+											}
+										},
+										{
+											"id": 161,
+											"name": "sortState",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The current sort state of the table."
+											},
+											"sources": [
+												{
+													"fileName": "components/TableHeader.tsx",
+													"line": 45,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "reference",
+												"id": 219,
+												"name": "SortType"
+											}
+										},
+										{
+											"id": 158,
+											"name": "onSortChange",
+											"kind": 2048,
+											"kindString": "Method",
+											"flags": {
+												"isOptional": true
+											},
+											"sources": [
+												{
+													"fileName": "components/TableHeader.tsx",
+													"line": 43,
+													"character": 4
+												}
+											],
+											"signatures": [
+												{
+													"id": 159,
+													"name": "onSortChange",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"comment": {
+														"shortText": "The function fired when the table sort state changes."
+													},
+													"parameters": [
+														{
+															"id": 160,
+															"name": "nextSort",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "reference",
+																"id": 219,
+																"name": "SortType"
+															}
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											]
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												164,
+												163,
+												162,
+												161
+											]
+										},
+										{
+											"title": "Methods",
+											"kind": 2048,
+											"children": [
+												158
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 154,
+							"name": "headers",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "The list of table headers that are going to be rendered."
+							},
+							"sources": [
+								{
+									"fileName": "components/TableHeader.tsx",
+									"line": 37,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 234,
+									"typeArguments": [
+										{
+											"type": "reference",
+											"id": 165,
+											"name": "T"
+										}
+									],
+									"name": "TableColumnType"
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								155,
+								156,
+								154
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "components/TableHeader.tsx",
+							"line": 35,
+							"character": 17
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 165,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						}
+					]
+				},
+				{
+					"id": 145,
+					"name": "TableHeader",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "components/TableHeader.tsx",
+							"line": 64,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 146,
+							"name": "TableHeader",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Renders a list of table headers."
+							},
+							"typeParameter": [
+								{
+									"id": 147,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 270,
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "any"
+											}
+										],
+										"name": "TableRowType"
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 148,
+									"name": "__namedParameters",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 153,
+										"typeArguments": [
+											{
+												"type": "reference",
+												"id": 147,
+												"name": "T"
+											}
+										],
+										"name": "TableHeaderProps"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "global.JSX.Element",
+								"package": "@types/react",
+								"name": "Element"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						149,
+						153
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						145
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "components/TableHeader.tsx",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 166,
+			"name": "helpers/checkbox",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "helpers/checkbox.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 180,
+			"name": "helpers/data",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "helpers/data.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 202,
+			"name": "helpers/object",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "helpers/object.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 211,
+			"name": "helpers/react",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "helpers/react.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 218,
+			"name": "helpers/types",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 222,
+					"name": "CheckboxState",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "The checkbox used as a value of the record used in the states."
+					},
+					"children": [
+						{
+							"id": 223,
+							"name": "selected",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "A `Set` type containing strings inferred from the\n`header.checkbox.idProp` field. These are always unique, as is\nthe behavior of the `Set` type."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 25,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									}
+								],
+								"qualifiedName": "Set",
+								"package": "typescript",
+								"name": "Set"
+							}
+						},
+						{
+							"id": 224,
+							"name": "state",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "The checkbox states. This is useful to determine the \"Select all\" and\n\"Deselect all\", as well as the table header's `indeterminate` state."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 30,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": "none-selected"
+									},
+									{
+										"type": "literal",
+										"value": "some-selected"
+									},
+									{
+										"type": "literal",
+										"value": "all-selected"
+									}
+								]
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								223,
+								224
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "helpers/types.ts",
+							"line": 19,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 219,
+					"name": "SortType",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "The sort type used in the states."
+					},
+					"children": [
+						{
+							"id": 221,
+							"name": "order",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "The sort order."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 13,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": "asc"
+									},
+									{
+										"type": "literal",
+										"value": "desc"
+									}
+								]
+							}
+						},
+						{
+							"id": 220,
+							"name": "prop",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "The column name.\nThis is the same as `header.prop` from `TableColumnType` interface."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 11,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								221,
+								220
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "helpers/types.ts",
+							"line": 6,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 234,
+					"name": "TableColumnType",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "The data structure of a table column, which will be used for the `headers`\nprop of the `DatatableWrapper` props, as well as the `TableHeader` props."
+					},
+					"children": [
+						{
+							"id": 260,
+							"name": "alignment",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Determines the cell alignment. This is a \"shortcut\" for aligning items instead\nof having to use `cellProps.className` or `cellProps.style` to achieve\nthe same thing."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 100,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 261,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 262,
+											"name": "horizontal",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "Sets the horizontal alignment of the cell."
+											},
+											"sources": [
+												{
+													"fileName": "helpers/types.ts",
+													"line": 103,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "literal",
+														"value": "left"
+													},
+													{
+														"type": "literal",
+														"value": "right"
+													},
+													{
+														"type": "literal",
+														"value": "center"
+													}
+												]
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												262
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 244,
+							"name": "cellProps",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The props passed to the table columns under `tbody`."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 63,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 245,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 246,
+											"name": "className",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "Set a custom `className` to the cell. This can be a raw string or\na function with the row data as parameter."
+											},
+											"sources": [
+												{
+													"fileName": "helpers/types.ts",
+													"line": 68,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "string"
+													},
+													{
+														"type": "reflection",
+														"declaration": {
+															"id": 247,
+															"name": "__type",
+															"kind": 65536,
+															"kindString": "Type literal",
+															"flags": {},
+															"signatures": [
+																{
+																	"id": 248,
+																	"name": "__type",
+																	"kind": 4096,
+																	"kindString": "Call signature",
+																	"flags": {},
+																	"parameters": [
+																		{
+																			"id": 249,
+																			"name": "row",
+																			"kind": 32768,
+																			"kindString": "Parameter",
+																			"flags": {},
+																			"type": {
+																				"type": "reference",
+																				"id": 263,
+																				"name": "T"
+																			}
+																		}
+																	],
+																	"type": {
+																		"type": "intrinsic",
+																		"name": "string"
+																	}
+																}
+															]
+														}
+													}
+												]
+											}
+										},
+										{
+											"id": 250,
+											"name": "style",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "Set a custom `style` to the cell. This can be a raw object or\na function with the row data as parameter."
+											},
+											"sources": [
+												{
+													"fileName": "helpers/types.ts",
+													"line": 73,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "reference",
+														"qualifiedName": "React.CSSProperties",
+														"package": "@types/react",
+														"name": "CSSProperties"
+													},
+													{
+														"type": "reflection",
+														"declaration": {
+															"id": 251,
+															"name": "__type",
+															"kind": 65536,
+															"kindString": "Type literal",
+															"flags": {},
+															"signatures": [
+																{
+																	"id": 252,
+																	"name": "__type",
+																	"kind": 4096,
+																	"kindString": "Call signature",
+																	"flags": {},
+																	"parameters": [
+																		{
+																			"id": 253,
+																			"name": "row",
+																			"kind": 32768,
+																			"kindString": "Parameter",
+																			"flags": {},
+																			"type": {
+																				"type": "reference",
+																				"id": 263,
+																				"name": "T"
+																			}
+																		}
+																	],
+																	"type": {
+																		"type": "reference",
+																		"qualifiedName": "React.CSSProperties",
+																		"package": "@types/react",
+																		"name": "CSSProperties"
+																	}
+																}
+															]
+														}
+													}
+												]
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												246,
+												250
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 256,
+							"name": "checkbox",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Determines whether the column is a checkbox or not. When set, then\nthe column will be a checkbox, both the headers and the rest of the rows."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 89,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 257,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 259,
+											"name": "className",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"shortText": "The custom `className` for the checkbox input."
+											},
+											"sources": [
+												{
+													"fileName": "helpers/types.ts",
+													"line": 93,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 258,
+											"name": "idProp",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"comment": {
+												"shortText": "The prop of the other headers that should be used as the unique ID."
+											},
+											"sources": [
+												{
+													"fileName": "helpers/types.ts",
+													"line": 91,
+													"character": 4
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												259,
+												258
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 254,
+							"name": "isFilterable",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Determines whether the column should be filterable or not.\nWhen no headers include `isFilterable: true`, then the filter control\nwill not be rendered."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 80,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						},
+						{
+							"id": 255,
+							"name": "isSortable",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Determines whether the column is sortable or not."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 84,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						},
+						{
+							"id": 235,
+							"name": "prop",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"comment": {
+								"shortText": "The prop name for the header. This prop should exist in the table body's data\nso that the column can render a non-empty cell. Moreover, each header should\nhave unique `prop` field."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 53,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "typeOperator",
+								"operator": "keyof",
+								"target": {
+									"type": "reference",
+									"id": 263,
+									"name": "T"
+								}
+							}
+						},
+						{
+							"id": 236,
+							"name": "title",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The title for the header."
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 55,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 241,
+							"name": "cell",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 61,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 242,
+									"name": "cell",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Custom render the table body cell. This is a function with the row data as parameter."
+									},
+									"parameters": [
+										{
+											"id": 243,
+											"name": "row",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "T"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"qualifiedName": "React.ReactNode",
+										"package": "@types/react",
+										"name": "ReactNode"
+									}
+								}
+							]
+						},
+						{
+							"id": 237,
+							"name": "headerCell",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 57,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 238,
+									"name": "headerCell",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Custom render the table header cell."
+									},
+									"parameters": [
+										{
+											"id": 239,
+											"name": "icon",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"qualifiedName": "React.ReactNode",
+												"package": "@types/react",
+												"name": "ReactNode"
+											}
+										},
+										{
+											"id": 240,
+											"name": "sortedProp",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 219,
+												"name": "SortType"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"qualifiedName": "React.ReactNode",
+										"package": "@types/react",
+										"name": "ReactNode"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								260,
+								244,
+								256,
+								254,
+								255,
+								235,
+								236
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								241,
+								237
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "helpers/types.ts",
+							"line": 47,
+							"character": 17
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 263,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						}
+					]
+				},
+				{
+					"id": 225,
+					"name": "CheckboxOnChange",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "helpers/types.ts",
+							"line": 36,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 226,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "helpers/types.ts",
+									"line": 36,
+									"character": 31
+								}
+							],
+							"signatures": [
+								{
+									"id": 227,
+									"name": "__type",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "The helper type to declare the checkbox onChange handler safely."
+									},
+									"parameters": [
+										{
+											"id": 228,
+											"name": "params",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 229,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 233,
+															"name": "checkboxRefs",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "helpers/types.ts",
+																	"line": 40,
+																	"character": 2
+																}
+															],
+															"type": {
+																"type": "reference",
+																"typeArguments": [
+																	{
+																		"type": "reference",
+																		"typeArguments": [
+																			{
+																				"type": "intrinsic",
+																				"name": "string"
+																			},
+																			{
+																				"type": "reference",
+																				"qualifiedName": "HTMLInputElement",
+																				"package": "typescript",
+																				"name": "HTMLInputElement"
+																			}
+																		],
+																		"qualifiedName": "Record",
+																		"package": "typescript",
+																		"name": "Record"
+																	}
+																],
+																"qualifiedName": "React.MutableRefObject",
+																"package": "@types/react",
+																"name": "MutableRefObject"
+															}
+														},
+														{
+															"id": 231,
+															"name": "idProp",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "helpers/types.ts",
+																	"line": 38,
+																	"character": 2
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														},
+														{
+															"id": 232,
+															"name": "nextCheckboxState",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "helpers/types.ts",
+																	"line": 39,
+																	"character": 2
+																}
+															],
+															"type": {
+																"type": "reference",
+																"id": 222,
+																"name": "CheckboxState"
+															}
+														},
+														{
+															"id": 230,
+															"name": "prop",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "helpers/types.ts",
+																	"line": 37,
+																	"character": 2
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Properties",
+															"kind": 1024,
+															"children": [
+																233,
+																231,
+																232,
+																230
+															]
+														}
+													],
+													"sources": [
+														{
+															"fileName": "helpers/types.ts",
+															"line": 36,
+															"character": 40
+														}
+													]
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 264,
+					"name": "ColumnProcessObj",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "This is the object of key/value which is used to transform a column's value\nto another form.",
+						"text": "At the moment, this is mostly useful for sorting, as for sorting, the most reliable\nway is to convert to numbers. While sorting strings is also possible, certain formats\ncan make the sort result incorrect, e.g. sorting formatted dates.\n"
+					},
+					"sources": [
+						{
+							"fileName": "helpers/types.ts",
+							"line": 115,
+							"character": 12
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 268,
+							"name": "TColumnType",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						},
+						{
+							"id": 269,
+							"name": "TReturnType",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"default": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "typeOperator",
+										"operator": "keyof",
+										"target": {
+											"type": "reference",
+											"id": 268,
+											"name": "TColumnType"
+										}
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 265,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "helpers/types.ts",
+													"line": 116,
+													"character": 28
+												}
+											],
+											"signatures": [
+												{
+													"id": 266,
+													"name": "__type",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 267,
+															"name": "column",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "union",
+																"types": [
+																	{
+																		"type": "intrinsic",
+																		"name": "string"
+																	},
+																	{
+																		"type": "intrinsic",
+																		"name": "number"
+																	}
+																]
+															}
+														}
+													],
+													"type": {
+														"type": "reference",
+														"id": 269,
+														"name": "TReturnType"
+													}
+												}
+											]
+										}
+									}
+								],
+								"qualifiedName": "Record",
+								"package": "typescript",
+								"name": "Record"
+							}
+						],
+						"qualifiedName": "Partial",
+						"package": "typescript",
+						"name": "Partial"
+					}
+				},
+				{
+					"id": 270,
+					"name": "TableRowType",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "This is used for the `extend` keyword in the components."
+					},
+					"sources": [
+						{
+							"fileName": "helpers/types.ts",
+							"line": 122,
+							"character": 12
+						}
+					],
+					"typeParameter": [
+						{
+							"id": 271,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"default": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "reference",
+								"id": 271,
+								"name": "T"
+							}
+						],
+						"qualifiedName": "Record",
+						"package": "typescript",
+						"name": "Record"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						222,
+						219,
+						234
+					]
+				},
+				{
+					"title": "Type aliases",
+					"kind": 4194304,
+					"children": [
+						225,
+						264,
+						270
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "helpers/types.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Modules",
+			"kind": 2,
+			"children": [
+				1,
+				14,
+				54,
+				71,
+				75,
+				98,
+				121,
+				144,
+				166,
+				180,
+				202,
+				211,
+				218
+			]
+		}
+	]
+}

@@ -1,8 +1,6 @@
 node_modules/
 storybook-static/
 lib/
-# This is the "dumping" space for all kinds of generator.
-out/
 
 *.log
 
