@@ -2,7 +2,6 @@
   "name": "react-bs-datatable",
   "version": "3.0.0-beta.0",
   "description": "React Bootstrap Datatable (without jQuery) with sorting, filter, and pagination",
-  "type": "module",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
@@ -23,7 +22,7 @@
     "v:betapatch": "npm version prepatch --preid beta",
     "v:prebump": "npm version prerelease",
     "typedoc": "typedoc --options typedoc.json",
-    "generate-story-data": "node --loader ts-node/esm --experimental-specifier-resolution=node ./scripts/generate-story-data.ts",
+    "generate-story-data": "ts-node ./scripts/generate-story-data.ts",
     "check-unstaged-files": "node --loader ts-node/esm --experimental-specifier-resolution=node ./scripts/check-unstaged-files.ts"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
