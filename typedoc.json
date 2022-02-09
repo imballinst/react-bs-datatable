@@ -1,5 +1,5 @@
 {
-  "out": "api/",
+  "json": "out/api.json",
   "readme": "none",
   "entryPoints": ["./src"],
   "entryPointStrategy": "expand",

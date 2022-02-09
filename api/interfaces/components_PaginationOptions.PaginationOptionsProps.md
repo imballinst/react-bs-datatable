@@ -28,7 +28,7 @@ To prevent layout shifts, `visibility: hidden` will be applied instead of
 
 #### Defined in
 
-[components/PaginationOptions.tsx:52](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/components/PaginationOptions.tsx#L52)
+[components/PaginationOptions.tsx:52](https://github.com/imballinst/react-bs-datatable/blob/915e2a8/src/components/PaginationOptions.tsx#L52)
 
 ___
 
@@ -40,7 +40,7 @@ Customize the classes of the `PaginationOptions` component.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:45](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/components/PaginationOptions.tsx#L45)
+[components/PaginationOptions.tsx:45](https://github.com/imballinst/react-bs-datatable/blob/915e2a8/src/components/PaginationOptions.tsx#L45)
 
 ___
 
@@ -61,7 +61,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:54](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/components/PaginationOptions.tsx#L54)
+[components/PaginationOptions.tsx:54](https://github.com/imballinst/react-bs-datatable/blob/915e2a8/src/components/PaginationOptions.tsx#L54)
 
 ___
 
@@ -73,4 +73,4 @@ Customize the labels of the `PaginationOptions` component.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:43](https://github.com/imballinst/react-bs-datatable/blob/86aa7e0/src/components/PaginationOptions.tsx#L43)
+[components/PaginationOptions.tsx:43](https://github.com/imballinst/react-bs-datatable/blob/915e2a8/src/components/PaginationOptions.tsx#L43)
