@@ -1,16 +1,10 @@
 [react-bs-datatable](../README.md) / [components/TableHeader](../modules/components_TableHeader.md) / TableHeaderProps
 
-# Interface: TableHeaderProps<T\>
+# Interface: TableHeaderProps
 
 [components/TableHeader](../modules/components_TableHeader.md).TableHeaderProps
 
 This is an interface for `TableHeader` component props.
-
-## Type parameters
-
-| Name |
-| :------ |
-| `T` |
 
 ## Table of contents
 
@@ -18,7 +12,6 @@ This is an interface for `TableHeader` component props.
 
 - [classes](components_TableHeader.TableHeaderProps.md#classes)
 - [controlledProps](components_TableHeader.TableHeaderProps.md#controlledprops)
-- [headers](components_TableHeader.TableHeaderProps.md#headers)
 
 ## Properties
 
@@ -30,7 +23,7 @@ Customize the classes of the `TableHeader` component.
 
 #### Defined in
 
-[components/TableHeader.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/8f7fb79/src/components/TableHeader.tsx#L39)
+[components/TableHeader.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/1b6bac8/src/components/TableHeader.tsx#L37)
 
 ___
 
@@ -52,16 +45,4 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableHeader.tsx:41](https://github.com/imballinst/react-bs-datatable/blob/8f7fb79/src/components/TableHeader.tsx#L41)
-
-___
-
-### headers
-
-• **headers**: [`TableColumnType`](helpers_types.TableColumnType.md)<`T`\>[]
-
-The list of table headers that are going to be rendered.
-
-#### Defined in
-
-[components/TableHeader.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/8f7fb79/src/components/TableHeader.tsx#L37)
+[components/TableHeader.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/1b6bac8/src/components/TableHeader.tsx#L39)

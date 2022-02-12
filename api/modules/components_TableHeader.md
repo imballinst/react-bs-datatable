@@ -17,21 +17,15 @@
 
 ### TableHeader
 
-▸ **TableHeader**<`T`\>(`__namedParameters`): `Element`
+▸ **TableHeader**(`__namedParameters`): `Element`
 
 Renders a list of table headers.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`TableRowType`](helpers_types.md#tablerowtype)<`any`\> |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | [`TableHeaderProps`](../interfaces/components_TableHeader.TableHeaderProps.md)<`T`\> |
+| `__namedParameters` | [`TableHeaderProps`](../interfaces/components_TableHeader.TableHeaderProps.md) |
 
 #### Returns
 
@@ -39,4 +33,4 @@ Renders a list of table headers.
 
 #### Defined in
 
-[components/TableHeader.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/8f7fb79/src/components/TableHeader.tsx#L64)
+[components/TableHeader.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/1b6bac8/src/components/TableHeader.tsx#L62)
