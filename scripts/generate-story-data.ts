@@ -111,6 +111,7 @@ const NUMBER_OF_ENTRIES = 60;
 main();
 
 async function main() {
+  const currentDirName = new URL(import.meta.url).pathname;
   const data = Array.from(new Array(NUMBER_OF_ENTRIES), (_, idx) => ({
     ...getNameAndUsername(idx),
     date: getRandomDateWithinOneMonth(),
@@ -118,7 +119,10 @@ async function main() {
     location: getRandomPlanet()
   }));
   await writeFile(
-    path.join(__dirname, '../src/__stories__/resources/story-data.json'),
+    path.join(
+      currentDirName,
+      '../../src/__stories__/resources/story-data.json'
+    ),
     JSON.stringify(data),
     'utf-8'
   );
