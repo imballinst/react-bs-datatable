@@ -5,9 +5,6 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/esm/index.d.ts",
-  "workspaces": [
-    "scripts"
-  ],
   "scripts": {
     "test": "jest",
     "jest": "jest --watch",
