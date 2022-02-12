@@ -23,7 +23,7 @@ Custom classes for the component.
 
 #### Defined in
 
-[components/BulkCheckboxControl.tsx:41](https://github.com/imballinst/react-bs-datatable/blob/1b6bac8/src/components/BulkCheckboxControl.tsx#L41)
+[components/BulkCheckboxControl.tsx:41](https://github.com/imballinst/react-bs-datatable/blob/91fe059/src/components/BulkCheckboxControl.tsx#L41)
 
 ___
 
@@ -43,4 +43,4 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/BulkCheckboxControl.tsx:26](https://github.com/imballinst/react-bs-datatable/blob/1b6bac8/src/components/BulkCheckboxControl.tsx#L26)
+[components/BulkCheckboxControl.tsx:26](https://github.com/imballinst/react-bs-datatable/blob/91fe059/src/components/BulkCheckboxControl.tsx#L26)
