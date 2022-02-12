@@ -284,7 +284,7 @@ function StoryTable({
         </Col>
       </Row>
       <Table>
-        <TableHeader headers={headers} />
+        <TableHeader />
         <TableBody onRowClick={rowOnClick} />
       </Table>
     </DatatableWrapper>
