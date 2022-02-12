@@ -30,11 +30,11 @@ Previously, we could just do this:
 
 ```ts
 import Datatable from 'react-bs-datatable';
-// or, if we are extending the table:
+// or, if we were extending the table:
 import Datatable, { useTableLifecycle } from 'react-bs-datatable';
 ```
 
-However, now we should import each of the component, including the ones from `react-bootstrap`, for example:
+However, now we should import each of the component (if we want to render all controls), including the ones from `react-bootstrap`, for example:
 
 ```ts
 import {
@@ -52,7 +52,7 @@ import { Col, Row, Table } from 'react-bootstrap';
 
 We now require to always use `DatatableWrapper` to wrap the entire table. It acts as a "context" so that we don't have to use the previous [`useDatatableLifecycle`](https://github.com/imballinst/react-bs-datatable/blob/14b03cefa652818a28b0c8d0ae3bbe965f243386/src/Table.tsx#L28) anymore.
 
-Now, to initialize the simplest table, we need to declare these JSX elements:
+In this version, to initialize a table with controls (filter/sort/pagination), we need to declare these JSX elements:
 
 ```tsx
 <DatatableWrapper body={json} headers={headers}>

@@ -120,7 +120,7 @@ function TableComponent() {
         </Col>
       </Row>
       <Table>
-        <TableHeader tableHeaders={headers} />
+        <TableHeader />
         <TableBody />
       </Table>
     </DatatableWrapper>
