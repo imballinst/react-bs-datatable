@@ -32,9 +32,7 @@ export interface TableHeaderClasses {
 /**
  * This is an interface for `TableHeader` component props.
  */
-export interface TableHeaderProps<T> {
-  /** The list of table headers that are going to be rendered. */
-  headers: TableColumnType<T>[];
+export interface TableHeaderProps {
   /** Customize the classes of the `TableHeader` component. */
   classes?: TableHeaderClasses;
   /** Props to make the component controlled. */
@@ -61,13 +59,10 @@ export interface TableHeaderProps<T> {
 /**
  * Renders a list of table headers.
  */
-export function TableHeader<T extends TableRowType>({
-  headers,
-  classes,
-  controlledProps
-}: TableHeaderProps<T>) {
+export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
   const headings = [];
   const {
+    headers,
     onSortChange: onSortChangeContext,
     sortState: sortStateContext,
     onCheckboxChange: onCheckboxChangeContext,

@@ -180,7 +180,6 @@ function AsyncStoryTable<TTableRowType = any>({
       </Row>
       <Table>
         <TableHeader
-          headers={CONTROLLED_HEADERS}
           controlledProps={{
             sortState,
             onSortChange,
