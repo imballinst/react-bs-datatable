@@ -30,13 +30,13 @@ The initial states for the table.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/368da29/src/components/DatatableWrapper.tsx#L64)
+[components/DatatableWrapper.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/DatatableWrapper.tsx#L64)
 
 ___
 
 ### sortValueObj
 
-• `Optional` **sortValueObj**: `Partial`<`Record`<keyof `TTableRowType`, (`column`: `string` \| `number`) => `number`\>\>
+• `Optional` **sortValueObj**: `Partial`<`Record`<keyof `TTableRowType`, (`column`: `TTableRowType`) => `number`\>\>
 
 An object with the key being the table columns' prop and
 the value being the value converter for the column.
@@ -62,4 +62,4 @@ by number (milliseconds) instead of by formatted date string.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/368da29/src/components/DatatableWrapper.tsx#L62)
+[components/DatatableWrapper.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/DatatableWrapper.tsx#L62)

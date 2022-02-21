@@ -44,13 +44,13 @@ The helper type to declare the checkbox onChange handler safely.
 
 #### Defined in
 
-[helpers/types.ts:36](https://github.com/imballinst/react-bs-datatable/blob/368da29/src/helpers/types.ts#L36)
+[helpers/types.ts:36](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L36)
 
 ___
 
 ### ColumnProcessObj
 
-Ƭ **ColumnProcessObj**<`TColumnType`, `TReturnType`\>: `Partial`<`Record`<keyof `TColumnType`, (`column`: `string` \| `number`) => `TReturnType`\>\>
+Ƭ **ColumnProcessObj**<`TColumnType`, `TReturnType`\>: `Partial`<`Record`<keyof `TColumnType`, (`column`: `TColumnType`) => `TReturnType`\>\>
 
 This is the object of key/value which is used to transform a column's value
 to another form.
@@ -68,7 +68,7 @@ can make the sort result incorrect, e.g. sorting formatted dates.
 
 #### Defined in
 
-[helpers/types.ts:115](https://github.com/imballinst/react-bs-datatable/blob/368da29/src/helpers/types.ts#L115)
+[helpers/types.ts:115](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L115)
 
 ___
 
@@ -86,4 +86,4 @@ This is used for the `extend` keyword in the components.
 
 #### Defined in
 
-[helpers/types.ts:122](https://github.com/imballinst/react-bs-datatable/blob/368da29/src/helpers/types.ts#L122)
+[helpers/types.ts:122](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L122)
