@@ -48,7 +48,7 @@ the same thing.
 
 #### Defined in
 
-[helpers/types.ts:100](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L100)
+[helpers/types.ts:100](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L100)
 
 ___
 
@@ -67,7 +67,7 @@ The props passed to the table columns under `tbody`.
 
 #### Defined in
 
-[helpers/types.ts:63](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L63)
+[helpers/types.ts:63](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L63)
 
 ___
 
@@ -87,7 +87,7 @@ the column will be a checkbox, both the headers and the rest of the rows.
 
 #### Defined in
 
-[helpers/types.ts:89](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L89)
+[helpers/types.ts:89](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L89)
 
 ___
 
@@ -101,7 +101,7 @@ will not be rendered.
 
 #### Defined in
 
-[helpers/types.ts:80](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L80)
+[helpers/types.ts:80](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L80)
 
 ___
 
@@ -113,7 +113,7 @@ Determines whether the column is sortable or not.
 
 #### Defined in
 
-[helpers/types.ts:84](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L84)
+[helpers/types.ts:84](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L84)
 
 ___
 
@@ -127,7 +127,7 @@ have unique `prop` field.
 
 #### Defined in
 
-[helpers/types.ts:53](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L53)
+[helpers/types.ts:53](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L53)
 
 ___
 
@@ -139,7 +139,7 @@ The title for the header.
 
 #### Defined in
 
-[helpers/types.ts:55](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L55)
+[helpers/types.ts:55](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L55)
 
 ## Methods
 
@@ -161,7 +161,7 @@ Custom render the table body cell. This is a function with the row data as param
 
 #### Defined in
 
-[helpers/types.ts:61](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L61)
+[helpers/types.ts:61](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L61)
 
 ___
 
@@ -184,4 +184,4 @@ Custom render the table header cell.
 
 #### Defined in
 
-[helpers/types.ts:57](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/helpers/types.ts#L57)
+[helpers/types.ts:57](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/helpers/types.ts#L57)
