@@ -113,7 +113,7 @@ export interface TableColumnType<T> {
  * can make the sort result incorrect, e.g. sorting formatted dates.
  */
 export type ColumnProcessObj<TColumnType, TReturnType = string> = Partial<
-  Record<keyof TColumnType, (column: string | number) => TReturnType>
+  Record<keyof TColumnType, (column: TColumnType) => TReturnType>
 >;
 
 /**
