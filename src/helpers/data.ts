@@ -26,8 +26,8 @@ export function sortData<TTableRowType extends TableRowType>(
     let quantifiedValue2 = b[prop];
 
     if (sortFn) {
-      quantifiedValue1 = sortFn(`${quantifiedValue1}`);
-      quantifiedValue2 = sortFn(`${quantifiedValue2}`);
+      quantifiedValue1 = sortFn(quantifiedValue1);
+      quantifiedValue2 = sortFn(quantifiedValue2);
     }
 
     if (quantifiedValue1 < quantifiedValue2) {
