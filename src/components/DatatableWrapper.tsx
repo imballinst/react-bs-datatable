@@ -325,6 +325,16 @@ export function DatatableWrapper<TTableRowType = any>({
     []
   );
 
+  useEffect(() => {
+    setState((oldState) => ({
+      ...oldState,
+      sort: {
+        prop: sortProps?.initialState?.prop,
+        order: sortProps?.initialState?.order
+      }
+    }));
+  }, [sortProps]);
+
   const { filter, sort, pagination, isFilterable } = state;
   const { data, filteredDataLength, maxPage } = useMemo(() => {
     let newData = body;
