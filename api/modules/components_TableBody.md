@@ -41,4 +41,4 @@ such as `tr` and `td` tags.
 
 #### Defined in
 
-[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/016002f/src/components/TableBody.tsx#L66)
+[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/TableBody.tsx#L66)
