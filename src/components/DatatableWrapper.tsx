@@ -157,6 +157,8 @@ export interface DatatableWrapperProps<TTableRowType> {
   children: ReactNode;
   headers: TableColumnType<TTableRowType>[];
   body: TTableRowType[];
+  /** When set to `true`, the table will "skip" all uncontrolled processes. */
+  isControlled?: boolean;
   filterProps?: TableFilterParameters;
   sortProps?: TableSortParameters<TTableRowType>;
   paginationProps?: TablePaginationParameters;
@@ -197,6 +199,7 @@ interface DatatableState {
 export function DatatableWrapper<TTableRowType = any>({
   headers,
   body,
+  isControlled,
   filterProps,
   sortProps,
   paginationProps,
@@ -232,7 +235,7 @@ export function DatatableWrapper<TTableRowType = any>({
 
   useEffect(() => {
     // Resets the table if the headers passed down is different.
-    if (headers !== undefined) {
+    if (headers !== undefined && !isControlled) {
       // Re-set the ref.
       headersRecordRef.current = convertArrayToRecord(headers, 'prop');
       // Re-set the initial state.
@@ -248,11 +251,11 @@ export function DatatableWrapper<TTableRowType = any>({
         })
       );
     }
-  }, [headers]);
+  }, [headers, isControlled]);
 
   useEffect(() => {
     // Resets the table if the data passed down is different.
-    if (body !== undefined) {
+    if (body !== undefined && !isControlled) {
       setState((oldState) => ({
         ...oldState,
         filter: '',
@@ -262,7 +265,7 @@ export function DatatableWrapper<TTableRowType = any>({
         }
       }));
     }
-  }, [body]);
+  }, [body, isControlled]);
 
   const onFilterChange = useCallback((text: string) => {
     setState((oldState) => ({
@@ -331,21 +334,24 @@ export function DatatableWrapper<TTableRowType = any>({
     let newFilteredDataLength = newData.length;
     let newMaxPage = 1;
 
-    if (isFilterable) {
-      newData = filterData(body, headersRecordRef.current, filter);
-      newFilteredDataLength = newData.length;
-    }
+    if (!isControlled) {
+      // Only do this in uncontrolled mode.
+      if (isFilterable) {
+        newData = filterData(body, headersRecordRef.current, filter);
+        newFilteredDataLength = newData.length;
+      }
 
-    newData = sortData(newData, sort, sortProps?.sortValueObj);
+      newData = sortData(newData, sort, sortProps?.sortValueObj);
 
-    if (pagination.rowsPerPage !== -1) {
-      // Pagination needs.
-      newMaxPage = Math.ceil(newData.length / pagination.rowsPerPage);
-      newData = paginateData(
-        newData,
-        pagination.currentPage,
-        pagination.rowsPerPage
-      );
+      if (pagination.rowsPerPage !== -1) {
+        // Pagination needs.
+        newMaxPage = Math.ceil(newData.length / pagination.rowsPerPage);
+        newData = paginateData(
+          newData,
+          pagination.currentPage,
+          pagination.rowsPerPage
+        );
+      }
     }
 
     return {
@@ -353,7 +359,7 @@ export function DatatableWrapper<TTableRowType = any>({
       maxPage: newMaxPage,
       filteredDataLength: newFilteredDataLength
     };
-  }, [body, filter, sort, pagination, isFilterable]);
+  }, [isControlled, body, filter, sort, pagination, isFilterable]);
 
   return (
     <Provider
@@ -381,8 +387,8 @@ export function DatatableWrapper<TTableRowType = any>({
         // Data.
         maxPage,
         filteredDataLength,
-        body,
-        data
+        data,
+        body
       }}
     >
       {children}

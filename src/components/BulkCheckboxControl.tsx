@@ -67,7 +67,6 @@ export function BulkCheckboxControl({
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
-
   const previouslyUpdatedCheckbox =
     checkboxState[previouslyModifiedCheckbox.prop];
   const state = previouslyUpdatedCheckbox?.state;

@@ -109,6 +109,9 @@ describe('Controlled', () => {
     fireEvent.click(nameTh);
     await act(async () => await sleep(200));
 
+    let tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Wileen');
     expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
 
     // Try sorting the other columns.
@@ -117,6 +120,9 @@ describe('Controlled', () => {
     await act(async () => await sleep(200));
 
     // The clicked header should have its sort state.
+    tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Aaren');
     expect(usernameTh.getAttribute('data-sort-order')).toBe('asc');
     // Meanwhile, the "Name" header should reset to its default state.
     expect(nameTh.getAttribute('data-sort-order')).toBe(null);

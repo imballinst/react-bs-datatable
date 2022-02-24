@@ -100,19 +100,8 @@ function AsyncStoryTable<TTableRowType = any>({
     setCurrentPage(1);
   }, []);
 
-  const onSortChange = useCallback((nextProp: SortType) => {
-    setSortState((oldState) => {
-      const nextSort = { ...oldState };
-
-      if (nextProp.prop !== oldState.prop) {
-        nextSort.prop = nextProp.prop;
-        nextSort.order = 'asc';
-      } else {
-        nextSort.order = 'desc';
-      }
-
-      return nextSort;
-    });
+  const onSortChange = useCallback((nextSort: SortType) => {
+    setSortState(nextSort);
   }, []);
 
   const onPaginationChange = useCallback((nextPage) => {
@@ -143,7 +132,7 @@ function AsyncStoryTable<TTableRowType = any>({
   }, [fetchFn, filter, sortState, currentPage, rowsPerPage]);
 
   return (
-    <DatatableWrapper body={data} headers={headers}>
+    <DatatableWrapper headers={headers} body={data} isControlled>
       <Row className="mb-4">
         <Col
           xs={12}
@@ -186,7 +175,11 @@ function AsyncStoryTable<TTableRowType = any>({
             filteredDataLength
           }}
         />
-        <TableBody />
+        <TableBody
+          controlledProps={{
+            filteredDataLength
+          }}
+        />
       </Table>
     </DatatableWrapper>
   );
