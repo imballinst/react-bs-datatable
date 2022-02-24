@@ -48,15 +48,15 @@ export async function fetchControlledMockData({
         newFilteredDataLength = newData.length;
       }
 
+      // Sort the data using a helper function.
+      newData = sortData(newData, sortState, SORT_PROPS?.sortValueObj);
+
       // Paginate the data.
       newMaxPage = Math.ceil(newData.length / rowsPerPage);
       newData = newData.slice(
         (currentPage - 1) * rowsPerPage,
         currentPage * rowsPerPage
       );
-
-      // Sort the data using a helper function.
-      newData = sortData(newData, sortState, SORT_PROPS?.sortValueObj);
 
       res({
         data: newData,

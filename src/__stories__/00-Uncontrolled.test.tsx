@@ -90,6 +90,9 @@ describe('Filter, sort, pagination', () => {
     let nameTh = getByText('Name', { selector: 'th' });
     fireEvent.click(nameTh);
 
+    let tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Wileen');
     expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
 
     // Try sorting the other columns.
@@ -97,6 +100,9 @@ describe('Filter, sort, pagination', () => {
     fireEvent.click(usernameTh);
 
     // The clicked header should have its sort state.
+    tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Aaren');
     expect(usernameTh.getAttribute('data-sort-order')).toBe('asc');
     // Meanwhile, the "Name" header should reset to its default state.
     expect(nameTh.getAttribute('data-sort-order')).toBe(null);
