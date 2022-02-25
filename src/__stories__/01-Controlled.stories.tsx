@@ -14,6 +14,7 @@ import { Filter } from '../components/Filter';
 import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
 import { SortType, TableColumnType } from '../helpers/types';
+import { getNextSortState } from '../helpers/data';
 
 export default {
   /* 👇 The title prop is optional.
@@ -100,8 +101,8 @@ function AsyncStoryTable<TTableRowType = any>({
     setCurrentPage(1);
   }, []);
 
-  const onSortChange = useCallback((nextSort: SortType) => {
-    setSortState(nextSort);
+  const onSortChange = useCallback((sortedProp: string) => {
+    setSortState((oldState) => getNextSortState(oldState, sortedProp));
   }, []);
 
   const onPaginationChange = useCallback((nextPage) => {

@@ -30,6 +30,8 @@ export type {
 export { BulkCheckboxControl } from './components/BulkCheckboxControl';
 export type { BulkCheckboxControlProps } from './components/BulkCheckboxControl';
 
+export { getNextSortState } from './helpers/data';
+
 export type {
   ColumnProcessObj,
   SortType,

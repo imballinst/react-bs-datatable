@@ -1,12 +1,14 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import React, { useRef } from 'react';
+import { render, fireEvent, act } from '@testing-library/react';
 
 import {
   FilterSortPagination,
   CustomLabels,
   CustomCellRender,
-  RowOnClick
+  RowOnClick,
+  UncontrolledWithRefEvents
 } from './00-Uncontrolled.stories';
+import { UncontrolledTableEvents } from '../components/DatatableWrapper';
 
 describe('Filter, sort, pagination', () => {
   const DEFAULT_PROPS = {
@@ -307,5 +309,51 @@ describe('Custom row on click', () => {
     allTableRows?.item(0).click();
     expect(clickFn).toBeCalledTimes(1);
     expect(clickFn.mock.calls[0][0]).toBe('Aaren');
+  });
+});
+
+describe('Trigger events from outside: sort', () => {
+  const DEFAULT_PROPS = {
+    sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
+    filterableFields: ['Name', 'Username', 'Location'],
+    // Test arbitrary numbers so that the last page has a different page number.
+    rowsPerPage: 8,
+    rowsPerPageOptions: [8, 16, 24, 32]
+  };
+
+  test('sort name and username using external buttons', () => {
+    const { getByText, getByRole } = render(
+      <UncontrolledWithRefEvents {...DEFAULT_PROPS} />
+    );
+
+    let tableElement = getByRole('table');
+    // We are doing the same sort scenario like the normal use case,
+    // but we are doing it using the refs instead.
+    // Sort descending the first column (since it's the initial state).
+    let externalSortNameBtn = getByText('External sort by name', {
+      selector: 'button'
+    });
+    let nameTh = getByText('Name', { selector: 'th' });
+    fireEvent.click(externalSortNameBtn);
+
+    let tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Wileen');
+    expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
+
+    // Try sorting the other columns.
+    let externalSortUsernameBtn = getByText('External sort by username', {
+      selector: 'button'
+    });
+    let usernameTh = getByText('Username', { selector: 'th' });
+    fireEvent.click(externalSortUsernameBtn);
+
+    // The clicked header should have its sort state.
+    tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Aaren');
+    expect(usernameTh.getAttribute('data-sort-order')).toBe('asc');
+    // Meanwhile, the "Name" header should reset to its default state.
+    expect(nameTh.getAttribute('data-sort-order')).toBe(null);
   });
 });

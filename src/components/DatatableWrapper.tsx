@@ -3,11 +3,17 @@ import React, {
   ReactNode,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState
 } from 'react';
-import { filterData, paginateData, sortData } from '../helpers/data';
+import {
+  filterData,
+  getNextSortState,
+  paginateData,
+  sortData
+} from '../helpers/data';
 import { convertArrayToRecord } from '../helpers/object';
 import { createCtx } from '../helpers/react';
 import {
@@ -106,6 +112,14 @@ export interface TableCheckboxParameters {
   initialState?: Record<string, CheckboxState>;
 }
 
+export interface UncontrolledTableEvents {
+  onFilterChange: (nextState: string) => void;
+  onSortChange: (sortedProp: string) => void;
+  onPaginationChange: (nextState: number) => void;
+  onRowsPerPageChange: (nextState: number) => void;
+  onCheckboxChange: CheckboxOnChange;
+}
+
 /**
  * @internal
  *
@@ -120,7 +134,7 @@ interface DatatableWrapperContextType<TTableRowType> {
   onFilterChange: (nextState: string) => void;
   // Sort.
   sortState: SortType;
-  onSortChange: (nextState: SortType) => void;
+  onSortChange: (sortedProp: string) => void;
   // Pagination.
   currentPageState: number;
   onPaginationChange: (nextState: number) => void;
@@ -164,6 +178,7 @@ export interface DatatableWrapperProps<TTableRowType> {
   paginationProps?: TablePaginationParameters;
   paginationOptionsProps?: TablePaginationOptionsParameters;
   checkboxProps?: TableCheckboxParameters;
+  tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
 }
 
 /**
@@ -205,6 +220,7 @@ export function DatatableWrapper<TTableRowType = any>({
   paginationProps,
   paginationOptionsProps,
   checkboxProps,
+  tableEventsRef,
   children
 }: DatatableWrapperProps<TTableRowType>) {
   const [state, setState] = useState<DatatableState>(
@@ -299,10 +315,10 @@ export function DatatableWrapper<TTableRowType = any>({
     }));
   }, []);
 
-  const onSortChange = useCallback((nextSort: SortType) => {
+  const onSortChange = useCallback((sortedProp: string) => {
     setState((oldState) => ({
       ...oldState,
-      sort: nextSort
+      sort: getNextSortState(oldState.sort, sortedProp)
     }));
   }, []);
 
@@ -325,6 +341,21 @@ export function DatatableWrapper<TTableRowType = any>({
         }
       }));
     },
+    []
+  );
+
+  // Imperative handle.
+  // This is if we want to keep the table events controllable from outside,
+  // without making the table controlled.
+  useImperativeHandle(
+    tableEventsRef,
+    () => ({
+      onFilterChange,
+      onPaginationChange,
+      onRowsPerPageChange,
+      onSortChange,
+      onCheckboxChange
+    }),
     []
   );
 
