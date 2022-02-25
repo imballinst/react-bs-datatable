@@ -30,7 +30,7 @@ The initial states for the table.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/DatatableWrapper.tsx#L64)
+[components/DatatableWrapper.tsx:70](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L70)
 
 ___
 
@@ -62,4 +62,4 @@ by number (milliseconds) instead of by formatted date string.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/DatatableWrapper.tsx#L62)
+[components/DatatableWrapper.tsx:68](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L68)

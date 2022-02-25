@@ -25,7 +25,7 @@ The class for the select input.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/PaginationOptions.tsx#L35)
+[components/PaginationOptions.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L35)
 
 ___
 
@@ -38,7 +38,7 @@ the `beforeSelect` label, the select input, and the `afterSelect` text.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:31](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/PaginationOptions.tsx#L31)
+[components/PaginationOptions.tsx:31](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L31)
 
 ___
 
@@ -50,4 +50,4 @@ The class for the `beforeSelect` and `afterSelect` labels.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:33](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/PaginationOptions.tsx#L33)
+[components/PaginationOptions.tsx:33](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L33)
