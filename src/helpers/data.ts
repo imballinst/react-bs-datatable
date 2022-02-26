@@ -114,6 +114,8 @@ export function paginateData<TTableRowType extends TableRowType>(
 }
 
 /**
+ * @internal
+ *
  * This is a helper function to get the next sort state.
  */
 export function getNextSortState(oldSort: SortType, sortedProp: string) {
