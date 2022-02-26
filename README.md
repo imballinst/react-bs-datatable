@@ -6,6 +6,16 @@ Inspired by [react-data-components](https://github.com/carlosrocha/react-data-co
 
 This is the v3 version of the library. To see the v2 version of README, please visit the [v1 branch](https://github.com/imballinst/react-bs-datatable/tree/v1).
 
+## Table of Contents
+
+- [What's new in v3?](#whats-new-in-v3)
+- [Migration guide](#migration-guide)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Storybook Demo](#storybook-demo)
+- [API reference](#api-reference)
+- [Contributing](#contributing)
+
 ## What's new in v3?
 
 - New build and publish system. Previously, this library used Webpack for bundling etc.—now it only uses `tsc` to compile the TypeScript files to output all files to the `lib` folder.
@@ -16,20 +26,9 @@ This is the v3 version of the library. To see the v2 version of README, please v
 - Drop support for all other libraries. This library will now only support Bootstrap tables.
 - Auto generate component APIs.
 
-To see the current state of `react-bs-datatable` prerelease version, please visit this Sandbox: https://codesandbox.io/s/react-bs-datatable-3-zq7xe.
-
 ## Migration guide
 
 Please read [this guide](./MIGRATION_GUIDE.md) if you are migrating from v2.
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Storybook Demo](#storybook-demo)
-- [Props](#props)
-- [Next Features or Improvements](#next-features-or-improvements)
-- [Contributing](#contributing)
 
 ## Installation
 
@@ -128,7 +127,7 @@ function TableComponent() {
 }
 ```
 
-## Storybook Demo.
+## Storybook Demo
 
 Head to https://imballinst.github.io/react-bs-datatable to see all of the features in action.
 
@@ -139,3 +138,7 @@ Visit the [API reference](./api/README.md) for more details.
 ## Contributing
 
 Feel free to contribute by creating issues and/or pull requests. I will do my best to address them as fast as I can.
+
+## License
+
+See license in [LICENSE](./LICENSE).
