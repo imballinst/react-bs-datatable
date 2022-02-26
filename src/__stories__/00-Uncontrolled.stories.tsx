@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MutableRefObject, useRef } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
 import { parse } from 'date-fns';
@@ -10,7 +10,8 @@ import { TableHeader } from '../components/TableHeader';
 import { TableBody, TableBodyProps } from '../components/TableBody';
 import {
   DatatableWrapper,
-  DatatableWrapperProps
+  DatatableWrapperProps,
+  UncontrolledTableEvents
 } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
 import { PaginationOptions } from '../components/PaginationOptions';
@@ -144,6 +145,36 @@ RowOnClick.argTypes = {
   }
 };
 
+const RefTemplate: ComponentStory<typeof StoryTable> = (args) => {
+  const tableEventsRef = useRef<UncontrolledTableEvents>();
+  return (
+    <div>
+      <button
+        onClick={() => tableEventsRef.current?.onSortByPropChange('name')}
+      >
+        External sort by name
+      </button>
+      <button
+        onClick={() => tableEventsRef.current?.onSortByPropChange('username')}
+      >
+        External sort by username
+      </button>
+      <StoryTable {...args} tableEventsRef={tableEventsRef} />
+    </div>
+  );
+};
+
+export const UncontrolledWithRefEvents = RefTemplate.bind({});
+UncontrolledWithRefEvents.storyName =
+  'Uncontrolled table with external sort events trigger';
+UncontrolledWithRefEvents.args = {
+  sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
+  filterableFields: ['Name', 'Username', 'Location'],
+  alwaysShowPagination: true,
+  rowsPerPage: 10,
+  rowsPerPageOptions: [5, 10, 15, 20]
+};
+
 // Components.
 const SORT_PROPS: DatatableWrapperProps<StoryColumnType>['sortProps'] = {
   sortValueObj: {
@@ -170,7 +201,8 @@ function StoryTable({
   scoreCellColumnColor,
   // For on click row event.
   rowOnClickText,
-  rowOnClickFn
+  rowOnClickFn,
+  tableEventsRef
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -191,6 +223,9 @@ function StoryTable({
   // For on click row event.
   rowOnClickText?: string;
   rowOnClickFn?: (name: string) => void;
+  // Set this to `true` if we want to control the table events from outside,
+  // but keep the table uncontrolled.
+  tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
 }) {
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
@@ -242,6 +277,7 @@ function StoryTable({
       body={json}
       headers={headers}
       sortProps={SORT_PROPS}
+      tableEventsRef={tableEventsRef}
       paginationOptionsProps={{
         initialState: {
           rowsPerPage,

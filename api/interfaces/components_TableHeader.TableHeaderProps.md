@@ -23,7 +23,7 @@ Customize the classes of the `TableHeader` component.
 
 #### Defined in
 
-[components/TableHeader.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/TableHeader.tsx#L37)
+[components/TableHeader.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/TableHeader.tsx#L37)
 
 ___
 
@@ -41,8 +41,8 @@ Props to make the component controlled.
 | `filteredDataLength?` | `number` | The filtered data length. When not using filter control, then this should equal to the table body's length. |
 | `onCheckboxChange?` | [`CheckboxOnChange`](../modules/helpers_types.md#checkboxonchange) | The function fired when any checkbox in the table changes. |
 | `sortState?` | [`SortType`](helpers_types.SortType.md) | The current sort state of the table. |
-| `onSortChange?` | (`nextSort`: [`SortType`](helpers_types.SortType.md)) => `void` | The function fired when the table sort state changes. |
+| `onSortChange?` | (`sortedProp`: `string`) => `void` | The function fired when the table sort state changes. |
 
 #### Defined in
 
-[components/TableHeader.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/TableHeader.tsx#L39)
+[components/TableHeader.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/TableHeader.tsx#L39)

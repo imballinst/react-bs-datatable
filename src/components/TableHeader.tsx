@@ -5,16 +5,16 @@ import { useDatatableWrapper } from './DatatableWrapper';
 import FontAwesome from './FontAwesome';
 import { makeClasses } from '../helpers/object';
 import {
-  TableColumnType,
   SortType,
-  TableRowType,
   CheckboxState,
-  CheckboxOnChange
+  CheckboxOnChange,
+  SortOnChange
 } from '../helpers/types';
 import {
   getNextCheckboxState,
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
+import { getNextSortState } from '../helpers/data';
 
 /**
  * This is an interface for customizing the classes for
@@ -38,7 +38,7 @@ export interface TableHeaderProps {
   /** Props to make the component controlled. */
   controlledProps?: {
     /** The function fired when the table sort state changes. */
-    onSortChange?: (nextSort: SortType) => void;
+    onSortChange?: SortOnChange;
     /** The current sort state of the table. */
     sortState?: SortType;
     /** The function fired when any checkbox in the table changes. */
@@ -95,7 +95,6 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
       'thead-th': true,
       sortable: isSortable === true
     });
-    const nextSort: SortType = { order: 'asc', prop };
     const isCurrentSort = sortState.prop === prop;
     const thProps: Record<string, any> = {
       key: `th-${i}`,
@@ -122,13 +121,12 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
 
         if (sortState.order === 'asc') {
           sortIcon = 'sortUp';
-          nextSort.order = 'desc';
         } else {
           sortIcon = 'sortDown';
         }
       }
 
-      thProps.onClick = () => onSortChange(nextSort);
+      thProps.onClick = () => onSortChange(getNextSortState(sortState, prop));
       thProps.role = 'button';
 
       sortIconRender = <FontAwesome icon={sortIcon} className="fa-fw" />;

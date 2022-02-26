@@ -12,6 +12,7 @@
 - [TablePaginationOptionsParameters](../interfaces/components_DatatableWrapper.TablePaginationOptionsParameters.md)
 - [TablePaginationParameters](../interfaces/components_DatatableWrapper.TablePaginationParameters.md)
 - [TableSortParameters](../interfaces/components_DatatableWrapper.TableSortParameters.md)
+- [UncontrolledTableEvents](../interfaces/components_DatatableWrapper.UncontrolledTableEvents.md)
 
 ### Functions
 
@@ -41,4 +42,4 @@
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:199](https://github.com/imballinst/react-bs-datatable/blob/6be73b6/src/components/DatatableWrapper.tsx#L199)
+[components/DatatableWrapper.tsx:214](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L214)

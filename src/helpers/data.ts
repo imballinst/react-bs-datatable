@@ -112,3 +112,17 @@ export function paginateData<TTableRowType extends TableRowType>(
 
   return paginatedData;
 }
+
+/**
+ * @internal
+ *
+ * This is a helper function to get the next sort state.
+ */
+export function getNextSortState(oldSort: SortType, sortedProp: string) {
+  const nextSort: SortType = { order: 'asc', prop: sortedProp };
+  if (sortedProp === oldSort.prop) {
+    nextSort.order = oldSort.order === 'asc' ? 'desc' : 'asc';
+  }
+
+  return nextSort;
+}

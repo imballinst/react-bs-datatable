@@ -31,16 +31,6 @@ export interface CheckboxState {
 }
 
 /**
- * The helper type to declare the checkbox onChange handler safely.
- */
-export type CheckboxOnChange = (params: {
-  prop: string;
-  idProp: string;
-  nextCheckboxState: CheckboxState;
-  checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
-}) => void;
-
-/**
  * The data structure of a table column, which will be used for the `headers`
  * prop of the `DatatableWrapper` props, as well as the `TableHeader` props.
  */
@@ -120,3 +110,40 @@ export type ColumnProcessObj<TColumnType, TReturnType = string> = Partial<
  * This is used for the `extend` keyword in the components.
  */
 export type TableRowType<T = any> = Record<string, T>;
+
+// Table events.
+
+/**
+ * The helper type for the filter change event.
+ */
+export type FilterOnChange = (nextState: string) => void;
+
+/**
+ * The helper type for the sort by next prop change event.
+ */
+export type SortOnChange = (nextProp: SortType) => void;
+
+/**
+ * The helper type for the sort by prop change event.
+ */
+export type SortByPropOnChange = (sortedProp: string) => void;
+
+/**
+ * The helper type for the sort by prop change event.
+ */
+export type PaginationOnChange = (nextState: number) => void;
+
+/**
+ * The helper type for the rows per page change event.
+ */
+export type RowsPerPageOnChange = (nextState: number) => void;
+
+/**
+ * The helper type for the checkbox change eveent.
+ */
+export type CheckboxOnChange = (params: {
+  prop: string;
+  idProp: string;
+  nextCheckboxState: CheckboxState;
+  checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
+}) => void;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
+import { FilterOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 import FontAwesome from './FontAwesome';
 
@@ -35,7 +36,7 @@ export interface FilterProps {
     /** The text filter. */
     filter?: string;
     /** The function fired when the text filter changes. */
-    onFilter?: (nextFilter: string) => void;
+    onFilter?: FilterOnChange;
   };
 }
 
