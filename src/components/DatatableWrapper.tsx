@@ -359,6 +359,8 @@ export function DatatableWrapper<TTableRowType = any>({
   // Imperative handle.
   // This is if we want to keep the table events controllable from outside,
   // without making the table controlled.
+  // TODO(imballinst): rethink about this for the next major version (4.x).
+  // https://github.com/imballinst/react-bs-datatable/pull/123#issuecomment-1050582200.
   useImperativeHandle(
     tableEventsRef,
     () => ({
