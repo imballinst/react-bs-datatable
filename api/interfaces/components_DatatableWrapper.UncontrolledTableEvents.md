@@ -9,13 +9,10 @@
 ### Properties
 
 - [onCheckboxChange](components_DatatableWrapper.UncontrolledTableEvents.md#oncheckboxchange)
-
-### Methods
-
 - [onFilterChange](components_DatatableWrapper.UncontrolledTableEvents.md#onfilterchange)
 - [onPaginationChange](components_DatatableWrapper.UncontrolledTableEvents.md#onpaginationchange)
 - [onRowsPerPageChange](components_DatatableWrapper.UncontrolledTableEvents.md#onrowsperpagechange)
-- [onSortChange](components_DatatableWrapper.UncontrolledTableEvents.md#onsortchange)
+- [onSortByPropChange](components_DatatableWrapper.UncontrolledTableEvents.md#onsortbypropchange)
 
 ## Properties
 
@@ -25,84 +22,44 @@
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:120](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L120)
+[components/DatatableWrapper.tsx:124](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/DatatableWrapper.tsx#L124)
 
-## Methods
+___
 
 ### onFilterChange
 
-▸ **onFilterChange**(`nextState`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `nextState` | `string` |
-
-#### Returns
-
-`void`
+• **onFilterChange**: [`FilterOnChange`](../modules/helpers_types.md#filteronchange)
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:116](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L116)
+[components/DatatableWrapper.tsx:120](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/DatatableWrapper.tsx#L120)
 
 ___
 
 ### onPaginationChange
 
-▸ **onPaginationChange**(`nextState`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `nextState` | `number` |
-
-#### Returns
-
-`void`
+• **onPaginationChange**: [`PaginationOnChange`](../modules/helpers_types.md#paginationonchange)
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:118](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L118)
+[components/DatatableWrapper.tsx:122](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/DatatableWrapper.tsx#L122)
 
 ___
 
 ### onRowsPerPageChange
 
-▸ **onRowsPerPageChange**(`nextState`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `nextState` | `number` |
-
-#### Returns
-
-`void`
+• **onRowsPerPageChange**: [`RowsPerPageOnChange`](../modules/helpers_types.md#rowsperpageonchange)
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:119](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L119)
+[components/DatatableWrapper.tsx:123](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/DatatableWrapper.tsx#L123)
 
 ___
 
-### onSortChange
+### onSortByPropChange
 
-▸ **onSortChange**(`sortedProp`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `sortedProp` | `string` |
-
-#### Returns
-
-`void`
+• **onSortByPropChange**: [`SortByPropOnChange`](../modules/helpers_types.md#sortbyproponchange)
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:117](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L117)
+[components/DatatableWrapper.tsx:121](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/DatatableWrapper.tsx#L121)

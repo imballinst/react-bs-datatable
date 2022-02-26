@@ -28,7 +28,7 @@ To prevent layout shifts, `visibility: hidden` will be applied instead of
 
 #### Defined in
 
-[components/Pagination.tsx:44](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Pagination.tsx#L44)
+[components/Pagination.tsx:45](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/Pagination.tsx#L45)
 
 ___
 
@@ -40,7 +40,7 @@ Customize the classes of the `Pagination` component.
 
 #### Defined in
 
-[components/Pagination.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Pagination.tsx#L37)
+[components/Pagination.tsx:38](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/Pagination.tsx#L38)
 
 ___
 
@@ -56,11 +56,11 @@ Props to make the component controlled.
 | :------ | :------ | :------ |
 | `currentPage?` | `number` | The currently active page. |
 | `maxPage?` | `number` | This is used to determine * the last numbered button in the pagination button group. This also determines the next page number when the "Last" button is clicked. |
-| `onPaginationChange?` | (`nextPage`: `number`) => `void` | The function fired when any of the pagination buttons is clicked. |
+| `onPaginationChange?` | [`PaginationOnChange`](../modules/helpers_types.md#paginationonchange) | The function fired when any of the pagination buttons is clicked. |
 
 #### Defined in
 
-[components/Pagination.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Pagination.tsx#L46)
+[components/Pagination.tsx:47](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/Pagination.tsx#L47)
 
 ___
 
@@ -72,4 +72,4 @@ Customize the labels of the `Pagination` component.
 
 #### Defined in
 
-[components/Pagination.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Pagination.tsx#L35)
+[components/Pagination.tsx:36](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/Pagination.tsx#L36)

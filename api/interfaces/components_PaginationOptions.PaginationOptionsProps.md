@@ -28,7 +28,7 @@ To prevent layout shifts, `visibility: hidden` will be applied instead of
 
 #### Defined in
 
-[components/PaginationOptions.tsx:52](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L52)
+[components/PaginationOptions.tsx:53](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/PaginationOptions.tsx#L53)
 
 ___
 
@@ -40,7 +40,7 @@ Customize the classes of the `PaginationOptions` component.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:45](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L45)
+[components/PaginationOptions.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/PaginationOptions.tsx#L46)
 
 ___
 
@@ -55,13 +55,13 @@ Props to make the component controlled.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `filteredDataLength?` | `number` | The filtered data length. When not using filter control, then this should equal to the table body's length. |
+| `onRowsPerPageChange?` | [`RowsPerPageOnChange`](../modules/helpers_types.md#rowsperpageonchange) | The function fired when any of the pagination option is changed. |
 | `rowsPerPage?` | `number` | Number of rows shown per page. |
 | `rowsPerPageOptions?` | `number`[] | Number of rows shown per page options. |
-| `onRowsPerPageChange?` | (`nextRowsPerPage`: `number`) => `void` | The function fired when any of the pagination option is changed. |
 
 #### Defined in
 
-[components/PaginationOptions.tsx:54](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L54)
+[components/PaginationOptions.tsx:55](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/PaginationOptions.tsx#L55)
 
 ___
 
@@ -73,4 +73,4 @@ Customize the labels of the `PaginationOptions` component.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:43](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/PaginationOptions.tsx#L43)
+[components/PaginationOptions.tsx:44](https://github.com/imballinst/react-bs-datatable/blob/f45e78e/src/components/PaginationOptions.tsx#L44)
