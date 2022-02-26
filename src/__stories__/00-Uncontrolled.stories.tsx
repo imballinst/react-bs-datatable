@@ -149,10 +149,14 @@ const RefTemplate: ComponentStory<typeof StoryTable> = (args) => {
   const tableEventsRef = useRef<UncontrolledTableEvents>();
   return (
     <div>
-      <button onClick={() => tableEventsRef.current?.onSortChange('name')}>
+      <button
+        onClick={() => tableEventsRef.current?.onSortByPropChange('name')}
+      >
         External sort by name
       </button>
-      <button onClick={() => tableEventsRef.current?.onSortChange('username')}>
+      <button
+        onClick={() => tableEventsRef.current?.onSortByPropChange('username')}
+      >
         External sort by username
       </button>
       <StoryTable {...args} tableEventsRef={tableEventsRef} />

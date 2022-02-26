@@ -20,6 +20,10 @@ import {
   CheckboxOnChange,
   CheckboxState,
   ColumnProcessObj,
+  FilterOnChange,
+  PaginationOnChange,
+  RowsPerPageOnChange,
+  SortByPropOnChange,
   SortType,
   TableRowType
 } from '../helpers/types';
@@ -113,10 +117,10 @@ export interface TableCheckboxParameters {
 }
 
 export interface UncontrolledTableEvents {
-  onFilterChange: (nextState: string) => void;
-  onSortChange: (sortedProp: string) => void;
-  onPaginationChange: (nextState: number) => void;
-  onRowsPerPageChange: (nextState: number) => void;
+  onFilterChange: FilterOnChange;
+  onSortByPropChange: SortByPropOnChange;
+  onPaginationChange: PaginationOnChange;
+  onRowsPerPageChange: RowsPerPageOnChange;
   onCheckboxChange: CheckboxOnChange;
 }
 
@@ -134,7 +138,8 @@ interface DatatableWrapperContextType<TTableRowType> {
   onFilterChange: (nextState: string) => void;
   // Sort.
   sortState: SortType;
-  onSortChange: (sortedProp: string) => void;
+  onSortChange: (nextProp: SortType) => void;
+  onSortByPropChange: (sortedProp: string) => void;
   // Pagination.
   currentPageState: number;
   onPaginationChange: (nextState: number) => void;
@@ -315,7 +320,14 @@ export function DatatableWrapper<TTableRowType = any>({
     }));
   }, []);
 
-  const onSortChange = useCallback((sortedProp: string) => {
+  const onSortChange = useCallback((nextSort: SortType) => {
+    setState((oldState) => ({
+      ...oldState,
+      sort: nextSort
+    }));
+  }, []);
+
+  const onSortByPropChange = useCallback((sortedProp: string) => {
     setState((oldState) => ({
       ...oldState,
       sort: getNextSortState(oldState.sort, sortedProp)
@@ -353,7 +365,7 @@ export function DatatableWrapper<TTableRowType = any>({
       onFilterChange,
       onPaginationChange,
       onRowsPerPageChange,
-      onSortChange,
+      onSortByPropChange,
       onCheckboxChange
     }),
     []
@@ -403,6 +415,7 @@ export function DatatableWrapper<TTableRowType = any>({
         // Sort.
         sortState: sort,
         onSortChange,
+        onSortByPropChange,
         // Pagination.
         currentPageState: pagination.currentPage,
         onPaginationChange,

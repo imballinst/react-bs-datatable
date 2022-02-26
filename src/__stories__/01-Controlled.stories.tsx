@@ -101,8 +101,8 @@ function AsyncStoryTable<TTableRowType = any>({
     setCurrentPage(1);
   }, []);
 
-  const onSortChange = useCallback((sortedProp: string) => {
-    setSortState((oldState) => getNextSortState(oldState, sortedProp));
+  const onSortChange = useCallback((nextProp: SortType) => {
+    setSortState(nextProp);
   }, []);
 
   const onPaginationChange = useCallback((nextPage) => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 
 import { makeClasses } from '../helpers/object';
+import { RowsPerPageOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
 /** This is an interface to customize the pagination options labels. */
@@ -62,7 +63,7 @@ export interface PaginationOptionsProps {
      */
     filteredDataLength?: number;
     /** The function fired when any of the pagination option is changed. */
-    onRowsPerPageChange?: (nextRowsPerPage: number) => void;
+    onRowsPerPageChange?: RowsPerPageOnChange;
   };
 }
 

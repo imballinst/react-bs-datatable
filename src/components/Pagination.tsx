@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 
 import { makeClasses } from '../helpers/object';
+import { PaginationOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
 /** This is an interface to customize the pagination labels. */
@@ -53,7 +54,7 @@ export interface PaginationProps {
      */
     maxPage?: number;
     /** The function fired when any of the pagination buttons is clicked. */
-    onPaginationChange?: (nextPage: number) => void;
+    onPaginationChange?: PaginationOnChange;
   };
 }
 
