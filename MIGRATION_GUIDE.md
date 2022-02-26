@@ -2,37 +2,6 @@
 
 This document contains migration guide between major versions.
 
-## `react-bs-datatable@3.1`
-
-There is 1 breaking change if you are using a controlled table: `onSortChange` now receives the sorted prop, instead of the next sort state. So, if you are doing this right now:
-
-```ts
-const onSortChange = useCallback((nextSort: SortType) => {
-  setSortState(nextSort);
-}, []);
-```
-
-Change it to this:
-
-```ts
-const onSortChange = useCallback((sortedProp: string) => {
-  setSortState((oldState) => getNextSortState(oldState, sortedProp));
-}, []);
-```
-
-This `getNextSortState` is a newly exported helper function to easily "compute" the next sort:
-
-```ts
-export function getNextSortState(oldSort: SortType, sortedProp: string) {
-  const nextSort: SortType = { order: 'asc', prop: sortedProp };
-  if (sortedProp === oldSort.prop) {
-    nextSort.order = oldSort.order === 'asc' ? 'desc' : 'asc';
-  }
-
-  return nextSort;
-}
-```
-
 ## `react-bs-datatable@3`
 
 Bumping this library from v2 to v3 requires you to rewrite how the table JSX is written, as well as modifying a lot of dependencies. The changes are as the following.
