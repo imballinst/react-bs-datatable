@@ -368,9 +368,10 @@ export function DatatableWrapper<TTableRowType = any>({
       onPaginationChange,
       onRowsPerPageChange,
       onSortByPropChange,
-      onCheckboxChange
+      onCheckboxChange,
+      pagination: state.pagination,
     }),
-    []
+    [state.pagination]
   );
 
   const { filter, sort, pagination, isFilterable } = state;
