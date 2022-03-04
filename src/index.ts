@@ -1,4 +1,7 @@
-export { DatatableWrapper } from './components/DatatableWrapper';
+export {
+  DatatableWrapper,
+  useDatatableWrapper
+} from './components/DatatableWrapper';
 export type { DatatableWrapperProps } from './components/DatatableWrapper';
 
 export { Filter } from './components/Filter';
