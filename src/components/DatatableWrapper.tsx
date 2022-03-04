@@ -183,6 +183,12 @@ export interface DatatableWrapperProps<TTableRowType> {
   paginationProps?: TablePaginationParameters;
   paginationOptionsProps?: TablePaginationOptionsParameters;
   checkboxProps?: TableCheckboxParameters;
+  /**
+   * @deprecated
+   *
+   * Usage of `tableEventsRef` is deprecated. Consider using `useDatatableWrapper`
+   * and raising the `DatatableWrapper` a bit higher in the structure instead.
+   */
   tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
 }
 
@@ -253,6 +259,15 @@ export function DatatableWrapper<TTableRowType = any>({
     headers,
     initialStates: checkboxProps?.initialState
   });
+
+  useEffect(() => {
+    if (tableEventsRef !== undefined) {
+      console.warn(
+        'Warning: Usage of `tableEventsRef` is deprecated. Consider using `useDatatableWrapper`' +
+          'and raising the `DatatableWrapper` a bit higher in the structure instead.'
+      );
+    }
+  }, [tableEventsRef]);
 
   useEffect(() => {
     // Resets the table if the headers passed down is different.
