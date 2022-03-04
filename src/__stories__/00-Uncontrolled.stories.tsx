@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from 'react';
+import React, { MutableRefObject, ReactNode, useRef } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
 import { parse } from 'date-fns';
@@ -11,7 +11,8 @@ import { TableBody, TableBodyProps } from '../components/TableBody';
 import {
   DatatableWrapper,
   DatatableWrapperProps,
-  UncontrolledTableEvents
+  UncontrolledTableEvents,
+  useDatatableWrapper
 } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
 import { PaginationOptions } from '../components/PaginationOptions';
@@ -145,6 +146,45 @@ RowOnClick.argTypes = {
   }
 };
 
+const RaisedTableContextTemplate: ComponentStory<typeof StoryTable> = (
+  args
+) => {
+  function Children() {
+    const { onSortByPropChange, sortState } = useDatatableWrapper();
+
+    return (
+      <div>
+        <label>Sort state</label>
+        <pre>{JSON.stringify(sortState)}</pre>
+
+        <button onClick={() => onSortByPropChange('name')}>
+          External sort by name
+        </button>
+        <button onClick={() => onSortByPropChange('username')}>
+          External sort by username
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <StoryTable {...args}>
+      <Children />
+    </StoryTable>
+  );
+};
+
+export const RaisedTableContext = RaisedTableContextTemplate.bind({});
+RaisedTableContext.storyName =
+  'Uncontrolled table with external sort events trigger';
+RaisedTableContext.args = {
+  sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
+  filterableFields: ['Name', 'Username', 'Location'],
+  alwaysShowPagination: true,
+  rowsPerPage: 10,
+  rowsPerPageOptions: [5, 10, 15, 20]
+};
+
 const RefTemplate: ComponentStory<typeof StoryTable> = (args) => {
   const tableEventsRef = useRef<UncontrolledTableEvents>();
   return (
@@ -166,7 +206,7 @@ const RefTemplate: ComponentStory<typeof StoryTable> = (args) => {
 
 export const UncontrolledWithRefEvents = RefTemplate.bind({});
 UncontrolledWithRefEvents.storyName =
-  'Uncontrolled table with external sort events trigger';
+  'Uncontrolled table with external sort events trigger (deprecated)';
 UncontrolledWithRefEvents.args = {
   sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
   filterableFields: ['Name', 'Username', 'Location'],
@@ -202,7 +242,8 @@ function StoryTable({
   // For on click row event.
   rowOnClickText,
   rowOnClickFn,
-  tableEventsRef
+  tableEventsRef,
+  children
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -226,6 +267,7 @@ function StoryTable({
   // Set this to `true` if we want to control the table events from outside,
   // but keep the table uncontrolled.
   tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
+  children?: ReactNode;
 }) {
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
@@ -285,6 +327,7 @@ function StoryTable({
         }
       }}
     >
+      {children}
       <Row className="mb-4">
         <Col
           xs={12}
