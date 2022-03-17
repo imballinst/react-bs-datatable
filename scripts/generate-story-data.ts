@@ -115,6 +115,7 @@ async function main() {
   const data = Array.from(new Array(NUMBER_OF_ENTRIES), (_, idx) => ({
     ...getNameAndUsername(idx),
     date: getRandomDateWithinOneMonth(),
+    status: Math.random() > 0.5 ? 'Active' : 'Inactive',
     score: getRandomScore(),
     location: getRandomPlanet()
   }));

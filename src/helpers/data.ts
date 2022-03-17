@@ -60,16 +60,12 @@ export function filterData<TTableRowType extends TableRowType>(
 
   return data.filter((element) => {
     let isElementIncluded = false;
-    let i = 0;
 
-    const elementProps = Object.keys(element);
-    const elementPropLength = elementProps.length;
+    for (const key in headers) {
+      const header = headers[key];
 
-    while (!isElementIncluded && i < elementPropLength) {
-      const prop = elementProps[i];
-
-      if (headers[prop].isFilterable) {
-        let columnValue = element[prop];
+      if (header.isFilterable) {
+        let columnValue = element[header.prop];
 
         if (typeof columnValue !== 'string') {
           // Convert to string if it is not a string.
@@ -83,8 +79,6 @@ export function filterData<TTableRowType extends TableRowType>(
           break;
         }
       }
-
-      i += 1;
     }
 
     return isElementIncluded;

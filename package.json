@@ -22,8 +22,8 @@
     "v:betaminor": "npm version preminor --preid beta",
     "v:betapatch": "npm version prepatch --preid beta",
     "v:prebump": "npm version prerelease",
-    "generate-story-data": "yarn workspace scripts generate-story-data",
-    "check-latest-docs": "yarn build:docs && yarn workspace scripts check-latest-docs"
+    "generate-story-data": "ts-node --esm scripts/generate-story-data.ts",
+    "check-latest-docs": "yarn build:docs && ts-node --esm scripts/check-latest-docs.ts"
   },
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
   "author": "Try Ajitiono",
@@ -61,7 +61,7 @@
     "react": "17.0.2",
     "react-bootstrap": "2.1.1",
     "react-dom": "17.0.2",
-    "ts-node": "10.5.0",
+    "ts-node": "10.7.0",
     "typedoc": "0.22.11",
     "typedoc-plugin-markdown": "3.11.13",
     "typescript": "4.5.5"
