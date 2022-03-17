@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import { format } from 'date-fns';
 
@@ -110,8 +110,32 @@ const NUMBER_OF_ENTRIES = 60;
 
 main();
 
+interface SampleDataType {
+  date: string;
+  status: string;
+  score: number;
+  location: string;
+  name: string;
+  username: string;
+}
+
 async function main() {
   const currentDirName = new URL(import.meta.url).pathname;
+  const storyDataPath = path.join(
+    currentDirName,
+    '../../src/__stories__/resources/story-data.json'
+  );
+
+  // Try to just append a field to the JSON, so that we don't break things.
+  let existingJson: SampleDataType[] = [];
+
+  try {
+    const existingContent = await readFile(storyDataPath, 'utf-8');
+    existingJson = JSON.parse(existingContent);
+  } catch (err) {
+    console.error(err);
+  }
+
   const data = Array.from(new Array(NUMBER_OF_ENTRIES), (_, idx) => ({
     ...getNameAndUsername(idx),
     date: getRandomDateWithinOneMonth(),
@@ -119,14 +143,20 @@ async function main() {
     score: getRandomScore(),
     location: getRandomPlanet()
   }));
-  await writeFile(
-    path.join(
-      currentDirName,
-      '../../src/__stories__/resources/story-data.json'
-    ),
-    JSON.stringify(data),
-    'utf-8'
-  );
+
+  // Append new fields to the existing JSON.
+  for (let i = 0; i < data.length; i++) {
+    const row = data[i];
+    const rowKeys = Object.keys(row) as (keyof SampleDataType)[];
+
+    for (const key of rowKeys) {
+      if (existingJson[i][key] === undefined) {
+        (existingJson[i] as any)[key] = data[i][key];
+      }
+    }
+  }
+
+  await writeFile(storyDataPath, JSON.stringify(existingJson), 'utf-8');
 }
 
 // Helper functions.
