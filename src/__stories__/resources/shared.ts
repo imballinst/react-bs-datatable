@@ -7,6 +7,7 @@ export const STORY_PROP_TO_OPTION_NAME: Record<keyof StoryColumnType, string> =
     username: 'Username',
     location: 'Location',
     date: 'Last Update',
+    status: '',
     score: 'Score',
     checkbox: ''
   };
