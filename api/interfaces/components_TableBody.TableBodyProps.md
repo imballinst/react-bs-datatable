@@ -34,7 +34,7 @@ Customize the classes of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:42](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/TableBody.tsx#L42)
+[components/TableBody.tsx:42](https://github.com/imballinst/react-bs-datatable/blob/8787141/src/components/TableBody.tsx#L42)
 
 ___
 
@@ -54,7 +54,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/TableBody.tsx#L46)
+[components/TableBody.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/8787141/src/components/TableBody.tsx#L46)
 
 ___
 
@@ -66,7 +66,7 @@ Customize the labels of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:40](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/TableBody.tsx#L40)
+[components/TableBody.tsx:40](https://github.com/imballinst/react-bs-datatable/blob/8787141/src/components/TableBody.tsx#L40)
 
 ## Methods
 
@@ -88,4 +88,4 @@ The function fired when any of the rows is clicked.
 
 #### Defined in
 
-[components/TableBody.tsx:44](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/TableBody.tsx#L44)
+[components/TableBody.tsx:44](https://github.com/imballinst/react-bs-datatable/blob/8787141/src/components/TableBody.tsx#L44)

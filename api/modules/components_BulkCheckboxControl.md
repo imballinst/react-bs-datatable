@@ -38,4 +38,4 @@ change to "Deselect all" button.
 
 #### Defined in
 
-[components/BulkCheckboxControl.tsx:52](https://github.com/imballinst/react-bs-datatable/blob/ab946d1/src/components/BulkCheckboxControl.tsx#L52)
+[components/BulkCheckboxControl.tsx:52](https://github.com/imballinst/react-bs-datatable/blob/8787141/src/components/BulkCheckboxControl.tsx#L52)
