@@ -42,4 +42,4 @@
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:214](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/DatatableWrapper.tsx#L214)
+[components/DatatableWrapper.tsx:219](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/DatatableWrapper.tsx#L219)

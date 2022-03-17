@@ -25,7 +25,7 @@ The class for the clear button.
 
 #### Defined in
 
-[components/Filter.tsx:19](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Filter.tsx#L19)
+[components/Filter.tsx:20](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/Filter.tsx#L20)
 
 ___
 
@@ -37,7 +37,7 @@ The class for the text input.
 
 #### Defined in
 
-[components/Filter.tsx:17](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Filter.tsx#L17)
+[components/Filter.tsx:18](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/Filter.tsx#L18)
 
 ___
 
@@ -50,4 +50,4 @@ text input and the clear button.
 
 #### Defined in
 
-[components/Filter.tsx:15](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Filter.tsx#L15)
+[components/Filter.tsx:16](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/Filter.tsx#L16)

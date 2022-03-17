@@ -14,6 +14,11 @@
 
 - [CheckboxOnChange](helpers_types.md#checkboxonchange)
 - [ColumnProcessObj](helpers_types.md#columnprocessobj)
+- [FilterOnChange](helpers_types.md#filteronchange)
+- [PaginationOnChange](helpers_types.md#paginationonchange)
+- [RowsPerPageOnChange](helpers_types.md#rowsperpageonchange)
+- [SortByPropOnChange](helpers_types.md#sortbyproponchange)
+- [SortOnChange](helpers_types.md#sortonchange)
 - [TableRowType](helpers_types.md#tablerowtype)
 
 ## Type aliases
@@ -26,7 +31,7 @@
 
 ▸ (`params`): `void`
 
-The helper type to declare the checkbox onChange handler safely.
+The helper type for the checkbox change eveent.
 
 ##### Parameters
 
@@ -44,7 +49,7 @@ The helper type to declare the checkbox onChange handler safely.
 
 #### Defined in
 
-[helpers/types.ts:36](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/helpers/types.ts#L36)
+[helpers/types.ts:144](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L144)
 
 ___
 
@@ -68,7 +73,137 @@ can make the sort result incorrect, e.g. sorting formatted dates.
 
 #### Defined in
 
-[helpers/types.ts:115](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/helpers/types.ts#L115)
+[helpers/types.ts:105](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L105)
+
+___
+
+### FilterOnChange
+
+Ƭ **FilterOnChange**: (`nextState`: `string`) => `void`
+
+#### Type declaration
+
+▸ (`nextState`): `void`
+
+The helper type for the filter change event.
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `nextState` | `string` |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[helpers/types.ts:119](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L119)
+
+___
+
+### PaginationOnChange
+
+Ƭ **PaginationOnChange**: (`nextState`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`nextState`): `void`
+
+The helper type for the sort by prop change event.
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `nextState` | `number` |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[helpers/types.ts:134](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L134)
+
+___
+
+### RowsPerPageOnChange
+
+Ƭ **RowsPerPageOnChange**: (`nextState`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`nextState`): `void`
+
+The helper type for the rows per page change event.
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `nextState` | `number` |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[helpers/types.ts:139](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L139)
+
+___
+
+### SortByPropOnChange
+
+Ƭ **SortByPropOnChange**: (`sortedProp`: `string`) => `void`
+
+#### Type declaration
+
+▸ (`sortedProp`): `void`
+
+The helper type for the sort by prop change event.
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `sortedProp` | `string` |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[helpers/types.ts:129](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L129)
+
+___
+
+### SortOnChange
+
+Ƭ **SortOnChange**: (`nextProp`: [`SortType`](../interfaces/helpers_types.SortType.md)) => `void`
+
+#### Type declaration
+
+▸ (`nextProp`): `void`
+
+The helper type for the sort by next prop change event.
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `nextProp` | [`SortType`](../interfaces/helpers_types.SortType.md) |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[helpers/types.ts:124](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L124)
 
 ___
 
@@ -86,4 +221,4 @@ This is used for the `extend` keyword in the components.
 
 #### Defined in
 
-[helpers/types.ts:122](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/helpers/types.ts#L122)
+[helpers/types.ts:112](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/helpers/types.ts#L112)

@@ -24,7 +24,7 @@ Custom classes for the component.
 
 #### Defined in
 
-[components/Filter.tsx:32](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Filter.tsx#L32)
+[components/Filter.tsx:33](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/Filter.tsx#L33)
 
 ___
 
@@ -39,11 +39,11 @@ Props to make the component controlled.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `filter?` | `string` | The text filter. |
-| `onFilter?` | (`nextFilter`: `string`) => `void` | The function fired when the text filter changes. |
+| `onFilter?` | [`FilterOnChange`](../modules/helpers_types.md#filteronchange) | The function fired when the text filter changes. |
 
 #### Defined in
 
-[components/Filter.tsx:34](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Filter.tsx#L34)
+[components/Filter.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/Filter.tsx#L35)
 
 ___
 
@@ -56,4 +56,4 @@ By default, the text is "Enter text...".
 
 #### Defined in
 
-[components/Filter.tsx:30](https://github.com/imballinst/react-bs-datatable/blob/eac35b9/src/components/Filter.tsx#L30)
+[components/Filter.tsx:31](https://github.com/imballinst/react-bs-datatable/blob/0222533/src/components/Filter.tsx#L31)
