@@ -32,7 +32,7 @@ export interface TableBodyClasses {
   td?: string;
 }
 
-export type RowProps = React.DetailedHTMLProps<
+export type TableRowProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLTableRowElement>,
   HTMLTableRowElement
 >;
@@ -46,7 +46,7 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   /** Customize the classes of the `TableBody` component. */
   classes?: TableBodyClasses;
   /** The props passed to the table rows under `tbody`. */
-  rowProps?: RowProps | ((row: TTableRowType) => RowProps);
+  rowProps?: TableRowProps | ((row: TTableRowType) => TableRowProps);
   /** The function fired when any of the rows is clicked. */
   onRowClick?: (row: TTableRowType) => void;
   /** Props to make the component controlled. */
