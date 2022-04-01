@@ -7,7 +7,7 @@ import json from './resources/story-data.json';
 import { StoryColumnType } from './resources/types';
 import { STORY_HEADERS, STORY_PROP_TO_OPTION_NAME } from './resources/shared';
 import { TableHeader } from '../components/TableHeader';
-import { TableBody, TableBodyProps } from '../components/TableBody';
+import { RowProps, TableBody, TableBodyProps } from '../components/TableBody';
 import {
   DatatableWrapper,
   DatatableWrapperProps,
@@ -136,6 +136,14 @@ CustomCellRender.argTypes = {
   }
 };
 
+export const CustomRowProps = Template.bind({});
+CustomRowProps.storyName = 'Custom row props depending depending on score';
+CustomRowProps.args = {
+  rowProps: (row) => ({
+    style: { background: `rgba(128, 0, 0, ${row.score / 200})` }
+  })
+};
+
 export const RowOnClick = Template.bind({});
 RowOnClick.storyName = 'Adding row on click event';
 RowOnClick.argTypes = {
@@ -185,6 +193,7 @@ RaisedTableContext.args = {
   rowsPerPageOptions: [5, 10, 15, 20]
 };
 
+// This example is deprecated. Prefer use the `RaisedTableContext` instead.
 const RefTemplate: ComponentStory<typeof StoryTable> = (args) => {
   const tableEventsRef = useRef<UncontrolledTableEvents>();
   return (
@@ -239,6 +248,8 @@ function StoryTable({
   prevPage,
   // For custom rendering of score column.
   scoreCellColumnColor,
+  // For custom props of row depending on score column.
+  rowProps,
   // For on click row event.
   rowOnClickText,
   rowOnClickFn,
@@ -261,6 +272,8 @@ function StoryTable({
   prevPage?: string;
   // For custom rendering of score column.
   scoreCellColumnColor?: string;
+  // For custom props of row depending on score column.
+  rowProps?: RowProps | ((row: any) => RowProps);
   // For on click row event.
   rowOnClickText?: string;
   rowOnClickFn?: (name: string) => void;
@@ -364,7 +377,7 @@ function StoryTable({
       </Row>
       <Table>
         <TableHeader />
-        <TableBody onRowClick={rowOnClick} />
+        <TableBody onRowClick={rowOnClick} rowProps={rowProps} />
       </Table>
     </DatatableWrapper>
   );
