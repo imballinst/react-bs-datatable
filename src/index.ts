@@ -22,7 +22,12 @@ export type {
 } from './components/PaginationOptions';
 
 export { TableBody } from './components/TableBody';
-export type { TableBodyProps, TableBodyClasses } from './components/TableBody';
+export type {
+  TableBodyProps,
+  TableBodyClasses,
+  TableRowProps,
+  TableBodyLabels
+} from './components/TableBody';
 
 export { TableHeader } from './components/TableHeader';
 export type {

@@ -32,6 +32,11 @@ export interface TableBodyClasses {
   td?: string;
 }
 
+export type TableRowProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLTableRowElement>,
+  HTMLTableRowElement
+>;
+
 /**
  * This is an interface for `TableBody` component props.
  */
@@ -40,6 +45,8 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   labels?: TableBodyLabels;
   /** Customize the classes of the `TableBody` component. */
   classes?: TableBodyClasses;
+  /** The props passed to the table rows under `tbody`. */
+  rowProps?: TableRowProps | ((row: TTableRowType) => TableRowProps);
   /** The function fired when any of the rows is clicked. */
   onRowClick?: (row: TTableRowType) => void;
   /** Props to make the component controlled. */
@@ -66,6 +73,7 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
 export function TableBody<TTableRowType extends TableRowType>({
   labels,
   classes,
+  rowProps,
   onRowClick: onRowClickProp,
   controlledProps
 }: TableBodyProps<TTableRowType>) {
@@ -183,10 +191,16 @@ export function TableBody<TTableRowType extends TableRowType>({
         );
       }
 
+      const { className: rowCustomClassName, ...restProps } =
+        typeof rowProps === 'function'
+          ? rowProps(data[rowIdx])
+          : rowProps || {};
+
       body.push(
         <tr
           key={rowIdx}
-          className={makeClasses('tbody-tr', classes?.tr)}
+          {...restProps}
+          className={makeClasses('tbody-tr', classes?.tr, rowCustomClassName)}
           onClick={() => onRowClick(rowIdx)}
         >
           {row}
