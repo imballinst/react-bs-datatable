@@ -327,7 +327,6 @@ describe('Custom table row props', () => {
 
       tds.forEach((el, idx) => {
         if (idx === scoreColumnIdx) {
-          // When bigger than 50, then it has no background.
           expect(row.style.background).toBe(
             `rgba(128, 0, 0, ${Number(el.innerHTML) / 200})`
           );
