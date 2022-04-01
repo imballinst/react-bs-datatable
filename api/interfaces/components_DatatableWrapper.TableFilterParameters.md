@@ -29,4 +29,4 @@ The initial states for the table.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:38](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/DatatableWrapper.tsx#L38)
+[components/DatatableWrapper.tsx:38](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/DatatableWrapper.tsx#L38)

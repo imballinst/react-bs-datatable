@@ -24,4 +24,4 @@ This defaults to `link-primary text-decoration-none`.
 
 #### Defined in
 
-[components/BulkCheckboxControl.tsx:18](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/BulkCheckboxControl.tsx#L18)
+[components/BulkCheckboxControl.tsx:18](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/BulkCheckboxControl.tsx#L18)

@@ -23,4 +23,4 @@ no data (empty array), or no matching found for the filtered text.
 
 #### Defined in
 
-[components/TableBody.tsx:19](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableBody.tsx#L19)
+[components/TableBody.tsx:19](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L19)

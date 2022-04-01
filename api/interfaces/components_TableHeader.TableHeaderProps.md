@@ -23,7 +23,7 @@ Customize the classes of the `TableHeader` component.
 
 #### Defined in
 
-[components/TableHeader.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableHeader.tsx#L37)
+[components/TableHeader.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableHeader.tsx#L37)
 
 ___
 
@@ -45,4 +45,4 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableHeader.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableHeader.tsx#L39)
+[components/TableHeader.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableHeader.tsx#L39)

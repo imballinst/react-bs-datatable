@@ -10,9 +10,23 @@
 - [TableBodyLabels](../interfaces/components_TableBody.TableBodyLabels.md)
 - [TableBodyProps](../interfaces/components_TableBody.TableBodyProps.md)
 
+### Type aliases
+
+- [TableRowProps](components_TableBody.md#tablerowprops)
+
 ### Functions
 
 - [TableBody](components_TableBody.md#tablebody)
+
+## Type aliases
+
+### TableRowProps
+
+Ƭ **TableRowProps**: `React.DetailedHTMLProps`<`React.HTMLAttributes`<`HTMLTableRowElement`\>, `HTMLTableRowElement`\>
+
+#### Defined in
+
+[components/TableBody.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L35)
 
 ## Functions
 
@@ -41,4 +55,4 @@ such as `tr` and `td` tags.
 
 #### Defined in
 
-[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableBody.tsx#L66)
+[components/TableBody.tsx:73](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L73)

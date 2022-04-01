@@ -25,7 +25,7 @@ the behavior of the `Set` type.
 
 #### Defined in
 
-[helpers/types.ts:25](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/helpers/types.ts#L25)
+[helpers/types.ts:25](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/helpers/types.ts#L25)
 
 ___
 
@@ -38,4 +38,4 @@ The checkbox states. This is useful to determine the "Select all" and
 
 #### Defined in
 
-[helpers/types.ts:30](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/helpers/types.ts#L30)
+[helpers/types.ts:30](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/helpers/types.ts#L30)

@@ -19,6 +19,7 @@ This is an interface for `TableBody` component props.
 - [classes](components_TableBody.TableBodyProps.md#classes)
 - [controlledProps](components_TableBody.TableBodyProps.md#controlledprops)
 - [labels](components_TableBody.TableBodyProps.md#labels)
+- [rowProps](components_TableBody.TableBodyProps.md#rowprops)
 
 ### Methods
 
@@ -34,7 +35,7 @@ Customize the classes of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:42](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableBody.tsx#L42)
+[components/TableBody.tsx:47](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L47)
 
 ___
 
@@ -54,7 +55,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableBody.tsx#L46)
+[components/TableBody.tsx:53](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L53)
 
 ___
 
@@ -66,7 +67,19 @@ Customize the labels of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:40](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableBody.tsx#L40)
+[components/TableBody.tsx:45](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L45)
+
+___
+
+### rowProps
+
+• `Optional` **rowProps**: [`TableRowProps`](../modules/components_TableBody.md#tablerowprops) \| (`row`: `TTableRowType`) => [`TableRowProps`](../modules/components_TableBody.md#tablerowprops)
+
+The props passed to the table rows under `tbody`.
+
+#### Defined in
+
+[components/TableBody.tsx:49](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L49)
 
 ## Methods
 
@@ -88,4 +101,4 @@ The function fired when any of the rows is clicked.
 
 #### Defined in
 
-[components/TableBody.tsx:44](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/TableBody.tsx#L44)
+[components/TableBody.tsx:51](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L51)

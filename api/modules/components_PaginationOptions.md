@@ -42,4 +42,4 @@ When `alwaysShowPagination` is set to `false`, then this component will be visua
 
 #### Defined in
 
-[components/PaginationOptions.tsx:81](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/PaginationOptions.tsx#L81)
+[components/PaginationOptions.tsx:81](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/PaginationOptions.tsx#L81)

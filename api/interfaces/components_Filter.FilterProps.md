@@ -24,7 +24,7 @@ Custom classes for the component.
 
 #### Defined in
 
-[components/Filter.tsx:33](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/Filter.tsx#L33)
+[components/Filter.tsx:33](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/Filter.tsx#L33)
 
 ___
 
@@ -43,7 +43,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/Filter.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/Filter.tsx#L35)
+[components/Filter.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/Filter.tsx#L35)
 
 ___
 
@@ -56,4 +56,4 @@ By default, the text is "Enter text...".
 
 #### Defined in
 
-[components/Filter.tsx:31](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/Filter.tsx#L31)
+[components/Filter.tsx:31](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/Filter.tsx#L31)

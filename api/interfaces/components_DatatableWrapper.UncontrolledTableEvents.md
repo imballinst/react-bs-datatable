@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:124](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/DatatableWrapper.tsx#L124)
+[components/DatatableWrapper.tsx:124](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/DatatableWrapper.tsx#L124)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:120](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/DatatableWrapper.tsx#L120)
+[components/DatatableWrapper.tsx:120](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/DatatableWrapper.tsx#L120)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:122](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/DatatableWrapper.tsx#L122)
+[components/DatatableWrapper.tsx:122](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/DatatableWrapper.tsx#L122)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:123](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/DatatableWrapper.tsx#L123)
+[components/DatatableWrapper.tsx:123](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/DatatableWrapper.tsx#L123)
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:121](https://github.com/imballinst/react-bs-datatable/blob/5e1a57a/src/components/DatatableWrapper.tsx#L121)
+[components/DatatableWrapper.tsx:121](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/DatatableWrapper.tsx#L121)
