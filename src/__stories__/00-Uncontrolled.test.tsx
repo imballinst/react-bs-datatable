@@ -20,6 +20,33 @@ describe('Filter, sort, pagination', () => {
     rowsPerPageOptions: [8, 16, 24, 32]
   };
 
+  describe('initial states', () => {
+    test('initial sort', () => {
+      const { getByRole } = render(
+        <FilterSortPagination
+          {...DEFAULT_PROPS}
+          sortProps={{
+            initialState: {
+              prop: 'score',
+              order: 'desc'
+            }
+          }}
+        />
+      );
+
+      let tableElement = getByRole('table');
+
+      expect(
+        tableElement
+          .querySelector('tbody')
+          ?.querySelectorAll('tr')
+          .item(0)
+          .querySelectorAll('td')
+          .item(0).innerHTML
+      ).toBe('Suzette');
+    });
+  });
+
   test('normal use case', () => {
     const {
       getByText,
