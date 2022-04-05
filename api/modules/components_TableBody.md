@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[components/TableBody.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L35)
+[components/TableBody.tsx:35](https://github.com/imballinst/react-bs-datatable/blob/1c0226c/src/components/TableBody.tsx#L35)
 
 ## Functions
 
@@ -55,4 +55,4 @@ such as `tr` and `td` tags.
 
 #### Defined in
 
-[components/TableBody.tsx:73](https://github.com/imballinst/react-bs-datatable/blob/e17bad5/src/components/TableBody.tsx#L73)
+[components/TableBody.tsx:73](https://github.com/imballinst/react-bs-datatable/blob/1c0226c/src/components/TableBody.tsx#L73)
