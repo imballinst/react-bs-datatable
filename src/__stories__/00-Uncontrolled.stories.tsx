@@ -170,7 +170,8 @@ function StoryTable({
   scoreCellColumnColor,
   // For on click row event.
   rowOnClickText,
-  rowOnClickFn
+  rowOnClickFn,
+  sortProps = {}
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -191,6 +192,8 @@ function StoryTable({
   // For on click row event.
   rowOnClickText?: string;
   rowOnClickFn?: (name: string) => void;
+  // Additional sort props.
+  sortProps?: DatatableWrapperProps<StoryColumnType>['sortProps'];
 }) {
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
@@ -241,7 +244,10 @@ function StoryTable({
     <DatatableWrapper
       body={json}
       headers={headers}
-      sortProps={SORT_PROPS}
+      sortProps={{
+        ...SORT_PROPS,
+        ...sortProps
+      }}
       paginationOptionsProps={{
         initialState: {
           rowsPerPage,
