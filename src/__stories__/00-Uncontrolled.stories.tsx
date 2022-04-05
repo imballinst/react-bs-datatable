@@ -258,7 +258,9 @@ function StoryTable({
   rowOnClickText,
   rowOnClickFn,
   tableEventsRef,
-  children
+  children,
+  // Additional sort props.
+  sortProps = {}
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -285,6 +287,8 @@ function StoryTable({
   // but keep the table uncontrolled.
   tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
   children?: ReactNode;
+  // Additional sort props.
+  sortProps?: DatatableWrapperProps<StoryColumnType>['sortProps'];
 }) {
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
@@ -335,7 +339,10 @@ function StoryTable({
     <DatatableWrapper
       body={json}
       headers={headers}
-      sortProps={SORT_PROPS}
+      sortProps={{
+        ...SORT_PROPS,
+        ...sortProps
+      }}
       tableEventsRef={tableEventsRef}
       paginationOptionsProps={{
         initialState: {
