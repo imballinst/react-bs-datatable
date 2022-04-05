@@ -474,7 +474,10 @@ function getDefaultDatatableState<TTableRowType = TableRowType>({
   | 'checkboxProps'
   | 'headers'
 >): DatatableState {
-  const defaultSort: SortType = { order: 'asc', prop: '' };
+  const defaultSort: SortType = sortProps?.initialState || {
+    order: 'asc',
+    prop: ''
+  };
   const checkbox: Record<string, CheckboxState> =
     checkboxProps?.initialState || {};
   let isFilterable = filterProps !== undefined;
@@ -482,14 +485,9 @@ function getDefaultDatatableState<TTableRowType = TableRowType>({
   for (const header of headers) {
     const prop = header.prop.toString();
 
-    // Set the default sort header.
-    if (
+    if (defaultSort.prop === '' && header.isSortable) {
       // If the sorted prop is still "empty", then we assign it with the current header.
-      (defaultSort.prop === '' && header.isSortable) ||
-      // Or, if the header prop matches the initial state, then set it as well.
-      prop === sortProps?.initialState?.prop
-    ) {
-      defaultSort.prop = prop;
+      defaultSort.prop = String(header.prop);
     }
 
     // Set the default checkbox values, if not provided from `checkboxProps`.
