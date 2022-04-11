@@ -23,6 +23,7 @@ prop of the `DatatableWrapper` props, as well as the `TableHeader` props.
 - [isFilterable](helpers_types.TableColumnType.md#isfilterable)
 - [isSortable](helpers_types.TableColumnType.md#issortable)
 - [prop](helpers_types.TableColumnType.md#prop)
+- [thProps](helpers_types.TableColumnType.md#thprops)
 - [title](helpers_types.TableColumnType.md#title)
 
 ### Methods
@@ -48,7 +49,7 @@ the same thing.
 
 #### Defined in
 
-[helpers/types.ts:90](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L90)
+[helpers/types.ts:98](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L98)
 
 ___
 
@@ -67,7 +68,7 @@ The props passed to the table columns under `tbody`.
 
 #### Defined in
 
-[helpers/types.ts:53](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L53)
+[helpers/types.ts:61](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L61)
 
 ___
 
@@ -87,7 +88,7 @@ the column will be a checkbox, both the headers and the rest of the rows.
 
 #### Defined in
 
-[helpers/types.ts:79](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L79)
+[helpers/types.ts:87](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L87)
 
 ___
 
@@ -101,7 +102,7 @@ will not be rendered.
 
 #### Defined in
 
-[helpers/types.ts:70](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L70)
+[helpers/types.ts:78](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L78)
 
 ___
 
@@ -113,7 +114,7 @@ Determines whether the column is sortable or not.
 
 #### Defined in
 
-[helpers/types.ts:74](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L74)
+[helpers/types.ts:82](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L82)
 
 ___
 
@@ -127,7 +128,19 @@ have unique `prop` field.
 
 #### Defined in
 
-[helpers/types.ts:43](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L43)
+[helpers/types.ts:48](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L48)
+
+___
+
+### thProps
+
+• `Optional` **thProps**: `ThHTMLAttributes`<`HTMLTableCellElement`\>
+
+The props passed to the table headers under `tbody`.
+
+#### Defined in
+
+[helpers/types.ts:58](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L58)
 
 ___
 
@@ -139,7 +152,7 @@ The title for the header.
 
 #### Defined in
 
-[helpers/types.ts:45](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L45)
+[helpers/types.ts:50](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L50)
 
 ## Methods
 
@@ -161,7 +174,7 @@ Custom render the table body cell. This is a function with the row data as param
 
 #### Defined in
 
-[helpers/types.ts:51](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L51)
+[helpers/types.ts:56](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L56)
 
 ___
 
@@ -184,4 +197,4 @@ Custom render the table header cell.
 
 #### Defined in
 
-[helpers/types.ts:47](https://github.com/imballinst/react-bs-datatable/blob/8a8b804/src/helpers/types.ts#L47)
+[helpers/types.ts:52](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/helpers/types.ts#L52)
