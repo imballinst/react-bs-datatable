@@ -1,4 +1,9 @@
-import { CSSProperties, MutableRefObject, ReactNode } from 'react';
+import {
+  CSSProperties,
+  MutableRefObject,
+  ReactNode,
+  ThHTMLAttributes
+} from 'react';
 
 /**
  * The sort type used in the states.
@@ -49,6 +54,9 @@ export interface TableColumnType<T> {
    * Custom render the table body cell. This is a function with the row data as parameter.
    */
   cell?: (row: T) => ReactNode;
+  /** The props passed to the table headers under `tbody`. */
+  thProps?: ThHTMLAttributes<HTMLTableCellElement>;
+  // TODO(imballinst): update `cellProps` to return entire props like `thProps` above.
   /** The props passed to the table columns under `tbody`. */
   cellProps?: {
     /**

@@ -8,8 +8,26 @@ import {
   CustomTableRowProps,
   RowOnClick,
   UncontrolledWithRefEvents,
-  RaisedTableContext
+  RaisedTableContext,
+  CustomThProps
 } from './00-Uncontrolled.stories';
+
+describe('Basic use cases', () => {
+  test('thProps', () => {
+    const { getByRole } = render(<CustomThProps thClassName="th--score" />);
+
+    let tableElement = getByRole('table');
+
+    expect(
+      tableElement
+        .querySelector('thead')
+        ?.querySelectorAll('tr')
+        .item(0)
+        .querySelectorAll('th')
+        .item(4).className
+    ).toBe('thead-th th--score');
+  });
+});
 
 describe('Filter, sort, pagination', () => {
   const DEFAULT_PROPS = {
