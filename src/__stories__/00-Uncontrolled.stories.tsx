@@ -148,6 +148,43 @@ CustomTableRowProps.args = {
   })
 };
 
+// TODO(imballinst): migrate all stories so they are composable like this,
+// instead of adding all to StoryTable props which can result in unmaintainability.
+export const CustomThProps = (() => {
+  function CustomThPropsTemplate({ thClassName }: { thClassName?: string }) {
+    const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
+      (header) => ({
+        ...header,
+        thProps:
+          header.prop === 'score'
+            ? {
+                className: thClassName
+              }
+            : undefined
+      })
+    );
+
+    return (
+      <DatatableWrapper body={json} headers={headers}>
+        <Table>
+          <TableHeader />
+          <TableBody />
+        </Table>
+      </DatatableWrapper>
+    );
+  }
+
+  return CustomThPropsTemplate as ComponentStory<typeof CustomThPropsTemplate>;
+})();
+CustomThProps.storyName = 'Custom "score" table header classname';
+CustomThProps.argTypes = {
+  thClassName: {
+    name: '"Score" table header classname',
+    type: 'string',
+    defaultValue: 'hello-world'
+  }
+};
+
 export const RowOnClick = Template.bind({});
 RowOnClick.storyName = 'Adding row on click event';
 RowOnClick.argTypes = {
