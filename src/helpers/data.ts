@@ -1,7 +1,7 @@
 import {
   ColumnProcessObj,
-  TableColumnType,
   SortType,
+  TableColumnType,
   TableRowType
 } from './types';
 
@@ -67,16 +67,19 @@ export function filterData<TTableRowType extends TableRowType>(
       if (header.isFilterable) {
         let columnValue = element[header.prop];
 
-        if (typeof columnValue !== 'string') {
-          // Convert to string if it is not a string.
-          columnValue = columnValue.toString();
-        }
+        // Only process non-null values.
+        if (columnValue !== null && columnValue !== undefined) {
+          if (typeof columnValue !== 'string') {
+            // Convert to string if it is not a string.
+            columnValue = columnValue.toString();
+          }
 
-        columnValue = columnValue.toLowerCase();
-        isElementIncluded = columnValue.includes(lowercased);
+          columnValue = columnValue.toLowerCase();
+          isElementIncluded = columnValue.includes(lowercased);
 
-        if (isElementIncluded) {
-          break;
+          if (isElementIncluded) {
+            break;
+          }
         }
       }
     }
