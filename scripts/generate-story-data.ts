@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'fs/promises';
-import path from 'path';
+
 import { format } from 'date-fns';
+import path from 'path';
 
 const NAMES = [
   'Aaren',
@@ -105,7 +106,8 @@ const NAMES = [
   'Wileen',
   'Yetty'
 ];
-const PLANETS = ['Earth', 'Mars', 'Saturn', 'Jupyter', 'Venus'];
+// Include null in PLANETS to test searching against null values.
+const PLANETS = ['Earth', 'Mars', 'Saturn', 'Jupyter', 'Venus', null];
 const NUMBER_OF_ENTRIES = 60;
 
 main();

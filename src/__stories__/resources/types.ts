@@ -6,7 +6,8 @@ export interface StoryColumnType {
   date: string;
   score: number;
   status: string;
-  location: string;
+  // This is nullable in order to intentionally test null values when searching.
+  location: string | null;
   // This is only for the headers and not used in the body whatsoever.
   checkbox?: boolean;
 }
