@@ -4,9 +4,6 @@
 
 [components/TableBody](../modules/components_TableBody.md).TableBodyClasses
 
-This is an interface for customizing the classes for
-the `TableBody` component.
-
 ## Table of contents
 
 ### Properties
@@ -25,7 +22,7 @@ The class for the `tbody` tag.
 
 #### Defined in
 
-[components/TableBody.tsx:28](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L28)
+[components/TableBody.tsx:23](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L23)
 
 ___
 
@@ -37,7 +34,7 @@ The class for the `td` tags inside each `tr` tag.
 
 #### Defined in
 
-[components/TableBody.tsx:32](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L32)
+[components/TableBody.tsx:27](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L27)
 
 ___
 
@@ -49,4 +46,4 @@ The class for the `tr` tags inside `tbody`.
 
 #### Defined in
 
-[components/TableBody.tsx:30](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L30)
+[components/TableBody.tsx:25](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L25)

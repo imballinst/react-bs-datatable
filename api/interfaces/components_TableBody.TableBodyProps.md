@@ -16,6 +16,7 @@ This is an interface for `TableBody` component props.
 
 ### Properties
 
+- [children](components_TableBody.TableBodyProps.md#children)
 - [classes](components_TableBody.TableBodyProps.md#classes)
 - [controlledProps](components_TableBody.TableBodyProps.md#controlledprops)
 - [labels](components_TableBody.TableBodyProps.md#labels)
@@ -27,6 +28,18 @@ This is an interface for `TableBody` component props.
 
 ## Properties
 
+### children
+
+• `Optional` **children**: `Element` \| (`rows`: `TTableRowType`[]) => `Element` \| `Element`[] \| `Element`[]
+
+The function to customize the table rows.
+
+#### Defined in
+
+[components/TableBody.tsx:68](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L68)
+
+___
+
 ### classes
 
 • `Optional` **classes**: [`TableBodyClasses`](components_TableBody.TableBodyClasses.md)
@@ -35,27 +48,19 @@ Customize the classes of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:47](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L47)
+[components/TableBody.tsx:60](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L60)
 
 ___
 
 ### controlledProps
 
-• `Optional` **controlledProps**: `Object`
+• `Optional` **controlledProps**: `TableBodyControlledProps`
 
 Props to make the component controlled.
 
-#### Type declaration
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `checkboxState?` | `Record`<`string`, [`CheckboxState`](helpers_types.CheckboxState.md)\> | A record, which key is the column prop name and the value is of type `CheckboxState`. |
-| `filteredDataLength?` | `number` | The filtered data length. When not using filter control, then this should equal to the table body's length. |
-| `onCheckboxChange?` | [`CheckboxOnChange`](../modules/helpers_types.md#checkboxonchange) | The function fired when any checkbox in the table changes. |
-
 #### Defined in
 
-[components/TableBody.tsx:53](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L53)
+[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L66)
 
 ___
 
@@ -67,19 +72,19 @@ Customize the labels of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:45](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L45)
+[components/TableBody.tsx:58](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L58)
 
 ___
 
 ### rowProps
 
-• `Optional` **rowProps**: [`TableRowProps`](../modules/components_TableBody.md#tablerowprops) \| (`row`: `TTableRowType`) => [`TableRowProps`](../modules/components_TableBody.md#tablerowprops)
+• `Optional` **rowProps**: [`HtmlTrProps`](../modules/components_TableBody.md#htmltrprops) \| (`row`: `TTableRowType`) => [`HtmlTrProps`](../modules/components_TableBody.md#htmltrprops)
 
 The props passed to the table rows under `tbody`.
 
 #### Defined in
 
-[components/TableBody.tsx:49](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L49)
+[components/TableBody.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L62)
 
 ## Methods
 
@@ -101,4 +106,4 @@ The function fired when any of the rows is clicked.
 
 #### Defined in
 
-[components/TableBody.tsx:51](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L51)
+[components/TableBody.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L64)

@@ -4,8 +4,6 @@
 
 [components/TableBody](../modules/components_TableBody.md).TableBodyLabels
 
-This is an interface to customize the pagination options labels.
-
 ## Table of contents
 
 ### Properties
@@ -23,4 +21,4 @@ no data (empty array), or no matching found for the filtered text.
 
 #### Defined in
 
-[components/TableBody.tsx:19](https://github.com/imballinst/react-bs-datatable/blob/5f07b72/src/components/TableBody.tsx#L19)
+[components/TableBody.tsx:18](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L18)
