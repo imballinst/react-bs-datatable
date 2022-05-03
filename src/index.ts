@@ -21,12 +21,17 @@ export type {
   PaginationOptionsLabels
 } from './components/PaginationOptions';
 
-export { TableBody } from './components/TableBody';
+export {
+  TableBody,
+  TableRow,
+  EmptyTablePlaceholder
+} from './components/TableBody';
 export type {
   TableBodyProps,
   TableBodyClasses,
   TableRowProps,
-  TableBodyLabels
+  TableBodyLabels,
+  EmptyTablePlaceholderProps
 } from './components/TableBody';
 
 export { TableHeader } from './components/TableHeader';

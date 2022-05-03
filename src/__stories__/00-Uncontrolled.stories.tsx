@@ -8,9 +8,11 @@ import { StoryColumnType } from './resources/types';
 import { STORY_HEADERS, STORY_PROP_TO_OPTION_NAME } from './resources/shared';
 import { TableHeader } from '../components/TableHeader';
 import {
-  TableRowProps,
+  EmptyTablePlaceholder,
+  HtmlTrProps,
   TableBody,
-  TableBodyProps
+  TableBodyProps,
+  TableRow
 } from '../components/TableBody';
 import {
   DatatableWrapper,
@@ -143,7 +145,7 @@ CustomCellRender.argTypes = {
 export const CustomTableRowProps = Template.bind({});
 CustomTableRowProps.storyName = 'Custom row props depending depending on score';
 CustomTableRowProps.args = {
-  rowProps: (row) => ({
+  rowProps: (row: StoryColumnType) => ({
     style: { background: `rgba(128, 0, 0, ${row.score / 200})` }
   })
 };
@@ -234,7 +236,131 @@ RaisedTableContext.args = {
   rowsPerPageOptions: [5, 10, 15, 20]
 };
 
-// This example is deprecated. Prefer use the `RaisedTableContext` instead.
+const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
+  rowOnClickFn,
+  sortableFields,
+  filterableFields,
+  rowsPerPage = 10,
+  rowsPerPageOptions = [5, 10, 15, 20],
+  alwaysShowPagination
+}) => {
+  const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
+    (header) => ({
+      ...header,
+      isSortable: sortableFields?.includes(
+        STORY_PROP_TO_OPTION_NAME[header.prop]
+      ),
+      isFilterable: filterableFields?.includes(
+        STORY_PROP_TO_OPTION_NAME[header.prop]
+      )
+    })
+  );
+  const checkboxControl = <BulkCheckboxControl />;
+  headers.push({
+    prop: 'checkbox',
+    checkbox: { idProp: 'name', className: 'table-checkbox' },
+    alignment: { horizontal: 'center' }
+  });
+
+  const header = headers.find((h) => h.prop === 'score');
+  if (header) {
+    header.cellProps = {
+      style: (row) => ({
+        background: row.score >= 50 ? 'unset' : '#fafafa'
+      })
+    };
+  }
+
+  const onRowClick = (row: StoryColumnType) => {
+    alert(`Clicked row containing name ${row.name}.`);
+
+    if (rowOnClickFn) {
+      rowOnClickFn(row.name);
+    }
+  };
+  const modifiedJson = [...json];
+  modifiedJson[3].status = 'unknown';
+
+  return (
+    <DatatableWrapper
+      body={json}
+      headers={headers}
+      sortProps={SORT_PROPS}
+      paginationOptionsProps={{
+        initialState: {
+          rowsPerPage,
+          options: rowsPerPageOptions
+        }
+      }}
+    >
+      <Row className="mb-4">
+        <Col
+          xs={12}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
+          <Filter />
+        </Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
+        >
+          <PaginationOptions alwaysShowPagination={alwaysShowPagination} />
+        </Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
+          <Pagination alwaysShowPagination={alwaysShowPagination} />
+        </Col>
+        <Col xs={12} className="mt-2">
+          {checkboxControl}
+        </Col>
+      </Row>
+      <Table>
+        <TableHeader />
+        <TableBody<StoryColumnType>>
+          {(rows) =>
+            rows.length === 0 ? (
+              <EmptyTablePlaceholder />
+            ) : (
+              rows.map((rowData) =>
+                rowData.status === 'unknown' ? (
+                  <tr key={rowData.username}>
+                    <td colSpan={headers.length}>Row status unknown</td>
+                  </tr>
+                ) : (
+                  <TableRow
+                    key={rowData.username}
+                    rowData={rowData}
+                    onRowClick={onRowClick}
+                  />
+                )
+              )
+            )
+          }
+        </TableBody>
+      </Table>
+    </DatatableWrapper>
+  );
+};
+
+export const ComposedTableRow = ComposedTableRowTemplate.bind({});
+ComposedTableRow.storyName = 'Composed table rows';
+ComposedTableRow.args = {
+  sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
+  filterableFields: ['Name', 'Username', 'Location'],
+  alwaysShowPagination: true,
+  rowsPerPage: 10,
+  rowsPerPageOptions: [5, 10, 15, 20]
+};
+
+// TODO(imballinst): this story example is deprecated and should be removed
+// in the next major update.
 const RefTemplate: ComponentStory<typeof StoryTable> = (args) => {
   const tableEventsRef = useRef<UncontrolledTableEvents>();
   return (
@@ -316,7 +442,7 @@ function StoryTable({
   // For custom rendering of score column.
   scoreCellColumnColor?: string;
   // For custom props of row depending on score column.
-  rowProps?: TableRowProps | ((row: any) => TableRowProps);
+  rowProps?: HtmlTrProps | ((row: any) => HtmlTrProps);
   // For on click row event.
   rowOnClickText?: string;
   rowOnClickFn?: (name: string) => void;
