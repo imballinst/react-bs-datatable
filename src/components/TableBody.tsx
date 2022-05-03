@@ -55,7 +55,10 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   /** Props to make the component controlled. */
   controlledProps?: TableBodyControlledProps;
   /** The function to customize the table rows. */
-  children?: (rows: TTableRowType[]) => JSX.Element | JSX.Element[];
+  children?:
+    | ((rows: TTableRowType[]) => JSX.Element | JSX.Element[])
+    | JSX.Element
+    | JSX.Element[];
 }
 
 /**
@@ -80,7 +83,11 @@ export function TableBody<TTableRowType extends TableRowType>({
   let bodyContent: JSX.Element | JSX.Element[];
 
   if (children) {
-    bodyContent = children(data);
+    if (typeof children === 'function') {
+      bodyContent = children(data);
+    } else {
+      bodyContent = children;
+    }
   } else {
     const body = [];
     const dataLength = data.length;

@@ -4,4 +4,6 @@ import '@testing-library/jest-dom';
 // Storybook's preview file location
 import * as globalStorybookConfig from './.storybook/preview';
 
+window.alert = () => {};
+
 setGlobalConfig(globalStorybookConfig);
