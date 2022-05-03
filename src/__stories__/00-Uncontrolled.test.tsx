@@ -691,30 +691,30 @@ describe('composed table rows', () => {
     });
   });
 
-  // describe('Custom row on click', () => {
-  //   const DEFAULT_PROPS = {
-  //     sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
-  //     filterableFields: ['Name', 'Username', 'Location'],
-  //     // Test arbitrary numbers so that the last page has a different page number.
-  //     rowsPerPage: 8,
-  //     rowsPerPageOptions: [8, 16, 24, 32]
-  //   };
-  //   const clickFn = jest.fn((name) => name);
+  describe('Custom row on click', () => {
+    const DEFAULT_PROPS = {
+      sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
+      filterableFields: ['Name', 'Username', 'Location'],
+      // Test arbitrary numbers so that the last page has a different page number.
+      rowsPerPage: 8,
+      rowsPerPageOptions: [8, 16, 24, 32]
+    };
+    const clickFn = jest.fn((name) => name);
 
-  //   test('custom score cell color when number is below 50', () => {
-  //     const { getByRole } = render(
-  //       <ComposedTableRow {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
-  //     );
+    test('custom score cell color when number is below 50', () => {
+      const { getByRole } = render(
+        <ComposedTableRow {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
+      );
 
-  //     const tableElement = getByRole('table');
-  //     const allTableRows = tableElement
-  //       .querySelector('tbody')
-  //       ?.querySelectorAll('tr');
+      const tableElement = getByRole('table');
+      const allTableRows = tableElement
+        .querySelector('tbody')
+        ?.querySelectorAll('tr');
 
-  //     // Test click the row.
-  //     allTableRows?.item(0).click();
-  //     expect(clickFn).toBeCalledTimes(1);
-  //     expect(clickFn.mock.calls[0][0]).toBe('Aaren');
-  //   });
-  // });
+      // Test click the row.
+      allTableRows?.item(0).click();
+      expect(clickFn).toBeCalledTimes(1);
+      expect(clickFn.mock.calls[0][0]).toBe('Aaren');
+    });
+  });
 });
