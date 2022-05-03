@@ -30,6 +30,7 @@ export type {
   TableBodyProps,
   TableBodyClasses,
   TableRowProps,
+  TableBodyLabels,
   EmptyTablePlaceholderProps
 } from './components/TableBody';
 

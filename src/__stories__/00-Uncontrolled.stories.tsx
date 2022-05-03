@@ -9,6 +9,7 @@ import { STORY_HEADERS, STORY_PROP_TO_OPTION_NAME } from './resources/shared';
 import { TableHeader } from '../components/TableHeader';
 import {
   EmptyTablePlaceholder,
+  HtmlTrProps,
   TableBody,
   TableBodyProps,
   TableRow
@@ -138,6 +139,51 @@ CustomCellRender.argTypes = {
     controls: {
       type: 'color'
     }
+  }
+};
+
+export const CustomTableRowProps = Template.bind({});
+CustomTableRowProps.storyName = 'Custom row props depending depending on score';
+CustomTableRowProps.args = {
+  rowProps: (row: StoryColumnType) => ({
+    style: { background: `rgba(128, 0, 0, ${row.score / 200})` }
+  })
+};
+
+// TODO(imballinst): migrate all stories so they are composable like this,
+// instead of adding all to StoryTable props which can result in unmaintainability.
+export const CustomThProps = (() => {
+  function CustomThPropsTemplate({ thClassName }: { thClassName?: string }) {
+    const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
+      (header) => ({
+        ...header,
+        thProps:
+          header.prop === 'score'
+            ? {
+                className: thClassName
+              }
+            : undefined
+      })
+    );
+
+    return (
+      <DatatableWrapper body={json} headers={headers}>
+        <Table>
+          <TableHeader />
+          <TableBody />
+        </Table>
+      </DatatableWrapper>
+    );
+  }
+
+  return CustomThPropsTemplate as ComponentStory<typeof CustomThPropsTemplate>;
+})();
+CustomThProps.storyName = 'Custom "score" table header classname';
+CustomThProps.argTypes = {
+  thClassName: {
+    name: '"Score" table header classname',
+    type: 'string',
+    defaultValue: 'hello-world'
   }
 };
 
@@ -369,11 +415,15 @@ function StoryTable({
   prevPage,
   // For custom rendering of score column.
   scoreCellColumnColor,
+  // For custom props of row depending on score column.
+  rowProps,
   // For on click row event.
   rowOnClickText,
   rowOnClickFn,
   tableEventsRef,
-  children
+  children,
+  // Additional sort props.
+  sortProps = {}
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -391,6 +441,8 @@ function StoryTable({
   prevPage?: string;
   // For custom rendering of score column.
   scoreCellColumnColor?: string;
+  // For custom props of row depending on score column.
+  rowProps?: HtmlTrProps | ((row: any) => HtmlTrProps);
   // For on click row event.
   rowOnClickText?: string;
   rowOnClickFn?: (name: string) => void;
@@ -398,6 +450,8 @@ function StoryTable({
   // but keep the table uncontrolled.
   tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
   children?: ReactNode;
+  // Additional sort props.
+  sortProps?: DatatableWrapperProps<StoryColumnType>['sortProps'];
 }) {
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
@@ -448,7 +502,10 @@ function StoryTable({
     <DatatableWrapper
       body={json}
       headers={headers}
-      sortProps={SORT_PROPS}
+      sortProps={{
+        ...SORT_PROPS,
+        ...sortProps
+      }}
       tableEventsRef={tableEventsRef}
       paginationOptionsProps={{
         initialState: {
@@ -494,7 +551,7 @@ function StoryTable({
       </Row>
       <Table>
         <TableHeader />
-        <TableBody onRowClick={rowOnClick} />
+        <TableBody onRowClick={rowOnClick} rowProps={rowProps} />
       </Table>
     </DatatableWrapper>
   );

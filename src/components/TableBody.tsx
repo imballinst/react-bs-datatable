@@ -42,6 +42,14 @@ interface TableBodyControlledProps {
   filteredDataLength?: number;
 }
 
+export type HtmlTrProps = Omit<
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLTableRowElement>,
+    HTMLTableRowElement
+  >,
+  'onClick'
+>;
+
 /**
  * This is an interface for `TableBody` component props.
  */
@@ -50,6 +58,8 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   labels?: TableBodyLabels;
   /** Customize the classes of the `TableBody` component. */
   classes?: TableBodyClasses;
+  /** The props passed to the table rows under `tbody`. */
+  rowProps?: HtmlTrProps | ((row: TTableRowType) => HtmlTrProps);
   /** The function fired when any of the rows is clicked. */
   onRowClick?: (row: TTableRowType) => void;
   /** Props to make the component controlled. */
@@ -68,6 +78,7 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
 export function TableBody<TTableRowType extends TableRowType>({
   labels,
   classes,
+  rowProps,
   onRowClick: onRowClickProp,
   controlledProps,
   children
@@ -194,6 +205,7 @@ export function TableBody<TTableRowType extends TableRowType>({
           <TableRow
             key={rowIdx}
             rowData={data[rowIdx]}
+            rowProps={rowProps}
             classes={{ td: classes?.td, tr: classes?.tr }}
             controlledProps={controlledProps}
             onRowClick={onRowClickProp}
@@ -233,6 +245,8 @@ export interface TableRowProps<TTableRowType extends TableRowType> {
   classes?: Omit<TableBodyClasses, 'tbody'>;
   /** Props to make the component controlled. */
   controlledProps?: TableBodyProps<TTableRowType>['controlledProps'];
+  /** Props to the `tr` element. */
+  rowProps?: TableBodyProps<TTableRowType>['rowProps'];
 }
 
 /**
@@ -262,7 +276,8 @@ export function TableRow<TTableRowType extends TableRowType>({
   rowData,
   onRowClick: onRowClickProp,
   classes,
-  controlledProps
+  controlledProps,
+  rowProps
 }: TableRowProps<TTableRowType>) {
   const {
     headers,
@@ -371,8 +386,24 @@ export function TableRow<TTableRowType extends TableRowType>({
     );
   }
 
+  let passedRowProps: HtmlTrProps = {};
+
+  if (typeof rowProps === 'function') {
+    passedRowProps = rowProps(rowData);
+  } else if (rowProps !== undefined) {
+    passedRowProps = rowProps;
+  }
+
   return (
-    <tr className={makeClasses('tbody-tr', classes?.tr)} onClick={onRowClick}>
+    <tr
+      {...passedRowProps}
+      className={makeClasses(
+        'tbody-tr',
+        classes?.tr,
+        passedRowProps?.className
+      )}
+      onClick={onRowClick}
+    >
       {row}
     </tr>
   );

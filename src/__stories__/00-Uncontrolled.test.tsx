@@ -5,11 +5,31 @@ import {
   FilterSortPagination,
   CustomLabels,
   CustomCellRender,
+  CustomTableRowProps,
   RowOnClick,
   UncontrolledWithRefEvents,
   RaisedTableContext,
+  CustomThProps,
   ComposedTableRow
 } from './00-Uncontrolled.stories';
+import { StoryColumnType } from './resources/types';
+
+describe('Basic use cases', () => {
+  test('thProps', () => {
+    const { getByRole } = render(<CustomThProps thClassName="th--score" />);
+
+    let tableElement = getByRole('table');
+
+    expect(
+      tableElement
+        .querySelector('thead')
+        ?.querySelectorAll('tr')
+        .item(0)
+        .querySelectorAll('th')
+        .item(4).className
+    ).toBe('thead-th th--score');
+  });
+});
 
 describe('Filter, sort, pagination', () => {
   const DEFAULT_PROPS = {
@@ -19,6 +39,33 @@ describe('Filter, sort, pagination', () => {
     rowsPerPage: 8,
     rowsPerPageOptions: [8, 16, 24, 32]
   };
+
+  describe('initial states', () => {
+    test('initial sort', () => {
+      const { getByRole } = render(
+        <FilterSortPagination
+          {...DEFAULT_PROPS}
+          sortProps={{
+            initialState: {
+              prop: 'score',
+              order: 'desc'
+            }
+          }}
+        />
+      );
+
+      let tableElement = getByRole('table');
+
+      expect(
+        tableElement
+          .querySelector('tbody')
+          ?.querySelectorAll('tr')
+          .item(0)
+          .querySelectorAll('td')
+          .item(0).innerHTML
+      ).toBe('Suzette');
+    });
+  });
 
   test('normal use case', () => {
     const {
@@ -279,6 +326,56 @@ describe('Custom cell render', () => {
           // When bigger than 50, then it has no background.
           expect(el.style.background).toBe(
             Number(el.innerHTML) >= 50 ? '' : BGCOLOR
+          );
+        }
+      });
+    });
+  });
+});
+
+describe('Custom table row props', () => {
+  const DEFAULT_PROPS = {
+    sortableFields: ['Name', 'Username', 'Last Update', 'Score'],
+    filterableFields: ['Name', 'Username', 'Location'],
+    // Test arbitrary numbers so that the last page has a different page number.
+    rowsPerPage: 8,
+    rowsPerPageOptions: [8, 16, 24, 32]
+  };
+
+  test('custom row color depending on number', () => {
+    const { getByRole } = render(
+      <CustomTableRowProps
+        {...DEFAULT_PROPS}
+        rowProps={(row: StoryColumnType) => ({
+          style: { background: `rgba(128, 0, 0, ${row.score / 200})` }
+        })}
+      />
+    );
+
+    const tableElement = getByRole('table');
+    const allTableHeaders = tableElement
+      .querySelector('thead')
+      ?.querySelectorAll('th');
+
+    let scoreColumnIdx = 0;
+
+    allTableHeaders?.forEach((el, idx) => {
+      if (el.innerHTML.includes('Score')) {
+        scoreColumnIdx = idx;
+      }
+    });
+
+    const allTableRows = tableElement
+      .querySelector('tbody')
+      ?.querySelectorAll('tr');
+
+    allTableRows?.forEach((row) => {
+      const tds = row.querySelectorAll('td');
+
+      tds.forEach((el, idx) => {
+        if (idx === scoreColumnIdx) {
+          expect(row.style.background).toBe(
+            `rgba(128, 0, 0, ${Number(el.innerHTML) / 200})`
           );
         }
       });
