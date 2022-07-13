@@ -28,7 +28,7 @@ interface FontAwesomeProps {
  */
 export default function FontAwesome({ icon, className }: FontAwesomeProps) {
   const faIconString = `fa-${icon}`;
-  const faClass = makeClasses('fas', faIconString, className);
+  const faClass = makeClasses('fa-solid', faIconString, className);
 
   return <FontAwesomeIcon className={faClass} icon={ICONS[icon]} />;
 }
