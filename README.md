@@ -35,13 +35,13 @@ Please read [this guide](./MIGRATION_GUIDE.md) if you are migrating from v2.
 With `npm`:
 
 ```bash
-npm install --save react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortawesome/fontawesome-svg-core@1 @fortawesome/free-solid-svg-icons@5 @fortawesome/react-fontawesome@0
+npm install --save react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortawesome/fontawesome-svg-core@6 @fortawesome/free-solid-svg-icons@6 @fortawesome/react-fontawesome@0
 ```
 
 With `yarn`:
 
 ```
-yarn add react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortawesome/fontawesome-svg-core@1 @fortawesome/free-solid-svg-icons@5 @fortawesome/react-fontawesome@0
+yarn add react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortawesome/fontawesome-svg-core@6 @fortawesome/free-solid-svg-icons@6 @fortawesome/react-fontawesome@0
 ```
 
 ## Usage
