@@ -22,7 +22,7 @@ The class for the `tbody` tag.
 
 #### Defined in
 
-[components/TableBody.tsx:23](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L23)
+[components/TableBody.tsx:23](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/TableBody.tsx#L23)
 
 ___
 
@@ -34,7 +34,7 @@ The class for the `td` tags inside each `tr` tag.
 
 #### Defined in
 
-[components/TableBody.tsx:27](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L27)
+[components/TableBody.tsx:27](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/TableBody.tsx#L27)
 
 ___
 
@@ -46,4 +46,4 @@ The class for the `tr` tags inside `tbody`.
 
 #### Defined in
 
-[components/TableBody.tsx:25](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L25)
+[components/TableBody.tsx:25](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/TableBody.tsx#L25)
