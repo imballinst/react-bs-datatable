@@ -36,7 +36,7 @@ The function to customize the table rows.
 
 #### Defined in
 
-[components/TableBody.tsx:68](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L68)
+[components/TableBody.tsx:68](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L68)
 
 ___
 
@@ -48,7 +48,7 @@ Customize the classes of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:60](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L60)
+[components/TableBody.tsx:60](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L60)
 
 ___
 
@@ -60,7 +60,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L66)
+[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L66)
 
 ___
 
@@ -72,7 +72,7 @@ Customize the labels of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:58](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L58)
+[components/TableBody.tsx:58](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L58)
 
 ___
 
@@ -84,7 +84,7 @@ The props passed to the table rows under `tbody`.
 
 #### Defined in
 
-[components/TableBody.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L62)
+[components/TableBody.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L62)
 
 ## Methods
 
@@ -106,4 +106,4 @@ The function fired when any of the rows is clicked.
 
 #### Defined in
 
-[components/TableBody.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/798f739/src/components/TableBody.tsx#L64)
+[components/TableBody.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/c9aa1a4/src/components/TableBody.tsx#L64)
