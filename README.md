@@ -46,7 +46,7 @@ yarn add react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortawesome/fontawe
 
 ## Usage
 
-For more complete examples, please visit this sandbox link (https://codesandbox.io/s/react-bs-datatable-3-zq7xe) or the Storybook demo (https://imballinst.github.io/react-bs-datatable).
+For more complete examples, please visit this sandbox link (https://codesandbox.io/s/react-bs-datatable-3-typescript-bn234b) or the Storybook demo (https://imballinst.github.io/react-bs-datatable).
 
 ```jsx
 import React from 'react';
