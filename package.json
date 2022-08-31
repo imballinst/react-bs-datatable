@@ -30,7 +30,7 @@
   "license": "MIT",
   "homepage": "https://github.com/imballinst/react-bs-datatable#readme",
   "devDependencies": {
-    "@actions/core": "1.6.0",
+    "@actions/core": "1.9.1",
     "@babel/core": "7.16.12",
     "@babel/preset-env": "7.3.4",
     "@babel/preset-react": "7.0.0",
