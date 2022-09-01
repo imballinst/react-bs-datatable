@@ -87,7 +87,7 @@ const ControlledComposedTableRowTemplate: ComponentStory<
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageProp);
   const [maxPage, setMaxPage] = useState(1);
 
-  const onFilter = useCallback((text) => {
+  const onFilterChange = useCallback((text) => {
     setFilter(text);
     setCurrentPage(1);
   }, []);
@@ -139,7 +139,7 @@ const ControlledComposedTableRowTemplate: ComponentStory<
           lg={4}
           className="d-flex flex-col justify-content-end align-items-end"
         >
-          <Filter controlledProps={{ filter, onFilter }} />
+          <Filter controlledProps={{ filter, onFilterChange }} />
         </Col>
         <Col
           xs={12}
@@ -233,7 +233,7 @@ function AsyncStoryTable<TTableRowType = any>({
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageProp);
   const [maxPage, setMaxPage] = useState(1);
 
-  const onFilter = useCallback((text) => {
+  const onFilterChange = useCallback((text) => {
     setFilter(text);
     setCurrentPage(1);
   }, []);
@@ -277,7 +277,7 @@ function AsyncStoryTable<TTableRowType = any>({
           lg={4}
           className="d-flex flex-col justify-content-end align-items-end"
         >
-          <Filter controlledProps={{ filter, onFilter }} />
+          <Filter controlledProps={{ filter, onFilterChange }} />
         </Col>
         <Col
           xs={12}
