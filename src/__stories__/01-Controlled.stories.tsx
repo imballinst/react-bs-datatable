@@ -132,7 +132,7 @@ const ControlledComposedTableRowTemplate: ComponentStory<
   }, [filter, sortState, currentPage, rowsPerPage]);
 
   return (
-    <DatatableWrapper headers={CONTROLLED_HEADERS} body={data} isControlled>
+    <DatatableWrapper headers={CONTROLLED_HEADERS} body={data}>
       <Row className="mb-4">
         <Col
           xs={12}
@@ -270,7 +270,7 @@ function AsyncStoryTable<TTableRowType = any>({
   }, [fetchFn, filter, sortState, currentPage, rowsPerPage]);
 
   return (
-    <DatatableWrapper headers={headers} body={data} isControlled>
+    <DatatableWrapper headers={headers} body={data}>
       <Row className="mb-4">
         <Col
           xs={12}
