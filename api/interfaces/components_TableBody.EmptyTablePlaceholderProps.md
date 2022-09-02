@@ -23,7 +23,7 @@ The className to pass to the component.
 
 #### Defined in
 
-[components/TableBody.tsx:417](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/TableBody.tsx#L417)
+[components/TableBody.tsx:420](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/TableBody.tsx#L420)
 
 ___
 
@@ -35,4 +35,4 @@ The label that will show up when the table is empty.
 
 #### Defined in
 
-[components/TableBody.tsx:419](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/TableBody.tsx#L419)
+[components/TableBody.tsx:422](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/TableBody.tsx#L422)

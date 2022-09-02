@@ -25,7 +25,7 @@ The "First" button label. Defaults to "First".
 
 #### Defined in
 
-[components/Pagination.tsx:11](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/Pagination.tsx#L11)
+[components/Pagination.tsx:12](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/Pagination.tsx#L12)
 
 ___
 
@@ -37,7 +37,7 @@ The "Last" button label. Defaults to "Last".
 
 #### Defined in
 
-[components/Pagination.tsx:13](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/Pagination.tsx#L13)
+[components/Pagination.tsx:14](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/Pagination.tsx#L14)
 
 ___
 
@@ -49,7 +49,7 @@ The "Next" button label. Defaults to "Next".
 
 #### Defined in
 
-[components/Pagination.tsx:17](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/Pagination.tsx#L17)
+[components/Pagination.tsx:18](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/Pagination.tsx#L18)
 
 ___
 
@@ -61,4 +61,4 @@ The "Prev" button label. Defaults to "Prev".
 
 #### Defined in
 
-[components/Pagination.tsx:15](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/Pagination.tsx#L15)
+[components/Pagination.tsx:16](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/Pagination.tsx#L16)

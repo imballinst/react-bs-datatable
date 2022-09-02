@@ -25,7 +25,7 @@ is a horizontal form instead of vertical (e.g. using `flex-direction: row`).
 
 #### Defined in
 
-[components/PaginationOptions.tsx:20](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/PaginationOptions.tsx#L20)
+[components/PaginationOptions.tsx:21](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/PaginationOptions.tsx#L21)
 
 ___
 
@@ -38,4 +38,4 @@ Defaults to "Rows per page".
 
 #### Defined in
 
-[components/PaginationOptions.tsx:14](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/PaginationOptions.tsx#L14)
+[components/PaginationOptions.tsx:15](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/PaginationOptions.tsx#L15)

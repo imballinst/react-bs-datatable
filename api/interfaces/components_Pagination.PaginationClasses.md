@@ -24,7 +24,7 @@ The class for each of the pagination button.
 
 #### Defined in
 
-[components/Pagination.tsx:26](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/Pagination.tsx#L26)
+[components/Pagination.tsx:27](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/Pagination.tsx#L27)
 
 ___
 
@@ -36,4 +36,4 @@ The class for the pagination button group.
 
 #### Defined in
 
-[components/Pagination.tsx:28](https://github.com/imballinst/react-bs-datatable/blob/cc33b67/src/components/Pagination.tsx#L28)
+[components/Pagination.tsx:29](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/Pagination.tsx#L29)

@@ -16,6 +16,7 @@ react-bs-datatable
 - [components/TableHeader](modules/components_TableHeader.md)
 - [helpers/checkbox](modules/helpers_checkbox.md)
 - [helpers/data](modules/helpers_data.md)
+- [helpers/hooks](modules/helpers_hooks.md)
 - [helpers/object](modules/helpers_object.md)
 - [helpers/react](modules/helpers_react.md)
 - [helpers/types](modules/helpers_types.md)
