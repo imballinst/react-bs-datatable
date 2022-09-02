@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import { useControlledStateSetter } from '../helpers/hooks';
 
 import { makeClasses } from '../helpers/object';
 import { PaginationOnChange } from '../helpers/types';
@@ -79,6 +80,7 @@ export function Pagination({
     maxPage: maxPageContext,
     onPaginationChange: onPaginationChangeContext
   } = useDatatableWrapper();
+  useControlledStateSetter(controlledProps);
 
   // Controlled has the bigger priority.
   const currentPageState =

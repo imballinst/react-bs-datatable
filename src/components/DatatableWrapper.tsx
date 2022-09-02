@@ -132,6 +132,7 @@ export interface UncontrolledTableEvents {
 interface DatatableWrapperContextType<TTableRowType> {
   // Things passed to other components.
   headers: TableColumnType<TTableRowType>[];
+  setIsControlled: React.Dispatch<React.SetStateAction<boolean>>;
   // Filter.
   isFilterable: boolean;
   filterState: string;
@@ -176,7 +177,12 @@ export interface DatatableWrapperProps<TTableRowType> {
   children: ReactNode;
   headers: TableColumnType<TTableRowType>[];
   body: TTableRowType[];
-  /** When set to `true`, the table will "skip" all uncontrolled processes. */
+  /**
+   * @deprecated
+   *
+   * This prop is deprecated; now the table is automatically set as controlled
+   * when any of the child components is provided `controlledProps`.
+   */
   isControlled?: boolean;
   filterProps?: TableFilterParameters;
   sortProps?: TableSortParameters<TTableRowType>;
@@ -225,7 +231,7 @@ interface DatatableState {
 export function DatatableWrapper<TTableRowType = any>({
   headers,
   body,
-  isControlled,
+  isControlled: isControlledProp,
   filterProps,
   sortProps,
   paginationProps,
@@ -244,6 +250,7 @@ export function DatatableWrapper<TTableRowType = any>({
       checkboxProps
     })
   );
+  const [isControlled, setIsControlled] = useState(isControlledProp || false);
   const headersRecordRef = useRef(convertArrayToRecord(headers, 'prop'));
   // Store this in a ref because we might need it in case `headers` change.
   // Though, we don't want to put these into `useEffect` because they most likely
@@ -425,6 +432,7 @@ export function DatatableWrapper<TTableRowType = any>({
     <Provider
       value={{
         headers,
+        setIsControlled,
         // Filter.
         isFilterable: isFilterable,
         filterState: filter,

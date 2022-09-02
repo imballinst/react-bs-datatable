@@ -15,6 +15,7 @@ import {
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
 import { getNextSortState } from '../helpers/data';
+import { useControlledStateSetter } from '../helpers/hooks';
 
 /**
  * This is an interface for customizing the classes for
@@ -71,6 +72,7 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
     filteredDataLength: filteredDataLengthContext,
     data
   } = useDatatableWrapper();
+  useControlledStateSetter(controlledProps);
 
   const onSortChange = controlledProps?.onSortChange || onSortChangeContext;
   const sortState = controlledProps?.sortState || sortStateContext;

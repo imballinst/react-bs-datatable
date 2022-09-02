@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import { useControlledStateSetter } from '../helpers/hooks';
 
 import { makeClasses } from '../helpers/object';
 import { RowsPerPageOnChange } from '../helpers/types';
@@ -90,6 +91,7 @@ export function PaginationOptions({
     rowsPerPageState: rowsPerPageStateContext,
     filteredDataLength: filteredDataLengthContext
   } = useDatatableWrapper();
+  useControlledStateSetter(controlledProps);
 
   // Controlled has the bigger priority.
   const rowsPerPageOptions =

@@ -9,6 +9,7 @@ import {
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 import { getNextCheckboxState } from '../helpers/checkbox';
+import { useControlledStateSetter } from '../helpers/hooks';
 
 export interface TableBodyLabels {
   /**
@@ -91,6 +92,8 @@ export function TableBody<TTableRowType extends TableRowType>({
     filteredDataLength: filteredDataLengthContext,
     checkboxRefs
   } = useDatatableWrapper();
+  useControlledStateSetter(controlledProps);
+
   let bodyContent: JSX.Element | JSX.Element[];
 
   if (children) {

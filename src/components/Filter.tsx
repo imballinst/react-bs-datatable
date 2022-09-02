@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
+import { useControlledStateSetter } from '../helpers/hooks';
 import { FilterOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 import FontAwesome from './FontAwesome';
@@ -61,6 +62,7 @@ export function Filter({
     onFilterChange: onFilterChangeContext,
     isFilterable
   } = useDatatableWrapper();
+  useControlledStateSetter(controlledProps);
 
   if (!isFilterable) {
     return null;
@@ -70,9 +72,10 @@ export function Filter({
    * Controlled has the bigger priority.
    * Supports @deprecated onFilter
    */
-  const onFilterChange = controlledProps?.onFilterChange
-      || controlledProps?.onFilter
-      || onFilterChangeContext;
+  const onFilterChange =
+    controlledProps?.onFilterChange ||
+    controlledProps?.onFilter ||
+    onFilterChangeContext;
   const filterState = controlledProps?.filter || filterStateContext;
 
   return (
