@@ -36,6 +36,12 @@ export interface FilterProps {
     /** The text filter. */
     filter?: string;
     /** The function fired when the text filter changes. */
+    onFilterChange?: FilterOnChange;
+    /**
+     * @deprecated
+     *
+     * Usage of `onFilter` is deprecated. Consider using `onFilterChange` instead.
+     */
     onFilter?: FilterOnChange;
   };
 }
@@ -60,8 +66,13 @@ export function Filter({
     return null;
   }
 
-  // Controlled has the bigger priority.
-  const onFilterChange = controlledProps?.onFilter || onFilterChangeContext;
+  /**
+   * Controlled has the bigger priority.
+   * Supports @deprecated onFilter
+   */
+  const onFilterChange = controlledProps?.onFilterChange
+      || controlledProps?.onFilter
+      || onFilterChangeContext;
   const filterState = controlledProps?.filter || filterStateContext;
 
   return (
