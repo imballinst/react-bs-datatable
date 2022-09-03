@@ -33,4 +33,4 @@ Renders a list of table headers.
 
 #### Defined in
 
-[components/TableHeader.tsx:63](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/components/TableHeader.tsx#L63)
+[components/TableHeader.tsx:63](https://github.com/imballinst/react-bs-datatable/blob/8b90ae8/src/components/TableHeader.tsx#L63)

@@ -23,7 +23,7 @@ The sort order.
 
 #### Defined in
 
-[helpers/types.ts:18](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/helpers/types.ts#L18)
+[helpers/types.ts:18](https://github.com/imballinst/react-bs-datatable/blob/8b90ae8/src/helpers/types.ts#L18)
 
 ___
 
@@ -36,4 +36,4 @@ This is the same as `header.prop` from `TableColumnType` interface.
 
 #### Defined in
 
-[helpers/types.ts:16](https://github.com/imballinst/react-bs-datatable/blob/a980185/src/helpers/types.ts#L16)
+[helpers/types.ts:16](https://github.com/imballinst/react-bs-datatable/blob/8b90ae8/src/helpers/types.ts#L16)
