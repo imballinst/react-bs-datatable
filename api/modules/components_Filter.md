@@ -35,4 +35,4 @@ prop. Otherwise, this component will return `null`.
 
 #### Defined in
 
-[components/Filter.tsx:55](https://github.com/imballinst/react-bs-datatable/blob/ffef9ab/src/components/Filter.tsx#L55)
+[components/Filter.tsx:55](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/Filter.tsx#L55)
