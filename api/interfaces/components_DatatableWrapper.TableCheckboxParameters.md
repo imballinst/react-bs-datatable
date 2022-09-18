@@ -23,4 +23,4 @@ The initial states for the table.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:116](https://github.com/imballinst/react-bs-datatable/blob/8b90ae8/src/components/DatatableWrapper.tsx#L116)
+[components/DatatableWrapper.tsx:116](https://github.com/imballinst/react-bs-datatable/blob/ffef9ab/src/components/DatatableWrapper.tsx#L116)

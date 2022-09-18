@@ -32,4 +32,4 @@
 
 #### Defined in
 
-[helpers/hooks.ts:4](https://github.com/imballinst/react-bs-datatable/blob/8b90ae8/src/helpers/hooks.ts#L4)
+[helpers/hooks.ts:4](https://github.com/imballinst/react-bs-datatable/blob/ffef9ab/src/helpers/hooks.ts#L4)
