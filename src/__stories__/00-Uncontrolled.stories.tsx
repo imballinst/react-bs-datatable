@@ -271,11 +271,14 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
     };
   }
 
-  const onRowClick = (row: StoryColumnType) => {
+  const onRowClick = (
+    row: StoryColumnType,
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => {
     alert(`Clicked row containing name ${row.name}.`);
-
+    console.log(event);
     if (rowOnClickFn) {
-      rowOnClickFn(row.name);
+      rowOnClickFn(row.name, event);
     }
   };
   const modifiedJson = [...json];
@@ -445,7 +448,10 @@ function StoryTable({
   rowProps?: HtmlTrProps | ((row: any) => HtmlTrProps);
   // For on click row event.
   rowOnClickText?: string;
-  rowOnClickFn?: (name: string) => void;
+  rowOnClickFn?: (
+    name: string,
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => void;
   // Set this to `true` if we want to control the table events from outside,
   // but keep the table uncontrolled.
   tableEventsRef?: MutableRefObject<UncontrolledTableEvents | undefined>;
@@ -489,13 +495,20 @@ function StoryTable({
   }
 
   if (rowOnClickText) {
-    rowOnClick = (row) => {
+    rowOnClick = (
+      row,
+      event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+    ) => {
       alert(
-        `Clicked row containing name ${row.name}.\n\nYou inputted the text: ${rowOnClickText}.`
+        `Clicked row containing name ${
+          row.name
+        }.\n\nYou inputted the text: ${rowOnClickText}. Clicked on element: ${
+          (event.target as any).tagName
+        }.`
       );
     };
   } else if (rowOnClickFn) {
-    rowOnClick = (row) => rowOnClickFn(row.name);
+    rowOnClick = (row, event) => rowOnClickFn(row.name, event);
   }
 
   return (

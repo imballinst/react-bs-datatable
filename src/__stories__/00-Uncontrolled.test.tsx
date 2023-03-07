@@ -391,7 +391,7 @@ describe('Custom row on click', () => {
     rowsPerPage: 8,
     rowsPerPageOptions: [8, 16, 24, 32]
   };
-  const clickFn = jest.fn((name) => name);
+  const clickFn = jest.fn();
 
   test('custom score cell color when number is below 50', () => {
     const { getByRole } = render(
@@ -404,9 +404,13 @@ describe('Custom row on click', () => {
       ?.querySelectorAll('tr');
 
     // Test click the row.
-    allTableRows?.item(0).click();
+    const firstRowFirstColumn = allTableRows
+      ?.item(0)
+      .children.item(0) as HTMLElement;
+    firstRowFirstColumn.click();
     expect(clickFn).toBeCalledTimes(1);
     expect(clickFn.mock.calls[0][0]).toBe('Aaren');
+    expect(clickFn.mock.calls[0][1].target.tagName).toBe('TD');
   });
 });
 

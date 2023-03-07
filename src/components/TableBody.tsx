@@ -62,7 +62,10 @@ export interface TableBodyProps<TTableRowType extends TableRowType> {
   /** The props passed to the table rows under `tbody`. */
   rowProps?: HtmlTrProps | ((row: TTableRowType) => HtmlTrProps);
   /** The function fired when any of the rows is clicked. */
-  onRowClick?: (row: TTableRowType) => void;
+  onRowClick?: (
+    row: TTableRowType,
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => void;
   /** Props to make the component controlled. */
   controlledProps?: TableBodyControlledProps;
   /** The function to customize the table rows. */
@@ -243,7 +246,10 @@ export interface TableRowProps<TTableRowType extends TableRowType> {
   /** The row data. */
   rowData: TTableRowType;
   /** Optional row on click event. */
-  onRowClick?: (row: TTableRowType) => void;
+  onRowClick?: (
+    row: TTableRowType,
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => void;
   /** Classes for the rows and columns. */
   classes?: Omit<TableBodyClasses, 'tbody'>;
   /** Props to make the component controlled. */
@@ -291,9 +297,11 @@ export function TableRow<TTableRowType extends TableRowType>({
   } = useDatatableWrapper();
   const headersLength = headers.length;
 
-  function onRowClick() {
+  function onRowClick(
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) {
     if (typeof onRowClickProp === 'function') {
-      onRowClickProp(rowData);
+      onRowClickProp(rowData, event);
     }
   }
 
