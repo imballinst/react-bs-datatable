@@ -276,7 +276,7 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
   ) => {
     alert(`Clicked row containing name ${row.name}.`);
-    console.log(event);
+
     if (rowOnClickFn) {
       rowOnClickFn(row.name, event);
     }
