@@ -35,7 +35,7 @@ Classes for the rows and columns.
 
 #### Defined in
 
-[components/TableBody.tsx:248](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L248)
+[components/TableBody.tsx:254](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L254)
 
 ___
 
@@ -47,7 +47,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:250](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L250)
+[components/TableBody.tsx:256](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L256)
 
 ___
 
@@ -59,7 +59,7 @@ The row data.
 
 #### Defined in
 
-[components/TableBody.tsx:244](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L244)
+[components/TableBody.tsx:247](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L247)
 
 ___
 
@@ -71,13 +71,13 @@ Props to the `tr` element.
 
 #### Defined in
 
-[components/TableBody.tsx:252](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L252)
+[components/TableBody.tsx:258](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L258)
 
 ## Methods
 
 ### onRowClick
 
-▸ `Optional` **onRowClick**(`row`): `void`
+▸ `Optional` **onRowClick**(`row`, `event`): `void`
 
 Optional row on click event.
 
@@ -86,6 +86,7 @@ Optional row on click event.
 | Name | Type |
 | :------ | :------ |
 | `row` | `TTableRowType` |
+| `event` | `MouseEvent`<`HTMLTableRowElement`, `MouseEvent`\> |
 
 #### Returns
 
@@ -93,4 +94,4 @@ Optional row on click event.
 
 #### Defined in
 
-[components/TableBody.tsx:246](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L246)
+[components/TableBody.tsx:249](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L249)

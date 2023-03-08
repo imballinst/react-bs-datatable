@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[components/TableBody.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L46)
+[components/TableBody.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L46)
 
 ## Functions
 
@@ -53,7 +53,7 @@ have matching search results.
 
 #### Defined in
 
-[components/TableBody.tsx:432](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L432)
+[components/TableBody.tsx:440](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L440)
 
 ___
 
@@ -82,7 +82,7 @@ such as `tr` and `td` tags.
 
 #### Defined in
 
-[components/TableBody.tsx:79](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L79)
+[components/TableBody.tsx:82](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L82)
 
 ___
 
@@ -127,4 +127,4 @@ The above snippet will render loading indicator for rows that don't have suffici
 
 #### Defined in
 
-[components/TableBody.tsx:278](https://github.com/imballinst/react-bs-datatable/blob/0e2d530/src/components/TableBody.tsx#L278)
+[components/TableBody.tsx:284](https://github.com/imballinst/react-bs-datatable/blob/23c9527/src/components/TableBody.tsx#L284)
