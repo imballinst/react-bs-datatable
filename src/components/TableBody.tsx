@@ -247,6 +247,7 @@ export function TableBody<TTableRowType extends TableRowType>({
 }
 
 // Composing functions.
+const VALID_TAGS_FOR_ROW_ONCLICK = ['TD', 'TR'];
 
 /**
  * The props for the `TableRow` component.
@@ -313,7 +314,7 @@ export function TableRow<TTableRowType extends TableRowType>({
       // TODO: extract this into a constant variable.
       if (
         event.target instanceof HTMLElement &&
-        event.target.tagName === 'TD'
+        VALID_TAGS_FOR_ROW_ONCLICK.includes(event.target.tagName)
       ) {
         onRowClickProp(rowData, event);
       }
