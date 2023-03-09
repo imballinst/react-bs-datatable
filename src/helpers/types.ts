@@ -1,4 +1,4 @@
-import {
+import React, {
   CSSProperties,
   MutableRefObject,
   ReactNode,
@@ -149,9 +149,15 @@ export type RowsPerPageOnChange = (nextState: number) => void;
 /**
  * The helper type for the checkbox change eveent.
  */
-export type CheckboxOnChange = (params: {
-  prop: string;
-  idProp: string;
-  nextCheckboxState: CheckboxState;
-  checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
-}) => void;
+export type CheckboxOnChange = (
+  params: {
+    prop: string;
+    idProp: string;
+    nextCheckboxState: CheckboxState;
+    checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
+  },
+  event: {
+    checkbox?: React.ChangeEvent<HTMLInputElement>,
+    others?: React.MouseEvent<HTMLElement>
+  }
+) => void;

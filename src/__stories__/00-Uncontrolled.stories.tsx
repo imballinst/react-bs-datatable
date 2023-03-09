@@ -23,7 +23,7 @@ import {
 import { Filter } from '../components/Filter';
 import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
-import { TableColumnType } from '../helpers/types';
+import { CheckboxOnChange, TableColumnType } from '../helpers/types';
 import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
 
 export default {
@@ -240,6 +240,7 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
   rowOnClickFn,
   sortableFields,
   filterableFields,
+  onCheckboxChange,
   rowsPerPage = 10,
   rowsPerPageOptions = [5, 10, 15, 20],
   alwaysShowPagination
@@ -294,6 +295,9 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
           rowsPerPage,
           options: rowsPerPageOptions
         }
+      }}
+      checkboxProps={{
+        onCheckboxChange
       }}
     >
       <Row className="mb-4">
@@ -407,7 +411,9 @@ function StoryTable({
   rowsPerPage = -1,
   rowsPerPageOptions = [],
   alwaysShowPagination = true,
+  // Checkbox stuff.
   hasCheckbox,
+  onCheckboxChange,
   // Custom labels.
   filterPlaceholder,
   afterSelect,
@@ -433,7 +439,9 @@ function StoryTable({
   rowsPerPage?: number;
   rowsPerPageOptions?: number[];
   alwaysShowPagination?: boolean;
+  // Checkbox stuff.
   hasCheckbox?: boolean;
+  onCheckboxChange?: CheckboxOnChange;
   // Custom labels.
   filterPlaceholder?: string;
   afterSelect?: string;
@@ -525,6 +533,9 @@ function StoryTable({
           rowsPerPage,
           options: rowsPerPageOptions
         }
+      }}
+      checkboxProps={{
+        onCheckboxChange
       }}
     >
       {children}

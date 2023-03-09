@@ -72,20 +72,30 @@ export function BulkCheckboxControl({
   const state = previouslyUpdatedCheckbox?.state;
   let rendered;
 
-  function onClick(type: GetNextCheckboxStateParams['type']) {
-    onCheckboxChange({
-      prop: previouslyModifiedCheckbox.prop,
-      idProp: previouslyModifiedCheckbox.idProp,
-      checkboxRefs,
-      nextCheckboxState: getNextCheckboxState({
-        checkboxState,
-        data: body,
-        filteredDataLength,
-        idProp: previouslyModifiedCheckbox.idProp,
+  function onClick(
+    type: GetNextCheckboxStateParams['type'],
+    event: React.MouseEvent<HTMLElement>
+  ) {
+    const params = [
+      {
         prop: previouslyModifiedCheckbox.prop,
-        type
-      })
-    });
+        idProp: previouslyModifiedCheckbox.idProp,
+        checkboxRefs,
+        nextCheckboxState: getNextCheckboxState({
+          checkboxState,
+          data: body,
+          filteredDataLength,
+          idProp: previouslyModifiedCheckbox.idProp,
+          prop: previouslyModifiedCheckbox.prop,
+          type
+        })
+      },
+      {
+        others: event
+      }
+    ] as const;
+
+    onCheckboxChange(params[0], params[1]);
   }
 
   const buttonClassName =
@@ -98,7 +108,7 @@ export function BulkCheckboxControl({
         <button
           type="button"
           tabIndex={0}
-          onClick={() => onClick('remove')}
+          onClick={(e) => onClick('remove', e)}
           className={buttonClassName}
         >
           Deselect all rows
@@ -112,7 +122,7 @@ export function BulkCheckboxControl({
         <button
           type="button"
           tabIndex={0}
-          onClick={() => onClick('add')}
+          onClick={(e) => onClick('add', e)}
           className={buttonClassName}
         >
           Select all rows

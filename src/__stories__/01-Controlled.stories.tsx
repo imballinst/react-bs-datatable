@@ -17,7 +17,7 @@ import { DatatableWrapper } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
 import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
-import { SortType, TableColumnType } from '../helpers/types';
+import { SortType, TableColumnType, TableRowType } from '../helpers/types';
 
 export default {
   /* 👇 The title prop is optional.
@@ -210,7 +210,7 @@ ControlledComposedTableRowTemplate.storyName = 'Composed table row';
 const DEFAULT_ROWS_PER_PAGE = 10;
 const DEFAULT_ROWS_PER_PAGE_OPTIONS = [5, 10, 15, 20];
 
-function AsyncStoryTable<TTableRowType = any>({
+function AsyncStoryTable<TTableRowType extends TableRowType>({
   fetchFn,
   headers = [],
   rowsPerPage: rowsPerPageProp = DEFAULT_ROWS_PER_PAGE,
