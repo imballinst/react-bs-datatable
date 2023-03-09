@@ -154,7 +154,7 @@ export function TableBody<TTableRowType extends TableRowType>({
                   value={data[rowIdx][checkbox.idProp]}
                   className={checkbox.className}
                   checked={checkboxState[prop].selected.has(idValue)}
-                  onChange={(e) => {
+                  onChange={(event) => {
                     const params = [
                       {
                         prop,
@@ -170,7 +170,7 @@ export function TableBody<TTableRowType extends TableRowType>({
                         checkboxRefs
                       },
                       {
-                        checkbox: e
+                        checkbox: event
                       }
                     ] as const;
 
@@ -310,7 +310,13 @@ export function TableRow<TTableRowType extends TableRowType>({
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
   ) {
     if (typeof onRowClickProp === 'function') {
-      onRowClickProp(rowData, event);
+      // TODO: extract this into a constant variable.
+      if (
+        event.target instanceof HTMLElement &&
+        event.target.tagName === 'TD'
+      ) {
+        onRowClickProp(rowData, event);
+      }
     }
   }
 
@@ -352,7 +358,7 @@ export function TableRow<TTableRowType extends TableRowType>({
             value={rowData[checkbox.idProp]}
             className={checkbox.className}
             checked={checkboxState[prop].selected.has(idValue)}
-            onChange={(e) => {
+            onChange={(event) => {
               const params = [
                 {
                   prop,
@@ -368,7 +374,7 @@ export function TableRow<TTableRowType extends TableRowType>({
                   checkboxRefs
                 },
                 {
-                  checkbox: e
+                  checkbox: event
                 }
               ] as const;
 
