@@ -311,7 +311,6 @@ export function TableRow<TTableRowType extends TableRowType>({
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
   ) {
     if (typeof onRowClickProp === 'function') {
-      // TODO: extract this into a constant variable.
       if (
         event.target instanceof HTMLElement &&
         VALID_TAGS_FOR_ROW_ONCLICK.includes(event.target.tagName)
