@@ -28,7 +28,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `TTableRowType` | `any` |
+| `TTableRowType` | extends [`TableRowType`](helpers_types.md#tablerowtype)<`any`\> |
 
 #### Parameters
 
@@ -42,4 +42,4 @@
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:231](https://github.com/imballinst/react-bs-datatable/blob/a4ddc10/src/components/DatatableWrapper.tsx#L231)
+[components/DatatableWrapper.tsx:233](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/components/DatatableWrapper.tsx#L233)
