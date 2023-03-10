@@ -121,6 +121,7 @@ export function TableBody<TTableRowType extends TableRowType>({
       for (let rowIdx = 0; rowIdx < dataLength; rowIdx++) {
         const row = [];
 
+        // Render rows.
         for (let colIdx = 0; colIdx < headersLength; colIdx++) {
           const {
             cell,
@@ -153,20 +154,27 @@ export function TableBody<TTableRowType extends TableRowType>({
                   value={data[rowIdx][checkbox.idProp]}
                   className={checkbox.className}
                   checked={checkboxState[prop].selected.has(idValue)}
-                  onChange={() => {
-                    onCheckboxChange({
-                      prop,
-                      idProp: checkbox.idProp,
-                      nextCheckboxState: getNextCheckboxState({
-                        checkboxState,
-                        data: data[rowIdx],
-                        idProp: checkbox.idProp,
-                        filteredDataLength,
+                  onChange={(event) => {
+                    const params = [
+                      {
                         prop,
-                        type: isSelected ? 'remove' : 'add'
-                      }),
-                      checkboxRefs
-                    });
+                        idProp: checkbox.idProp,
+                        nextCheckboxState: getNextCheckboxState({
+                          checkboxState,
+                          data: data[rowIdx],
+                          idProp: checkbox.idProp,
+                          filteredDataLength,
+                          prop,
+                          type: isSelected ? 'remove' : 'add'
+                        }),
+                        checkboxRefs
+                      },
+                      {
+                        checkbox: event
+                      }
+                    ] as const;
+
+                    onCheckboxChange(...params);
                   }}
                 />
               </Form.Group>
@@ -207,6 +215,7 @@ export function TableBody<TTableRowType extends TableRowType>({
           );
         }
 
+        // Push to array.
         body.push(
           <TableRow
             key={rowIdx}
@@ -238,6 +247,7 @@ export function TableBody<TTableRowType extends TableRowType>({
 }
 
 // Composing functions.
+const VALID_TAGS_FOR_ROW_ONCLICK = ['TD', 'TR'];
 
 /**
  * The props for the `TableRow` component.
@@ -301,7 +311,12 @@ export function TableRow<TTableRowType extends TableRowType>({
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
   ) {
     if (typeof onRowClickProp === 'function') {
-      onRowClickProp(rowData, event);
+      if (
+        event.target instanceof HTMLElement &&
+        VALID_TAGS_FOR_ROW_ONCLICK.includes(event.target.tagName)
+      ) {
+        onRowClickProp(rowData, event);
+      }
     }
   }
 
@@ -343,20 +358,27 @@ export function TableRow<TTableRowType extends TableRowType>({
             value={rowData[checkbox.idProp]}
             className={checkbox.className}
             checked={checkboxState[prop].selected.has(idValue)}
-            onChange={() => {
-              onCheckboxChange({
-                prop,
-                idProp: checkbox.idProp,
-                nextCheckboxState: getNextCheckboxState({
-                  checkboxState,
-                  data: rowData,
-                  idProp: checkbox.idProp,
-                  filteredDataLength,
+            onChange={(event) => {
+              const params = [
+                {
                   prop,
-                  type: isSelected ? 'remove' : 'add'
-                }),
-                checkboxRefs
-              });
+                  idProp: checkbox.idProp,
+                  nextCheckboxState: getNextCheckboxState({
+                    checkboxState,
+                    data: rowData,
+                    idProp: checkbox.idProp,
+                    filteredDataLength,
+                    prop,
+                    type: isSelected ? 'remove' : 'add'
+                  }),
+                  checkboxRefs
+                },
+                {
+                  checkbox: event
+                }
+              ] as const;
+
+              onCheckboxChange(...params);
             }}
           />
         </Form.Group>

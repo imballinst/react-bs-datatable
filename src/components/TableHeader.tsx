@@ -178,20 +178,25 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
                 checkboxRefs.current[prop] = node;
               }
             }}
-            onChange={() => {
-              onCheckboxChange({
-                prop,
-                idProp: checkbox.idProp,
-                nextCheckboxState: getNextCheckboxState({
-                  checkboxState,
-                  data,
-                  idProp: checkbox.idProp,
-                  filteredDataLength,
+            onChange={(e) => {
+              onCheckboxChange(
+                {
                   prop,
-                  type: nextCheckboxType
-                }),
-                checkboxRefs
-              });
+                  idProp: checkbox.idProp,
+                  nextCheckboxState: getNextCheckboxState({
+                    checkboxState,
+                    data,
+                    idProp: checkbox.idProp,
+                    filteredDataLength,
+                    prop,
+                    type: nextCheckboxType
+                  }),
+                  checkboxRefs
+                },
+                {
+                  checkbox: e
+                }
+              );
             }}
           />
         </Form.Group>

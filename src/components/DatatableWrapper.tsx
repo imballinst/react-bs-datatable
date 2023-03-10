@@ -114,6 +114,8 @@ export interface TablePaginationOptionsParameters {
 export interface TableCheckboxParameters {
   /** The initial states for the table. */
   initialState?: Record<string, CheckboxState>;
+  /** Change event for the checkboxes state. */
+  onCheckboxChange?: CheckboxOnChange;
 }
 
 export interface UncontrolledTableEvents {
@@ -172,7 +174,7 @@ export const useDatatableWrapper = useCtx;
 /**
  * The props that can be passed to the `DatatableWrapper` component.
  */
-export interface DatatableWrapperProps<TTableRowType> {
+export interface DatatableWrapperProps<TTableRowType extends TableRowType> {
   /** The rest of the table, including its controls. */
   children: ReactNode;
   headers: TableColumnType<TTableRowType>[];
@@ -228,7 +230,7 @@ interface DatatableState {
   previouslyModifiedCheckbox: PreviouslyModifiedCheckbox;
 }
 
-export function DatatableWrapper<TTableRowType = any>({
+export function DatatableWrapper<TTableRowType extends TableRowType>({
   headers,
   body,
   isControlled: isControlledProp,
@@ -357,11 +359,15 @@ export function DatatableWrapper<TTableRowType = any>({
   }, []);
 
   const onCheckboxChange: CheckboxOnChange = useCallback(
-    ({ prop, nextCheckboxState, checkboxRefs, idProp }) => {
+    (result, event) => {
+      const { prop, nextCheckboxState, checkboxRefs, idProp } = result;
+
       // We put this here because it'll be easier to switch between
       // controlled and uncontrolled this way.
       checkboxRefs.current[prop].indeterminate =
         nextCheckboxState.state === 'some-selected';
+      
+      checkboxProps?.onCheckboxChange?.(result, event);
 
       setState((oldState) => ({
         ...oldState,
@@ -375,7 +381,7 @@ export function DatatableWrapper<TTableRowType = any>({
         }
       }));
     },
-    []
+    [checkboxProps?.onCheckboxChange]
   );
 
   // Imperative handle.
@@ -466,7 +472,7 @@ export function DatatableWrapper<TTableRowType = any>({
 }
 
 // Helper functions.
-function getDefaultDatatableState<TTableRowType = TableRowType>({
+function getDefaultDatatableState<TTableRowType extends TableRowType>({
   filterProps,
   paginationOptionsProps,
   paginationProps,
