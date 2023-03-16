@@ -25,7 +25,7 @@ The class for all `th` tags inside each `tr` tag.
 
 #### Defined in
 
-[components/TableHeader.tsx:30](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/components/TableHeader.tsx#L30)
+[components/TableHeader.tsx:30](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableHeader.tsx#L30)
 
 ___
 
@@ -37,7 +37,7 @@ The class for the `thead` tag.
 
 #### Defined in
 
-[components/TableHeader.tsx:26](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/components/TableHeader.tsx#L26)
+[components/TableHeader.tsx:26](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableHeader.tsx#L26)
 
 ___
 
@@ -49,4 +49,4 @@ The class for all `tr` tags inside `tbody`.
 
 #### Defined in
 
-[components/TableHeader.tsx:28](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/components/TableHeader.tsx#L28)
+[components/TableHeader.tsx:28](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableHeader.tsx#L28)

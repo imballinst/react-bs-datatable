@@ -6,5 +6,6 @@
   "cleanOutputDir": true,
   "tsconfig": "./tsconfig.json",
   "exclude": ["src/__stories__/**/*", "**/*.test.(ts|tsx)"],
+  "gitRevision": "master",
   "excludeInternal": true
 }

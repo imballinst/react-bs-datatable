@@ -24,7 +24,7 @@ The initial states for the table.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:116](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/components/DatatableWrapper.tsx#L116)
+[components/DatatableWrapper.tsx:116](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L116)
 
 ___
 
@@ -36,4 +36,4 @@ Change event for the checkboxes state.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:118](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/components/DatatableWrapper.tsx#L118)
+[components/DatatableWrapper.tsx:118](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L118)

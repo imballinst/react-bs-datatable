@@ -52,7 +52,7 @@ The helper type for the checkbox change eveent.
 
 #### Defined in
 
-[helpers/types.ts:152](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L152)
+[helpers/types.ts:152](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L152)
 
 ___
 
@@ -76,7 +76,7 @@ can make the sort result incorrect, e.g. sorting formatted dates.
 
 #### Defined in
 
-[helpers/types.ts:113](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L113)
+[helpers/types.ts:113](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L113)
 
 ___
 
@@ -102,7 +102,7 @@ The helper type for the filter change event.
 
 #### Defined in
 
-[helpers/types.ts:127](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L127)
+[helpers/types.ts:127](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L127)
 
 ___
 
@@ -128,7 +128,7 @@ The helper type for the sort by prop change event.
 
 #### Defined in
 
-[helpers/types.ts:142](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L142)
+[helpers/types.ts:142](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L142)
 
 ___
 
@@ -154,7 +154,7 @@ The helper type for the rows per page change event.
 
 #### Defined in
 
-[helpers/types.ts:147](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L147)
+[helpers/types.ts:147](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L147)
 
 ___
 
@@ -180,7 +180,7 @@ The helper type for the sort by prop change event.
 
 #### Defined in
 
-[helpers/types.ts:137](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L137)
+[helpers/types.ts:137](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L137)
 
 ___
 
@@ -206,7 +206,7 @@ The helper type for the sort by next prop change event.
 
 #### Defined in
 
-[helpers/types.ts:132](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L132)
+[helpers/types.ts:132](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L132)
 
 ___
 
@@ -224,4 +224,4 @@ This is used for the `extend` keyword in the components.
 
 #### Defined in
 
-[helpers/types.ts:120](https://github.com/imballinst/react-bs-datatable/blob/ed76c0b/src/helpers/types.ts#L120)
+[helpers/types.ts:120](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L120)
