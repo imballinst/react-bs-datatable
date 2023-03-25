@@ -9,7 +9,10 @@ import {
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
 import { getNextCheckboxState } from '../helpers/checkbox';
-import { useControlledStateSetter } from '../helpers/hooks';
+import {
+  useControlledStateSetter,
+  useTableCheckboxState
+} from '../helpers/hooks';
 
 export interface TableBodyLabels {
   /**
@@ -97,6 +100,18 @@ export function TableBody<TTableRowType extends TableRowType>({
   } = useDatatableWrapper();
   useControlledStateSetter(controlledProps);
 
+  const onCheckboxChange =
+    controlledProps?.onCheckboxChange || onCheckboxChangeContext;
+  const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
+  const filteredDataLength =
+    controlledProps?.filteredDataLength || filteredDataLengthContext;
+
+  const { createColumnCheckboxClickHandler } = useTableCheckboxState({
+    checkboxState,
+    data,
+    filteredDataLength,
+    onCheckboxChange
+  });
   let bodyContent: JSX.Element | JSX.Element[];
 
   if (children) {
@@ -109,13 +124,6 @@ export function TableBody<TTableRowType extends TableRowType>({
     const body = [];
     const dataLength = data.length;
     const headersLength = headers.length;
-
-    const onCheckboxChange =
-      controlledProps?.onCheckboxChange || onCheckboxChangeContext;
-    const checkboxState =
-      controlledProps?.checkboxState || checkboxStateContext;
-    const filteredDataLength =
-      controlledProps?.filteredDataLength || filteredDataLengthContext;
 
     if (dataLength > 0) {
       for (let rowIdx = 0; rowIdx < dataLength; rowIdx++) {
@@ -154,28 +162,11 @@ export function TableBody<TTableRowType extends TableRowType>({
                   value={data[rowIdx][checkbox.idProp]}
                   className={checkbox.className}
                   checked={checkboxState[prop].selected.has(idValue)}
-                  onChange={(event) => {
-                    const params = [
-                      {
-                        prop,
-                        idProp: checkbox.idProp,
-                        nextCheckboxState: getNextCheckboxState({
-                          checkboxState,
-                          data: data[rowIdx],
-                          idProp: checkbox.idProp,
-                          filteredDataLength,
-                          prop,
-                          type: isSelected ? 'remove' : 'add'
-                        }),
-                        checkboxRefs
-                      },
-                      {
-                        checkbox: event
-                      }
-                    ] as const;
-
-                    onCheckboxChange(...params);
-                  }}
+                  onChange={createColumnCheckboxClickHandler({
+                    checkboxProp: prop,
+                    idProp: checkbox.idProp,
+                    rowIdx
+                  })}
                 />
               </Form.Group>
             );
@@ -361,14 +352,14 @@ export function TableRow<TTableRowType extends TableRowType>({
             onChange={(event) => {
               const params = [
                 {
-                  prop,
+                  checkboxProp: prop,
                   idProp: checkbox.idProp,
                   nextCheckboxState: getNextCheckboxState({
                     checkboxState,
                     data: rowData,
                     idProp: checkbox.idProp,
                     filteredDataLength,
-                    prop,
+                    checkboxProp: prop,
                     type: isSelected ? 'remove' : 'add'
                   }),
                   checkboxRefs

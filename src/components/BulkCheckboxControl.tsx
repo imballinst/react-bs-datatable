@@ -3,6 +3,7 @@ import {
   getNextCheckboxState,
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
+import { useTableCheckboxState } from '../helpers/hooks';
 import { CheckboxOnChange, CheckboxState } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
@@ -58,45 +59,26 @@ export function BulkCheckboxControl({
     onCheckboxChange: onCheckboxChangeContext,
     filteredDataLength: filteredDataLengthContext,
     previouslyModifiedCheckbox,
-    checkboxRefs,
-    body
+    data
   } = useDatatableWrapper();
 
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
-  const onCheckboxChange =
-    controlledProps?.onCheckboxChange || onCheckboxChangeContext;
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
   const previouslyUpdatedCheckbox =
-    checkboxState[previouslyModifiedCheckbox.prop];
+    checkboxState[previouslyModifiedCheckbox.checkboxProp];
+  const onCheckboxChange =
+    controlledProps?.onCheckboxChange || onCheckboxChangeContext;
   const state = previouslyUpdatedCheckbox?.state;
   let rendered;
 
-  function onClick(
-    type: GetNextCheckboxStateParams['type'],
-    event: React.MouseEvent<HTMLElement>
-  ) {
-    const params = [
-      {
-        prop: previouslyModifiedCheckbox.prop,
-        idProp: previouslyModifiedCheckbox.idProp,
-        checkboxRefs,
-        nextCheckboxState: getNextCheckboxState({
-          checkboxState,
-          data: body,
-          filteredDataLength,
-          idProp: previouslyModifiedCheckbox.idProp,
-          prop: previouslyModifiedCheckbox.prop,
-          type
-        })
-      },
-      {
-        others: event
-      }
-    ] as const;
-
-    onCheckboxChange(params[0], params[1]);
-  }
+  const { createBulkCheckboxClickHandler } = useTableCheckboxState({
+    checkboxState,
+    data,
+    filteredDataLength,
+    onCheckboxChange
+  });
+  const onClick = createBulkCheckboxClickHandler();
 
   const buttonClassName =
     classes?.selectRemoveAllText || 'text-primary p-0 border-0 bg-transparent';
@@ -108,7 +90,7 @@ export function BulkCheckboxControl({
         <button
           type="button"
           tabIndex={0}
-          onClick={(e) => onClick('remove', e)}
+          onClick={onClick}
           className={buttonClassName}
         >
           Deselect all rows
@@ -122,7 +104,7 @@ export function BulkCheckboxControl({
         <button
           type="button"
           tabIndex={0}
-          onClick={(e) => onClick('add', e)}
+          onClick={onClick}
           className={buttonClassName}
         >
           Select all rows
