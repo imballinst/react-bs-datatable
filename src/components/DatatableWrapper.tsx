@@ -158,7 +158,7 @@ interface DatatableWrapperContextType<TTableRowType> {
    *
    * This is mostly for internal usage.
    */
-  previouslyModifiedCheckbox: PreviouslyModifiedCheckbox;
+  previouslyModifiedCheckbox: MutableRefObject<PreviouslyModifiedCheckbox>;
   onCheckboxChange: CheckboxOnChange;
   /**
    * @internal
@@ -244,7 +244,6 @@ interface DatatableState {
   };
   filter: string;
   checkbox: Record<string, CheckboxState>;
-  previouslyModifiedCheckbox: PreviouslyModifiedCheckbox;
 }
 
 export function DatatableWrapper<TTableRowType extends TableRowType>({
@@ -281,10 +280,11 @@ export function DatatableWrapper<TTableRowType extends TableRowType>({
     paginationOptionsProps,
     checkboxProps
   });
-  const checkboxRefs = useTableHeaderCheckbox({
-    headers,
-    initialStates: checkboxProps?.initialState
-  });
+  const { checkboxRefs, previouslyModifiedCheckboxRef } =
+    useTableHeaderCheckbox({
+      headers,
+      initialStates: checkboxProps?.initialState
+    });
 
   useEffect(() => {
     if (tableEventsRef !== undefined) {
@@ -377,12 +377,7 @@ export function DatatableWrapper<TTableRowType extends TableRowType>({
 
   const onCheckboxChange: CheckboxOnChange = useCallback(
     (result, event) => {
-      const { checkboxProp, nextCheckboxState, checkboxRefs, idProp } = result;
-
-      // We put this here because it'll be easier to switch between
-      // controlled and uncontrolled this way.
-      checkboxRefs.current[checkboxProp].indeterminate =
-        nextCheckboxState.state === 'some-selected';
+      const { checkboxProp, nextCheckboxState } = result;
 
       checkboxProps?.onCheckboxChange?.(result, event);
 
@@ -391,10 +386,6 @@ export function DatatableWrapper<TTableRowType extends TableRowType>({
         checkbox: {
           ...oldState.checkbox,
           [checkboxProp]: nextCheckboxState
-        },
-        previouslyModifiedCheckbox: {
-          idProp,
-          checkboxProp
         }
       }));
     },
@@ -474,7 +465,7 @@ export function DatatableWrapper<TTableRowType extends TableRowType>({
         onRowsPerPageChange,
         // Checkbox.
         checkboxState: state.checkbox,
-        previouslyModifiedCheckbox: state.previouslyModifiedCheckbox,
+        previouslyModifiedCheckbox: previouslyModifiedCheckboxRef,
         onCheckboxChange,
         checkboxRefs,
         // Data.
@@ -542,11 +533,7 @@ function getDefaultDatatableState<TTableRowType extends TableRowType>({
       rowsPerPage: paginationOptionsProps?.initialState?.rowsPerPage || -1,
       rowsPerPageOptions: paginationOptionsProps?.initialState?.options || []
     },
-    checkbox,
-    previouslyModifiedCheckbox: {
-      idProp: '',
-      checkboxProp: ''
-    }
+    checkbox
   };
 }
 
@@ -558,6 +545,10 @@ function useTableHeaderCheckbox<TTableColumnType>({
   initialStates?: Record<string, CheckboxState>;
 }) {
   const checkboxRefs = useRef<Record<string, HTMLInputElement>>({});
+  const previouslyModifiedCheckboxRef = useRef<PreviouslyModifiedCheckbox>({
+    checkboxProp: '',
+    idProp: ''
+  });
 
   useEffect(() => {
     if (initialStates) {
@@ -573,5 +564,5 @@ function useTableHeaderCheckbox<TTableColumnType>({
     }
   }, [headers, initialStates]);
 
-  return checkboxRefs;
+  return { checkboxRefs, previouslyModifiedCheckboxRef };
 }

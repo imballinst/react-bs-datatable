@@ -58,18 +58,19 @@ export function BulkCheckboxControl({
     checkboxState: checkboxStateContext,
     onCheckboxChange: onCheckboxChangeContext,
     filteredDataLength: filteredDataLengthContext,
-    previouslyModifiedCheckbox,
+    previouslyModifiedCheckbox: previouslyModifiedCheckboxContext,
     data
   } = useDatatableWrapper();
 
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
-  const previouslyUpdatedCheckbox =
-    checkboxState[previouslyModifiedCheckbox.checkboxProp];
+  const previouslyModifiedCheckbox: CheckboxState | undefined =
+    checkboxState[previouslyModifiedCheckboxContext.current.checkboxProp];
   const onCheckboxChange =
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
-  const state = previouslyUpdatedCheckbox?.state;
+
+  const state = previouslyModifiedCheckbox?.state;
   let rendered;
 
   const { createBulkCheckboxClickHandler } = useTableCheckboxState({
@@ -100,7 +101,7 @@ export function BulkCheckboxControl({
   } else if (state === 'some-selected') {
     rendered = (
       <>
-        {previouslyUpdatedCheckbox?.selected.size} rows selected.{' '}
+        {previouslyModifiedCheckbox?.selected.size} rows selected.{' '}
         <button
           type="button"
           tabIndex={0}

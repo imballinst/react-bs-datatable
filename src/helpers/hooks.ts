@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDatatableWrapper } from '../components/DatatableWrapper';
 import {
+  CONTROLLED_TABLE_NONE_SELECTED,
   CONTROLLED_TABLE_SELECTED_ALL,
   getNextCheckboxState,
   GetNextCheckboxStateParams
@@ -21,10 +22,10 @@ export function useControlledStateSetter<ControlledPropsType extends object>(
 }
 
 export interface UseTableCheckboxStateParameter {
-  checkboxState?: Record<string, CheckboxState>;
-  onCheckboxChange?: CheckboxOnChange;
-  filteredDataLength?: number;
-  data?: any[];
+  checkboxState: Record<string, CheckboxState>;
+  onCheckboxChange: CheckboxOnChange;
+  filteredDataLength: number;
+  data: any[];
 }
 
 export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
@@ -52,6 +53,30 @@ export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
     filteredDataLengthProp || filteredDataLengthContext;
   const data = dataProp || dataContext;
 
+  // Whenever we change checkbox, we should update the table header's column representation as well.
+  function onCheckboxChangeEffectForHeaderColumn({
+    state,
+    idProp,
+    checkboxProp
+  }: {
+    state: CheckboxState;
+    idProp: string;
+    checkboxProp: string;
+  }) {
+    if (isControlled) {
+      // For controlled, perhaps we need the checkboxes to be indeterminate per page, because we don't know
+      // exactly the IDs of the remaining items.
+      const size = state.selected.size;
+      checkboxRefs.current[checkboxProp].indeterminate =
+        size > 0 && size < filteredDataLength;
+    } else {
+      checkboxRefs.current[checkboxProp].indeterminate =
+        state.state === 'some-selected';
+    }
+
+    previouslyModifiedCheckbox.current = { checkboxProp, idProp };
+  }
+
   /**
    * Creates a bulk checkbox click handler. There are 2 ways to use this function:
    *
@@ -61,13 +86,18 @@ export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
    *    by this function internals.
    */
   function createBulkCheckboxClickHandler(
-    type?: GetNextCheckboxStateParams['type']
+    type?: GetNextCheckboxStateParams['type'],
+    checkboxInfo?: { idProp: string; checkboxProp: string }
   ) {
+    const checkboxProp =
+      checkboxInfo?.checkboxProp ||
+      previouslyModifiedCheckbox.current.checkboxProp;
+    const idProp =
+      checkboxInfo?.idProp || previouslyModifiedCheckbox.current.idProp;
     let effectiveType = type;
 
     if (!effectiveType) {
-      const previouslyUpdatedCheckbox =
-        checkboxState[previouslyModifiedCheckbox.checkboxProp];
+      const previouslyUpdatedCheckbox = checkboxState[checkboxProp];
       const state = previouslyUpdatedCheckbox?.state;
 
       if (state === 'all-selected') {
@@ -80,28 +110,35 @@ export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
     return (event: React.MouseEvent<HTMLElement>) => {
       if (!effectiveType) return;
 
+      const nextCheckboxState = getNextCheckboxState({
+        checkboxState,
+        data:
+          effectiveType === 'add' && isControlled
+            ? CONTROLLED_TABLE_SELECTED_ALL
+            : effectiveType === 'remove' && isControlled
+            ? CONTROLLED_TABLE_NONE_SELECTED
+            : body,
+        filteredDataLength,
+        idProp,
+        checkboxProp,
+        type: effectiveType
+      });
+
       const params = [
         {
-          checkboxProp: previouslyModifiedCheckbox.checkboxProp,
-          idProp: previouslyModifiedCheckbox.idProp,
-          checkboxRefs,
-          nextCheckboxState: getNextCheckboxState({
-            checkboxState,
-            data:
-              effectiveType === 'add' && isControlled
-                ? CONTROLLED_TABLE_SELECTED_ALL
-                : body,
-            filteredDataLength,
-            idProp: previouslyModifiedCheckbox.idProp,
-            checkboxProp: previouslyModifiedCheckbox.checkboxProp,
-            type: effectiveType
-          })
+          checkboxProp,
+          nextCheckboxState
         },
         {
           others: event
         }
       ] as const;
 
+      onCheckboxChangeEffectForHeaderColumn({
+        state: nextCheckboxState,
+        checkboxProp,
+        idProp
+      });
       onCheckboxChange(params[0], params[1]);
     };
   }
@@ -122,25 +159,30 @@ export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
       const isSelected = checkboxState[checkboxProp].selected.has(
         data[rowIdx][idProp]
       );
+      const nextCheckboxState = getNextCheckboxState({
+        checkboxState,
+        data: data[rowIdx],
+        idProp,
+        filteredDataLength,
+        checkboxProp,
+        type: isSelected ? 'remove' : 'add'
+      });
+
       const params = [
         {
           checkboxProp,
-          idProp,
-          nextCheckboxState: getNextCheckboxState({
-            checkboxState,
-            data,
-            idProp,
-            filteredDataLength,
-            checkboxProp,
-            type: isSelected ? 'remove' : 'add'
-          }),
-          checkboxRefs
+          nextCheckboxState
         },
         {
           checkbox: event
         }
       ] as const;
 
+      onCheckboxChangeEffectForHeaderColumn({
+        state: nextCheckboxState,
+        checkboxProp,
+        idProp
+      });
       onCheckboxChange(...params);
     };
   }
@@ -171,25 +213,30 @@ export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
         nextCheckboxType = 'add';
       }
 
+      const nextCheckboxState = getNextCheckboxState({
+        checkboxState,
+        data,
+        idProp,
+        filteredDataLength,
+        checkboxProp,
+        type: nextCheckboxType
+      });
+
       const params = [
         {
           checkboxProp,
-          idProp,
-          nextCheckboxState: getNextCheckboxState({
-            checkboxState,
-            data,
-            idProp,
-            filteredDataLength,
-            checkboxProp,
-            type: nextCheckboxType
-          }),
-          checkboxRefs
+          nextCheckboxState
         },
         {
           checkbox: event
         }
       ] as const;
 
+      onCheckboxChangeEffectForHeaderColumn({
+        state: nextCheckboxState,
+        checkboxProp,
+        idProp
+      });
       onCheckboxChange(...params);
     };
   }

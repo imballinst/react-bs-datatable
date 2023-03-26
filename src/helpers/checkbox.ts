@@ -8,6 +8,12 @@ export const CONTROLLED_TABLE_SELECTED_ALL =
 
 /**
  * @internal
+ */
+export const CONTROLLED_TABLE_NONE_SELECTED =
+  '__CONTROLLED_TABLE_NONE_SELECTED__';
+
+/**
+ * @internal
  *
  * This is an interface for the `getNextCheckboxState` function. Exported
  * for ease-of-use to get the matching type for the passed parameter.
@@ -17,6 +23,7 @@ export interface GetNextCheckboxStateParams {
   checkboxProp: string;
   data:
     | typeof CONTROLLED_TABLE_SELECTED_ALL
+    | typeof CONTROLLED_TABLE_NONE_SELECTED
     | Record<string, any>
     | Record<string, any>[];
   filteredDataLength: number;
@@ -45,8 +52,14 @@ export function getNextCheckboxState({
     return nextCheckboxState;
   }
 
+  if (data === CONTROLLED_TABLE_NONE_SELECTED) {
+    nextCheckboxState.state = 'none-selected';
+    return nextCheckboxState;
+  }
+
   // None selected.
   // This one is easy, just add all of them.
+
   if (checkboxState[checkboxProp].state === 'none-selected') {
     const newSet = new Set<string>();
 

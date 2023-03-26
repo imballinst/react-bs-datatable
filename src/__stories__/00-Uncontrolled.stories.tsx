@@ -25,6 +25,7 @@ import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
 import { CheckboxOnChange, TableColumnType } from '../helpers/types';
 import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
+import { useTableCheckboxState } from '../helpers/hooks';
 
 export default {
   /* 👇 The title prop is optional.
@@ -240,7 +241,7 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
   rowOnClickFn,
   sortableFields,
   filterableFields,
-  onCheckboxChange,
+  onCheckboxChange: onCheckboxChangeProp,
   rowsPerPage = 10,
   rowsPerPageOptions = [5, 10, 15, 20],
   alwaysShowPagination
@@ -284,6 +285,36 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
   };
   const modifiedJson = [...json];
   modifiedJson[3].status = 'unknown';
+
+  // Render a random button that'll render a reset selection button at the bottom of the table.
+  function StrayResetSelectionButton() {
+    const { createBulkCheckboxClickHandler } = useTableCheckboxState();
+
+    return (
+      <>
+        <button
+          onClick={createBulkCheckboxClickHandler('add', {
+            checkboxProp: 'checkbox',
+            idProp: 'name'
+          })}
+        >
+          Add all to selection
+        </button>
+        <button
+          onClick={createBulkCheckboxClickHandler('remove', {
+            checkboxProp: 'checkbox',
+            idProp: 'name'
+          })}
+        >
+          Reset selection
+        </button>
+      </>
+    );
+  }
+  const onCheckboxChange: CheckboxOnChange = (result, event) => {
+    onCheckboxChangeProp?.(result, event);
+    console.debug(result, event);
+  };
 
   return (
     <DatatableWrapper
@@ -335,7 +366,7 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
             rows.length === 0 ? (
               <EmptyTablePlaceholder />
             ) : (
-              rows.map((rowData) =>
+              rows.map((rowData, rowIdx) =>
                 rowData.status === 'unknown' ? (
                   <tr key={rowData.username}>
                     <td colSpan={headers.length}>Row status unknown</td>
@@ -344,6 +375,7 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
                   <TableRow
                     key={rowData.username}
                     rowData={rowData}
+                    rowIdx={rowIdx}
                     onRowClick={onRowClick}
                   />
                 )
@@ -352,6 +384,12 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
           }
         </TableBody>
       </Table>
+
+      <Row>
+        <Col xs={12}>
+          <StrayResetSelectionButton />
+        </Col>
+      </Row>
     </DatatableWrapper>
   );
 };

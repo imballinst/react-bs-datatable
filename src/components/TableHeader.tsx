@@ -167,7 +167,6 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
       }
 
       // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
-      // TODO(imballinst): show the number of currently selected rows in the label.
       rendered = (
         <Form.Group controlId={`table-selection-all`}>
           <Form.Label className="visually-hidden">

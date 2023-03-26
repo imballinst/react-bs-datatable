@@ -152,9 +152,7 @@ export type RowsPerPageOnChange = (nextState: number) => void;
 export type CheckboxOnChange = (
   params: {
     checkboxProp: string;
-    idProp: string;
     nextCheckboxState: CheckboxState;
-    checkboxRefs: MutableRefObject<Record<string, HTMLInputElement>>;
   },
   event: {
     checkbox?: React.ChangeEvent<HTMLInputElement>;
