@@ -78,10 +78,20 @@ export function getNextCheckboxState({
     return nextCheckboxState;
   }
 
-  // Some, or all selected.
+
+  // if `all-selected`, just clear the set
+  if (checkboxState[checkboxProp].state === 'all-selected') {
+    const newSet = new Set<string>();
+    nextCheckboxState.selected = newSet;
+    nextCheckboxState.state =
+      newSet.size === filteredDataLength ? 'all-selected' : 'some-selected';
+
+    return nextCheckboxState;
+  }
+
+  // Some selected.
   // This is a bit tricky, because we need to consider whether we want to add or remove.
   const newSet = new Set<string>(checkboxState[checkboxProp].selected);
-
   if (Array.isArray(data)) {
     for (const row of data) {
       const value = row[idProp];
