@@ -83,9 +83,7 @@ export function getNextCheckboxState({
   if (checkboxState[checkboxProp].state === 'all-selected') {
     const newSet = new Set<string>();
     nextCheckboxState.selected = newSet;
-    nextCheckboxState.state =
-      newSet.size === filteredDataLength ? 'all-selected' : 'some-selected';
-
+    nextCheckboxState.state = 'none-selected'
     return nextCheckboxState;
   }
 
