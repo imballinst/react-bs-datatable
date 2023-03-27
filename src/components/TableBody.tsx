@@ -8,7 +8,6 @@ import {
 } from '../helpers/types';
 import { makeClasses } from '../helpers/object';
 import { useDatatableWrapper } from './DatatableWrapper';
-import { getNextCheckboxState } from '../helpers/checkbox';
 import {
   useControlledStateSetter,
   useCreateCheckboxHandlers
@@ -170,11 +169,11 @@ export interface TableRowProps<TTableRowType extends TableRowType> {
  * ```
  * <TableBody>
  *   {
- *     data.map(row => (
+ *     data.map((row, rowIdx) => (
  *       row.isLoading ? (
  *         <tr><td colSpan={headers.length}><Loading /></td></tr>
  *       ) : (
- *         <TableRow rowData={row} />
+ *         <TableRow rowData={row} rowIdx={rowIdx} />
  *       )
  *     ))
  *   }
@@ -182,9 +181,6 @@ export interface TableRowProps<TTableRowType extends TableRowType> {
  * ```
  *
  * The above snippet will render loading indicator for rows that don't have sufficient data to store yet.
- *
- * @param param0
- * @returns
  */
 export function TableRow<TTableRowType extends TableRowType>({
   rowData,
