@@ -36,7 +36,7 @@ The function to customize the table rows.
 
 #### Defined in
 
-[components/TableBody.tsx:72](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L72)
+[components/TableBody.tsx:75](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L75)
 
 ___
 
@@ -48,7 +48,7 @@ Customize the classes of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:61](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L61)
+[components/TableBody.tsx:64](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L64)
 
 ___
 
@@ -60,7 +60,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:70](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L70)
+[components/TableBody.tsx:73](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L73)
 
 ___
 
@@ -72,7 +72,7 @@ Customize the labels of the `TableBody` component.
 
 #### Defined in
 
-[components/TableBody.tsx:59](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L59)
+[components/TableBody.tsx:62](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L62)
 
 ___
 
@@ -84,7 +84,7 @@ The props passed to the table rows under `tbody`.
 
 #### Defined in
 
-[components/TableBody.tsx:63](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L63)
+[components/TableBody.tsx:66](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L66)
 
 ## Methods
 
@@ -107,4 +107,4 @@ The function fired when any of the rows is clicked.
 
 #### Defined in
 
-[components/TableBody.tsx:65](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L65)
+[components/TableBody.tsx:68](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L68)

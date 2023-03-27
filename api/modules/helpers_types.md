@@ -25,7 +25,7 @@
 
 ### CheckboxOnChange
 
-Ƭ **CheckboxOnChange**: (`params`: { `checkboxRefs`: `MutableRefObject`<`Record`<`string`, `HTMLInputElement`\>\> ; `idProp`: `string` ; `nextCheckboxState`: [`CheckboxState`](../interfaces/helpers_types.CheckboxState.md) ; `prop`: `string`  }, `event`: { `checkbox?`: `React.ChangeEvent`<`HTMLInputElement`\> ; `others?`: `React.MouseEvent`<`HTMLElement`\>  }) => `void`
+Ƭ **CheckboxOnChange**: (`params`: { `checkboxProp`: `string` ; `nextCheckboxState`: [`CheckboxState`](../interfaces/helpers_types.CheckboxState.md)  }, `event`: { `checkbox?`: `React.ChangeEvent`<`HTMLInputElement`\> ; `others?`: `React.MouseEvent`<`HTMLElement`\>  }) => `void`
 
 #### Type declaration
 
@@ -38,10 +38,8 @@ The helper type for the checkbox change eveent.
 | Name | Type |
 | :------ | :------ |
 | `params` | `Object` |
-| `params.checkboxRefs` | `MutableRefObject`<`Record`<`string`, `HTMLInputElement`\>\> |
-| `params.idProp` | `string` |
+| `params.checkboxProp` | `string` |
 | `params.nextCheckboxState` | [`CheckboxState`](../interfaces/helpers_types.CheckboxState.md) |
-| `params.prop` | `string` |
 | `event` | `Object` |
 | `event.checkbox?` | `React.ChangeEvent`<`HTMLInputElement`\> |
 | `event.others?` | `React.MouseEvent`<`HTMLElement`\> |
