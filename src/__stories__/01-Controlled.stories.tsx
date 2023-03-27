@@ -25,7 +25,7 @@ import {
   TableRowType
 } from '../helpers/types';
 import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
-import { useTableCheckboxState } from '../helpers/hooks';
+import { useCreateCheckboxHandlers } from '../helpers/hooks';
 
 export default {
   /* 👇 The title prop is optional.
@@ -164,7 +164,7 @@ const ControlledComposedTableRowTemplate: ComponentStory<
 
   // Render a random button that'll render a reset selection button at the bottom of the table.
   function StrayResetSelectionButton() {
-    const { createBulkCheckboxClickHandler } = useTableCheckboxState({
+    const { createBulkCheckboxClickHandler } = useCreateCheckboxHandlers({
       checkboxState,
       data,
       filteredDataLength,

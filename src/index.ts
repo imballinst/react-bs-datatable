@@ -52,5 +52,5 @@ export type {
   TableRowType
 } from './helpers/types';
 
-export { useTableCheckboxState } from './helpers/hooks';
-export type { UseTableCheckboxStateParameter } from './helpers/hooks';
+export { useCreateCheckboxHandlers } from './helpers/hooks';
+export type { useCreateCheckboxHandlersParameter } from './helpers/hooks';

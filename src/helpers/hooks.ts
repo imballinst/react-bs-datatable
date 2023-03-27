@@ -21,14 +21,34 @@ export function useControlledStateSetter<ControlledPropsType extends object>(
   }, []);
 }
 
-export interface UseTableCheckboxStateParameter {
+/**
+ * The optional object passed to the `useCreateCheckboxHandlers` function.
+ * Pass the object if you are using controlled table.
+ */
+export interface useCreateCheckboxHandlersParameter {
   checkboxState: Record<string, CheckboxState>;
   onCheckboxChange: CheckboxOnChange;
   filteredDataLength: number;
   data: any[];
 }
 
-export function useTableCheckboxState(param?: UseTableCheckboxStateParameter) {
+/**
+ * A hook containing functions to create table checkbox event handlers.
+ * As library users, most likely you'll most likely be using `createBulkCheckboxClickHandler`. Example usage:
+ *
+ * ```
+ * const { createBulkCheckboxClickHandler } = useCreateCheckboxHandlers();
+ * const onClick = createBulkCheckboxClickHandler('add', {
+ *   checkboxProp: 'checkbox',
+ *   idProp: 'name'
+ * })
+ *
+ * <button onClick={onClick}>Add all to selection</button>
+ * ```
+ */
+export function useCreateCheckboxHandlers(
+  param?: useCreateCheckboxHandlersParameter
+) {
   const {
     checkboxState: checkboxStateContext,
     onCheckboxChange: onCheckboxChangeContext,

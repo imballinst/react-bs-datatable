@@ -3,7 +3,7 @@ import {
   getNextCheckboxState,
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
-import { useTableCheckboxState } from '../helpers/hooks';
+import { useCreateCheckboxHandlers } from '../helpers/hooks';
 import { CheckboxOnChange, CheckboxState } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
@@ -73,7 +73,7 @@ export function BulkCheckboxControl({
   const state = previouslyModifiedCheckbox?.state;
   let rendered;
 
-  const { createBulkCheckboxClickHandler } = useTableCheckboxState({
+  const { createBulkCheckboxClickHandler } = useCreateCheckboxHandlers({
     checkboxState,
     data,
     filteredDataLength,

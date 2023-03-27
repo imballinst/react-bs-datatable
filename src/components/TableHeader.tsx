@@ -17,7 +17,7 @@ import {
 import { getNextSortState } from '../helpers/data';
 import {
   useControlledStateSetter,
-  useTableCheckboxState
+  useCreateCheckboxHandlers
 } from '../helpers/hooks';
 
 /**
@@ -85,7 +85,7 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
 
-  const { createHeaderCheckboxClickHandler } = useTableCheckboxState({
+  const { createHeaderCheckboxClickHandler } = useCreateCheckboxHandlers({
     checkboxState,
     data,
     filteredDataLength,

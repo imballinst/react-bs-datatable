@@ -11,7 +11,7 @@ import { useDatatableWrapper } from './DatatableWrapper';
 import { getNextCheckboxState } from '../helpers/checkbox';
 import {
   useControlledStateSetter,
-  useTableCheckboxState
+  useCreateCheckboxHandlers
 } from '../helpers/hooks';
 
 export interface TableBodyLabels {
@@ -223,7 +223,7 @@ export function TableRow<TTableRowType extends TableRowType>({
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
 
-  const { createColumnCheckboxClickHandler } = useTableCheckboxState({
+  const { createColumnCheckboxClickHandler } = useCreateCheckboxHandlers({
     checkboxState,
     data,
     filteredDataLength,
