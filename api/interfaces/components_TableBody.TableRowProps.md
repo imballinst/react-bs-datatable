@@ -36,7 +36,7 @@ Classes for the rows and columns.
 
 #### Defined in
 
-[components/TableBody.tsx:159](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L159)
+[components/TableBody.tsx:158](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L158)
 
 ___
 
@@ -48,7 +48,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:161](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L161)
+[components/TableBody.tsx:160](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L160)
 
 ___
 
@@ -60,7 +60,7 @@ The row data.
 
 #### Defined in
 
-[components/TableBody.tsx:150](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L150)
+[components/TableBody.tsx:149](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L149)
 
 ___
 
@@ -72,7 +72,7 @@ The row index.
 
 #### Defined in
 
-[components/TableBody.tsx:152](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L152)
+[components/TableBody.tsx:151](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L151)
 
 ___
 
@@ -84,7 +84,7 @@ Props to the `tr` element.
 
 #### Defined in
 
-[components/TableBody.tsx:163](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L163)
+[components/TableBody.tsx:162](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L162)
 
 ## Methods
 
@@ -107,4 +107,4 @@ Optional row on click event.
 
 #### Defined in
 
-[components/TableBody.tsx:154](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L154)
+[components/TableBody.tsx:153](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L153)

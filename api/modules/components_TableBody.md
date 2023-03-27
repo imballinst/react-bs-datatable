@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[components/TableBody.tsx:49](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L49)
+[components/TableBody.tsx:48](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L48)
 
 ## Functions
 
@@ -53,7 +53,7 @@ have matching search results.
 
 #### Defined in
 
-[components/TableBody.tsx:348](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L348)
+[components/TableBody.tsx:344](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L344)
 
 ___
 
@@ -82,13 +82,13 @@ such as `tr` and `td` tags.
 
 #### Defined in
 
-[components/TableBody.tsx:85](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L85)
+[components/TableBody.tsx:84](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L84)
 
 ___
 
 ### TableRow
 
-▸ **TableRow**<`TTableRowType`\>(`param0`): `Element`
+▸ **TableRow**<`TTableRowType`\>(`__namedParameters`): `Element`
 
 `TableRow` component, as its name suggests, is a component to render a row of a table.
 This component is exported so it is possible to compose the rows further. For example:
@@ -96,11 +96,11 @@ This component is exported so it is possible to compose the rows further. For ex
 ```
 <TableBody>
   {
-    data.map(row => (
+    data.map((row, rowIdx) => (
       row.isLoading ? (
         <tr><td colSpan={headers.length}><Loading /></td></tr>
       ) : (
-        <TableRow rowData={row} />
+        <TableRow rowData={row} rowIdx={rowIdx} />
       )
     ))
   }
@@ -119,7 +119,7 @@ The above snippet will render loading indicator for rows that don't have suffici
 
 | Name | Type |
 | :------ | :------ |
-| `param0` | [`TableRowProps`](../interfaces/components_TableBody.TableRowProps.md)<`TTableRowType`\> |
+| `__namedParameters` | [`TableRowProps`](../interfaces/components_TableBody.TableRowProps.md)<`TTableRowType`\> |
 
 #### Returns
 
@@ -127,4 +127,4 @@ The above snippet will render loading indicator for rows that don't have suffici
 
 #### Defined in
 
-[components/TableBody.tsx:189](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L189)
+[components/TableBody.tsx:185](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L185)
