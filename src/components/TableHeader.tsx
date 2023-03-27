@@ -15,7 +15,10 @@ import {
   GetNextCheckboxStateParams
 } from '../helpers/checkbox';
 import { getNextSortState } from '../helpers/data';
-import { useControlledStateSetter } from '../helpers/hooks';
+import {
+  useControlledStateSetter,
+  useCreateCheckboxHandlers
+} from '../helpers/hooks';
 
 /**
  * This is an interface for customizing the classes for
@@ -81,6 +84,13 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
+
+  const { createHeaderCheckboxClickHandler } = useCreateCheckboxHandlers({
+    checkboxState,
+    data,
+    filteredDataLength,
+    onCheckboxChange
+  });
 
   for (let i = 0; i < headers.length; i += 1) {
     const {
@@ -157,7 +167,6 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
       }
 
       // Source for using visually hidden: https://www.w3.org/WAI/tutorials/forms/labels/#hiding-the-label-element.
-      // TODO(imballinst): show the number of currently selected rows in the label.
       rendered = (
         <Form.Group controlId={`table-selection-all`}>
           <Form.Label className="visually-hidden">
@@ -178,26 +187,10 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
                 checkboxRefs.current[prop] = node;
               }
             }}
-            onChange={(e) => {
-              onCheckboxChange(
-                {
-                  prop,
-                  idProp: checkbox.idProp,
-                  nextCheckboxState: getNextCheckboxState({
-                    checkboxState,
-                    data,
-                    idProp: checkbox.idProp,
-                    filteredDataLength,
-                    prop,
-                    type: nextCheckboxType
-                  }),
-                  checkboxRefs
-                },
-                {
-                  checkbox: e
-                }
-              );
-            }}
+            onChange={createHeaderCheckboxClickHandler({
+              checkboxProp: prop,
+              idProp: checkbox.idProp
+            })}
           />
         </Form.Group>
       );

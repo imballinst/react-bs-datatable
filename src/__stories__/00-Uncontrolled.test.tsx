@@ -653,7 +653,7 @@ describe('composed table rows', () => {
       expect(bulkControlElement).toContainElement(buttonBulkControlElement);
       expect(tableHeaderCheckbox).not.toBeChecked();
 
-      expect(onCheckboxChange.mock.calls[0][0].prop).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[0][0].checkboxProp).toBe('checkbox');
       expect(onCheckboxChange.mock.calls[0][1].checkbox).toBeDefined();
       expect(onCheckboxChange.mock.calls[0][1].others).not.toBeDefined();
 
@@ -667,7 +667,7 @@ describe('composed table rows', () => {
       });
 
       expect(bulkControlElement).toContainElement(buttonBulkControlElement);
-      expect(onCheckboxChange.mock.calls[1][0].prop).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[1][0].checkboxProp).toBe('checkbox');
       expect(onCheckboxChange.mock.calls[1][1].checkbox).toBeDefined();
       expect(onCheckboxChange.mock.calls[1][1].others).not.toBeDefined();
 
@@ -682,7 +682,7 @@ describe('composed table rows', () => {
       expect(bulkControlElement).toContainElement(buttonBulkControlElement);
       expect(tableHeaderCheckbox).toBeChecked();
 
-      expect(onCheckboxChange.mock.calls[2][0].prop).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[2][0].checkboxProp).toBe('checkbox');
       expect(onCheckboxChange.mock.calls[2][1].others).toBeDefined();
       expect(onCheckboxChange.mock.calls[2][1].checkbox).not.toBeDefined();
 
@@ -698,7 +698,7 @@ describe('composed table rows', () => {
       expect(bulkControlElement).toContainElement(buttonBulkControlElement);
       expect(tableHeaderCheckbox).not.toBeChecked();
 
-      expect(onCheckboxChange.mock.calls[3][0].prop).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[3][0].checkboxProp).toBe('checkbox');
       expect(onCheckboxChange.mock.calls[3][1].checkbox).toBeDefined();
       expect(onCheckboxChange.mock.calls[3][1].others).not.toBeDefined();
 
@@ -714,7 +714,7 @@ describe('composed table rows', () => {
       expect(bulkControlElement).toContainElement(buttonBulkControlElement);
       expect(tableHeaderCheckbox).toBeChecked();
 
-      expect(onCheckboxChange.mock.calls[4][0].prop).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[4][0].checkboxProp).toBe('checkbox');
       expect(onCheckboxChange.mock.calls[4][1].checkbox).toBeDefined();
       expect(onCheckboxChange.mock.calls[4][1].others).not.toBeDefined();
     });

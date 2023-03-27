@@ -4,5 +4,8 @@ module.exports = {
     '../src/__stories__/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
-  framework: '@storybook/react'
+  framework: '@storybook/react',
+  typescript: {
+    reactDocgen: false
+  }
 };

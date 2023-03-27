@@ -51,3 +51,6 @@ export type {
   TableColumnType,
   TableRowType
 } from './helpers/types';
+
+export { useCreateCheckboxHandlers } from './helpers/hooks';
+export type { useCreateCheckboxHandlersParameter } from './helpers/hooks';

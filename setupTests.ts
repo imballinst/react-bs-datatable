@@ -5,5 +5,7 @@ import '@testing-library/jest-dom';
 import * as globalStorybookConfig from './.storybook/preview';
 
 window.alert = () => {};
+console.warn = () => {};
+console.debug = () => {};
 
 setGlobalConfig(globalStorybookConfig);

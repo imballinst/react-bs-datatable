@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Col, Row, Table } from 'react-bootstrap';
 
@@ -17,7 +17,15 @@ import { DatatableWrapper } from '../components/DatatableWrapper';
 import { Filter } from '../components/Filter';
 import { PaginationOptions } from '../components/PaginationOptions';
 import { Pagination } from '../components/Pagination';
-import { SortType, TableColumnType, TableRowType } from '../helpers/types';
+import {
+  CheckboxOnChange,
+  CheckboxState,
+  SortType,
+  TableColumnType,
+  TableRowType
+} from '../helpers/types';
+import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
+import { useCreateCheckboxHandlers } from '../helpers/hooks';
 
 export default {
   /* 👇 The title prop is optional.
@@ -74,8 +82,14 @@ const ControlledComposedTableRowTemplate: ComponentStory<
 > = ({
   rowOnClickFn,
   rowsPerPage: rowsPerPageProp = 8,
-  rowsPerPageOptions = [8, 16, 24, 32]
+  rowsPerPageOptions = [8, 16, 24, 32],
+  onCheckboxChange: onCheckboxChangeProp
 }) => {
+  const headers = useRef<Array<TableColumnType<StoryColumnType>>>([
+    ...CONTROLLED_HEADERS,
+    { prop: 'checkbox', checkbox: { idProp: 'name' } }
+  ]);
+
   const [data, setData] = useState<StoryColumnType[]>([]);
   const [filteredDataLength, setFilteredDataLength] = useState(0);
   const [filter, setFilter] = useState('');
@@ -86,6 +100,11 @@ const ControlledComposedTableRowTemplate: ComponentStory<
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageProp);
   const [maxPage, setMaxPage] = useState(1);
+  const [checkboxState, setCheckboxState] = useState<
+    Record<string, CheckboxState>
+  >({
+    checkbox: { selected: new Set(), state: 'none-selected' }
+  });
 
   const onFilterChange = useCallback((text) => {
     setFilter(text);
@@ -113,6 +132,18 @@ const ControlledComposedTableRowTemplate: ComponentStory<
     }
   };
 
+  const onCheckboxChange: CheckboxOnChange = (
+    { checkboxProp, nextCheckboxState },
+    event
+  ) => {
+    onCheckboxChangeProp?.({ checkboxProp, nextCheckboxState }, event);
+
+    setCheckboxState((oldState) => ({
+      ...oldState,
+      [checkboxProp]: nextCheckboxState
+    }));
+  };
+
   // Simulate API hit.
   useEffect(() => {
     async function getData() {
@@ -131,8 +162,39 @@ const ControlledComposedTableRowTemplate: ComponentStory<
     getData();
   }, [filter, sortState, currentPage, rowsPerPage]);
 
+  // Render a random button that'll render a reset selection button at the bottom of the table.
+  function StrayResetSelectionButton() {
+    const { createBulkCheckboxClickHandler } = useCreateCheckboxHandlers({
+      checkboxState,
+      data,
+      filteredDataLength,
+      onCheckboxChange
+    });
+
+    return (
+      <>
+        <button
+          onClick={createBulkCheckboxClickHandler('add', {
+            checkboxProp: 'checkbox',
+            idProp: 'name'
+          })}
+        >
+          Add all to selection
+        </button>
+        <button
+          onClick={createBulkCheckboxClickHandler('remove', {
+            checkboxProp: 'checkbox',
+            idProp: 'name'
+          })}
+        >
+          Reset selection
+        </button>
+      </>
+    );
+  }
+
   return (
-    <DatatableWrapper headers={CONTROLLED_HEADERS} body={data}>
+    <DatatableWrapper headers={headers.current} body={data}>
       <Row className="mb-4">
         <Col
           xs={12}
@@ -167,19 +229,34 @@ const ControlledComposedTableRowTemplate: ComponentStory<
           />
         </Col>
       </Row>
+      <Row className="mb-4">
+        <Col xs={12} lg={4}>
+          <StrayResetSelectionButton />
+
+          <BulkCheckboxControl
+            controlledProps={{
+              checkboxState,
+              filteredDataLength,
+              onCheckboxChange
+            }}
+          />
+        </Col>
+      </Row>
       <Table>
         <TableHeader
           controlledProps={{
             sortState,
             onSortChange,
-            filteredDataLength
+            filteredDataLength,
+            checkboxState,
+            onCheckboxChange
           }}
         />
         <TableBody<StoryColumnType>>
           {data.length === 0 ? (
             <EmptyTablePlaceholder />
           ) : (
-            data.map((rowData) =>
+            data.map((rowData, rowIdx) =>
               rowData.status === 'unknown' ? (
                 <tr key={rowData.username}>
                   <td colSpan={CONTROLLED_HEADERS.length}>
@@ -190,8 +267,13 @@ const ControlledComposedTableRowTemplate: ComponentStory<
                 <TableRow
                   key={rowData.username}
                   rowData={rowData}
+                  rowIdx={rowIdx}
                   onRowClick={onRowClick}
-                  controlledProps={{ filteredDataLength }}
+                  controlledProps={{
+                    filteredDataLength,
+                    checkboxState,
+                    onCheckboxChange
+                  }}
                 />
               )
             )
@@ -220,6 +302,7 @@ function AsyncStoryTable<TTableRowType extends TableRowType>({
   headers?: TableColumnType<TTableRowType>[];
   rowsPerPage?: number;
   rowsPerPageOptions?: number[];
+  onCheckboxChange?: CheckboxOnChange;
   rowOnClickFn?: (name: string) => void;
 }) {
   const [data, setData] = useState<TTableRowType[]>([]);

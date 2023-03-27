@@ -256,6 +256,99 @@ describe('Composed table row', () => {
     expect(clickFn).toBeCalledTimes(1);
     expect(clickFn.mock.calls[0][0]).toBe('Aaren');
   });
+
+  test('checkbox states: none selected, some selected, all selected', async () => {
+    const onCheckboxChange = jest.fn();
+
+    const { getByText, getByLabelText, queryByText } = render(
+      <ControlledComposedTableRow
+        fetchFn={fetchControlledMockData}
+        onCheckboxChange={onCheckboxChange}
+      />
+    );
+
+    await waitForElementToBeRemoved(() =>
+      queryByText('No results to be shown.')
+    );
+
+    let tableHeaderCheckbox = getByLabelText('Add 8 rows to selection');
+    fireEvent.click(tableHeaderCheckbox);
+
+    let bulkControlElement = getByText(/8 rows selected\./);
+    let buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
+    });
+
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    expect(onCheckboxChange.mock.calls[0][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[0][1].checkbox).toBeDefined();
+    expect(onCheckboxChange.mock.calls[0][1].others).not.toBeDefined();
+
+    // De-select one row.
+    let aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/7 rows selected\./);
+    buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
+    });
+
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+    expect(onCheckboxChange.mock.calls[1][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[1][1].checkbox).toBeDefined();
+    expect(onCheckboxChange.mock.calls[1][1].others).not.toBeDefined();
+
+    // Select all rows.
+    fireEvent.click(buttonBulkControlElement);
+
+    bulkControlElement = getByText(/All 60 rows selected\./);
+    buttonBulkControlElement = getByText(/Deselect all rows/, {
+      selector: 'button'
+    });
+
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+    expect(tableHeaderCheckbox).toBeChecked();
+
+    expect(onCheckboxChange.mock.calls[2][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[2][1].others).toBeDefined();
+    expect(onCheckboxChange.mock.calls[2][1].checkbox).not.toBeDefined();
+
+    // Deselect one row.
+    // Although perhaps, the "Aaren" checkbox isn't going to be selected from the select all,
+    // so this should result in only 8 rows selected.
+    aarenCheckbox = getByLabelText(/Add Aaren to selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/8 rows selected\./);
+    buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
+    });
+
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    expect(onCheckboxChange.mock.calls[3][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[3][1].checkbox).toBeDefined();
+    expect(onCheckboxChange.mock.calls[3][1].others).not.toBeDefined();
+
+    // Remove Aaren again.
+    aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+    fireEvent.click(aarenCheckbox);
+
+    bulkControlElement = getByText(/7 rows selected\./);
+    buttonBulkControlElement = getByText(/Select all rows/, {
+      selector: 'button'
+    });
+
+    expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+    expect(tableHeaderCheckbox).not.toBeChecked();
+
+    expect(onCheckboxChange.mock.calls[4][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[4][1].checkbox).toBeDefined();
+    expect(onCheckboxChange.mock.calls[4][1].others).not.toBeDefined();
+  });
 });
 
 function sleep(period: number) {

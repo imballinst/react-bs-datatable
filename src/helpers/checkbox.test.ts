@@ -15,7 +15,7 @@ test('getNextCheckboxState', () => {
     filteredDataLength,
     checkboxState,
     idProp: 'id',
-    prop: 'checkbox',
+    checkboxProp: 'checkbox',
     data: [{ id: 'hello' }, { id: 'world' }],
     type: 'add'
   });
@@ -30,7 +30,7 @@ test('getNextCheckboxState', () => {
     filteredDataLength,
     checkboxState: { checkbox: result },
     idProp: 'id',
-    prop: 'checkbox',
+    checkboxProp: 'checkbox',
     data: [{ id: 'hello' }, { id: 'world' }],
     type: 'remove'
   });
@@ -45,7 +45,7 @@ test('getNextCheckboxState', () => {
     filteredDataLength,
     checkboxState: { checkbox: result },
     idProp: 'id',
-    prop: 'checkbox',
+    checkboxProp: 'checkbox',
     data: [
       { id: 'hello' },
       { id: 'world' },
@@ -70,7 +70,7 @@ test('getNextCheckboxState', () => {
     filteredDataLength,
     checkboxState: { checkbox: result },
     idProp: 'id',
-    prop: 'checkbox',
+    checkboxProp: 'checkbox',
     data: { id: 'javascript' },
     type: 'remove'
   });
@@ -88,7 +88,7 @@ test('getNextCheckboxState', () => {
     filteredDataLength,
     checkboxState: { checkbox: result },
     idProp: 'id',
-    prop: 'checkbox',
+    checkboxProp: 'checkbox',
     data: [{ id: 'hello' }, { id: 'world' }, { id: 'this' }, { id: 'is' }],
     type: 'remove'
   });
