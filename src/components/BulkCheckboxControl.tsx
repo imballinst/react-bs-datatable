@@ -72,7 +72,7 @@ export function BulkCheckboxControl({
   const onCheckboxChange =
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
 
-  const state = previouslyModifiedCheckbox?.state!;
+  const state = previouslyModifiedCheckbox?.state;
   let rendered;
 
   const { createBulkCheckboxClickHandler } = useCreateCheckboxHandlers({
