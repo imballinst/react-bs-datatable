@@ -65,12 +65,14 @@ export function BulkCheckboxControl({
   const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
   const filteredDataLength =
     controlledProps?.filteredDataLength || filteredDataLengthContext;
-  const previouslyModifiedCheckbox: CheckboxState | undefined =
-    checkboxState[previouslyModifiedCheckboxContext.current.checkboxProp];
+  // Not sure why TypeScript is classifying this as non-nullable `CheckboxState` if we specify type by not using `as`.
+  const previouslyModifiedCheckbox = checkboxState[
+    previouslyModifiedCheckboxContext.current.checkboxProp
+  ] as CheckboxState | undefined;
   const onCheckboxChange =
     controlledProps?.onCheckboxChange || onCheckboxChangeContext;
 
-  const state = previouslyModifiedCheckbox?.state;
+  const state = previouslyModifiedCheckbox?.state!;
   let rendered;
 
   const { createBulkCheckboxClickHandler } = useCreateCheckboxHandlers({
@@ -87,7 +89,8 @@ export function BulkCheckboxControl({
   if (state === 'all-selected') {
     rendered = (
       <>
-        All {filteredDataLength} rows selected.{' '}
+        All {filteredDataLength} {pluralize('row', filteredDataLength)}{' '}
+        selected.
         <button
           type="button"
           tabIndex={0}
@@ -99,9 +102,11 @@ export function BulkCheckboxControl({
       </>
     );
   } else if (state === 'some-selected') {
+    const selectedSize = previouslyModifiedCheckbox?.selected.size!;
+
     rendered = (
       <>
-        {previouslyModifiedCheckbox?.selected.size} rows selected.{' '}
+        {selectedSize} {pluralize('row', selectedSize)} selected.{' '}
         <button
           type="button"
           tabIndex={0}
@@ -122,4 +127,10 @@ export function BulkCheckboxControl({
       {rendered}
     </div>
   );
+}
+
+// Helper functions.
+function pluralize(word: string, length: number) {
+  if (length === 1) return word;
+  return `${word}s`;
 }

@@ -107,7 +107,29 @@ export function useCreateCheckboxHandlers(
    */
   function createBulkCheckboxClickHandler(
     type?: GetNextCheckboxStateParams['type'],
-    checkboxInfo?: { idProp: string; checkboxProp: string }
+    checkboxInfo?: {
+      idProp: string;
+      checkboxProp: string;
+    },
+    /**
+     * You most likely won't need to pass this argument, unless you are using the case as shown in this issue:
+     * https://github.com/imballinst/react-bs-datatable/issues/173. If you want to keep your table controlled but you are using servvr-side pagination,
+     * then you'll need this to manually clear the selection. However, bear in mind that the table won't be able to "select all" without the help from
+     * the server.
+     *
+     * Example usage:
+     *
+     * ```ts
+     * const clearSelectionHandler = createBulkCheckboxClickHandler("remove", {
+     *   idProp: "id",
+     *   checkboxProp: "checkbox"
+     * }, (newCheckboxState) => {
+     *   // Do something with `newCheckboxState` here...
+     *   return { checkbox: { selected: new Set(), state: 'none-selected' } }
+     * })
+     * ```
+     */
+    newStateOverrider?: (newState: CheckboxState) => CheckboxState
   ) {
     const checkboxProp =
       checkboxInfo?.checkboxProp ||
@@ -130,7 +152,7 @@ export function useCreateCheckboxHandlers(
     return (event: React.MouseEvent<HTMLElement>) => {
       if (!effectiveType) return;
 
-      const nextCheckboxState = getNextCheckboxState({
+      let nextCheckboxState = getNextCheckboxState({
         checkboxState,
         data:
           effectiveType === 'add' && isControlled
@@ -143,6 +165,9 @@ export function useCreateCheckboxHandlers(
         checkboxProp,
         type: effectiveType
       });
+      if (newStateOverrider) {
+        nextCheckboxState = newStateOverrider(nextCheckboxState);
+      }
 
       const params = [
         {

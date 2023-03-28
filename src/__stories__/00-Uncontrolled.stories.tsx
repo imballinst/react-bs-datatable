@@ -308,6 +308,18 @@ const ComposedTableRowTemplate: ComponentStory<typeof StoryTable> = ({
         >
           Reset selection
         </button>
+        <button
+          onClick={createBulkCheckboxClickHandler(
+            'remove',
+            {
+              checkboxProp: 'checkbox',
+              idProp: 'name'
+            },
+            () => ({ state: 'some-selected', selected: new Set(['Aaren']) })
+          )}
+        >
+          Reset selection except for Aaren
+        </button>
       </>
     );
   }

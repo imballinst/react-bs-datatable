@@ -718,6 +718,78 @@ describe('composed table rows', () => {
       expect(onCheckboxChange.mock.calls[4][1].checkbox).toBeDefined();
       expect(onCheckboxChange.mock.calls[4][1].others).not.toBeDefined();
     });
+
+    test('checkbox states: newStateOverrider', () => {
+      const onCheckboxChange = jest.fn();
+
+      const { getByText, getByLabelText } = render(
+        <ComposedTableRow
+          {...DEFAULT_PROPS}
+          hasCheckbox
+          onCheckboxChange={onCheckboxChange}
+        />
+      );
+
+      let tableHeaderCheckbox = getByLabelText('Add 8 rows to selection');
+      fireEvent.click(tableHeaderCheckbox);
+
+      let bulkControlElement = getByText(/8 rows selected\./);
+      let buttonBulkControlElement = getByText(/Select all rows/, {
+        selector: 'button'
+      });
+
+      expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+      expect(tableHeaderCheckbox).not.toBeChecked();
+
+      expect(onCheckboxChange.mock.calls[0][0].checkboxProp).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[0][1].checkbox).toBeDefined();
+      expect(onCheckboxChange.mock.calls[0][1].others).not.toBeDefined();
+
+      // De-select one row.
+      let aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
+      fireEvent.click(aarenCheckbox);
+
+      bulkControlElement = getByText(/7 rows selected\./);
+      buttonBulkControlElement = getByText(/Select all rows/, {
+        selector: 'button'
+      });
+
+      expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+      expect(onCheckboxChange.mock.calls[1][0].checkboxProp).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[1][1].checkbox).toBeDefined();
+      expect(onCheckboxChange.mock.calls[1][1].others).not.toBeDefined();
+
+      // Select all rows.
+      fireEvent.click(buttonBulkControlElement);
+
+      buttonBulkControlElement = getByText(
+        /Reset selection except for Aaren$/,
+        {
+          selector: 'button'
+        }
+      );
+
+      expect(tableHeaderCheckbox).toBeChecked();
+
+      expect(onCheckboxChange.mock.calls[2][0].checkboxProp).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[2][1].others).toBeDefined();
+      expect(onCheckboxChange.mock.calls[2][1].checkbox).not.toBeDefined();
+
+      // Deselect all except for "Aaren".
+      fireEvent.click(buttonBulkControlElement);
+
+      bulkControlElement = getByText(/1 row selected\./);
+      buttonBulkControlElement = getByText(/Select all rows/, {
+        selector: 'button'
+      });
+
+      expect(bulkControlElement).toContainElement(buttonBulkControlElement);
+      expect(tableHeaderCheckbox).not.toBeChecked();
+
+      expect(onCheckboxChange.mock.calls[3][0].checkboxProp).toBe('checkbox');
+      expect(onCheckboxChange.mock.calls[3][1].others).toBeDefined();
+      expect(onCheckboxChange.mock.calls[3][1].checkbox).not.toBeDefined();
+    });
   });
 
   describe('Custom row on click', () => {
