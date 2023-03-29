@@ -110,26 +110,7 @@ export function useCreateCheckboxHandlers(
     checkboxInfo?: {
       idProp: string;
       checkboxProp: string;
-    },
-    /**
-     * You most likely won't need to pass this argument, unless you are using the case as shown in this issue:
-     * https://github.com/imballinst/react-bs-datatable/issues/173. If you want to keep your table controlled but you are using servvr-side pagination,
-     * then you'll need this to manually clear the selection. However, bear in mind that the table won't be able to "select all" without the help from
-     * the server.
-     *
-     * Example usage:
-     *
-     * ```ts
-     * const clearSelectionHandler = createBulkCheckboxClickHandler("remove", {
-     *   idProp: "id",
-     *   checkboxProp: "checkbox"
-     * }, (newCheckboxState) => {
-     *   // Do something with `newCheckboxState` here...
-     *   return { checkbox: { selected: new Set(), state: 'none-selected' } }
-     * })
-     * ```
-     */
-    newStateOverrider?: (newState: CheckboxState) => CheckboxState
+    }
   ) {
     const checkboxProp =
       checkboxInfo?.checkboxProp ||
@@ -165,9 +146,6 @@ export function useCreateCheckboxHandlers(
         checkboxProp,
         type: effectiveType
       });
-      if (newStateOverrider) {
-        nextCheckboxState = newStateOverrider(nextCheckboxState);
-      }
 
       const params = [
         {
@@ -179,12 +157,12 @@ export function useCreateCheckboxHandlers(
         }
       ] as const;
 
+      onCheckboxChange(params[0], params[1]);
       onCheckboxChangeEffectForHeaderColumn({
         state: nextCheckboxState,
         checkboxProp,
         idProp
       });
-      onCheckboxChange(params[0], params[1]);
     };
   }
 
@@ -223,12 +201,12 @@ export function useCreateCheckboxHandlers(
         }
       ] as const;
 
+      onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
         state: nextCheckboxState,
         checkboxProp,
         idProp
       });
-      onCheckboxChange(...params);
     };
   }
 
@@ -277,12 +255,12 @@ export function useCreateCheckboxHandlers(
         }
       ] as const;
 
+      onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
         state: nextCheckboxState,
         checkboxProp,
         idProp
       });
-      onCheckboxChange(...params);
     };
   }
 

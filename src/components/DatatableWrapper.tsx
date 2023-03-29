@@ -377,9 +377,9 @@ export function DatatableWrapper<TTableRowType extends TableRowType>({
 
   const onCheckboxChange: CheckboxOnChange = useCallback(
     (result, event) => {
-      const { checkboxProp, nextCheckboxState } = result;
-
+      // This is put here so that if we modify `result`, it'll be taken into account when we destructure it on the following line.
       checkboxProps?.onCheckboxChange?.(result, event);
+      const { checkboxProp, nextCheckboxState } = result;
 
       setState((oldState) => ({
         ...oldState,
