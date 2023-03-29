@@ -159,7 +159,7 @@ export function useCreateCheckboxHandlers(
 
       onCheckboxChange(params[0], params[1]);
       onCheckboxChangeEffectForHeaderColumn({
-        state: nextCheckboxState,
+        state: params[0].nextCheckboxState,
         checkboxProp,
         idProp
       });
@@ -203,7 +203,7 @@ export function useCreateCheckboxHandlers(
 
       onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: nextCheckboxState,
+        state: params[0].nextCheckboxState,
         checkboxProp,
         idProp
       });
@@ -257,7 +257,7 @@ export function useCreateCheckboxHandlers(
 
       onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: nextCheckboxState,
+        state: params[0].nextCheckboxState,
         checkboxProp,
         idProp
       });
