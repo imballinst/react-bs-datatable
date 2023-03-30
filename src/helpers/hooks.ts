@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDatatableWrapper } from '../components/DatatableWrapper';
 import {
-  CONTROLLED_TABLE_NONE_SELECTED,
-  CONTROLLED_TABLE_SELECTED_ALL,
+  CONTROLLED_TABLE_ACTION,
   getNextCheckboxState,
   GetNextCheckboxStateParams
 } from './checkbox';
@@ -135,12 +134,7 @@ export function useCreateCheckboxHandlers(
 
       let nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data:
-          effectiveType === 'add' && isControlled
-            ? CONTROLLED_TABLE_SELECTED_ALL
-            : effectiveType === 'remove' && isControlled
-            ? CONTROLLED_TABLE_NONE_SELECTED
-            : body,
+        data: isControlled ? CONTROLLED_TABLE_ACTION : body,
         filteredDataLength,
         idProp,
         checkboxProp,
@@ -184,7 +178,7 @@ export function useCreateCheckboxHandlers(
       );
       const nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data: data[rowIdx],
+        data: isControlled ? CONTROLLED_TABLE_ACTION : data[rowIdx],
         idProp,
         filteredDataLength,
         checkboxProp,
@@ -238,7 +232,7 @@ export function useCreateCheckboxHandlers(
 
       const nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data,
+        data: isControlled ? CONTROLLED_TABLE_ACTION : data,
         idProp,
         filteredDataLength,
         checkboxProp,

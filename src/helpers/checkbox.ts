@@ -3,14 +3,7 @@ import { CheckboxState } from './types';
 /**
  * @internal
  */
-export const CONTROLLED_TABLE_SELECTED_ALL =
-  '__CONTROLLED_TABLE_SELECTED_ALL__';
-
-/**
- * @internal
- */
-export const CONTROLLED_TABLE_NONE_SELECTED =
-  '__CONTROLLED_TABLE_NONE_SELECTED__';
+export const CONTROLLED_TABLE_ACTION = '__CONTROLLED_TABLE_ACTION__';
 
 /**
  * @internal
@@ -22,8 +15,7 @@ export interface GetNextCheckboxStateParams {
   checkboxState: Record<string, CheckboxState>;
   checkboxProp: string;
   data:
-    | typeof CONTROLLED_TABLE_SELECTED_ALL
-    | typeof CONTROLLED_TABLE_NONE_SELECTED
+    | typeof CONTROLLED_TABLE_ACTION
     | Record<string, any>
     | Record<string, any>[];
   filteredDataLength: number;
@@ -47,13 +39,7 @@ export function getNextCheckboxState({
 }: GetNextCheckboxStateParams) {
   const nextCheckboxState = { ...checkboxState[checkboxProp] };
 
-  if (data === CONTROLLED_TABLE_SELECTED_ALL) {
-    nextCheckboxState.state = 'all-selected';
-    return nextCheckboxState;
-  }
-
-  if (data === CONTROLLED_TABLE_NONE_SELECTED) {
-    nextCheckboxState.state = 'none-selected';
+  if (data === CONTROLLED_TABLE_ACTION) {
     return nextCheckboxState;
   }
 
