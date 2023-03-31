@@ -131,8 +131,7 @@ export function useCreateCheckboxHandlers(
       const params = [
         {
           checkboxProp,
-          nextCheckboxState,
-          action: undefined
+          nextCheckboxState
         },
         {
           others: event
@@ -175,8 +174,7 @@ export function useCreateCheckboxHandlers(
       const params = [
         {
           checkboxProp,
-          nextCheckboxState,
-          action: 'change-row'
+          nextCheckboxState
         },
         {
           checkbox: event
@@ -229,8 +227,7 @@ export function useCreateCheckboxHandlers(
       const params = [
         {
           checkboxProp,
-          nextCheckboxState,
-          action: 'change-header'
+          nextCheckboxState
         },
         {
           checkbox: event

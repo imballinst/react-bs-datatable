@@ -24,7 +24,6 @@ import {
   TableColumnType,
   TableRowType
 } from '../helpers/types';
-import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
 import { useCreateCheckboxHandlers } from '../helpers/hooks';
 
 export default {
@@ -197,7 +196,7 @@ const ControlledComposedTableRowTemplate: ComponentStory<
               checkboxProp: 'checkbox',
               idProp: 'name'
             },
-            (prev) => ({
+            () => ({
               selected: new Set(),
               state: 'none-selected'
             })
