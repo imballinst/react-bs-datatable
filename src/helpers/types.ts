@@ -153,6 +153,7 @@ export type CheckboxOnChange = (
   params: {
     checkboxProp: string;
     nextCheckboxState: CheckboxState;
+    action: 'change-row' | 'change-header' | undefined;
   },
   event: {
     checkbox?: React.ChangeEvent<HTMLInputElement>;

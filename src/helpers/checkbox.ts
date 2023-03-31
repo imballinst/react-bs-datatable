@@ -2,11 +2,6 @@ import { CheckboxState } from './types';
 
 /**
  * @internal
- */
-export const CONTROLLED_TABLE_ACTION = '__CONTROLLED_TABLE_ACTION__';
-
-/**
- * @internal
  *
  * This is an interface for the `getNextCheckboxState` function. Exported
  * for ease-of-use to get the matching type for the passed parameter.
@@ -14,10 +9,7 @@ export const CONTROLLED_TABLE_ACTION = '__CONTROLLED_TABLE_ACTION__';
 export interface GetNextCheckboxStateParams {
   checkboxState: Record<string, CheckboxState>;
   checkboxProp: string;
-  data:
-    | typeof CONTROLLED_TABLE_ACTION
-    | Record<string, any>
-    | Record<string, any>[];
+  data: Record<string, any> | Record<string, any>[];
   filteredDataLength: number;
   idProp: string;
   type: 'add' | 'remove';
@@ -38,34 +30,8 @@ export function getNextCheckboxState({
   type
 }: GetNextCheckboxStateParams) {
   const nextCheckboxState = { ...checkboxState[checkboxProp] };
-
-  if (data === CONTROLLED_TABLE_ACTION) {
-    return nextCheckboxState;
-  }
-
-  // None selected.
-  // This one is easy, just add all of them.
-  if (checkboxState[checkboxProp].state === 'none-selected') {
-    const newSet = new Set<string>();
-
-    if (Array.isArray(data)) {
-      for (const row of data) {
-        newSet.add(row[idProp]);
-      }
-    } else {
-      newSet.add(data[idProp]);
-    }
-
-    nextCheckboxState.selected = newSet;
-    nextCheckboxState.state =
-      newSet.size === filteredDataLength ? 'all-selected' : 'some-selected';
-
-    return nextCheckboxState;
-  }
-
-  // Some, or all selected.
-  // This is a bit tricky, because we need to consider whether we want to add or remove.
   const newSet = new Set<string>(checkboxState[checkboxProp].selected);
+
   if (Array.isArray(data)) {
     for (const row of data) {
       const value = row[idProp];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Form } from 'react-bootstrap';
 
 import { useDatatableWrapper } from './DatatableWrapper';
@@ -71,7 +71,6 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
     sortState: sortStateContext,
     onCheckboxChange: onCheckboxChangeContext,
     checkboxState: checkboxStateContext,
-    checkboxRefs,
     filteredDataLength: filteredDataLengthContext,
     data
   } = useDatatableWrapper();
@@ -184,7 +183,8 @@ export function TableHeader({ classes, controlledProps }: TableHeaderProps) {
             checked={checkboxState[prop].state === 'all-selected'}
             ref={(node: HTMLInputElement | null) => {
               if (node !== null) {
-                checkboxRefs.current[prop] = node;
+                node.indeterminate =
+                  checkboxState[prop].state === 'some-selected';
               }
             }}
             onChange={createHeaderCheckboxClickHandler({

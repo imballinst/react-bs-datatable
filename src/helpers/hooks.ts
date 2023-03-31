@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDatatableWrapper } from '../components/DatatableWrapper';
-import {
-  CONTROLLED_TABLE_ACTION,
-  getNextCheckboxState,
-  GetNextCheckboxStateParams
-} from './checkbox';
+import { getNextCheckboxState, GetNextCheckboxStateParams } from './checkbox';
 import { CheckboxOnChange, CheckboxState } from './types';
 
 export function useControlledStateSetter<ControlledPropsType extends object>(
@@ -53,10 +49,8 @@ export function useCreateCheckboxHandlers(
     onCheckboxChange: onCheckboxChangeContext,
     filteredDataLength: filteredDataLengthContext,
     previouslyModifiedCheckbox,
-    checkboxRefs,
     data: dataContext,
-    body,
-    isControlled
+    body
   } = useDatatableWrapper();
 
   const {
@@ -74,25 +68,12 @@ export function useCreateCheckboxHandlers(
 
   // Whenever we change checkbox, we should update the table header's column representation as well.
   function onCheckboxChangeEffectForHeaderColumn({
-    state,
     idProp,
     checkboxProp
   }: {
-    state: CheckboxState;
     idProp: string;
     checkboxProp: string;
   }) {
-    if (isControlled) {
-      // For controlled, perhaps we need the checkboxes to be indeterminate per page, because we don't know
-      // exactly the IDs of the remaining items.
-      const size = state.selected.size;
-      checkboxRefs.current[checkboxProp].indeterminate =
-        size > 0 && size < filteredDataLength;
-    } else {
-      checkboxRefs.current[checkboxProp].indeterminate =
-        state.state === 'some-selected';
-    }
-
     previouslyModifiedCheckbox.current = { checkboxProp, idProp };
   }
 
@@ -134,7 +115,7 @@ export function useCreateCheckboxHandlers(
 
       let nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data: isControlled ? CONTROLLED_TABLE_ACTION : body,
+        data: body,
         filteredDataLength,
         idProp,
         checkboxProp,
@@ -144,16 +125,16 @@ export function useCreateCheckboxHandlers(
       const params = [
         {
           checkboxProp,
-          nextCheckboxState
+          nextCheckboxState,
+          action: undefined
         },
         {
           others: event
         }
       ] as const;
 
-      onCheckboxChange(params[0], params[1]);
+      onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: params[0].nextCheckboxState,
         checkboxProp,
         idProp
       });
@@ -178,7 +159,7 @@ export function useCreateCheckboxHandlers(
       );
       const nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data: isControlled ? CONTROLLED_TABLE_ACTION : data[rowIdx],
+        data: data[rowIdx],
         idProp,
         filteredDataLength,
         checkboxProp,
@@ -188,7 +169,8 @@ export function useCreateCheckboxHandlers(
       const params = [
         {
           checkboxProp,
-          nextCheckboxState
+          nextCheckboxState,
+          action: 'change-row'
         },
         {
           checkbox: event
@@ -197,7 +179,6 @@ export function useCreateCheckboxHandlers(
 
       onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: params[0].nextCheckboxState,
         checkboxProp,
         idProp
       });
@@ -232,7 +213,7 @@ export function useCreateCheckboxHandlers(
 
       const nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data: isControlled ? CONTROLLED_TABLE_ACTION : data,
+        data,
         idProp,
         filteredDataLength,
         checkboxProp,
@@ -242,7 +223,8 @@ export function useCreateCheckboxHandlers(
       const params = [
         {
           checkboxProp,
-          nextCheckboxState
+          nextCheckboxState,
+          action: 'change-header'
         },
         {
           checkbox: event
@@ -251,7 +233,6 @@ export function useCreateCheckboxHandlers(
 
       onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: params[0].nextCheckboxState,
         checkboxProp,
         idProp
       });
