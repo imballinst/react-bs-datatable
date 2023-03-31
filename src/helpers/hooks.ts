@@ -77,12 +77,14 @@ export function useCreateCheckboxHandlers(
     previouslyModifiedCheckbox.current = { checkboxProp, idProp };
   }
 
+  // TODO: refactor to be an object parameter in the next major version.
+
   /**
    * Creates a bulk checkbox click handler. There are 2 ways to use this function:
    *
    * 1. Specify explicitly: `createBulkCheckboxClickHandler("add")` or `createBulkCheckboxClickHandler("remove")`.
    *    This will create a handler that will alwaays either add all to selection or remove all from selection.
-   * 2. Don't pass an argument: `createBulkCheckboxClickHandler("add")`. Using this, the action will be "computed"
+   * 2. Don't pass an argument: `createBulkCheckboxClickHandler()`. Using this, the action will be "computed"
    *    by this function internals.
    */
   function createBulkCheckboxClickHandler(
@@ -90,7 +92,8 @@ export function useCreateCheckboxHandlers(
     checkboxInfo?: {
       idProp: string;
       checkboxProp: string;
-    }
+    },
+    checkboxStateOverrider?: (prev: CheckboxState) => CheckboxState
   ) {
     const checkboxProp =
       checkboxInfo?.checkboxProp ||
@@ -121,6 +124,9 @@ export function useCreateCheckboxHandlers(
         checkboxProp,
         type: effectiveType
       });
+      if (checkboxStateOverrider) {
+        nextCheckboxState = checkboxStateOverrider(nextCheckboxState);
+      }
 
       const params = [
         {

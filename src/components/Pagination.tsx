@@ -123,6 +123,7 @@ export function Pagination({
       className={classes?.button}
       key={`page-${firstLabel}`}
       onClick={() => onPaginationChange(1)}
+      aria-label="Go to first page"
       disabled={!hasPrev}
     >
       {firstLabel}
@@ -130,6 +131,7 @@ export function Pagination({
     <Button
       className={classes?.button}
       key={`page-${prevLabel}`}
+      aria-label="Go to previous page"
       // If out of bounds, prev button refers to the last page.
       onClick={() => onPaginationChange(currentPageState - 1)}
       disabled={!hasPrev}
@@ -153,6 +155,7 @@ export function Pagination({
         key={`page-btn-${pageNumber}`}
         onClick={() => onPaginationChange(pageNumber)}
         disabled={currentPageState === pageNumber}
+        aria-label={`Go to page ${pageNumber}`}
         className={classes?.button}
       >
         {pageNumber}
@@ -162,6 +165,7 @@ export function Pagination({
       className={classes?.button}
       key={`page-${nextLabel}`}
       onClick={() => onPaginationChange(currentPageState + 1)}
+      aria-label="Go to next page"
       disabled={!hasNext}
     >
       {nextLabel}
@@ -170,6 +174,7 @@ export function Pagination({
       className={classes?.button}
       key={`page-${lastLabel}`}
       onClick={() => onPaginationChange(maxPage)}
+      aria-label="Go to last page"
       disabled={!hasNext}
     >
       {lastLabel}

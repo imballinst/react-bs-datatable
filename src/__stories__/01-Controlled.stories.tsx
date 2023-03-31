@@ -191,18 +191,17 @@ const ControlledComposedTableRowTemplate: ComponentStory<
     return (
       <>
         <button
-          onClick={createBulkCheckboxClickHandler('add', {
-            checkboxProp: 'checkbox',
-            idProp: 'name'
-          })}
-        >
-          Add all to selection
-        </button>
-        <button
-          onClick={createBulkCheckboxClickHandler('remove', {
-            checkboxProp: 'checkbox',
-            idProp: 'name'
-          })}
+          onClick={createBulkCheckboxClickHandler(
+            'remove',
+            {
+              checkboxProp: 'checkbox',
+              idProp: 'name'
+            },
+            (prev) => ({
+              selected: new Set(),
+              state: 'none-selected'
+            })
+          )}
         >
           Reset selection
         </button>

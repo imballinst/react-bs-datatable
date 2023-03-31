@@ -304,9 +304,9 @@ describe('Composed table row', () => {
 
     expect(tableHeaderCheckbox).toBeChecked();
 
-    expect(onCheckboxChange.mock.calls[3][0].checkboxProp).toBe('checkbox');
-    expect(onCheckboxChange.mock.calls[3][1].checkbox).toBeDefined();
-    expect(onCheckboxChange.mock.calls[3][1].others).not.toBeDefined();
+    expect(onCheckboxChange.mock.calls[2][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[2][1].checkbox).toBeDefined();
+    expect(onCheckboxChange.mock.calls[2][1].others).not.toBeDefined();
 
     // Remove Aaren again.
     aarenCheckbox = getByLabelText(/Remove Aaren from selection/);
@@ -316,9 +316,33 @@ describe('Composed table row', () => {
 
     expect(tableHeaderCheckbox).not.toBeChecked();
 
-    expect(onCheckboxChange.mock.calls[4][0].checkboxProp).toBe('checkbox');
-    expect(onCheckboxChange.mock.calls[4][1].checkbox).toBeDefined();
-    expect(onCheckboxChange.mock.calls[4][1].others).not.toBeDefined();
+    expect(onCheckboxChange.mock.calls[3][0].checkboxProp).toBe('checkbox');
+    expect(onCheckboxChange.mock.calls[3][1].checkbox).toBeDefined();
+    expect(onCheckboxChange.mock.calls[3][1].others).not.toBeDefined();
+
+    // Go to second page, select "Bobbi".
+    let goToNextPage = getByLabelText(/Go to next page/);
+    fireEvent.click(goToNextPage);
+
+    await waitForElementToBeRemoved(() => queryByText('Adriana'));
+
+    let bobbiCheckbox = getByLabelText(/Add Bobbi to selection/);
+    fireEvent.click(bobbiCheckbox);
+
+    bulkControlElement = getByText(/8 rows selected\./);
+
+    let goToPrevPage = getByLabelText(/Go to previous page/);
+    fireEvent.click(goToPrevPage);
+
+    let resetSelectionButton = getByText(/Reset selection/);
+    fireEvent.click(resetSelectionButton);
+
+    // The text shouldn't show at all. This prevents the "clearing" only for the current page.
+    let queriedBulkControlElement = queryByText(/8 rows selected\./);
+    expect(queriedBulkControlElement).not.toBeInTheDocument();
+
+    queriedBulkControlElement = queryByText(/1 rows selected\./);
+    expect(queriedBulkControlElement).not.toBeInTheDocument();
   });
 });
 
