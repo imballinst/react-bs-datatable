@@ -1,11 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDatatableWrapper } from '../components/DatatableWrapper';
-import {
-  CONTROLLED_TABLE_NONE_SELECTED,
-  CONTROLLED_TABLE_SELECTED_ALL,
-  getNextCheckboxState,
-  GetNextCheckboxStateParams
-} from './checkbox';
+import { getNextCheckboxState, GetNextCheckboxStateParams } from './checkbox';
 import { CheckboxOnChange, CheckboxState } from './types';
 
 export function useControlledStateSetter<ControlledPropsType extends object>(
@@ -54,10 +49,8 @@ export function useCreateCheckboxHandlers(
     onCheckboxChange: onCheckboxChangeContext,
     filteredDataLength: filteredDataLengthContext,
     previouslyModifiedCheckbox,
-    checkboxRefs,
     data: dataContext,
-    body,
-    isControlled
+    body
   } = useDatatableWrapper();
 
   const {
@@ -75,39 +68,32 @@ export function useCreateCheckboxHandlers(
 
   // Whenever we change checkbox, we should update the table header's column representation as well.
   function onCheckboxChangeEffectForHeaderColumn({
-    state,
     idProp,
     checkboxProp
   }: {
-    state: CheckboxState;
     idProp: string;
     checkboxProp: string;
   }) {
-    if (isControlled) {
-      // For controlled, perhaps we need the checkboxes to be indeterminate per page, because we don't know
-      // exactly the IDs of the remaining items.
-      const size = state.selected.size;
-      checkboxRefs.current[checkboxProp].indeterminate =
-        size > 0 && size < filteredDataLength;
-    } else {
-      checkboxRefs.current[checkboxProp].indeterminate =
-        state.state === 'some-selected';
-    }
-
     previouslyModifiedCheckbox.current = { checkboxProp, idProp };
   }
+
+  // TODO: refactor to be an object parameter in the next major version.
 
   /**
    * Creates a bulk checkbox click handler. There are 2 ways to use this function:
    *
    * 1. Specify explicitly: `createBulkCheckboxClickHandler("add")` or `createBulkCheckboxClickHandler("remove")`.
    *    This will create a handler that will alwaays either add all to selection or remove all from selection.
-   * 2. Don't pass an argument: `createBulkCheckboxClickHandler("add")`. Using this, the action will be "computed"
+   * 2. Don't pass an argument: `createBulkCheckboxClickHandler()`. Using this, the action will be "computed"
    *    by this function internals.
    */
   function createBulkCheckboxClickHandler(
     type?: GetNextCheckboxStateParams['type'],
-    checkboxInfo?: { idProp: string; checkboxProp: string }
+    checkboxInfo?: {
+      idProp: string;
+      checkboxProp: string;
+    },
+    checkboxStateOverrider?: (prev: CheckboxState) => CheckboxState
   ) {
     const checkboxProp =
       checkboxInfo?.checkboxProp ||
@@ -130,19 +116,17 @@ export function useCreateCheckboxHandlers(
     return (event: React.MouseEvent<HTMLElement>) => {
       if (!effectiveType) return;
 
-      const nextCheckboxState = getNextCheckboxState({
+      let nextCheckboxState = getNextCheckboxState({
         checkboxState,
-        data:
-          effectiveType === 'add' && isControlled
-            ? CONTROLLED_TABLE_SELECTED_ALL
-            : effectiveType === 'remove' && isControlled
-            ? CONTROLLED_TABLE_NONE_SELECTED
-            : body,
+        data: body,
         filteredDataLength,
         idProp,
         checkboxProp,
         type: effectiveType
       });
+      if (checkboxStateOverrider) {
+        nextCheckboxState = checkboxStateOverrider(nextCheckboxState);
+      }
 
       const params = [
         {
@@ -154,12 +138,11 @@ export function useCreateCheckboxHandlers(
         }
       ] as const;
 
+      onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: nextCheckboxState,
         checkboxProp,
         idProp
       });
-      onCheckboxChange(params[0], params[1]);
     };
   }
 
@@ -198,12 +181,11 @@ export function useCreateCheckboxHandlers(
         }
       ] as const;
 
+      onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: nextCheckboxState,
         checkboxProp,
         idProp
       });
-      onCheckboxChange(...params);
     };
   }
 
@@ -252,12 +234,11 @@ export function useCreateCheckboxHandlers(
         }
       ] as const;
 
+      onCheckboxChange(...params);
       onCheckboxChangeEffectForHeaderColumn({
-        state: nextCheckboxState,
         checkboxProp,
         idProp
       });
-      onCheckboxChange(...params);
     };
   }
 

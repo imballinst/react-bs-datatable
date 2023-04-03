@@ -23,21 +23,6 @@ export interface BulkCheckboxControlClasses {
  * This is an interface for `BulkCheckboxControl` component props.
  */
 export interface BulkCheckboxControlProps {
-  /** Props to make the component controlled. */
-  controlledProps?: {
-    /**
-     * A record, which key is the column prop name and the value
-     * is of type `CheckboxState`.
-     */
-    checkboxState?: Record<string, CheckboxState>;
-    /** The function fired when any checkbox in the table changes. */
-    onCheckboxChange?: CheckboxOnChange;
-    /**
-     * The filtered data length. When not using filter control,
-     * then this should equal to the table body's length.
-     */
-    filteredDataLength?: number;
-  };
   /** Custom classes for the component. */
   classes?: BulkCheckboxControlClasses;
 }
@@ -49,11 +34,10 @@ export interface BulkCheckboxControlProps {
  * number of checked rows, as well as the "Select all" button.
  * On the other hand, when all rows are selected, then it will
  * change to "Deselect all" button.
+ *
+ * This is only fit for an uncontrolled table.
  */
-export function BulkCheckboxControl({
-  controlledProps,
-  classes
-}: BulkCheckboxControlProps) {
+export function BulkCheckboxControl({ classes }: BulkCheckboxControlProps) {
   const {
     checkboxState: checkboxStateContext,
     onCheckboxChange: onCheckboxChangeContext,
@@ -62,13 +46,13 @@ export function BulkCheckboxControl({
     data
   } = useDatatableWrapper();
 
-  const checkboxState = controlledProps?.checkboxState || checkboxStateContext;
-  const filteredDataLength =
-    controlledProps?.filteredDataLength || filteredDataLengthContext;
-  const previouslyModifiedCheckbox: CheckboxState | undefined =
-    checkboxState[previouslyModifiedCheckboxContext.current.checkboxProp];
-  const onCheckboxChange =
-    controlledProps?.onCheckboxChange || onCheckboxChangeContext;
+  const checkboxState = checkboxStateContext;
+  const filteredDataLength = filteredDataLengthContext;
+  // Not sure why TypeScript is classifying this as non-nullable `CheckboxState` if we specify type by not using `as`.
+  const previouslyModifiedCheckbox = checkboxState[
+    previouslyModifiedCheckboxContext.current.checkboxProp
+  ] as CheckboxState | undefined;
+  const onCheckboxChange = onCheckboxChangeContext;
 
   const state = previouslyModifiedCheckbox?.state;
   let rendered;
@@ -87,7 +71,8 @@ export function BulkCheckboxControl({
   if (state === 'all-selected') {
     rendered = (
       <>
-        All {filteredDataLength} rows selected.{' '}
+        All {filteredDataLength} {pluralize('row', filteredDataLength)}{' '}
+        selected.
         <button
           type="button"
           tabIndex={0}
@@ -99,9 +84,11 @@ export function BulkCheckboxControl({
       </>
     );
   } else if (state === 'some-selected') {
+    const selectedSize = previouslyModifiedCheckbox?.selected.size!;
+
     rendered = (
       <>
-        {previouslyModifiedCheckbox?.selected.size} rows selected.{' '}
+        {selectedSize} {pluralize('row', selectedSize)} selected.{' '}
         <button
           type="button"
           tabIndex={0}
@@ -122,4 +109,10 @@ export function BulkCheckboxControl({
       {rendered}
     </div>
   );
+}
+
+// Helper functions.
+function pluralize(word: string, length: number) {
+  if (length === 1) return word;
+  return `${word}s`;
 }

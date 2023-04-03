@@ -24,7 +24,6 @@ import {
   TableColumnType,
   TableRowType
 } from '../helpers/types';
-import { BulkCheckboxControl } from '../components/BulkCheckboxControl';
 import { useCreateCheckboxHandlers } from '../helpers/hooks';
 
 export default {
@@ -132,15 +131,18 @@ const ControlledComposedTableRowTemplate: ComponentStory<
     }
   };
 
-  const onCheckboxChange: CheckboxOnChange = (
-    { checkboxProp, nextCheckboxState },
-    event
-  ) => {
-    onCheckboxChangeProp?.({ checkboxProp, nextCheckboxState }, event);
+  const onCheckboxChange: CheckboxOnChange = (result, event) => {
+    // Manually modifying these below will cause unexpected behavior
+    // when we select a checkbox one-by-one in controlled mode.
+    result.nextCheckboxState.state =
+      result.nextCheckboxState.selected.size === data.length
+        ? 'all-selected'
+        : 'none-selected';
 
+    onCheckboxChangeProp?.(result, event);
     setCheckboxState((oldState) => ({
       ...oldState,
-      [checkboxProp]: nextCheckboxState
+      [result.checkboxProp]: result.nextCheckboxState
     }));
   };
 
@@ -152,6 +154,20 @@ const ControlledComposedTableRowTemplate: ComponentStory<
         sortState,
         currentPage,
         rowsPerPage
+      });
+
+      setCheckboxState((oldState) => {
+        return {
+          ...oldState,
+          checkbox: {
+            selected: oldState.checkbox.selected,
+            state: response.data.every((item) =>
+              oldState.checkbox.selected.has(item.name)
+            )
+              ? 'all-selected'
+              : 'none-selected'
+          }
+        };
       });
 
       setFilteredDataLength(response.filteredDataLength);
@@ -174,18 +190,17 @@ const ControlledComposedTableRowTemplate: ComponentStory<
     return (
       <>
         <button
-          onClick={createBulkCheckboxClickHandler('add', {
-            checkboxProp: 'checkbox',
-            idProp: 'name'
-          })}
-        >
-          Add all to selection
-        </button>
-        <button
-          onClick={createBulkCheckboxClickHandler('remove', {
-            checkboxProp: 'checkbox',
-            idProp: 'name'
-          })}
+          onClick={createBulkCheckboxClickHandler(
+            'remove',
+            {
+              checkboxProp: 'checkbox',
+              idProp: 'name'
+            },
+            () => ({
+              selected: new Set(),
+              state: 'none-selected'
+            })
+          )}
         >
           Reset selection
         </button>
@@ -233,13 +248,13 @@ const ControlledComposedTableRowTemplate: ComponentStory<
         <Col xs={12} lg={4}>
           <StrayResetSelectionButton />
 
-          <BulkCheckboxControl
-            controlledProps={{
-              checkboxState,
-              filteredDataLength,
-              onCheckboxChange
-            }}
-          />
+          {checkboxState.checkbox.selected.size > 0 && (
+            <div>
+              {`${checkboxState.checkbox.selected.size} ${
+                checkboxState.checkbox.selected.size === 1 ? 'row' : 'rows'
+              } selected.`}
+            </div>
+          )}
         </Col>
       </Row>
       <Table>

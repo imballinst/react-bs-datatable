@@ -195,7 +195,6 @@ export function TableRow<TTableRowType extends TableRowType>({
     onCheckboxChange: onCheckboxChangeContext,
     checkboxState: checkboxStateContext,
     filteredDataLength: filteredDataLengthContext,
-    checkboxRefs,
     data
   } = useDatatableWrapper();
   const headersLength = headers.length;
