@@ -30,7 +30,7 @@ export interface TableBodyClasses {
   td?: string;
 }
 
-interface TableBodyControlledProps {
+export interface TableBodyControlledProps {
   /**
    * A record, which key is the column prop name and the value
    * is of type `CheckboxState`.

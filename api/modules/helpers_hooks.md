@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[helpers/hooks.ts:11](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/hooks.ts#L11)
+[helpers/hooks.ts:6](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/hooks.ts#L6)
 
 ___
 
@@ -70,10 +70,10 @@ const onClick = createBulkCheckboxClickHandler('add', {
 
 | Name | Type |
 | :------ | :------ |
-| `createBulkCheckboxClickHandler` | (`type?`: ``"add"`` \| ``"remove"``, `checkboxInfo?`: { `checkboxProp`: `string` ; `idProp`: `string`  }) => (`event`: `MouseEvent`<`HTMLElement`, `MouseEvent`\>) => `void` |
+| `createBulkCheckboxClickHandler` | (`type?`: ``"add"`` \| ``"remove"``, `checkboxInfo?`: { `checkboxProp`: `string` ; `idProp`: `string`  }, `checkboxStateOverrider?`: (`prev`: [`CheckboxState`](../interfaces/helpers_types.CheckboxState.md)) => [`CheckboxState`](../interfaces/helpers_types.CheckboxState.md)) => (`event`: `MouseEvent`<`HTMLElement`, `MouseEvent`\>) => `void` |
 | `createColumnCheckboxClickHandler` | (`__namedParameters`: { `checkboxProp`: `string` ; `idProp`: `string` ; `rowIdx`: `number`  }) => (`event`: `ChangeEvent`<`HTMLInputElement`\>) => `void` |
 | `createHeaderCheckboxClickHandler` | (`__namedParameters`: { `checkboxProp`: `string` ; `idProp`: `string`  }) => (`event`: `ChangeEvent`<`HTMLInputElement`\>) => `void` |
 
 #### Defined in
 
-[helpers/hooks.ts:49](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/hooks.ts#L49)
+[helpers/hooks.ts:44](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/hooks.ts#L44)

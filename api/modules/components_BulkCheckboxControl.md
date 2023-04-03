@@ -26,6 +26,8 @@ number of checked rows, as well as the "Select all" button.
 On the other hand, when all rows are selected, then it will
 change to "Deselect all" button.
 
+This is only fit for an uncontrolled table.
+
 #### Parameters
 
 | Name | Type |
@@ -38,4 +40,4 @@ change to "Deselect all" button.
 
 #### Defined in
 
-[components/BulkCheckboxControl.tsx:53](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/BulkCheckboxControl.tsx#L53)
+[components/BulkCheckboxControl.tsx:40](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/BulkCheckboxControl.tsx#L40)

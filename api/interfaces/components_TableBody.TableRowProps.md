@@ -42,7 +42,7 @@ ___
 
 ### controlledProps
 
-• `Optional` **controlledProps**: `TableBodyControlledProps`
+• `Optional` **controlledProps**: [`TableBodyControlledProps`](components_TableBody.TableBodyControlledProps.md)
 
 Props to make the component controlled.
 

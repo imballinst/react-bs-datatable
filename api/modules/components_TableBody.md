@@ -8,6 +8,7 @@
 
 - [EmptyTablePlaceholderProps](../interfaces/components_TableBody.EmptyTablePlaceholderProps.md)
 - [TableBodyClasses](../interfaces/components_TableBody.TableBodyClasses.md)
+- [TableBodyControlledProps](../interfaces/components_TableBody.TableBodyControlledProps.md)
 - [TableBodyLabels](../interfaces/components_TableBody.TableBodyLabels.md)
 - [TableBodyProps](../interfaces/components_TableBody.TableBodyProps.md)
 - [TableRowProps](../interfaces/components_TableBody.TableRowProps.md)
@@ -53,7 +54,7 @@ have matching search results.
 
 #### Defined in
 
-[components/TableBody.tsx:344](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L344)
+[components/TableBody.tsx:343](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L343)
 
 ___
 
