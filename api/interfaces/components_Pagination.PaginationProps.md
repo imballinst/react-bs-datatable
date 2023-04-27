@@ -14,6 +14,7 @@ This is an interface for `Pagination` component props.
 - [classes](components_Pagination.PaginationProps.md#classes)
 - [controlledProps](components_Pagination.PaginationProps.md#controlledprops)
 - [labels](components_Pagination.PaginationProps.md#labels)
+- [paginationRange](components_Pagination.PaginationProps.md#paginationrange)
 
 ## Properties
 
@@ -28,7 +29,7 @@ To prevent layout shifts, `visibility: hidden` will be applied instead of
 
 #### Defined in
 
-[components/Pagination.tsx:46](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L46)
+[components/Pagination.tsx:48](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L48)
 
 ___
 
@@ -40,7 +41,7 @@ Customize the classes of the `Pagination` component.
 
 #### Defined in
 
-[components/Pagination.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L39)
+[components/Pagination.tsx:41](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L41)
 
 ___
 
@@ -60,7 +61,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/Pagination.tsx:48](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L48)
+[components/Pagination.tsx:56](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L56)
 
 ___
 
@@ -72,4 +73,18 @@ Customize the labels of the `Pagination` component.
 
 #### Defined in
 
-[components/Pagination.tsx:37](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L37)
+[components/Pagination.tsx:39](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L39)
+
+___
+
+### paginationRange
+
+• `Optional` **paginationRange**: `number`
+
+The pagination range that shows between the "First"/"Prev" and "Next"/"Last" buttons.
+Defaults to 3, for example: First, Prev, 1, 2, 3, Next, Last.
+When set to 5, for example: First, Prev, 1, 2, 3, 4, 5 Next, Last.
+
+#### Defined in
+
+[components/Pagination.tsx:54](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/Pagination.tsx#L54)
