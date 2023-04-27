@@ -159,6 +159,31 @@ describe('Filter, sort, pagination', () => {
     expect(nameTh.getAttribute('data-sort-order')).toBe(null);
   });
 
+  test('custom pagination range', () => {
+    const { getByText, queryByText } = render(
+      <FilterSortPagination {...DEFAULT_PROPS} paginationRange={5} />
+    );
+    let firstBtnElement = getByText('First');
+    let lastBtnElement = getByText('Last');
+    let firstNumButtonElement = queryByText('1');
+    let secondNumButtonElement = queryByText('2');
+    let thirdNumButtonElement = queryByText('3');
+    let fourthNumButtonElement = queryByText('4');
+    let fifthNumButtonElement = queryByText('5');
+    let sixthNumButtonElement = queryByText('6');
+
+    // All buttons should be disabled, and the "2" and "3" page button
+    // should not exist in the table.
+    expect(firstBtnElement).toBeDisabled();
+    expect(lastBtnElement).not.toBeDisabled();
+    expect(firstNumButtonElement).toBeDisabled();
+    expect(secondNumButtonElement).toBeInTheDocument();
+    expect(thirdNumButtonElement).toBeInTheDocument();
+    expect(fourthNumButtonElement).toBeInTheDocument();
+    expect(fifthNumButtonElement).toBeInTheDocument();
+    expect(sixthNumButtonElement).not.toBeInTheDocument();
+  });
+
   test('filtering an unfilterable column: score', () => {
     const { getByText, getByPlaceholderText } = render(
       <FilterSortPagination {...DEFAULT_PROPS} />

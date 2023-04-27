@@ -6,6 +6,8 @@ import { makeClasses } from '../helpers/object';
 import { PaginationOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 
+const DEFAULT_PAGINATION_RANGE = 3;
+
 /** This is an interface to customize the pagination labels. */
 export interface PaginationLabels {
   /** The "First" button label. Defaults to "First". */
@@ -44,6 +46,12 @@ export interface PaginationProps {
    * `display: none` style. Defaults to `true`.
    */
   alwaysShowPagination?: boolean;
+  /**
+   * The pagination range that shows between the "First"/"Prev" and "Next"/"Last" buttons.
+   * Defaults to 3, for example: First, Prev, 1, 2, 3, Next, Last.
+   * When set to 5, for example: First, Prev, 1, 2, 3, 4, 5 Next, Last.
+   **/
+  paginationRange?: number;
   /** Props to make the component controlled. */
   controlledProps?: {
     /** The currently active page. */
@@ -72,6 +80,7 @@ export interface PaginationProps {
 export function Pagination({
   labels,
   classes,
+  paginationRange = DEFAULT_PAGINATION_RANGE,
   alwaysShowPagination = true,
   controlledProps
 }: PaginationProps) {
@@ -142,7 +151,7 @@ export function Pagination({
 
   const pageNumbers: number[] = [];
 
-  while (i < 3 && startNumber <= maxPage) {
+  while (i < paginationRange && startNumber <= maxPage) {
     pageNumbers.push(startNumber);
     // Increment all.
     i += 1;

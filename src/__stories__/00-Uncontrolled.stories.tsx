@@ -449,6 +449,7 @@ function StoryTable({
   rowsPerPage = -1,
   rowsPerPageOptions = [],
   alwaysShowPagination = true,
+  paginationRange = 3,
   // Checkbox stuff.
   hasCheckbox,
   onCheckboxChange,
@@ -477,6 +478,7 @@ function StoryTable({
   rowsPerPage?: number;
   rowsPerPageOptions?: number[];
   alwaysShowPagination?: boolean;
+  paginationRange?: number;
   // Checkbox stuff.
   hasCheckbox?: boolean;
   onCheckboxChange?: CheckboxOnChange;
@@ -604,6 +606,7 @@ function StoryTable({
         >
           <Pagination
             alwaysShowPagination={alwaysShowPagination}
+            paginationRange={paginationRange}
             labels={{ firstPage, lastPage, nextPage, prevPage }}
           />
         </Col>
