@@ -158,6 +158,15 @@ export function Pagination({
     startNumber += 1;
   }
 
+  const lacking = paginationRange - pageNumbers.length;
+  if (lacking > 0) {
+    let it = pageNumbers[0] - 1;
+    while (pageNumbers.length < paginationRange && it > 1) {
+      pageNumbers.unshift(it);
+      it = it - 1;
+    }
+  }
+
   buttons.push(
     ...pageNumbers.map((pageNumber) => (
       <Button

@@ -64,6 +64,11 @@ FilterSortPagination.argTypes = {
     defaultValue: true,
     type: 'boolean'
   },
+  paginationRange: {
+    name: 'Pagination range',
+    defaultValue: 3,
+    type: 'number'
+  },
   hasCheckbox: {
     name: 'Has checkbox?',
     defaultValue: true,
