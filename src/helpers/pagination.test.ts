@@ -91,7 +91,79 @@ describe('getPageNumbers util (src/utils/getPageNumbers)', () => {
         prevPageState: 1
       })
     ).toEqual([6, 7, 8, 9, 10]);
+  });
 
-    // TODO: add even pagination ranges.
+  test('getPageNumbers: build from previous state: even', () => {
+    // [1, 2, 3, 4]
+    expect(
+      getPageNumbers({
+        currentPageState: 2,
+        maxPage: 5,
+        paginationRange: 4,
+        prevPageNumbers: [1, 2, 3, 4],
+        prevPageState: 1
+      })
+    ).toEqual([1, 2, 3, 4]);
+
+    expect(
+      getPageNumbers({
+        currentPageState: 3,
+        maxPage: 5,
+        paginationRange: 4,
+        prevPageNumbers: [1, 2, 3, 4],
+        prevPageState: 1
+      })
+    ).toEqual([1, 2, 3, 4]);
+
+    // [1, 2, 3, 4, 5, 6]
+    expect(
+      getPageNumbers({
+        currentPageState: 2,
+        maxPage: 10,
+        paginationRange: 6,
+        prevPageNumbers: [1, 2, 3, 4, 5, 6],
+        prevPageState: 1
+      })
+    ).toEqual([1, 2, 3, 4, 5, 6]);
+
+    expect(
+      getPageNumbers({
+        currentPageState: 3,
+        maxPage: 10,
+        paginationRange: 6,
+        prevPageNumbers: [1, 2, 3, 4, 5, 6],
+        prevPageState: 1
+      })
+    ).toEqual([1, 2, 3, 4, 5, 6]);
+
+    expect(
+      getPageNumbers({
+        currentPageState: 4,
+        maxPage: 10,
+        paginationRange: 6,
+        prevPageNumbers: [1, 2, 3, 4, 5, 6],
+        prevPageState: 1
+      })
+    ).toEqual([1, 2, 3, 4, 5, 6]);
+
+    expect(
+      getPageNumbers({
+        currentPageState: 5,
+        maxPage: 10,
+        paginationRange: 6,
+        prevPageNumbers: [1, 2, 3, 4, 5, 6],
+        prevPageState: 1
+      })
+    ).toEqual([2, 3, 4, 5, 6, 7]);
+
+    expect(
+      getPageNumbers({
+        currentPageState: 10,
+        maxPage: 10,
+        paginationRange: 6,
+        prevPageNumbers: [1, 2, 3, 4, 5, 6],
+        prevPageState: 1
+      })
+    ).toEqual([5, 6, 7, 8, 9, 10]);
   });
 });

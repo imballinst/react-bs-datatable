@@ -28,13 +28,15 @@ export function getPageNumbers({
     const isCurrentPageStateLocatedAtMiddleButtonGroupInPreviousState =
       index > numberOfButtonsToEdges &&
       index < paginationRange - numberOfButtonsToEdges;
-    const isCurrentPageWithinRangeOfMinOrMaxPage =
-      currentPageState <= paginationRange ||
-      currentPageState >= maxPage - paginationRange;
+    const isPrevPageWithinRangeOfMinOrMaxPage =
+      (currentPageState <= paginationRange - numberOfButtonsToEdges ||
+        currentPageState >=
+          maxPage - paginationRange + numberOfButtonsToEdges) &&
+      prevPageNumbers.includes(currentPageState);
 
     if (
       isCurrentPageStateLocatedAtMiddleButtonGroupInPreviousState ||
-      isCurrentPageWithinRangeOfMinOrMaxPage
+      isPrevPageWithinRangeOfMinOrMaxPage
     ) {
       // For example, from this:
       // 4, 5, [6], 7, 8, 9
@@ -49,36 +51,6 @@ export function getPageNumbers({
       // 5, 6, 7, [8], 9, 10 --> 5, 6, 7, 8, [9], 10 (assuming 10 is the maxPage)
       return prevPageNumbers;
     }
-
-    // Otherwise, create a new one.
-    const isCurrentPageStateBigger = currentPageState > prevPageState;
-    // If the next clicked page is "bigger" than the previous one, ensure it's located at the right-side of the middle parts.
-    // Otherwise, it should be located at the left-side of the middle parts.
-    if (isCurrentPageStateBigger) {
-      return [
-        ...getNumbers(
-          currentPageState - numberOfButtonsToEdges - 1,
-          currentPageState
-        ),
-        currentPageState,
-        ...getNumbers(
-          currentPageState + 1,
-          currentPageState + numberOfButtonsToEdges
-        )
-      ];
-    }
-
-    return [
-      ...getNumbers(
-        currentPageState - numberOfButtonsToEdges,
-        currentPageState
-      ),
-      currentPageState,
-      ...getNumbers(
-        currentPageState + 1,
-        currentPageState + numberOfButtonsToEdges + 1
-      )
-    ];
   }
 
   // Build fresh.
@@ -116,12 +88,4 @@ export function getPageNumbers({
   }
 
   return pageNumbers;
-}
-
-function getNumbers(from: number, to: number) {
-  const numbers: number[] = [];
-  for (let i = from; i < to; i++) {
-    numbers.push(i);
-  }
-  return numbers;
 }
