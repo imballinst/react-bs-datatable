@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useControlledStateSetter } from '../helpers/hooks';
 
 import { makeClasses } from '../helpers/object';
 import { PaginationOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
+import { getPageNumbers } from '../helpers/pagination';
 
 const DEFAULT_PAGINATION_RANGE = 3;
 
@@ -108,24 +109,25 @@ export function Pagination({
   const nextLabel = labels?.nextPage || 'Next';
   const lastLabel = labels?.lastPage || 'Last';
 
-  let startNumber: number;
-  let i = 0;
-  let hasPrev = true;
-  let hasNext = true;
+  const prevPageNumbers = useRef<number[] | undefined>(undefined);
+  const prevPageState = useRef<number | undefined>(undefined);
+  const pageNumbers = useMemo(() => {
+    return getPageNumbers({
+      currentPageState,
+      prevPageState: prevPageState.current,
+      maxPage,
+      paginationRange,
+      prevPageNumbers: prevPageNumbers.current
+    });
+  }, [currentPageState, maxPage, paginationRange]);
 
-  if (currentPageState === 1) {
-    // Active button is the first one.
-    startNumber = 1;
-    hasPrev = false;
-    hasNext = maxPage > 1;
-  } else if (currentPageState === maxPage && maxPage !== 1) {
-    // Active button is in the last.
-    startNumber = maxPage - 2 > 0 ? currentPageState - 2 : 1;
-    hasNext = false;
-  } else {
-    // Active button is in the middle.
-    startNumber = currentPageState - 1;
-  }
+  useEffect(() => {
+    prevPageNumbers.current = pageNumbers;
+    prevPageState.current = currentPageState;
+  }, [pageNumbers, currentPageState]);
+
+  const hasPrev = currentPageState !== 1;
+  const hasNext = currentPageState !== maxPage;
 
   buttons.push(
     <Button
@@ -146,28 +148,7 @@ export function Pagination({
       disabled={!hasPrev}
     >
       {prevLabel}
-    </Button>
-  );
-
-  const pageNumbers: number[] = [];
-
-  while (i < paginationRange && startNumber <= maxPage) {
-    pageNumbers.push(startNumber);
-    // Increment all.
-    i += 1;
-    startNumber += 1;
-  }
-
-  const lacking = paginationRange - pageNumbers.length;
-  if (lacking > 0) {
-    let it = pageNumbers[0] - 1;
-    while (pageNumbers.length < paginationRange && it > 1) {
-      pageNumbers.unshift(it);
-      it = it - 1;
-    }
-  }
-
-  buttons.push(
+    </Button>,
     ...pageNumbers.map((pageNumber) => (
       <Button
         key={`page-btn-${pageNumber}`}
