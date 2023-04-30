@@ -110,11 +110,9 @@ export function Pagination({
   const lastLabel = labels?.lastPage || 'Last';
 
   const prevPageNumbers = useRef<number[] | undefined>(undefined);
-  const prevPageState = useRef<number | undefined>(undefined);
   const pageNumbers = useMemo(() => {
     return getPageNumbers({
       currentPageState,
-      prevPageState: prevPageState.current,
       maxPage,
       paginationRange,
       prevPageNumbers: prevPageNumbers.current
@@ -123,8 +121,7 @@ export function Pagination({
 
   useEffect(() => {
     prevPageNumbers.current = pageNumbers;
-    prevPageState.current = currentPageState;
-  }, [pageNumbers, currentPageState]);
+  }, [pageNumbers]);
 
   const hasPrev = currentPageState !== 1;
   const hasNext = currentPageState !== maxPage;

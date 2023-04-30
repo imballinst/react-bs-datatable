@@ -81,8 +81,8 @@ FilterSortPagination.argTypes = {
   },
   rowsPerPageOptions: {
     name: 'Rows per page options',
-    defaultValue: [5, 10, 15, 20],
-    options: [5, 10, 15, 20],
+    defaultValue: ['5', '10', '15', '20'],
+    options: ['5', '10', '15', '20'],
     control: {
       type: 'inline-check'
     }
@@ -512,7 +512,6 @@ function StoryTable({
   // Additional sort props.
   sortProps?: DatatableWrapperProps<StoryColumnType>['sortProps'];
 }) {
-  console.info(rowsPerPage, rowsPerPageOptions);
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
       ...header,
