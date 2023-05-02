@@ -1,3 +1,8 @@
+/**
+ * @internal
+ *
+ * This is a helper function to generate the page numbers.
+ */
 export function getPageNumbers({
   currentPageState,
   prevPageNumbers,

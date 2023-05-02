@@ -18,5 +18,6 @@ react-bs-datatable
 - [helpers/data](modules/helpers_data.md)
 - [helpers/hooks](modules/helpers_hooks.md)
 - [helpers/object](modules/helpers_object.md)
+- [helpers/pagination](modules/helpers_pagination.md)
 - [helpers/react](modules/helpers_react.md)
 - [helpers/types](modules/helpers_types.md)
