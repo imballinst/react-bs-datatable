@@ -159,112 +159,253 @@ describe('Filter, sort, pagination', () => {
     expect(nameTh.getAttribute('data-sort-order')).toBe(null);
   });
 
-  test('custom pagination range', () => {
-    const { getByText, queryByLabelText } = render(
-      <FilterSortPagination {...DEFAULT_PROPS} paginationRange={5} />
-    );
-    let firstBtnElement = getByText('First');
-    let lastBtnElement = getByText('Last');
-    let firstNumButtonElement = queryByLabelText('Go to page 1');
-    let secondNumButtonElement = queryByLabelText('Go to page 2');
-    let thirdNumButtonElement = queryByLabelText('Go to page 3');
-    let fourthNumButtonElement = queryByLabelText('Go to page 4');
-    let fifthNumButtonElement = queryByLabelText('Go to page 5');
-    let sixthNumButtonElement = queryByLabelText('Go to page 6');
+  describe('custom pagination range', () => {
+    test('odd', () => {
+      const { getByText, queryByLabelText } = render(
+        <FilterSortPagination {...DEFAULT_PROPS} paginationRange={5} />
+      );
+      let firstBtnElement = getByText('First');
+      let lastBtnElement = getByText('Last');
+      let firstNumButtonElement = queryByLabelText('Go to page 1');
+      let secondNumButtonElement = queryByLabelText('Go to page 2');
+      let thirdNumButtonElement = queryByLabelText('Go to page 3');
+      let fourthNumButtonElement = queryByLabelText('Go to page 4');
+      let fifthNumButtonElement = queryByLabelText('Go to page 5');
+      let sixthNumButtonElement = queryByLabelText('Go to page 6');
 
-    // All buttons should be disabled, and the "2" and "3" page button
-    // should not exist in the table.
-    expect(firstBtnElement).toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).toBeDisabled();
-    expect(secondNumButtonElement).not.toBeDisabled();
-    expect(thirdNumButtonElement).not.toBeDisabled();
-    expect(fourthNumButtonElement).not.toBeDisabled();
-    expect(fifthNumButtonElement).not.toBeDisabled();
-    expect(sixthNumButtonElement).not.toBeInTheDocument();
+      expect(firstBtnElement).toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).toBeDisabled();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeInTheDocument();
 
-    // Test click the second page.
-    secondNumButtonElement?.click();
+      // Test click the second page.
+      secondNumButtonElement?.click();
 
-    expect(firstBtnElement).not.toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).not.toBeDisabled();
-    expect(secondNumButtonElement).toBeDisabled();
-    expect(thirdNumButtonElement).not.toBeDisabled();
-    expect(fourthNumButtonElement).not.toBeDisabled();
-    expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
 
-    // Test click the third page.
-    thirdNumButtonElement?.click();
+      // Test click the third page.
+      thirdNumButtonElement?.click();
 
-    expect(firstBtnElement).not.toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).not.toBeDisabled();
-    expect(secondNumButtonElement).not.toBeDisabled();
-    expect(thirdNumButtonElement).toBeDisabled();
-    expect(fourthNumButtonElement).not.toBeDisabled();
-    expect(fifthNumButtonElement).not.toBeDisabled();
-    expect(sixthNumButtonElement).not.toBeInTheDocument();
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeInTheDocument();
 
-    // Test click the fourth page.
-    fourthNumButtonElement?.click();
+      // Test click the fourth page.
+      fourthNumButtonElement?.click();
 
-    expect(firstBtnElement).not.toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).not.toBeDisabled();
-    expect(secondNumButtonElement).not.toBeDisabled();
-    expect(thirdNumButtonElement).not.toBeDisabled();
-    expect(fourthNumButtonElement).toBeDisabled();
-    expect(fifthNumButtonElement).not.toBeDisabled();
-    expect(sixthNumButtonElement).not.toBeInTheDocument();
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeInTheDocument();
 
-    // Test click the fifth page.
-    // The pagination should "shift".
-    fifthNumButtonElement?.click();
+      // Test click the fifth page.
+      // The pagination should "shift".
+      fifthNumButtonElement?.click();
 
-    firstNumButtonElement = queryByLabelText('Go to page 1');
-    secondNumButtonElement = queryByLabelText('Go to page 2');
-    thirdNumButtonElement = queryByLabelText('Go to page 3');
-    fourthNumButtonElement = queryByLabelText('Go to page 4');
-    fifthNumButtonElement = queryByLabelText('Go to page 5');
-    sixthNumButtonElement = queryByLabelText('Go to page 6');
-    let seventhNumButtonElement = queryByLabelText('Go to page 7');
-    let eighthNumButtonElement = queryByLabelText('Go to page 8');
+      firstNumButtonElement = queryByLabelText('Go to page 1');
+      secondNumButtonElement = queryByLabelText('Go to page 2');
+      thirdNumButtonElement = queryByLabelText('Go to page 3');
+      fourthNumButtonElement = queryByLabelText('Go to page 4');
+      fifthNumButtonElement = queryByLabelText('Go to page 5');
+      sixthNumButtonElement = queryByLabelText('Go to page 6');
+      let seventhNumButtonElement = queryByLabelText('Go to page 7');
+      let eighthNumButtonElement = queryByLabelText('Go to page 8');
 
-    expect(firstBtnElement).not.toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).not.toBeInTheDocument();
-    expect(secondNumButtonElement).not.toBeInTheDocument();
-    expect(thirdNumButtonElement).not.toBeInTheDocument();
-    expect(fourthNumButtonElement).not.toBeDisabled();
-    expect(fifthNumButtonElement).toBeDisabled();
-    expect(sixthNumButtonElement).not.toBeDisabled();
-    expect(seventhNumButtonElement).not.toBeDisabled();
-    expect(eighthNumButtonElement).not.toBeDisabled();
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeInTheDocument();
+      expect(secondNumButtonElement).not.toBeInTheDocument();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeDisabled();
+      expect(eighthNumButtonElement).not.toBeInTheDocument();
 
-    // Test click the fourth page.
-    // The pagination should "shift" back.
-    fourthNumButtonElement?.click();
+      // Test click the fourth page.
+      // The pagination should "shift" back.
+      fourthNumButtonElement?.click();
 
-    firstNumButtonElement = queryByLabelText('Go to page 1');
-    secondNumButtonElement = queryByLabelText('Go to page 2');
-    thirdNumButtonElement = queryByLabelText('Go to page 3');
-    fourthNumButtonElement = queryByLabelText('Go to page 4');
-    fifthNumButtonElement = queryByLabelText('Go to page 5');
-    sixthNumButtonElement = queryByLabelText('Go to page 6');
-    seventhNumButtonElement = queryByLabelText('Go to page 7');
-    eighthNumButtonElement = queryByLabelText('Go to page 8');
+      firstNumButtonElement = queryByLabelText('Go to page 1');
+      secondNumButtonElement = queryByLabelText('Go to page 2');
+      thirdNumButtonElement = queryByLabelText('Go to page 3');
+      fourthNumButtonElement = queryByLabelText('Go to page 4');
+      fifthNumButtonElement = queryByLabelText('Go to page 5');
+      sixthNumButtonElement = queryByLabelText('Go to page 6');
+      seventhNumButtonElement = queryByLabelText('Go to page 7');
+      eighthNumButtonElement = queryByLabelText('Go to page 8');
 
-    expect(firstBtnElement).not.toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).not.toBeInTheDocument();
-    expect(secondNumButtonElement).not.toBeInTheDocument();
-    expect(thirdNumButtonElement).not.toBeDisabled();
-    expect(fourthNumButtonElement).toBeDisabled();
-    expect(fifthNumButtonElement).not.toBeDisabled();
-    expect(sixthNumButtonElement).not.toBeDisabled();
-    expect(seventhNumButtonElement).not.toBeDisabled();
-    expect(eighthNumButtonElement).not.toBeInTheDocument();
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeInTheDocument();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeInTheDocument();
+      expect(eighthNumButtonElement).not.toBeInTheDocument();
+    });
+
+    test('even', () => {
+      const { getByText, queryByLabelText } = render(
+        <FilterSortPagination {...DEFAULT_PROPS} paginationRange={6} />
+      );
+      let firstBtnElement = getByText('First');
+      let lastBtnElement = getByText('Last');
+      let firstNumButtonElement = queryByLabelText('Go to page 1');
+      let secondNumButtonElement = queryByLabelText('Go to page 2');
+      let thirdNumButtonElement = queryByLabelText('Go to page 3');
+      let fourthNumButtonElement = queryByLabelText('Go to page 4');
+      let fifthNumButtonElement = queryByLabelText('Go to page 5');
+      let sixthNumButtonElement = queryByLabelText('Go to page 6');
+      let seventhNumButtonElement = queryByLabelText('Go to page 7');
+
+      expect(firstBtnElement).toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).toBeDisabled();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeInTheDocument();
+
+      // Test click the second page.
+      secondNumButtonElement?.click();
+
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeInTheDocument();
+
+      // Test click the third page.
+      thirdNumButtonElement?.click();
+
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeInTheDocument();
+
+      // Test click the fourth page.
+      fourthNumButtonElement?.click();
+
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeInTheDocument();
+
+      // Test click the fifth page.
+      // The pagination should "shift".
+      fifthNumButtonElement?.click();
+
+      firstNumButtonElement = queryByLabelText('Go to page 1');
+      secondNumButtonElement = queryByLabelText('Go to page 2');
+      thirdNumButtonElement = queryByLabelText('Go to page 3');
+      fourthNumButtonElement = queryByLabelText('Go to page 4');
+      fifthNumButtonElement = queryByLabelText('Go to page 5');
+      sixthNumButtonElement = queryByLabelText('Go to page 6');
+      seventhNumButtonElement = queryByLabelText('Go to page 7');
+      let eighthNumButtonElement = queryByLabelText('Go to page 8');
+      let ninthNumButtonElement = queryByLabelText('Go to page 9');
+
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeInTheDocument();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeDisabled();
+      expect(eighthNumButtonElement).not.toBeInTheDocument();
+      expect(ninthNumButtonElement).not.toBeInTheDocument();
+
+      // Test click the fourth page.
+      // The pagination should "stay".
+      fourthNumButtonElement?.click();
+
+      firstNumButtonElement = queryByLabelText('Go to page 1');
+      secondNumButtonElement = queryByLabelText('Go to page 2');
+      thirdNumButtonElement = queryByLabelText('Go to page 3');
+      fourthNumButtonElement = queryByLabelText('Go to page 4');
+      fifthNumButtonElement = queryByLabelText('Go to page 5');
+      sixthNumButtonElement = queryByLabelText('Go to page 6');
+      seventhNumButtonElement = queryByLabelText('Go to page 7');
+      eighthNumButtonElement = queryByLabelText('Go to page 8');
+      ninthNumButtonElement = queryByLabelText('Go to page 9');
+
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeInTheDocument();
+      expect(secondNumButtonElement).not.toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeDisabled();
+      expect(eighthNumButtonElement).not.toBeInTheDocument();
+      expect(ninthNumButtonElement).not.toBeInTheDocument();
+
+      // Test click the second page.
+      // The pagination should "shift left" by 2 values.
+      secondNumButtonElement?.click();
+
+      firstNumButtonElement = queryByLabelText('Go to page 1');
+      secondNumButtonElement = queryByLabelText('Go to page 2');
+      thirdNumButtonElement = queryByLabelText('Go to page 3');
+      fourthNumButtonElement = queryByLabelText('Go to page 4');
+      fifthNumButtonElement = queryByLabelText('Go to page 5');
+      sixthNumButtonElement = queryByLabelText('Go to page 6');
+      seventhNumButtonElement = queryByLabelText('Go to page 7');
+      eighthNumButtonElement = queryByLabelText('Go to page 8');
+      ninthNumButtonElement = queryByLabelText('Go to page 9');
+
+      expect(firstBtnElement).not.toBeDisabled();
+      expect(lastBtnElement).not.toBeDisabled();
+      expect(firstNumButtonElement).not.toBeDisabled();
+      expect(secondNumButtonElement).toBeDisabled();
+      expect(thirdNumButtonElement).not.toBeDisabled();
+      expect(fourthNumButtonElement).not.toBeDisabled();
+      expect(fifthNumButtonElement).not.toBeDisabled();
+      expect(sixthNumButtonElement).not.toBeDisabled();
+      expect(seventhNumButtonElement).not.toBeInTheDocument();
+      expect(ninthNumButtonElement).not.toBeInTheDocument();
+    });
   });
 
   test('filtering an unfilterable column: score', () => {
