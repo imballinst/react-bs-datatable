@@ -7,6 +7,14 @@ import { PaginationOnChange } from '../helpers/types';
 import { useDatatableWrapper } from './DatatableWrapper';
 import { getPageNumbers } from '../helpers/pagination';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAnglesLeft,
+  faAnglesRight,
+  faAngleLeft,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
+
 const DEFAULT_PAGINATION_RANGE = 3;
 
 /** This is an interface to customize the pagination labels. */
@@ -134,7 +142,8 @@ export function Pagination({
       aria-label="Go to first page"
       disabled={!hasPrev}
     >
-      {firstLabel}
+      {/* {firstLabel} */}
+      <FontAwesomeIcon icon={faAnglesLeft} />
     </Button>,
     <Button
       className={classes?.button}
@@ -144,7 +153,8 @@ export function Pagination({
       onClick={() => onPaginationChange(currentPageState - 1)}
       disabled={!hasPrev}
     >
-      {prevLabel}
+      {/* {prevLabel} */}
+      <FontAwesomeIcon icon={faAngleLeft} />
     </Button>,
     ...pageNumbers.map((pageNumber) => (
       <Button
@@ -164,7 +174,8 @@ export function Pagination({
       aria-label="Go to next page"
       disabled={!hasNext}
     >
-      {nextLabel}
+      {/* {nextLabel} */}
+      <FontAwesomeIcon icon={faAngleRight} />
     </Button>,
     <Button
       className={classes?.button}
@@ -173,7 +184,8 @@ export function Pagination({
       aria-label="Go to last page"
       disabled={!hasNext}
     >
-      {lastLabel}
+      {/* {lastLabel} */}
+      <FontAwesomeIcon icon={faAnglesRight} />
     </Button>
   );
 
