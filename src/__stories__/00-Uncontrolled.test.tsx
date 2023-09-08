@@ -13,7 +13,7 @@ import {
   ComposedTableRow
 } from './00-Uncontrolled.stories';
 import { StoryColumnType } from './resources/types';
-import { CheckboxState } from '../helpers/types';
+import { CheckboxState, TableColumnType } from '../helpers/types';
 
 describe('Basic use cases', () => {
   test('thProps', () => {
@@ -641,9 +641,10 @@ describe('Custom row on click', () => {
     rowsPerPage: 8,
     rowsPerPageOptions: [8, 16, 24, 32]
   };
-  const clickFn = jest.fn();
 
   test('custom score cell color when number is below 50', () => {
+    const clickFn = jest.fn();
+
     const { getByRole } = render(
       <RowOnClick {...DEFAULT_PROPS} rowOnClickFn={clickFn} />
     );
@@ -661,6 +662,80 @@ describe('Custom row on click', () => {
     expect(clickFn).toBeCalledTimes(1);
     expect(clickFn.mock.calls[0][0]).toBe('Aaren');
     expect(clickFn.mock.calls[0][1].target.tagName).toBe('TD');
+  });
+
+  test('custom validRowClickTagNames', () => {
+    const clickFn = jest.fn();
+
+    const headers: TableColumnType<StoryColumnType>[] = [
+      {
+        prop: 'name',
+        title: 'Name',
+        cell: (row) => <p>{row.name}</p>
+      },
+      {
+        prop: 'username',
+        title: 'Username'
+      },
+      {
+        prop: 'location',
+        title: 'Location'
+      },
+      {
+        prop: 'date',
+        title: 'Last Update'
+      },
+      {
+        prop: 'score',
+        title: 'Score'
+      }
+    ];
+
+    // Use P tag name.
+    let { getByText, rerender } = render(
+      <RowOnClick
+        {...DEFAULT_PROPS}
+        rowOnClickFn={clickFn}
+        headers={headers}
+        validRowClickTagNames={['P']}
+      />
+    );
+
+    let aarenText = getByText(/Aaren/);
+    aarenText.click();
+
+    expect(clickFn).toBeCalledTimes(1);
+    expect(clickFn.mock.calls[0][0]).toBe('Aaren');
+    expect(clickFn.mock.calls[0][1].target.tagName).toBe('P');
+
+    // Use all tag names.
+    rerender(
+      <RowOnClick
+        {...DEFAULT_PROPS}
+        rowOnClickFn={clickFn}
+        headers={headers}
+        validRowClickTagNames="*"
+      />
+    );
+
+    aarenText = getByText(/Aaren/);
+    aarenText.click();
+
+    expect(clickFn).toBeCalledTimes(2);
+    expect(clickFn.mock.calls[1][0]).toBe('Aaren');
+    expect(clickFn.mock.calls[1][1].target.tagName).toBe('P');
+
+    // Use the default one.
+    // Since "P" is not included inside ['TR', 'TD'], then nothing will happen.
+    rerender(
+      <RowOnClick {...DEFAULT_PROPS} rowOnClickFn={clickFn} headers={headers} />
+    );
+
+    aarenText = getByText(/Aaren/);
+    aarenText.click();
+
+    expect(clickFn).toBeCalledTimes(2);
+    expect(clickFn.mock.calls[2]).toBeUndefined();
   });
 });
 

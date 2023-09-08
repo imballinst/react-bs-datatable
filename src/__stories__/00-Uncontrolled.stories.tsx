@@ -12,7 +12,8 @@ import {
   HtmlTrProps,
   TableBody,
   TableBodyProps,
-  TableRow
+  TableRow,
+  TableRowProps
 } from '../components/TableBody';
 import {
   DatatableWrapper,
@@ -193,7 +194,11 @@ CustomThProps.argTypes = {
   }
 };
 
-export const RowOnClick = Template.bind({});
+const RowOnClickTemplate: ComponentStory<typeof RowOnClickStoryTable> = (
+  args
+) => <RowOnClickStoryTable {...args} />;
+
+export const RowOnClick = RowOnClickTemplate.bind({});
 RowOnClick.storyName = 'Adding row on click event';
 RowOnClick.argTypes = {
   rowOnClickText: {
@@ -476,7 +481,9 @@ function StoryTable({
   tableEventsRef,
   children,
   // Additional sort props.
-  sortProps = {}
+  sortProps = {},
+  // Valid row click tag names.
+  validRowClickTagNames
 }: {
   sortableFields?: string[];
   filterableFields?: string[];
@@ -511,6 +518,7 @@ function StoryTable({
   children?: ReactNode;
   // Additional sort props.
   sortProps?: DatatableWrapperProps<StoryColumnType>['sortProps'];
+  validRowClickTagNames?: TableRowProps<StoryColumnType>['validRowClickTagNames'];
 }) {
   const headers: TableColumnType<StoryColumnType>[] = STORY_HEADERS.map(
     (header) => ({
@@ -621,7 +629,61 @@ function StoryTable({
       </Row>
       <Table>
         <TableHeader />
-        <TableBody onRowClick={rowOnClick} rowProps={rowProps} />
+        <TableBody
+          onRowClick={rowOnClick}
+          rowProps={rowProps}
+          validRowClickTagNames={validRowClickTagNames}
+        />
+      </Table>
+    </DatatableWrapper>
+  );
+}
+
+// For row on click templates.
+function RowOnClickStoryTable({
+  // For on click row event.
+  rowOnClickText,
+  rowOnClickFn,
+  // Valid row click tag names.
+  validRowClickTagNames,
+  headers = STORY_HEADERS
+}: {
+  // For on click row event.
+  rowOnClickText?: string;
+  rowOnClickFn?: (
+    name: string,
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => void;
+  validRowClickTagNames?: TableRowProps<StoryColumnType>['validRowClickTagNames'];
+  headers?: TableColumnType<StoryColumnType>[];
+}) {
+  let rowOnClick: TableBodyProps<StoryColumnType>['onRowClick'];
+
+  if (rowOnClickText) {
+    rowOnClick = (
+      row,
+      event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+    ) => {
+      alert(
+        `Clicked row containing name ${
+          row.name
+        }.\n\nYou inputted the text: ${rowOnClickText}. Clicked on element: ${
+          (event.target as any).tagName
+        }.`
+      );
+    };
+  } else if (rowOnClickFn) {
+    rowOnClick = (row, event) => rowOnClickFn(row.name, event);
+  }
+
+  return (
+    <DatatableWrapper body={json} headers={headers}>
+      <Table>
+        <TableHeader />
+        <TableBody
+          onRowClick={rowOnClick}
+          validRowClickTagNames={validRowClickTagNames}
+        />
       </Table>
     </DatatableWrapper>
   );
