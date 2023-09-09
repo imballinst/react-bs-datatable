@@ -13,6 +13,19 @@ import {
   useCreateCheckboxHandlers
 } from '../helpers/hooks';
 
+const VALID_TAGS_FOR_ROW_ONCLICK = ['TD', 'TR'];
+
+interface CommonProps {
+  /**
+   * Customize the tag names that will trigger the row onClick. Defaults to ['TR', 'TD'].
+   * For more information, please visit the [tagName documentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName).
+   *
+   * Other than an array of tag names, you can also pass a string "*" to indicate that all child elements
+   * will trigger the row on click event.
+   */
+  validRowClickTagNames?: '*' | string[];
+}
+
 export interface TableBodyLabels {
   /**
    * The text shown when there is no result, which can be because of
@@ -56,7 +69,8 @@ export type HtmlTrProps = Omit<
 /**
  * This is an interface for `TableBody` component props.
  */
-export interface TableBodyProps<TTableRowType extends TableRowType> {
+export interface TableBodyProps<TTableRowType extends TableRowType>
+  extends CommonProps {
   /** Customize the labels of the `TableBody` component. */
   labels?: TableBodyLabels;
   /** Customize the classes of the `TableBody` component. */
@@ -87,7 +101,8 @@ export function TableBody<TTableRowType extends TableRowType>({
   rowProps,
   onRowClick: onRowClickProp,
   controlledProps,
-  children
+  children,
+  validRowClickTagNames = VALID_TAGS_FOR_ROW_ONCLICK
 }: TableBodyProps<TTableRowType>) {
   const { data } = useDatatableWrapper();
   useControlledStateSetter(controlledProps);
@@ -115,6 +130,7 @@ export function TableBody<TTableRowType extends TableRowType>({
             rowProps={rowProps}
             classes={{ td: classes?.td, tr: classes?.tr }}
             controlledProps={controlledProps}
+            validRowClickTagNames={validRowClickTagNames}
             onRowClick={onRowClickProp}
           />
         );
@@ -139,12 +155,12 @@ export function TableBody<TTableRowType extends TableRowType>({
 }
 
 // Composing functions.
-const VALID_TAGS_FOR_ROW_ONCLICK = ['TD', 'TR'];
 
 /**
  * The props for the `TableRow` component.
  */
-export interface TableRowProps<TTableRowType extends TableRowType> {
+export interface TableRowProps<TTableRowType extends TableRowType>
+  extends CommonProps {
   /** The row data. */
   rowData: TTableRowType;
   /** The row index. */
@@ -188,7 +204,8 @@ export function TableRow<TTableRowType extends TableRowType>({
   onRowClick: onRowClickProp,
   classes,
   controlledProps,
-  rowProps
+  rowProps,
+  validRowClickTagNames = VALID_TAGS_FOR_ROW_ONCLICK
 }: TableRowProps<TTableRowType>) {
   const {
     headers,
@@ -203,10 +220,12 @@ export function TableRow<TTableRowType extends TableRowType>({
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
   ) {
     if (typeof onRowClickProp === 'function') {
-      if (
-        event.target instanceof HTMLElement &&
-        VALID_TAGS_FOR_ROW_ONCLICK.includes(event.target.tagName)
-      ) {
+      const isValidTagName =
+        validRowClickTagNames === '*' ||
+        (event.target instanceof HTMLElement &&
+          validRowClickTagNames.includes(event.target.tagName));
+
+      if (isValidTagName) {
         onRowClickProp(rowData, event);
       }
     }

@@ -12,6 +12,12 @@ The props for the `TableRow` component.
 | :------ | :------ |
 | `TTableRowType` | extends [`TableRowType`](../modules/helpers_types.md#tablerowtype) |
 
+## Hierarchy
+
+- `CommonProps`
+
+  ↳ **`TableRowProps`**
+
 ## Table of contents
 
 ### Properties
@@ -21,6 +27,7 @@ The props for the `TableRow` component.
 - [rowData](components_TableBody.TableRowProps.md#rowdata)
 - [rowIdx](components_TableBody.TableRowProps.md#rowidx)
 - [rowProps](components_TableBody.TableRowProps.md#rowprops)
+- [validRowClickTagNames](components_TableBody.TableRowProps.md#validrowclicktagnames)
 
 ### Methods
 
@@ -36,7 +43,7 @@ Classes for the rows and columns.
 
 #### Defined in
 
-[components/TableBody.tsx:158](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L158)
+[components/TableBody.tsx:174](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L174)
 
 ___
 
@@ -48,7 +55,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/TableBody.tsx:160](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L160)
+[components/TableBody.tsx:176](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L176)
 
 ___
 
@@ -60,7 +67,7 @@ The row data.
 
 #### Defined in
 
-[components/TableBody.tsx:149](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L149)
+[components/TableBody.tsx:165](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L165)
 
 ___
 
@@ -72,7 +79,7 @@ The row index.
 
 #### Defined in
 
-[components/TableBody.tsx:151](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L151)
+[components/TableBody.tsx:167](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L167)
 
 ___
 
@@ -84,7 +91,27 @@ Props to the `tr` element.
 
 #### Defined in
 
-[components/TableBody.tsx:162](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L162)
+[components/TableBody.tsx:178](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L178)
+
+___
+
+### validRowClickTagNames
+
+• `Optional` **validRowClickTagNames**: ``"*"`` \| `string`[]
+
+Customize the tag names that will trigger the row onClick. Defaults to ['TR', 'TD'].
+For more information, please visit the [tagName documentation](https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName).
+
+Other than an array of tag names, you can also pass a string "*" to indicate that all child elements
+will trigger the row on click event.
+
+#### Inherited from
+
+CommonProps.validRowClickTagNames
+
+#### Defined in
+
+[components/TableBody.tsx:26](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L26)
 
 ## Methods
 
@@ -107,4 +134,4 @@ Optional row on click event.
 
 #### Defined in
 
-[components/TableBody.tsx:153](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L153)
+[components/TableBody.tsx:169](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/TableBody.tsx#L169)
