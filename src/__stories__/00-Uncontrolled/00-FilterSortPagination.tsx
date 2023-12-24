@@ -21,15 +21,17 @@ export function FilterSortPaginationStoryComponent({
   paginationRange = 3,
   rowsPerPage = 10,
   rowsPerPageOption = [5, 10, 15, 20],
-  alwaysShowPagination
+  alwaysShowPagination,
+  customHeaders
 }: {
   sortProps?: DatatableWrapperProps<any>['sortProps'];
   paginationRange?: number;
   rowsPerPage?: number;
   rowsPerPageOption?: number[];
   alwaysShowPagination?: boolean;
+  customHeaders?: TableColumnType<StoryColumnType>[];
 }) {
-  const headers: TableColumnType<StoryColumnType>[] = [
+  const headers: TableColumnType<StoryColumnType>[] = customHeaders ?? [
     {
       prop: 'name',
       title: 'Name',

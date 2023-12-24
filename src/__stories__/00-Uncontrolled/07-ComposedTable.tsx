@@ -25,11 +25,13 @@ import { useCreateCheckboxHandlers } from '../../helpers/hooks';
 export function ComposedTableStoryComponent({
   alwaysShowPagination,
   onCheckboxChange,
-  rowOnClickFn
+  rowOnClickFn,
+  data = TABLE_DATA
 }: {
   alwaysShowPagination?: boolean;
   onCheckboxChange?: TableCheckboxParameters['onCheckboxChange'];
   rowOnClickFn?: TableBodyProps<any>['onRowClick'];
+  data?: any[];
 }) {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
@@ -67,7 +69,7 @@ export function ComposedTableStoryComponent({
 
   return (
     <DatatableWrapper
-      body={TABLE_DATA}
+      body={data}
       headers={headers}
       checkboxProps={{
         onCheckboxChange

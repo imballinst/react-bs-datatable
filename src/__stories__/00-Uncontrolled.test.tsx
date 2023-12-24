@@ -14,7 +14,9 @@ import {
 import { StoryColumnType } from './resources/types';
 import { CheckboxState, TableColumnType } from '../helpers/types';
 
-const PAGE_SIZE_8_PROPS = {
+import TABLE_DATA from './resources/story-data.json';
+
+const PAGINATION_SIZE_8_PROPS = {
   rowsPerPage: 8,
   rowsPerPageOptions: [8, 16, 24, 32]
 };
@@ -72,7 +74,7 @@ describe('Filter, sort, pagination', () => {
       getByLabelText,
       queryByText,
       getByPlaceholderText
-    } = render(<FilterSortPagination />);
+    } = render(<FilterSortPagination {...PAGINATION_SIZE_8_PROPS} />);
     let firstBtnElement = getByText('First');
     let lastBtnElement = getByText('Last');
     let tableElement = getByRole('table');
@@ -159,7 +161,10 @@ describe('Filter, sort, pagination', () => {
   describe('custom pagination range', () => {
     test('odd', () => {
       const { getByText, queryByLabelText } = render(
-        <FilterSortPagination paginationRange={5} />
+        <FilterSortPagination
+          paginationRange={5}
+          {...PAGINATION_SIZE_8_PROPS}
+        />
       );
       let firstBtnElement = getByText('First');
       let lastBtnElement = getByText('Last');
@@ -265,7 +270,10 @@ describe('Filter, sort, pagination', () => {
 
     test('even', () => {
       const { getByText, queryByLabelText } = render(
-        <FilterSortPagination paginationRange={6} />
+        <FilterSortPagination
+          paginationRange={6}
+          {...PAGINATION_SIZE_8_PROPS}
+        />
       );
       let firstBtnElement = getByText('First');
       let lastBtnElement = getByText('Last');
@@ -406,8 +414,38 @@ describe('Filter, sort, pagination', () => {
   });
 
   test('filtering an unfilterable column: score', () => {
+    const customHeaders: TableColumnType<StoryColumnType>[] = [
+      {
+        prop: 'name',
+        title: 'Name',
+        isSortable: true,
+        isFilterable: true
+      },
+      {
+        prop: 'username',
+        title: 'Username',
+        isSortable: true,
+        isFilterable: true
+      },
+      {
+        prop: 'location',
+        title: 'Location'
+      },
+      {
+        prop: 'date',
+        title: 'Last Update',
+        isSortable: true,
+        isFilterable: true
+      },
+      {
+        prop: 'score',
+        title: 'Score',
+        isSortable: true
+      }
+    ];
+
     const { getByText, getByPlaceholderText } = render(
-      <FilterSortPagination />
+      <FilterSortPagination customHeaders={customHeaders} />
     );
 
     let filterElement = getByPlaceholderText('Enter text...');
@@ -436,7 +474,9 @@ describe('Filter, sort, pagination', () => {
   });
 
   test('checkbox states: none selected, some selected, all selected', () => {
-    const { getByText, getByLabelText } = render(<FilterSortPagination />);
+    const { getByText, getByLabelText } = render(
+      <FilterSortPagination {...PAGINATION_SIZE_8_PROPS} />
+    );
 
     let tableHeaderCheckbox = getByLabelText('Add 8 rows to selection');
     fireEvent.click(tableHeaderCheckbox);
@@ -729,14 +769,19 @@ describe('Trigger events from outside: sort', () => {
 
 describe('composed table rows', () => {
   describe('Filter, sort, pagination', () => {
-    test.only('normal use case', () => {
+    test('normal use case', () => {
+      const customData: StoryColumnType[] = JSON.parse(
+        JSON.stringify(TABLE_DATA)
+      );
+      customData[3].status = 'unknown';
+
       const {
         getByText,
         getByRole,
         getByLabelText,
         queryByText,
         getByPlaceholderText
-      } = render(<ComposedTable />);
+      } = render(<ComposedTable data={customData} />);
       let firstBtnElement = getByText('First');
       let lastBtnElement = getByText('Last');
       let tableElement = getByRole('table');
@@ -816,7 +861,6 @@ describe('composed table rows', () => {
       // The clicked header should have its sort state.
       tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
       expect(tableRows).toBeDefined();
-      console.info(tableRows?.[3].innerHTML);
       expect(tableRows?.[3].querySelector('td')?.textContent).toBe(
         'Row status unknown'
       );
