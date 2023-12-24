@@ -1,22 +1,10 @@
-import { Row, Col, Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { Filter } from '../../components/Filter';
-import { PaginationOptions } from '../../components/PaginationOptions';
-import {
-  EmptyTablePlaceholder,
-  TableBody,
-  TableRow
-} from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import { Pagination } from '../../components/Pagination';
-import { parse } from 'date-fns';
-import TABLE_DATA from '../resources/story-data.json';
-import { BulkCheckboxControl } from '../../components/BulkCheckboxControl';
-import { useCreateCheckboxHandlers } from '../../helpers/hooks';
+---
+title: Composed Table
+description: Sample code on using composed table
+---
 
-// @@@SNIPSTART ComposedTable
+<!--SNIPSTART ComposedTable-->
+```tsx
 export function ComposedTableStoryComponent() {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
@@ -160,4 +148,5 @@ function StrayResetSelectionButton() {
     </>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->

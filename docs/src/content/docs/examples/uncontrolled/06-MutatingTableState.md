@@ -1,15 +1,10 @@
-import { Col, Row, Table } from 'react-bootstrap';
-import {
-  DatatableWrapper,
-  useDatatableWrapper
-} from '../../components/DatatableWrapper';
-import { TableBody } from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import TABLE_DATA from '../resources/story-data.json';
+---
+title: Mutating Table State
+description: Sample code on using mutating table state
+---
 
-// @@@SNIPSTART MutatingTableState
+<!--SNIPSTART MutatingTableState-->
+```tsx
 export function MutatingTableStateStoryComponent() {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
@@ -68,4 +63,5 @@ function TableController() {
     </div>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->

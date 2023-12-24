@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 
 import { AsyncTimeoutStoryComponent } from './01-Controlled/00-AsyncTimeout';
 import { AsyncPokemonStoryComponent } from './01-Controlled/01-AsyncPokemon';
@@ -17,24 +17,24 @@ export default {
       }
     }
   }
-} as ComponentMeta<any>;
+};
 
 // Async.
-const AsyncTimeoutTemplate: ComponentStory<typeof AsyncTimeoutStoryComponent> =
+const AsyncTimeoutTemplate: StoryFn<typeof AsyncTimeoutStoryComponent> =
   AsyncTimeoutStoryComponent;
 
 export const Async = AsyncTimeoutTemplate.bind({});
 Async.storyName = 'Async example (with setTimeout)';
 
 // Async Pokémon.
-const AsyncPokemonTemplate: ComponentStory<typeof AsyncPokemonStoryComponent> =
+const AsyncPokemonTemplate: StoryFn<typeof AsyncPokemonStoryComponent> =
   AsyncPokemonStoryComponent;
 
 export const AsyncPokemon = AsyncPokemonTemplate.bind({});
 AsyncPokemon.storyName = 'Async example (with Pokémon API)';
 
 // Controlled composed table.
-const ControlledComposedTableTemplate: ComponentStory<
+const ControlledComposedTableTemplate: StoryFn<
   typeof ControlledComposedTableStoryComponent
 > = ControlledComposedTableStoryComponent;
 

@@ -1,17 +1,10 @@
-import { Row, Col, Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { Filter } from '../../components/Filter';
-import { PaginationOptions } from '../../components/PaginationOptions';
-import { TableBody } from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import { Pagination } from '../../components/Pagination';
-import { parse } from 'date-fns';
-import TABLE_DATA from '../resources/story-data.json';
-import { BulkCheckboxControl } from '../../components/BulkCheckboxControl';
+---
+title: Custom Labels
+description: Sample code on using custom labels
+---
 
-// @@@SNIPSTART CustomLabels
+<!--SNIPSTART CustomLabels-->
+```tsx
 export function CustomLabelsStoryComponent({
   filterPlaceholder,
   afterSelect,
@@ -124,4 +117,5 @@ export function CustomLabelsStoryComponent({
     </DatatableWrapper>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->

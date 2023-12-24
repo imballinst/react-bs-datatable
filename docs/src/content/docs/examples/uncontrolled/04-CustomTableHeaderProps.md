@@ -1,12 +1,10 @@
-import { Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { TableBody } from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import TABLE_DATA from '../resources/story-data.json';
+---
+title: Custom Table Header Props
+description: Sample code on using custom table header props
+---
 
-// @@@SNIPSTART CustomTableHeaderProps
+<!--SNIPSTART CustomTableHeaderProps-->
+```tsx
 export function CustomTableHeaderPropsStoryComponent({
   thClassName
 }: {
@@ -47,4 +45,5 @@ export function CustomTableHeaderPropsStoryComponent({
     </DatatableWrapper>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->

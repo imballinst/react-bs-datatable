@@ -1,34 +1,11 @@
-import { Row, Col, Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { Filter } from '../../components/Filter';
-import { PaginationOptions } from '../../components/PaginationOptions';
-import { TableBody } from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import { Pagination } from '../../components/Pagination';
-import { parse } from 'date-fns';
-import TABLE_DATA from '../resources/story-data.json';
-import { BulkCheckboxControl } from '../../components/BulkCheckboxControl';
+---
+title: Filter, sort, pagination, and checkbox
+description: Sample code on using filter, sort, pagination, and checkbox
+---
 
-// @@@SNIPSTART CustomLabels
-export function CustomLabelsStoryComponent({
-  filterPlaceholder,
-  afterSelect,
-  beforeSelect,
-  firstPage,
-  lastPage,
-  nextPage,
-  prevPage
-}: {
-  filterPlaceholder: string;
-  afterSelect: string;
-  beforeSelect: string;
-  firstPage: string;
-  lastPage: string;
-  nextPage: string;
-  prevPage: string;
-}) {
+<!--SNIPSTART FilterSortPagination-->
+```tsx
+export function FilterSortPaginationStoryComponent() {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
       prop: 'name',
@@ -88,7 +65,7 @@ export function CustomLabelsStoryComponent({
           lg={4}
           className="d-flex flex-col justify-content-end align-items-end"
         >
-          <Filter placeholder={filterPlaceholder} />
+          <Filter />
         </Col>
         <Col
           xs={12}
@@ -96,10 +73,7 @@ export function CustomLabelsStoryComponent({
           lg={4}
           className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
         >
-          <PaginationOptions
-            alwaysShowPagination
-            labels={{ afterSelect, beforeSelect }}
-          />
+          <PaginationOptions alwaysShowPagination />
         </Col>
         <Col
           xs={12}
@@ -107,11 +81,7 @@ export function CustomLabelsStoryComponent({
           lg={4}
           className="d-flex flex-col justify-content-end align-items-end"
         >
-          <Pagination
-            alwaysShowPagination
-            paginationRange={3}
-            labels={{ firstPage, lastPage, nextPage, prevPage }}
-          />
+          <Pagination alwaysShowPagination paginationRange={3} />
         </Col>
         <Col xs={12} className="mt-2">
           <BulkCheckboxControl />
@@ -124,4 +94,5 @@ export function CustomLabelsStoryComponent({
     </DatatableWrapper>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->

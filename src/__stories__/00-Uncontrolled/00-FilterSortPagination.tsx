@@ -11,6 +11,7 @@ import { parse } from 'date-fns';
 import TABLE_DATA from '../resources/story-data.json';
 import { BulkCheckboxControl } from '../../components/BulkCheckboxControl';
 
+// @@@SNIPSTART FilterSortPagination
 export function FilterSortPaginationStoryComponent() {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
@@ -100,3 +101,4 @@ export function FilterSortPaginationStoryComponent() {
     </DatatableWrapper>
   );
 }
+// @@@SNIPEND

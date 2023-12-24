@@ -40,7 +40,7 @@ npm install --save react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortaweso
 
 With `yarn`:
 
-```
+```bash
 yarn add react-bs-datatable@3 bootstrap@5 react-bootstrap@2 @fortawesome/fontawesome-svg-core@6 @fortawesome/free-solid-svg-icons@6 @fortawesome/react-fontawesome@0
 ```
 

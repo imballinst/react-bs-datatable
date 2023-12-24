@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 
 import { StoryColumnType } from './resources/types';
 import { FilterSortPaginationStoryComponent } from './00-Uncontrolled/00-FilterSortPagination';
@@ -15,26 +15,24 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Uncontrolled',
-  parameters: {
-    docs: {
-      source: {
-        code: null
-      }
-    }
-  }
-} as ComponentMeta<any>;
+  title: 'Uncontrolled'
+};
 
 // Filter, sort, pagination, checkbox.
-const FilterSortPaginationTemplate: ComponentStory<
+const FilterSortPaginationTemplate: StoryFn<
   typeof FilterSortPaginationStoryComponent
 > = FilterSortPaginationStoryComponent;
 
 export const FilterSortPagination = FilterSortPaginationTemplate.bind({});
 FilterSortPagination.storyName = 'Filter, sort, pagination, checkbox';
+FilterSortPagination.parameters = {
+  docs: {
+    source: 'helloworld'
+  }
+};
 
 // Custom labels.
-const CustomLabelsStoryComponentTemplate: ComponentStory<
+const CustomLabelsStoryComponentTemplate: StoryFn<
   typeof CustomLabelsStoryComponent
 > = CustomLabelsStoryComponent;
 
@@ -43,7 +41,6 @@ CustomLabels.storyName = 'Custom labels';
 CustomLabels.argTypes = {
   filterPlaceholder: {
     name: 'Filter placeholder',
-    defaultValue: 'Filter text...',
     type: 'string'
   },
   afterSelect: {
@@ -52,33 +49,36 @@ CustomLabels.argTypes = {
   },
   beforeSelect: {
     name: 'Text before pagination options',
-    defaultValue: 'Number of rows shown',
     type: 'string'
   },
   firstPage: {
     name: 'First page label',
-    defaultValue: '<<',
     type: 'string'
   },
   lastPage: {
     name: 'Last page label',
-    defaultValue: '>>',
     type: 'string'
   },
   nextPage: {
     name: 'Next page label',
-    defaultValue: '>',
     type: 'string'
   },
   prevPage: {
     name: 'Previous page label',
-    defaultValue: '<',
     type: 'string'
   }
 };
+CustomLabels.args = {
+  filterPlaceholder: 'Filter text...',
+  beforeSelect: 'Number of rows shown',
+  firstPage: '<<',
+  lastPage: '>>',
+  nextPage: '>',
+  prevPage: '<'
+};
 
 // Custom cell style.
-const CustomCellStyleStoryComponentTemplate: ComponentStory<
+const CustomCellStyleStoryComponentTemplate: StoryFn<
   typeof CustomCellStyleStoryComponent
 > = CustomCellStyleStoryComponent;
 
@@ -88,15 +88,17 @@ CustomCellStyle.argTypes = {
   scoreCellColumnColor: {
     name: 'Score cell column color if score is lower than 50',
     type: 'string',
-    defaultValue: '#cf8a8a',
     controls: {
       type: 'color'
     }
   }
 };
+CustomCellStyle.args = {
+  scoreCellColumnColor: '#cf8a8a'
+};
 
 // Custom table row style.
-const CustomRowStyleStoryComponentTemplate: ComponentStory<
+const CustomRowStyleStoryComponentTemplate: StoryFn<
   typeof CustomRowStyleStoryComponent
 > = CustomRowStyleStoryComponent;
 
@@ -111,7 +113,7 @@ CustomRowStyleProps.args = {
 };
 
 // Custom table header props.
-const CustomTableHeaderPropsStoryComponentTemplate: ComponentStory<
+const CustomTableHeaderPropsStoryComponentTemplate: StoryFn<
   typeof CustomTableHeaderPropsStoryComponent
 > = CustomTableHeaderPropsStoryComponent;
 
@@ -121,13 +123,15 @@ CustomTableHeaderProps.storyName = 'Custom "score" table header classname';
 CustomTableHeaderProps.argTypes = {
   thClassName: {
     name: '"Score" table header classname',
-    type: 'string',
-    defaultValue: 'hello-world'
+    type: 'string'
   }
+};
+CustomTableHeaderProps.args = {
+  thClassName: '#hello-world'
 };
 
 // Custom row on click.
-const RowOnClickTemplate: ComponentStory<typeof RowOnClickStoryComponent> =
+const RowOnClickTemplate: StoryFn<typeof RowOnClickStoryComponent> =
   RowOnClickStoryComponent;
 
 export const RowOnClick = RowOnClickTemplate.bind({});
@@ -135,13 +139,15 @@ RowOnClick.storyName = 'Adding row on click event';
 RowOnClick.argTypes = {
   rowOnClickText: {
     name: 'Text shown when row is clicked',
-    type: 'string',
-    defaultValue: 'Hello, world'
+    type: 'string'
   }
+};
+RowOnClick.args = {
+  rowOnClickText: 'Hello, world'
 };
 
 // Control table from outside.
-const MutatingTableStateStoryComponentTemplate: ComponentStory<
+const MutatingTableStateStoryComponentTemplate: StoryFn<
   typeof MutatingTableStateStoryComponent
 > = MutatingTableStateStoryComponent;
 
@@ -151,7 +157,7 @@ export const MutatingTableState = MutatingTableStateStoryComponentTemplate.bind(
 MutatingTableState.storyName = "Mutating uncontrolled table's state";
 
 // Composed table.
-const ComposedTableStoryComponentTemplate: ComponentStory<
+const ComposedTableStoryComponentTemplate: StoryFn<
   typeof ComposedTableStoryComponent
 > = ComposedTableStoryComponent;
 

@@ -1,4 +1,6 @@
 // Need to wrap this and use `require`.
+import { Preview } from '@storybook/react';
+
 // This is because, during testing, we don't need to import Bootstrap CSS.
 if (process.env.NODE_ENV !== 'test') {
   require('bootstrap/dist/css/bootstrap.css');

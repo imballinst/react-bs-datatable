@@ -1,12 +1,10 @@
-import { Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { TableBody } from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import TABLE_DATA from '../resources/story-data.json';
+---
+title: Custom Row On Click
+description: Sample code on using custom row on click
+---
 
-// @@@SNIPSTART RowOnClick
+<!--SNIPSTART RowOnClick-->
+```tsx
 export function RowOnClickStoryComponent({
   rowOnClickText
 }: {
@@ -54,4 +52,5 @@ export function RowOnClickStoryComponent({
     </DatatableWrapper>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->

@@ -12,8 +12,9 @@
     "build:esm": "tsc --project tsconfig.esm.json",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "docs": "typedoc --options typedoc.json",
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build",
+    "sb:dev": "storybook dev -p 6006 --no-open",
+    "sb:prod": "yarn storybook build -o docs/dist/storybook",
+    "build-docs": "yarn --cwd docs build && yarn sb:prod",
     "preversion": "yarn test && rm -rf lib && yarn build",
     "v:alphamajor": "npm version premajor --preid alpha",
     "v:alphaminor": "npm version preminor --preid alpha",
@@ -78,5 +79,6 @@
   },
   "engines": {
     "node": ">=16"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }

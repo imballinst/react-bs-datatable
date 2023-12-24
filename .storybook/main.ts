@@ -1,4 +1,6 @@
-module.exports = {
+import type { StorybookConfig } from '@storybook/react-webpack5';
+
+const config: StorybookConfig = {
   stories: [
     '../src/__stories__/*.stories.mdx',
     '../src/__stories__/*.stories.@(js|jsx|ts|tsx)'
@@ -13,9 +15,7 @@ module.exports = {
 
   typescript: {
     reactDocgen: false
-  },
-
-  docs: {
-    autodocs: true
   }
 };
+
+export default config;

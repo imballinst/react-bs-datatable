@@ -1,12 +1,10 @@
-import { Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { TableBody } from '../../components/TableBody';
-import { TableHeader } from '../../components/TableHeader';
-import { TableColumnType } from '../../helpers/types';
-import { StoryColumnType } from '../resources/types';
-import TABLE_DATA from '../resources/story-data.json';
+---
+title: Custom Row Style
+description: Sample code on using custom row style
+---
 
-// @@@SNIPSTART CustomRowStyle
+<!--SNIPSTART CustomRowStyle-->
+```tsx
 export function CustomRowStyleStoryComponent() {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
@@ -44,4 +42,5 @@ export function CustomRowStyleStoryComponent() {
     </DatatableWrapper>
   );
 }
-// @@@SNIPEND
+```
+<!--SNIPEND-->
