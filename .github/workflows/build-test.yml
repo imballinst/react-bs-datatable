@@ -43,17 +43,18 @@ jobs:
           node-version: 16.x
           cache: yarn
       - run: yarn
-      # Build Storybook.
-      - run: yarn build-storybook
+      - run: yarn --cwd docs install
+      # Build Docs and Storybook.
+      - run: yarn build-docs
         env:
-          BASE_PATH: /react-bs-datatable
-      # Deploy Storybook.
+          BASE_PATH: react-bs-datatable
+      # Deploy Docs and Storybook.
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
+          publish_dir: ./docs/dist
           # Publish only with the latest commit.
           # Source: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-force-orphan-force_orphan.
           force_orphan: true
