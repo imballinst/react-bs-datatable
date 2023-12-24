@@ -20,10 +20,10 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - uses: actions/checkout@v2
-      - name: Setup node 16
+      - name: Setup node 18
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: yarn
       - run: yarn
       - run: yarn test
@@ -37,10 +37,10 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - uses: actions/checkout@v2
-      - name: Setup node 16
+      - name: Setup node 18
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: yarn
       - run: yarn
       - run: yarn --cwd docs install
