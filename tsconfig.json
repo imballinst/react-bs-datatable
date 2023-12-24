@@ -4,6 +4,7 @@
     "lib": ["esnext", "dom"],
     "strict": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "module": "ESNext",
     "moduleResolution": "node",
     "isolatedModules": true,
@@ -14,8 +15,6 @@
   "include": ["src", "scripts", "./setupTests.ts", ".storybook"],
   "exclude": ["src/index.ts"],
   "ts-node": {
-    "compilerOptions": {
-      
-    }
+    "compilerOptions": {}
   }
 }

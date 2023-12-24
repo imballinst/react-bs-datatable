@@ -50,6 +50,8 @@ export interface PaginationOptionsProps {
    * When set to `false`, the pagination will be hidden when there is only 1 page.
    * To prevent layout shifts, `visibility: hidden` will be applied instead of
    * `display: none` style. Defaults to `true`.
+   *
+   * TODO: rename this to `isAlwaysShowPagination`.
    */
   alwaysShowPagination?: boolean;
   /** Props to make the component controlled. */

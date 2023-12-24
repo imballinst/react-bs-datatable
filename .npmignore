@@ -1,19 +1,20 @@
 .devcontainer/
-examples/
-src/
-scripts/
 .github/
+.storybook/
+.swc/
+.yarn/
 api/
+docs/
+examples/
+scripts/
+src/
 # This is the "dumping" space for all kinds of generator.
 out/
-storybook-static/
 
 *.log
 .travis.yml
 .babelrc
-Makefile
 tsconfig*
-.storybook
 .prettierrc.json
 setupTests.ts
 jest.config.*
