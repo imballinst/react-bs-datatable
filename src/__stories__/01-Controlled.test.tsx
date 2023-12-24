@@ -7,11 +7,11 @@ import {
   act
 } from '@testing-library/react';
 
-import { Async, ControlledComposedTableRow } from './01-Controlled.stories';
 import {
-  CONTROLLED_HEADERS,
-  fetchControlledMockData
-} from './resources/shared-controlled';
+  Async,
+  AsyncPokemon,
+  ControlledComposedTable
+} from './01-Controlled.stories';
 import { TableColumnType } from '../helpers/types';
 
 // TODO(imballinst): probably better if we use MSW
@@ -23,16 +23,7 @@ test('Normal use case', async () => {
     getByLabelText,
     queryByText,
     getByPlaceholderText
-  } = render(
-    <Async
-      fetchFn={fetchControlledMockData}
-      // Not sure why this is marked as `unknown`.
-      headers={CONTROLLED_HEADERS as TableColumnType<unknown>[]}
-      rowsPerPage={8}
-      rowsPerPageOptions={[8, 16, 24, 32]}
-      rowOnClickFn={() => {}}
-    />
-  );
+  } = render(<Async rowsPerPage={8} />);
 
   await waitForElementToBeRemoved(() => queryByText('No results to be shown.'));
 
@@ -134,9 +125,7 @@ describe('Composed table row', () => {
       getByLabelText,
       queryByText,
       getByPlaceholderText
-    } = render(
-      <ControlledComposedTableRow fetchFn={fetchControlledMockData} />
-    );
+    } = render(<ControlledComposedTable rowsPerPage={8} />);
 
     await waitForElementToBeRemoved(() =>
       queryByText('No results to be shown.')
@@ -236,10 +225,7 @@ describe('Composed table row', () => {
     const clickFn = jest.fn((name) => name);
 
     const { getByRole, queryByText } = render(
-      <ControlledComposedTableRow
-        fetchFn={fetchControlledMockData}
-        rowOnClickFn={clickFn}
-      />
+      <ControlledComposedTable rowOnClickFn={clickFn} />
     );
 
     await waitForElementToBeRemoved(() =>
@@ -254,16 +240,16 @@ describe('Composed table row', () => {
     // Test click the row.
     allTableRows?.item(0).click();
     expect(clickFn).toBeCalledTimes(1);
-    expect(clickFn.mock.calls[0][0]).toBe('Aaren');
+    expect(clickFn.mock.calls[0][0].name).toBe('Aaren');
   });
 
   test('checkbox states: none selected, some selected, all selected', async () => {
     const onCheckboxChange = jest.fn();
 
     const { getByText, getByLabelText, queryByText } = render(
-      <ControlledComposedTableRow
-        fetchFn={fetchControlledMockData}
+      <ControlledComposedTable
         onCheckboxChange={onCheckboxChange}
+        rowsPerPage={8}
       />
     );
 

@@ -1,10 +1,15 @@
+import React from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
+import {
+  DatatableWrapper,
+  TableCheckboxParameters
+} from '../../components/DatatableWrapper';
 import { Filter } from '../../components/Filter';
 import { PaginationOptions } from '../../components/PaginationOptions';
 import {
   EmptyTablePlaceholder,
   TableBody,
+  TableBodyProps,
   TableRow
 } from '../../components/TableBody';
 import { TableHeader } from '../../components/TableHeader';
@@ -17,7 +22,15 @@ import { BulkCheckboxControl } from '../../components/BulkCheckboxControl';
 import { useCreateCheckboxHandlers } from '../../helpers/hooks';
 
 // @@@SNIPSTART ComposedTable
-export function ComposedTableStoryComponent() {
+export function ComposedTableStoryComponent({
+  alwaysShowPagination,
+  onCheckboxChange,
+  rowOnClickFn
+}: {
+  alwaysShowPagination?: boolean;
+  onCheckboxChange?: TableCheckboxParameters['onCheckboxChange'];
+  rowOnClickFn?: TableBodyProps<any>['onRowClick'];
+}) {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
       prop: 'name',
@@ -33,19 +46,17 @@ export function ComposedTableStoryComponent() {
     },
     {
       prop: 'location',
-      title: 'Location'
+      title: 'Location',
+      isFilterable: true
     },
     {
       prop: 'date',
-      title: 'Last Update',
-      isSortable: true,
-      isFilterable: true
+      title: 'Last Update'
     },
     {
       prop: 'score',
       title: 'Score',
-      isSortable: true,
-      isFilterable: true
+      isSortable: true
     },
     {
       prop: 'checkbox',
@@ -58,6 +69,9 @@ export function ComposedTableStoryComponent() {
     <DatatableWrapper
       body={TABLE_DATA}
       headers={headers}
+      checkboxProps={{
+        onCheckboxChange
+      }}
       sortProps={{
         sortValueObj: {
           date: (date) =>
@@ -66,8 +80,8 @@ export function ComposedTableStoryComponent() {
       }}
       paginationOptionsProps={{
         initialState: {
-          rowsPerPage: 10,
-          options: [5, 10, 15, 20]
+          rowsPerPage: 8,
+          options: [8, 16, 24, 32]
         }
       }}
     >
@@ -85,7 +99,7 @@ export function ComposedTableStoryComponent() {
           lg={4}
           className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
         >
-          <PaginationOptions alwaysShowPagination />
+          <PaginationOptions alwaysShowPagination={alwaysShowPagination} />
         </Col>
         <Col
           xs={12}
@@ -93,7 +107,10 @@ export function ComposedTableStoryComponent() {
           lg={4}
           className="d-flex flex-col justify-content-end align-items-end"
         >
-          <Pagination alwaysShowPagination paginationRange={3} />
+          <Pagination
+            alwaysShowPagination={alwaysShowPagination}
+            paginationRange={3}
+          />
         </Col>
         <Col xs={12} className="mt-2">
           <BulkCheckboxControl />
@@ -116,9 +133,10 @@ export function ComposedTableStoryComponent() {
                     key={rowData.username}
                     rowData={rowData}
                     rowIdx={rowIdx}
-                    onRowClick={(row) =>
-                      alert(`Clicked row containing name ${row.name}.`)
-                    }
+                    onRowClick={(row, event) => {
+                      alert(`Clicked row containing name ${row.name}.`);
+                      rowOnClickFn?.(row, event);
+                    }}
                   />
                 )
               )

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import {
   DatatableWrapper,

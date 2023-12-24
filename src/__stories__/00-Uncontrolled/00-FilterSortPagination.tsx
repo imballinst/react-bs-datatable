@@ -1,5 +1,9 @@
+import React from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
+import {
+  DatatableWrapper,
+  DatatableWrapperProps
+} from '../../components/DatatableWrapper';
 import { Filter } from '../../components/Filter';
 import { PaginationOptions } from '../../components/PaginationOptions';
 import { TableBody } from '../../components/TableBody';
@@ -12,7 +16,19 @@ import TABLE_DATA from '../resources/story-data.json';
 import { BulkCheckboxControl } from '../../components/BulkCheckboxControl';
 
 // @@@SNIPSTART FilterSortPagination
-export function FilterSortPaginationStoryComponent() {
+export function FilterSortPaginationStoryComponent({
+  sortProps,
+  paginationRange = 3,
+  rowsPerPage = 10,
+  rowsPerPageOption = [5, 10, 15, 20],
+  alwaysShowPagination
+}: {
+  sortProps?: DatatableWrapperProps<any>['sortProps'];
+  paginationRange?: number;
+  rowsPerPage?: number;
+  rowsPerPageOption?: number[];
+  alwaysShowPagination?: boolean;
+}) {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
       prop: 'name',
@@ -57,12 +73,13 @@ export function FilterSortPaginationStoryComponent() {
         sortValueObj: {
           date: (date) =>
             parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
-        }
+        },
+        ...sortProps
       }}
       paginationOptionsProps={{
         initialState: {
-          rowsPerPage: 10,
-          options: [5, 10, 15, 20]
+          rowsPerPage,
+          options: rowsPerPageOption
         }
       }}
     >
@@ -80,7 +97,7 @@ export function FilterSortPaginationStoryComponent() {
           lg={4}
           className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
         >
-          <PaginationOptions alwaysShowPagination />
+          <PaginationOptions alwaysShowPagination={alwaysShowPagination} />
         </Col>
         <Col
           xs={12}
@@ -88,7 +105,10 @@ export function FilterSortPaginationStoryComponent() {
           lg={4}
           className="d-flex flex-col justify-content-end align-items-end"
         >
-          <Pagination alwaysShowPagination paginationRange={3} />
+          <Pagination
+            alwaysShowPagination={alwaysShowPagination}
+            paginationRange={paginationRange}
+          />
         </Col>
         <Col xs={12} className="mt-2">
           <BulkCheckboxControl />

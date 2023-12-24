@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
 import { DatatableWrapper } from '../../components/DatatableWrapper';
 import { Filter } from '../../components/Filter';
@@ -55,7 +55,11 @@ const TABLE_HEADERS: TableColumnType<StoryColumnType>[] = [
 ];
 const HEADERS_DICTIONARY = convertArrayToRecord(TABLE_HEADERS, 'prop');
 
-export function AsyncTimeoutStoryComponent() {
+export function AsyncTimeoutStoryComponent({
+  rowsPerPage: rowsPerPageProp
+}: {
+  rowsPerPage?: number;
+}) {
   const [data, setData] = useState<StoryColumnType[]>([]);
   const [filteredDataLength, setFilteredDataLength] = useState(0);
   const [filter, setFilter] = useState('');
@@ -64,7 +68,7 @@ export function AsyncTimeoutStoryComponent() {
     order: 'asc'
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageProp ?? 10);
   const [maxPage, setMaxPage] = useState(1);
 
   const onFilterChange = useCallback((text) => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Table } from 'react-bootstrap';
 import { DatatableWrapper } from '../../components/DatatableWrapper';
 import { TableBody } from '../../components/TableBody';

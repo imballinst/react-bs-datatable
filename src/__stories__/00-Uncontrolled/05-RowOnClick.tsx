@@ -1,6 +1,10 @@
+import React from 'react';
 import { Table } from 'react-bootstrap';
-import { DatatableWrapper } from '../../components/DatatableWrapper';
-import { TableBody } from '../../components/TableBody';
+import {
+  DatatableWrapper,
+  DatatableWrapperProps
+} from '../../components/DatatableWrapper';
+import { TableBody, TableBodyProps } from '../../components/TableBody';
 import { TableHeader } from '../../components/TableHeader';
 import { TableColumnType } from '../../helpers/types';
 import { StoryColumnType } from '../resources/types';
@@ -8,11 +12,17 @@ import TABLE_DATA from '../resources/story-data.json';
 
 // @@@SNIPSTART RowOnClick
 export function RowOnClickStoryComponent({
-  rowOnClickText
+  rowOnClickText,
+  rowOnClickFn,
+  validRowClickTagNames,
+  customHeaders
 }: {
-  rowOnClickText: string;
+  customHeaders?: TableColumnType<StoryColumnType>[];
+  rowOnClickText?: string;
+  rowOnClickFn?: TableBodyProps<any>['onRowClick'];
+  validRowClickTagNames?: TableBodyProps<any>['validRowClickTagNames'];
 }) {
-  const headers: TableColumnType<StoryColumnType>[] = [
+  const headers: TableColumnType<StoryColumnType>[] = customHeaders ?? [
     {
       prop: 'name',
       title: 'Name'
@@ -40,7 +50,9 @@ export function RowOnClickStoryComponent({
       <Table>
         <TableHeader />
         <TableBody<StoryColumnType>
+          validRowClickTagNames={validRowClickTagNames}
           onRowClick={(row, event) => {
+            rowOnClickFn?.(row, event);
             alert(
               `Clicked row containing name ${
                 row.name

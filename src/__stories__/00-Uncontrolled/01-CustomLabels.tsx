@@ -1,3 +1,4 @@
+import React from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
 import { DatatableWrapper } from '../../components/DatatableWrapper';
 import { Filter } from '../../components/Filter';

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useCreateCheckboxHandlers } from '../../helpers/hooks';
 import {
   TableColumnType,
@@ -14,14 +14,16 @@ import {
 import { Row, Col, Table } from 'react-bootstrap';
 import {
   DatatableWrapper,
-  DatatableWrapperProps
+  DatatableWrapperProps,
+  TableCheckboxParameters
 } from '../../components/DatatableWrapper';
 import { Filter } from '../../components/Filter';
 import { PaginationOptions } from '../../components/PaginationOptions';
 import {
   TableBody,
   EmptyTablePlaceholder,
-  TableRow
+  TableRow,
+  TableBodyProps
 } from '../../components/TableBody';
 import { TableHeader } from '../../components/TableHeader';
 import { Pagination } from '../../components/Pagination';
@@ -76,7 +78,15 @@ const TABLE_HEADERS: TableColumnType<StoryColumnType>[] = [
 ];
 const HEADERS_DICTIONARY = convertArrayToRecord(TABLE_HEADERS, 'prop');
 
-export function ControlledComposedTableStoryComponent() {
+export function ControlledComposedTableStoryComponent({
+  onCheckboxChange: onCheckboxChangeProp,
+  rowOnClickFn,
+  rowsPerPage: rowsPerPageProp
+}: {
+  onCheckboxChange?: TableCheckboxParameters['onCheckboxChange'];
+  rowOnClickFn?: TableBodyProps<any>['onRowClick'];
+  rowsPerPage?: number;
+}) {
   const [data, setData] = useState<StoryColumnType[]>([]);
   const [filteredDataLength, setFilteredDataLength] = useState(0);
   const [filter, setFilter] = useState('');
@@ -85,7 +95,7 @@ export function ControlledComposedTableStoryComponent() {
     order: 'asc'
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageProp ?? 10);
   const [maxPage, setMaxPage] = useState(1);
   const [checkboxState, setCheckboxState] = useState<
     Record<string, CheckboxState>
@@ -111,8 +121,9 @@ export function ControlledComposedTableStoryComponent() {
     setCurrentPage(1);
   }, []);
 
-  const onRowClick = (row: StoryColumnType) => {
+  const onRowClick: TableBodyProps<any>['onRowClick'] = (row, event) => {
     alert(`Clicked row containing name ${row.name}.`);
+    rowOnClickFn?.(row, event);
   };
 
   const onCheckboxChange: CheckboxOnChange = (result, event) => {
@@ -123,6 +134,7 @@ export function ControlledComposedTableStoryComponent() {
         ? 'all-selected'
         : 'none-selected';
 
+    onCheckboxChangeProp?.(result, event);
     setCheckboxState((oldState) => ({
       ...oldState,
       [result.checkboxProp]: result.nextCheckboxState
