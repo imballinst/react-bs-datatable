@@ -1,5 +1,13 @@
+import { parse } from 'date-fns';
+import { DatatableWrapperProps } from '../../components/DatatableWrapper';
 import { TableColumnType } from '../../helpers/types';
 import { StoryColumnType } from './types';
+
+export const SORT_PROPS: DatatableWrapperProps<StoryColumnType>['sortProps'] = {
+  sortValueObj: {
+    date: (date) => parse(`${date}`, 'MMMM dd, yyyy', new Date()).getTime()
+  }
+};
 
 export const STORY_PROP_TO_OPTION_NAME: Record<keyof StoryColumnType, string> =
   {
