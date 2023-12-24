@@ -63,7 +63,7 @@ import { Col, Row, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Create table headers consisting of 4 columns.
-const header = [
+const headers = [
   { title: 'Username', prop: 'username' },
   { title: 'Name', prop: 'realname' },
   { title: 'Location', prop: 'location' }
