@@ -110,9 +110,29 @@ export interface TableColumnType<T> {
  * way is to convert to numbers. While sorting strings is also possible, certain formats
  * can make the sort result incorrect, e.g. sorting formatted dates.
  */
-export type ColumnProcessObj<TColumnType, TReturnType = string> = Partial<
-  Record<keyof TColumnType, (column: TColumnType) => TReturnType>
->;
+export type ColumnValueProcessor<TColumnType> =
+  | Partial<{
+      [K in keyof TColumnType]: (
+        columnValue: TColumnType[K]
+      ) => string | number;
+    }>
+  | ((
+      key: keyof TColumnType,
+      rowValue: TColumnType
+    ) => string | number | TColumnType[keyof TColumnType]);
+/**
+ * This is the object of key/value which is used to transform a column's value
+ * to another form.
+ *
+ * At the moment, this is mostly useful for sorting, as for sorting, the most reliable
+ * way is to convert to numbers. While sorting strings is also possible, certain formats
+ * can make the sort result incorrect, e.g. sorting formatted dates.
+ *
+ * @deprecated use `ColumnValueProcessor` instead.
+ */
+export type ColumnProcessObj<TColumnType, TReturnType = string> = Partial<{
+  [K in keyof TColumnType]: (columnValue: TColumnType[K]) => TReturnType;
+}>;
 
 /**
  * This is used for the `extend` keyword in the components.

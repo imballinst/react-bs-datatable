@@ -1,5 +1,5 @@
 import {
-  ColumnProcessObj,
+  ColumnValueProcessor,
   SortType,
   TableColumnType,
   TableRowType
@@ -13,21 +13,32 @@ import {
 export function sortData<TTableRowType extends TableRowType>(
   data: TTableRowType[],
   sortedProp: SortType,
-  sortValueObj?: ColumnProcessObj<TTableRowType, number>
+  columnValueProcessor?: ColumnValueProcessor<TTableRowType>
 ) {
   const sortedData = [...data];
 
   const { prop, order } = sortedProp;
   const sortMultiplier = order === 'asc' ? 1 : -1;
-  const sortFn = sortValueObj?.[prop];
+
+  const sortFnFromObject =
+    typeof columnValueProcessor === 'object'
+      ? columnValueProcessor?.[prop]
+      : undefined;
+  const sortFnFromFn =
+    typeof columnValueProcessor === 'function'
+      ? (value: any) => columnValueProcessor(prop, value)
+      : undefined;
 
   sortedData.sort((a, b) => {
     let quantifiedValue1 = a[prop];
     let quantifiedValue2 = b[prop];
 
-    if (sortFn) {
-      quantifiedValue1 = sortFn(quantifiedValue1);
-      quantifiedValue2 = sortFn(quantifiedValue2);
+    if (sortFnFromObject) {
+      quantifiedValue1 = sortFnFromObject(quantifiedValue1);
+      quantifiedValue2 = sortFnFromObject(quantifiedValue2);
+    } else if (sortFnFromFn) {
+      quantifiedValue1 = sortFnFromFn(a);
+      quantifiedValue2 = sortFnFromFn(b);
     }
 
     if (quantifiedValue1 < quantifiedValue2) {

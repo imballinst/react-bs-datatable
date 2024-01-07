@@ -124,3 +124,115 @@ export function FilterSortPaginationStoryComponent({
   );
 }
 // @@@SNIPEND
+
+export function FilterSortPaginationWithSortValueObjStoryComponent({
+  sortProps,
+  paginationRange = 3,
+  rowsPerPage = 10,
+  rowsPerPageOption = [5, 10, 15, 20],
+  alwaysShowPagination,
+  customHeaders
+}: {
+  sortProps?: DatatableWrapperProps<any>['sortProps'];
+  paginationRange?: number;
+  rowsPerPage?: number;
+  rowsPerPageOption?: number[];
+  alwaysShowPagination?: boolean;
+  customHeaders?: TableColumnType<StoryColumnType>[];
+}) {
+  const headers: TableColumnType<StoryColumnType>[] = customHeaders ?? [
+    {
+      prop: 'name',
+      title: 'Name',
+      isSortable: true,
+      isFilterable: true
+    },
+    {
+      prop: 'username',
+      title: 'Username',
+      isSortable: true,
+      isFilterable: true
+    },
+    {
+      prop: 'location',
+      title: 'Location'
+    },
+    {
+      prop: 'date',
+      title: 'Last Update',
+      isSortable: true,
+      isFilterable: true
+    },
+    {
+      prop: 'score',
+      title: 'Score',
+      isSortable: true,
+      isFilterable: true
+    },
+    {
+      prop: 'checkbox',
+      checkbox: { idProp: 'name', className: 'table-checkbox' },
+      alignment: { horizontal: 'center' }
+    }
+  ];
+
+  return (
+    <DatatableWrapper
+      body={TABLE_DATA}
+      headers={headers}
+      sortProps={{
+        columnValueProcessor: (key, row) => {
+          const value = row[key];
+          if (key === 'date') {
+            return parse(`${value}`, 'MMMM dd, yyyy', new Date()).getTime();
+          }
+
+          return value;
+        },
+        ...sortProps
+      }}
+      paginationOptionsProps={{
+        initialState: {
+          rowsPerPage,
+          options: rowsPerPageOption
+        }
+      }}
+    >
+      <Row className="mb-4">
+        <Col
+          xs={12}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
+          <Filter />
+        </Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0"
+        >
+          <PaginationOptions alwaysShowPagination={alwaysShowPagination} />
+        </Col>
+        <Col
+          xs={12}
+          sm={6}
+          lg={4}
+          className="d-flex flex-col justify-content-end align-items-end"
+        >
+          <Pagination
+            alwaysShowPagination={alwaysShowPagination}
+            paginationRange={paginationRange}
+          />
+        </Col>
+        <Col xs={12} className="mt-2">
+          <BulkCheckboxControl />
+        </Col>
+      </Row>
+      <Table>
+        <TableHeader />
+        <TableBody />
+      </Table>
+    </DatatableWrapper>
+  );
+}

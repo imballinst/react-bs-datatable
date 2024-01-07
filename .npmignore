@@ -1,7 +1,7 @@
+.changeset/
 .devcontainer/
 .github/
 .storybook/
-.swc/
 .yarn/
 api/
 docs/
@@ -11,13 +11,12 @@ src/
 # This is the "dumping" space for all kinds of generator.
 out/
 
-*.log
-.travis.yml
 .babelrc
-tsconfig*
+*.log
+*.yml
+*.ts
 .prettierrc.json
-setupTests.ts
-jest.config.*
+tsconfig*
 typedoc.json
 
 # Markdowns.

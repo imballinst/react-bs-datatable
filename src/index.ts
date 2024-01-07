@@ -45,6 +45,7 @@ export type { BulkCheckboxControlProps } from './components/BulkCheckboxControl'
 
 export type {
   ColumnProcessObj,
+  ColumnValueProcessor,
   SortType,
   CheckboxState,
   CheckboxOnChange,
