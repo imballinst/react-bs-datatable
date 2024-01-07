@@ -15,6 +15,7 @@ import { StoryColumnType } from './resources/types';
 import { CheckboxState, TableColumnType } from '../helpers/types';
 
 import TABLE_DATA from './resources/story-data.json';
+import { FilterSortPaginationWithSortValueObjStoryComponent } from './00-Uncontrolled/00-FilterSortPagination';
 
 const PAGINATION_SIZE_8_PROPS = {
   rowsPerPage: 8,
@@ -67,95 +68,131 @@ describe('Filter, sort, pagination', () => {
     });
   });
 
-  test('normal use case', () => {
-    const {
-      getByText,
-      getByRole,
-      getByLabelText,
-      queryByText,
-      getByPlaceholderText
-    } = render(<FilterSortPagination {...PAGINATION_SIZE_8_PROPS} />);
-    let firstBtnElement = getByText('First');
-    let lastBtnElement = getByText('Last');
-    let tableElement = getByRole('table');
+  describe('normal use case', () => {
+    const elements = [
+      {
+        name: 'normal',
+        element: <FilterSortPagination {...PAGINATION_SIZE_8_PROPS} />
+      },
+      {
+        name: 'columnValueProcessor',
+        element: (
+          <FilterSortPaginationWithSortValueObjStoryComponent
+            {...PAGINATION_SIZE_8_PROPS}
+          />
+        )
+      }
+    ];
 
-    expect(firstBtnElement).toBeDisabled();
-    expect(lastBtnElement).toBeInTheDocument();
+    for (const element of elements) {
+      test(element.name, () => {
+        const {
+          getByText,
+          getByRole,
+          getByLabelText,
+          queryByText,
+          getByPlaceholderText
+        } = render(<FilterSortPagination {...PAGINATION_SIZE_8_PROPS} />);
+        let firstBtnElement = getByText('First');
+        let lastBtnElement = getByText('Last');
+        let tableElement = getByRole('table');
 
-    // Test go to the last pagination.
-    fireEvent.click(lastBtnElement);
+        expect(firstBtnElement).toBeDisabled();
+        expect(lastBtnElement).toBeInTheDocument();
 
-    expect(firstBtnElement).not.toBeDisabled();
-    expect(lastBtnElement).toBeDisabled();
+        // Test go to the last pagination.
+        fireEvent.click(lastBtnElement);
 
-    // With 8 rows per page, the last page should only have 4 rows.
-    expect(
-      tableElement.querySelector('tbody')?.querySelectorAll('tr').length
-    ).toBe(4);
+        expect(firstBtnElement).not.toBeDisabled();
+        expect(lastBtnElement).toBeDisabled();
 
-    // Try filtering. It should go back to the first page.
-    let filterElement = getByPlaceholderText('Enter text...');
-    fireEvent.change(filterElement, { target: { value: 'aaren' } });
+        // With 8 rows per page, the last page should only have 4 rows.
+        expect(
+          tableElement.querySelector('tbody')?.querySelectorAll('tr').length
+        ).toBe(4);
 
-    let firstNumButtonElement = queryByText('1');
-    let secondNumButtonElement = queryByText('2');
-    let thirdNumButtonElement = queryByText('3');
-    firstBtnElement = getByText('First');
-    lastBtnElement = getByText('Last');
+        // Try filtering. It should go back to the first page.
+        let filterElement = getByPlaceholderText('Enter text...');
+        fireEvent.change(filterElement, { target: { value: 'aaren' } });
 
-    // All buttons should be disabled, and the "2" and "3" page button
-    // should not exist in the table.
-    expect(firstBtnElement).toBeDisabled();
-    expect(lastBtnElement).toBeDisabled();
-    expect(firstNumButtonElement).toBeDisabled();
-    expect(secondNumButtonElement).not.toBeInTheDocument();
-    expect(thirdNumButtonElement).not.toBeInTheDocument();
+        let firstNumButtonElement = queryByText('1');
+        let secondNumButtonElement = queryByText('2');
+        let thirdNumButtonElement = queryByText('3');
+        firstBtnElement = getByText('First');
+        lastBtnElement = getByText('Last');
 
-    expect(
-      tableElement.querySelector('tbody')?.querySelectorAll('tr').length
-    ).toBe(1);
+        // All buttons should be disabled, and the "2" and "3" page button
+        // should not exist in the table.
+        expect(firstBtnElement).toBeDisabled();
+        expect(lastBtnElement).toBeDisabled();
+        expect(firstNumButtonElement).toBeDisabled();
+        expect(secondNumButtonElement).not.toBeInTheDocument();
+        expect(thirdNumButtonElement).not.toBeInTheDocument();
 
-    // Reset the filter first by clicking the "X" clear filter button.
-    let clearFilterButton = getByLabelText('Clear filter');
-    fireEvent.click(clearFilterButton);
+        expect(
+          tableElement.querySelector('tbody')?.querySelectorAll('tr').length
+        ).toBe(1);
 
-    firstNumButtonElement = queryByText('1');
-    secondNumButtonElement = queryByText('2');
-    thirdNumButtonElement = queryByText('3');
-    firstBtnElement = getByText('First');
-    lastBtnElement = getByText('Last');
+        // Reset the filter first by clicking the "X" clear filter button.
+        let clearFilterButton = getByLabelText('Clear filter');
+        fireEvent.click(clearFilterButton);
 
-    expect(firstBtnElement).toBeDisabled();
-    expect(lastBtnElement).not.toBeDisabled();
-    expect(firstNumButtonElement).toBeDisabled();
-    expect(secondNumButtonElement).not.toBeDisabled();
-    expect(thirdNumButtonElement).not.toBeDisabled();
+        firstNumButtonElement = queryByText('1');
+        secondNumButtonElement = queryByText('2');
+        thirdNumButtonElement = queryByText('3');
+        firstBtnElement = getByText('First');
+        lastBtnElement = getByText('Last');
 
-    expect(
-      tableElement.querySelector('tbody')?.querySelectorAll('tr').length
-    ).toBe(8);
+        expect(firstBtnElement).toBeDisabled();
+        expect(lastBtnElement).not.toBeDisabled();
+        expect(firstNumButtonElement).toBeDisabled();
+        expect(secondNumButtonElement).not.toBeDisabled();
+        expect(thirdNumButtonElement).not.toBeDisabled();
 
-    // Try sorting.
-    // Sort descending the first column (since it's the initial state).
-    let nameTh = getByText('Name', { selector: 'th' });
-    fireEvent.click(nameTh);
+        expect(
+          tableElement.querySelector('tbody')?.querySelectorAll('tr').length
+        ).toBe(8);
 
-    let tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
-    expect(tableRows).toBeDefined();
-    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Wileen');
-    expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
+        // Try sorting.
+        // Sort descending the first column (since it's the initial state).
+        let nameTh = getByText('Name', { selector: 'th' });
+        fireEvent.click(nameTh);
 
-    // Try sorting the other columns.
-    let usernameTh = getByText('Username', { selector: 'th' });
-    fireEvent.click(usernameTh);
+        let tableRows = tableElement
+          .querySelector('tbody')
+          ?.querySelectorAll('tr');
+        expect(tableRows).toBeDefined();
+        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Wileen');
+        expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
 
-    // The clicked header should have its sort state.
-    tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
-    expect(tableRows).toBeDefined();
-    expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Aaren');
-    expect(usernameTh.getAttribute('data-sort-order')).toBe('asc');
-    // Meanwhile, the "Name" header should reset to its default state.
-    expect(nameTh.getAttribute('data-sort-order')).toBe(null);
+        // Try sorting the other columns.
+        let usernameTh = getByText('Username', { selector: 'th' });
+        fireEvent.click(usernameTh);
+
+        // The clicked header should have its sort state.
+        tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+        expect(tableRows).toBeDefined();
+        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Aaren');
+        expect(usernameTh.getAttribute('data-sort-order')).toBe('asc');
+        // Meanwhile, the "Name" header should reset to its default state.
+        expect(nameTh.getAttribute('data-sort-order')).toBe(null);
+
+        // Try sorting by the "date". Ascending sort should show "Mary" as the first row and descending sort should show "Basia" as the first row.
+        let dateTh = getByText('Last Update', { selector: 'th' });
+        fireEvent.click(dateTh);
+
+        tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Mary');
+        expect(dateTh.getAttribute('data-sort-order')).toBe('asc');
+
+        // Sort descending.
+        fireEvent.click(dateTh);
+
+        tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
+        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Basia');
+        expect(dateTh.getAttribute('data-sort-order')).toBe('desc');
+      });
+    }
   });
 
   describe('custom pagination range', () => {

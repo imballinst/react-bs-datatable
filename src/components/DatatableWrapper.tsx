@@ -441,7 +441,11 @@ export function DatatableWrapper<TTableRowType extends TableRowType>({
         newFilteredDataLength = newData.length;
       }
 
-      newData = sortData(newData, sort, sortProps?.sortValueObj);
+      newData = sortData(
+        newData,
+        sort,
+        sortProps?.columnValueProcessor || sortProps?.sortValueObj
+      );
 
       if (pagination.rowsPerPage !== -1) {
         // Pagination needs.

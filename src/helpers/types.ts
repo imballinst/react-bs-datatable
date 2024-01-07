@@ -116,7 +116,10 @@ export type ColumnValueProcessor<TColumnType> =
         columnValue: TColumnType[K]
       ) => string | number;
     }>
-  | ((key: keyof TColumnType, rowValue: TColumnType) => string | number);
+  | ((
+      key: keyof TColumnType,
+      rowValue: TColumnType
+    ) => string | number | TColumnType[keyof TColumnType]);
 /**
  * This is the object of key/value which is used to transform a column's value
  * to another form.
