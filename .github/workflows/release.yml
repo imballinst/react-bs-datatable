@@ -22,6 +22,7 @@ jobs:
           cache: yarn
 
       - run: yarn
+      - run: yarn test
 
       - name: Create Release Pull Request
         uses: changesets/action@v1

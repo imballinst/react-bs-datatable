@@ -14,6 +14,7 @@
 
 - [CheckboxOnChange](helpers_types.md#checkboxonchange)
 - [ColumnProcessObj](helpers_types.md#columnprocessobj)
+- [ColumnValueProcessor](helpers_types.md#columnvalueprocessor)
 - [FilterOnChange](helpers_types.md#filteronchange)
 - [PaginationOnChange](helpers_types.md#paginationonchange)
 - [RowsPerPageOnChange](helpers_types.md#rowsperpageonchange)
@@ -50,13 +51,39 @@ The helper type for the checkbox change eveent.
 
 #### Defined in
 
-[helpers/types.ts:152](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L152)
+[helpers/types.ts:172](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L172)
 
 ___
 
 ### ColumnProcessObj
 
-Ƭ **ColumnProcessObj**<`TColumnType`, `TReturnType`\>: `Partial`<`Record`<keyof `TColumnType`, (`column`: `TColumnType`) => `TReturnType`\>\>
+Ƭ **ColumnProcessObj**<`TColumnType`, `TReturnType`\>: `Partial`<{ [K in keyof TColumnType]: Function }\>
+
+This is the object of key/value which is used to transform a column's value
+to another form.
+
+At the moment, this is mostly useful for sorting, as for sorting, the most reliable
+way is to convert to numbers. While sorting strings is also possible, certain formats
+can make the sort result incorrect, e.g. sorting formatted dates.
+
+**`deprecated`** use `ColumnValueProcessor` instead.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TColumnType` | `TColumnType` |
+| `TReturnType` | `string` |
+
+#### Defined in
+
+[helpers/types.ts:133](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L133)
+
+___
+
+### ColumnValueProcessor
+
+Ƭ **ColumnValueProcessor**<`TColumnType`\>: `Partial`<{ [K in keyof TColumnType]: Function }\> \| (`key`: keyof `TColumnType`, `rowValue`: `TColumnType`) => `string` \| `number` \| `TColumnType`[keyof `TColumnType`]
 
 This is the object of key/value which is used to transform a column's value
 to another form.
@@ -67,10 +94,9 @@ can make the sort result incorrect, e.g. sorting formatted dates.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `TColumnType` | `TColumnType` |
-| `TReturnType` | `string` |
+| Name |
+| :------ |
+| `TColumnType` |
 
 #### Defined in
 
@@ -100,7 +126,7 @@ The helper type for the filter change event.
 
 #### Defined in
 
-[helpers/types.ts:127](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L127)
+[helpers/types.ts:147](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L147)
 
 ___
 
@@ -126,7 +152,7 @@ The helper type for the sort by prop change event.
 
 #### Defined in
 
-[helpers/types.ts:142](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L142)
+[helpers/types.ts:162](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L162)
 
 ___
 
@@ -152,7 +178,7 @@ The helper type for the rows per page change event.
 
 #### Defined in
 
-[helpers/types.ts:147](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L147)
+[helpers/types.ts:167](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L167)
 
 ___
 
@@ -178,7 +204,7 @@ The helper type for the sort by prop change event.
 
 #### Defined in
 
-[helpers/types.ts:137](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L137)
+[helpers/types.ts:157](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L157)
 
 ___
 
@@ -204,7 +230,7 @@ The helper type for the sort by next prop change event.
 
 #### Defined in
 
-[helpers/types.ts:132](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L132)
+[helpers/types.ts:152](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L152)
 
 ___
 
@@ -222,4 +248,4 @@ This is used for the `extend` keyword in the components.
 
 #### Defined in
 
-[helpers/types.ts:120](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L120)
+[helpers/types.ts:140](https://github.com/imballinst/react-bs-datatable/blob/master/src/helpers/types.ts#L140)

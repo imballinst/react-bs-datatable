@@ -26,9 +26,11 @@ When set to `false`, the pagination will be hidden when there is only 1 page.
 To prevent layout shifts, `visibility: hidden` will be applied instead of
 `display: none` style. Defaults to `true`.
 
+TODO: rename this to `isAlwaysShowPagination`.
+
 #### Defined in
 
-[components/PaginationOptions.tsx:54](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/PaginationOptions.tsx#L54)
+[components/PaginationOptions.tsx:56](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/PaginationOptions.tsx#L56)
 
 ___
 
@@ -61,7 +63,7 @@ Props to make the component controlled.
 
 #### Defined in
 
-[components/PaginationOptions.tsx:56](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/PaginationOptions.tsx#L56)
+[components/PaginationOptions.tsx:58](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/PaginationOptions.tsx#L58)
 
 ___
 

@@ -17,26 +17,15 @@ Only applicable for uncontrolled table mode.
 
 ### Properties
 
+- [columnValueProcessor](components_DatatableWrapper.TableSortParameters.md#columnvalueprocessor)
 - [initialState](components_DatatableWrapper.TableSortParameters.md#initialstate)
 - [sortValueObj](components_DatatableWrapper.TableSortParameters.md#sortvalueobj)
 
 ## Properties
 
-### initialState
+### columnValueProcessor
 
-• `Optional` **initialState**: [`SortType`](helpers_types.SortType.md)
-
-The initial states for the table.
-
-#### Defined in
-
-[components/DatatableWrapper.tsx:74](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L74)
-
-___
-
-### sortValueObj
-
-• `Optional` **sortValueObj**: `Partial`<`Record`<keyof `TTableRowType`, (`column`: `TTableRowType`) => `number`\>\>
+• `Optional` **columnValueProcessor**: [`ColumnValueProcessor`](../modules/helpers_types.md#columnvalueprocessor)<`TTableRowType`\>
 
 An object with the key being the table columns' prop and
 the value being the value converter for the column.
@@ -60,6 +49,54 @@ number value.
 The object above will cause all rows in the `date` column to be sorted
 by number (milliseconds) instead of by formatted date string.
 
+Alternatively, pass a function (key: keyof TTableRowType, value: TTableRowType) => string | number to process the values.
+
 #### Defined in
 
-[components/DatatableWrapper.tsx:72](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L72)
+[components/DatatableWrapper.tsx:75](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L75)
+
+___
+
+### initialState
+
+• `Optional` **initialState**: [`SortType`](helpers_types.SortType.md)
+
+The initial states for the table.
+
+#### Defined in
+
+[components/DatatableWrapper.tsx:103](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L103)
+
+___
+
+### sortValueObj
+
+• `Optional` **sortValueObj**: `Partial`<{ [K in string \| number \| symbol]: Function }\>
+
+An object with the key being the table columns' prop and
+the value being the value converter for the column.
+This is most useful when we want to sort something by number
+instead of by text.
+
+For example, we want to convert a date format
+as the following: "Jan 22, 2022". Since string sorting will result
+in a wrong result, then we need to convert it first, e.g. using `date-fns`.
+After we parse the column's formatted date, only then we can get its
+number value.
+
+```ts
+{
+  sortValueObject: {
+    date: (column: string) => parse(column).getTime()
+  }
+}
+```
+
+The object above will cause all rows in the `date` column to be sorted
+by number (milliseconds) instead of by formatted date string.
+
+**`deprecated`** use `columnValueProcessor` instead.
+
+#### Defined in
+
+[components/DatatableWrapper.tsx:101](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L101)

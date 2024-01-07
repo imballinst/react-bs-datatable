@@ -35,7 +35,7 @@ The props that can be passed to the `DatatableWrapper` component.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:186](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L186)
+[components/DatatableWrapper.tsx:215](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L215)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:198](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L198)
+[components/DatatableWrapper.tsx:227](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L227)
 
 ___
 
@@ -57,7 +57,7 @@ The rest of the table, including its controls.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:184](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L184)
+[components/DatatableWrapper.tsx:213](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L213)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:194](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L194)
+[components/DatatableWrapper.tsx:223](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L223)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:185](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L185)
+[components/DatatableWrapper.tsx:214](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L214)
 
 ___
 
@@ -92,7 +92,7 @@ when any of the child components is provided `controlledProps`.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:193](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L193)
+[components/DatatableWrapper.tsx:222](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L222)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:197](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L197)
+[components/DatatableWrapper.tsx:226](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L226)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:196](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L196)
+[components/DatatableWrapper.tsx:225](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L225)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:195](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L195)
+[components/DatatableWrapper.tsx:224](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L224)
 
 ___
 
@@ -137,4 +137,4 @@ and raising the `DatatableWrapper` a bit higher in the structure instead.
 
 #### Defined in
 
-[components/DatatableWrapper.tsx:205](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L205)
+[components/DatatableWrapper.tsx:234](https://github.com/imballinst/react-bs-datatable/blob/master/src/components/DatatableWrapper.tsx#L234)
