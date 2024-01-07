@@ -1,5 +1,11 @@
 # react-bs-datatable
 
+## 3.13.1
+
+### Patch Changes
+
+- fba3e0c: fix: fix declaration files not being included in npm
+
 ## 3.13.0
 
 ### Minor Changes
