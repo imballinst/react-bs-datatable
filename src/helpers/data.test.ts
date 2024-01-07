@@ -1,6 +1,6 @@
 import { sortData, filterData, paginateData } from './data';
 import { convertArrayToRecord } from './object';
-import { ColumnProcessObj, TableColumnType } from './types';
+import { ColumnValueProcessor, TableColumnType } from './types';
 
 interface TestObject {
   prop1: number;
@@ -24,6 +24,61 @@ describe('data util (src/utils/data)', () => {
 
     expect(sortSecondData[0]).toBe(secondData);
     expect(sortSecondData[1]).toBe(firstData);
+  });
+
+  it('should sort data correctly: with column value processor', () => {
+    const firstData = { name: 'hello world' };
+    const secondData = { name: 'Hello World' };
+    const data = [firstData, secondData];
+
+    const sortedPropFirst = { prop: 'name', order: 'asc' } as const;
+    const sortedPropSecond = { prop: 'name', order: 'desc' } as const;
+
+    let sortFirstData = sortData(data, sortedPropFirst, undefined);
+    let sortSecondData = sortData(data, sortedPropSecond, undefined);
+
+    // A-Z comes before a-z, so the order should be the other way around.
+    expect(sortFirstData[0]).toBe(secondData);
+    expect(sortFirstData[1]).toBe(firstData);
+
+    // This is the counterpart.
+    expect(sortSecondData[0]).toBe(firstData);
+    expect(sortSecondData[1]).toBe(secondData);
+
+    // Now, we try usnig the column value processor to "normalize" the text to be all lowercase. The order should stay the same.
+    const columnValueProcessorObject: ColumnValueProcessor<typeof firstData> = {
+      name: (val) => val.toLowerCase()
+    };
+
+    sortFirstData = sortData(data, sortedPropFirst, columnValueProcessorObject);
+    sortSecondData = sortData(
+      data,
+      sortedPropSecond,
+      columnValueProcessorObject
+    );
+
+    expect(sortFirstData[0]).toBe(firstData);
+    expect(sortFirstData[1]).toBe(secondData);
+
+    expect(sortSecondData[0]).toBe(firstData);
+    expect(sortSecondData[1]).toBe(secondData);
+
+    // Now, try using the function form.
+    const columnValueProcessorFn: ColumnValueProcessor<typeof firstData> = (
+      key,
+      row
+    ) => {
+      return row[key].toLowerCase();
+    };
+
+    sortFirstData = sortData(data, sortedPropFirst, columnValueProcessorFn);
+    sortSecondData = sortData(data, sortedPropSecond, columnValueProcessorFn);
+
+    expect(sortFirstData[0]).toBe(firstData);
+    expect(sortFirstData[1]).toBe(secondData);
+
+    expect(sortSecondData[0]).toBe(firstData);
+    expect(sortSecondData[1]).toBe(secondData);
   });
 
   it('should filter data correctly', () => {

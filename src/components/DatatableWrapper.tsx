@@ -20,6 +20,7 @@ import {
   CheckboxOnChange,
   CheckboxState,
   ColumnProcessObj,
+  ColumnValueProcessor,
   FilterOnChange,
   PaginationOnChange,
   RowsPerPageOnChange,
@@ -68,6 +69,34 @@ export interface TableSortParameters<TTableRowType> {
    *
    * The object above will cause all rows in the `date` column to be sorted
    * by number (milliseconds) instead of by formatted date string.
+   *
+   * Alternatively, pass a function (key: keyof TTableRowType, value: TTableRowType) => string | number to process the values.
+   */
+  columnValueProcessor?: ColumnValueProcessor<TTableRowType>;
+  /**
+   * An object with the key being the table columns' prop and
+   * the value being the value converter for the column.
+   * This is most useful when we want to sort something by number
+   * instead of by text.
+   *
+   * For example, we want to convert a date format
+   * as the following: "Jan 22, 2022". Since string sorting will result
+   * in a wrong result, then we need to convert it first, e.g. using `date-fns`.
+   * After we parse the column's formatted date, only then we can get its
+   * number value.
+   *
+   * ```ts
+   * {
+   *   sortValueObject: {
+   *     date: (column: string) => parse(column).getTime()
+   *   }
+   * }
+   * ```
+   *
+   * The object above will cause all rows in the `date` column to be sorted
+   * by number (milliseconds) instead of by formatted date string.
+   *
+   * @deprecated use `columnValueProcessor` instead.
    */
   sortValueObj?: ColumnProcessObj<TTableRowType, number>;
   /** The initial states for the table. */
