@@ -22,6 +22,9 @@
   "repository": "git@github.com:imballinst/react-bs-datatable.git",
   "author": "Try Ajitiono",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/imballinst/react-bs-datatable#readme",
   "devDependencies": {
     "@actions/core": "1.9.1",
