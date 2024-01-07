@@ -3,4 +3,4 @@ storybook-static/
 lib/
 
 *.log
-
+.npmrc
