@@ -177,19 +177,19 @@ describe('Filter, sort, pagination', () => {
         // Meanwhile, the "Name" header should reset to its default state.
         expect(nameTh.getAttribute('data-sort-order')).toBe(null);
 
-        // Try sorting by the "date". Ascending sort should show "Mary" as the first row and descending sort should show "Basia" as the first row.
+        // Try sorting by the "date". Ascending sort should show "Alisha" as the first row and descending sort should show "Fred" as the first row.
         let dateTh = getByText('Last Update', { selector: 'th' });
         fireEvent.click(dateTh);
 
         tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
-        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Mary');
+        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Alisha');
         expect(dateTh.getAttribute('data-sort-order')).toBe('asc');
 
         // Sort descending.
         fireEvent.click(dateTh);
 
         tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
-        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Basia');
+        expect(tableRows?.[0].querySelector('td')?.textContent).toBe('Fred');
         expect(dateTh.getAttribute('data-sort-order')).toBe('desc');
       });
     }
