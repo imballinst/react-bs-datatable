@@ -184,8 +184,7 @@ export function FilterSortPaginationWithSortValueObjStoryComponent({
         columnValueProcessor: (key, row) => {
           const value = row[key];
           if (key === 'date') {
-            return value;
-            // return parse(`${value}`, 'MMMM dd, yyyy', new Date()).getTime();
+            return parse(`${value}`, 'MMMM dd, yyyy', new Date()).getTime();
           }
 
           return value;
