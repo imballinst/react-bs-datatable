@@ -14,7 +14,7 @@ out/
 .babelrc
 *.log
 *.yml
-*.ts
+/*.ts
 .prettierrc.json
 tsconfig*
 typedoc.json
