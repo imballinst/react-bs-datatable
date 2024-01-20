@@ -1,15 +1,16 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import {
-  FilterSortPagination,
-  CustomLabels,
+  ComposedTable,
   CustomCellStyle,
+  CustomLabels,
   CustomRowStyleProps,
-  RowOnClick,
-  MutatingTableState,
   CustomTableHeaderProps,
-  ComposedTable
+  FilterSortPagination,
+  MutatingTableState,
+  NestedObjectTable,
+  RowOnClick
 } from './00-Uncontrolled.stories';
 import { StoryColumnType } from './resources/types';
 import { CheckboxState, TableColumnType } from '../helpers/types';
@@ -1089,5 +1090,46 @@ describe('composed table rows', () => {
       expect(clickFn).toBeCalledTimes(1);
       expect(clickFn.mock.calls[0][0].name).toBe('Aaren');
     });
+  });
+});
+
+describe('Nested object', () => {
+  test('nested object table renders', () => {
+    const { getByRole } = render(
+      <NestedObjectTable />
+    );
+
+    const tableElement = getByRole('table');
+
+    const allTableRows = tableElement
+      .querySelector('tbody')
+      ?.querySelectorAll('tr');
+
+    const firstRowFirstColumn = allTableRows
+      ?.item(0)
+      .children.item(0) as HTMLElement;
+    expect(firstRowFirstColumn.textContent).toBe("Aaren")
+    const firstRowSecondColumn = allTableRows
+      ?.item(0)
+      .children.item(1) as HTMLElement;
+    expect(firstRowSecondColumn.textContent).toBe("Saturn V")
+    const firstRowThirdColumn = allTableRows
+      ?.item(0)
+      .children.item(2) as HTMLElement;
+    expect(firstRowThirdColumn.textContent).toBe("NASA")
+
+    const lastRowFirstColumn = allTableRows
+      ?.item(1)
+      .children.item(0) as HTMLElement;
+    expect(lastRowFirstColumn.textContent).toBe("Wileen")
+    const lastRowSecondColumn = allTableRows
+      ?.item(1)
+      .children.item(1) as HTMLElement;
+    expect(lastRowSecondColumn.textContent).toBe("")
+    const lastRowThirdColumn = allTableRows
+      ?.item(1)
+      .children.item(2) as HTMLElement;
+    expect(lastRowThirdColumn.textContent).toBe("")
+
   });
 });

@@ -10,6 +10,10 @@ export interface StoryColumnType {
   location: string | null;
   // This is only for the headers and not used in the body whatsoever.
   checkbox?: boolean;
+  //This is only for nested tests
+  "rocket.name"?:string;
+  "rocket.company"?:string;
+
 }
 
 export interface FetchParams {

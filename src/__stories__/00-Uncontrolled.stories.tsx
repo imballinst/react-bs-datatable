@@ -9,6 +9,7 @@ import { CustomTableHeaderPropsStoryComponent } from './00-Uncontrolled/04-Custo
 import { RowOnClickStoryComponent } from './00-Uncontrolled/05-RowOnClick';
 import { MutatingTableStateStoryComponent } from './00-Uncontrolled/06-MutatingTableState';
 import { ComposedTableStoryComponent } from './00-Uncontrolled/07-ComposedTable';
+import { NestedObjectComponent } from './00-Uncontrolled/08-NestedObject';
 
 export default {
   /* 👇 The title prop is optional.
@@ -163,3 +164,11 @@ const ComposedTableStoryComponentTemplate: StoryFn<
 
 export const ComposedTable = ComposedTableStoryComponentTemplate.bind({});
 ComposedTable.storyName = 'Composed table';
+
+// Nested object.
+const NestedObjectComponentTemplate: StoryFn<
+  typeof NestedObjectComponent
+> = NestedObjectComponent;
+
+export const NestedObjectTable = NestedObjectComponentTemplate.bind({});
+NestedObjectTable.storyName = 'Nested object table';
