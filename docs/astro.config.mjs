@@ -3,7 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-  base: process.env.BASE_PATH,
+  base: '/react-bs-datatable',
   integrations: [
     starlight({
       title: 'react-bs-datatable',
