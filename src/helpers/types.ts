@@ -54,7 +54,7 @@ export interface TableColumnType<T extends object> {
    * so that the column can render a non-empty cell. Moreover, each header should
    * have unique `prop` field.
    */
-  prop: keyof T;
+  prop: NestedKeyOf<T>;
   /** The title for the header. */
   title?: string;
   /** Custom render the table header cell. */
