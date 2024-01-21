@@ -160,7 +160,7 @@ export interface UncontrolledTableEvents {
  *
  * This is the values stored in the `DatatableWrapper` context.
  */
-interface DatatableWrapperContextType<TTableRowType> {
+interface DatatableWrapperContextType<TTableRowType extends object> {
   // Things passed to other components.
   headers: TableColumnType<TTableRowType>[];
   isControlled: boolean;
