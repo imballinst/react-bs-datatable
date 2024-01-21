@@ -36,10 +36,19 @@ export interface CheckboxState {
 }
 
 /**
+ * Helper to get properties of type including nested ones.
+ */
+type NestedKeyOf<ObjectType extends object> =
+  {[Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ?
+    ObjectType[Key] extends { pop: any; push: any } ? `${Key}?` : `${Key}?` | `${Key}?.${NestedKeyOf<ObjectType[Key]>}?`
+    : `${Key}?`
+  }[keyof ObjectType & (string | number)];
+
+/**
  * The data structure of a table column, which will be used for the `headers`
  * prop of the `DatatableWrapper` props, as well as the `TableHeader` props.
  */
-export interface TableColumnType<T> {
+export interface TableColumnType<T extends object> {
   /**
    * The prop name for the header. This prop should exist in the table body's data
    * so that the column can render a non-empty cell. Moreover, each header should

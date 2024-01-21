@@ -11,8 +11,14 @@ export interface StoryColumnType {
   // This is only for the headers and not used in the body whatsoever.
   checkbox?: boolean;
   //This is only for nested tests
-  "rocket.name"?:string;
-  "rocket.company"?:string;
+  rocket?: {
+    name:string,
+    company:string,
+    engine: {
+      name: string,
+      company: string
+    }
+  }
 
 }
 

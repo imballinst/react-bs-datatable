@@ -7,7 +7,7 @@ import NESTED_TABLE_DATA from '../resources/nested-story-data.json';
 import { TableHeader } from '../../components/TableHeader';
 import { TableBody } from '../../components/TableBody';
 
-// @@@SNIPSTART CustomRowStyle
+// @@@SNIPSTART NestedObject
 export function NestedObjectComponent() {
   const headers: TableColumnType<StoryColumnType>[] = [
     {
@@ -15,12 +15,16 @@ export function NestedObjectComponent() {
       title: 'Name'
     },
     {
+      title: 'Rocket name',
       prop: 'rocket.name',
-      title: 'Rocket name'
     },
     {
-      prop: 'rocket.company',
-      title: 'Rocket company'
+      title: 'Rocket company',
+      prop: 'rocket.company'
+    },
+    {
+      title: 'Rocket engine',
+      prop: 'rocket.engine.name'
     }
   ];
 

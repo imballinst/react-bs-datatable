@@ -1117,6 +1117,11 @@ describe('Nested object', () => {
       ?.item(0)
       .children.item(2) as HTMLElement;
     expect(firstRowThirdColumn.textContent).toBe("NASA")
+    const firstRowFourthColumn = allTableRows
+      ?.item(0)
+      .children.item(3) as HTMLElement;
+    expect(firstRowFourthColumn.textContent).toBe("F-1")
+
 
     const lastRowFirstColumn = allTableRows
       ?.item(1)
@@ -1130,6 +1135,10 @@ describe('Nested object', () => {
       ?.item(1)
       .children.item(2) as HTMLElement;
     expect(lastRowThirdColumn.textContent).toBe("")
+    const lastRowFourthColumn = allTableRows
+      ?.item(1)
+      .children.item(3) as HTMLElement;
+    expect(lastRowFourthColumn.textContent).toBe("")
 
   });
 });

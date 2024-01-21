@@ -96,14 +96,14 @@ export interface TableBodyProps<TTableRowType extends TableRowType>
  * such as `tr` and `td` tags.
  */
 export function TableBody<TTableRowType extends TableRowType>({
-                                                                labels,
-                                                                classes,
-                                                                rowProps,
-                                                                onRowClick: onRowClickProp,
-                                                                controlledProps,
-                                                                children,
-                                                                validRowClickTagNames = VALID_TAGS_FOR_ROW_ONCLICK
-                                                              }: TableBodyProps<TTableRowType>) {
+  labels,
+  classes,
+  rowProps,
+  onRowClick: onRowClickProp,
+  controlledProps,
+  children,
+  validRowClickTagNames = VALID_TAGS_FOR_ROW_ONCLICK
+}: TableBodyProps<TTableRowType>) {
   const { data } = useDatatableWrapper();
   useControlledStateSetter(controlledProps);
 
@@ -149,7 +149,7 @@ export function TableBody<TTableRowType extends TableRowType>({
 
   return (
     <tbody className={makeClasses('tbody', classes?.tbody)}>
-    {bodyContent}
+      {bodyContent}
     </tbody>
   );
 }
@@ -199,14 +199,14 @@ export interface TableRowProps<TTableRowType extends TableRowType>
  * The above snippet will render loading indicator for rows that don't have sufficient data to store yet.
  */
 export function TableRow<TTableRowType extends TableRowType>({
-                                                               rowData,
-                                                               rowIdx,
-                                                               onRowClick: onRowClickProp,
-                                                               classes,
-                                                               controlledProps,
-                                                               rowProps,
-                                                               validRowClickTagNames = VALID_TAGS_FOR_ROW_ONCLICK
-                                                             }: TableRowProps<TTableRowType>) {
+  rowData,
+  rowIdx,
+  onRowClick: onRowClickProp,
+  classes,
+  controlledProps,
+  rowProps,
+  validRowClickTagNames = VALID_TAGS_FOR_ROW_ONCLICK
+}: TableRowProps<TTableRowType>) {
   const {
     headers,
     onCheckboxChange: onCheckboxChangeContext,
@@ -365,9 +365,9 @@ export interface EmptyTablePlaceholderProps {
  * @returns
  */
 export function EmptyTablePlaceholder({
-                                        className,
-                                        noResultsLabel
-                                      }: EmptyTablePlaceholderProps) {
+  className,
+  noResultsLabel
+}: EmptyTablePlaceholderProps) {
   const { headers } = useDatatableWrapper();
 
   return (
