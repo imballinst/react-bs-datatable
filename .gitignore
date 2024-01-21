@@ -4,3 +4,6 @@ lib/
 
 *.log
 .npmrc
+
+.yarn/install-state.gz
+**/*/.yarn/install-state.gz

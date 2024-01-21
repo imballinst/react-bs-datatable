@@ -137,7 +137,17 @@ Visit the [API reference](./api/README.md) for more details.
 
 ## Contributing
 
-Feel free to contribute by creating issues and/or pull requests. I will do my best to address them as fast as I can.
+Feel free to contribute by creating issues and/or pull requests. I will do my best to address them as fast as I can. Additionally, after working on your task, since we are using [changesets](https://github.com/changesets/changesets), please run this command:
+
+```shell
+yarn changeset
+```
+
+Then follow the promppt accordingly. The rule of thumb is as follows:
+
+1. Major bump: breaking changes
+2. Minor bump: new features
+3. Patch bump: bug fixes, docs fixes, refactors
 
 ## License
 
