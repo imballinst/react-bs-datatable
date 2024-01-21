@@ -14,7 +14,7 @@ export interface StoryColumnType {
   rocket?: {
     name:string,
     company:string,
-    engine: {
+    engine?: {
       name: string,
       company: string
     }

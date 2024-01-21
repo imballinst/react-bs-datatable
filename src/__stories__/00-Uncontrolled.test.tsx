@@ -1095,9 +1095,7 @@ describe('composed table rows', () => {
 
 describe('Nested object', () => {
   test('nested object table renders', () => {
-    const { getByRole } = render(
-      <NestedObjectTable />
-    );
+    const { getByRole } = render(<NestedObjectTable />);
 
     const tableElement = getByRole('table');
 
@@ -1108,37 +1106,35 @@ describe('Nested object', () => {
     const firstRowFirstColumn = allTableRows
       ?.item(0)
       .children.item(0) as HTMLElement;
-    expect(firstRowFirstColumn.textContent).toBe("Aaren")
+    expect(firstRowFirstColumn.textContent).toBe('Aaren');
     const firstRowSecondColumn = allTableRows
       ?.item(0)
       .children.item(1) as HTMLElement;
-    expect(firstRowSecondColumn.textContent).toBe("Saturn V")
+    expect(firstRowSecondColumn.textContent).toBe('Saturn V');
     const firstRowThirdColumn = allTableRows
       ?.item(0)
       .children.item(2) as HTMLElement;
-    expect(firstRowThirdColumn.textContent).toBe("NASA")
+    expect(firstRowThirdColumn.textContent).toBe('NASA');
     const firstRowFourthColumn = allTableRows
       ?.item(0)
       .children.item(3) as HTMLElement;
-    expect(firstRowFourthColumn.textContent).toBe("F-1")
-
+    expect(firstRowFourthColumn.textContent).toBe('F-1');
 
     const lastRowFirstColumn = allTableRows
       ?.item(1)
       .children.item(0) as HTMLElement;
-    expect(lastRowFirstColumn.textContent).toBe("Wileen")
+    expect(lastRowFirstColumn.textContent).toBe('Wileen');
     const lastRowSecondColumn = allTableRows
       ?.item(1)
       .children.item(1) as HTMLElement;
-    expect(lastRowSecondColumn.textContent).toBe("")
+    expect(lastRowSecondColumn.textContent).toBe('');
     const lastRowThirdColumn = allTableRows
       ?.item(1)
       .children.item(2) as HTMLElement;
-    expect(lastRowThirdColumn.textContent).toBe("")
+    expect(lastRowThirdColumn.textContent).toBe('');
     const lastRowFourthColumn = allTableRows
       ?.item(1)
       .children.item(3) as HTMLElement;
-    expect(lastRowFourthColumn.textContent).toBe("")
-
+    expect(lastRowFourthColumn.textContent).toBe('');
   });
 });

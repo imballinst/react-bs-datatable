@@ -38,11 +38,11 @@ export interface CheckboxState {
 /**
  * Helper to get properties of type including nested ones.
  */
-type NestedKeyOf<ObjectType extends object> =
-  {[Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ?
-    ObjectType[Key] extends { pop: any; push: any } ? `${Key}?` : `${Key}?` | `${Key}?.${NestedKeyOf<ObjectType[Key]>}?`
-    : `${Key}?`
-  }[keyof ObjectType & (string | number)];
+type NestedKeyOf<T> = T extends object
+  ? {
+      [K in keyof T]: `${Exclude<K, symbol>}${'' | `.${NestedKeyOf<T[K]>}`}`;
+    }[keyof T]
+  : never;
 
 /**
  * The data structure of a table column, which will be used for the `headers`
