@@ -1,5 +1,11 @@
 # react-bs-datatable
 
+## 3.14.0
+
+### Minor Changes
+
+- cdd6353: feat: add support for nested objects
+
 ## 3.13.1
 
 ### Patch Changes
