@@ -286,7 +286,12 @@ export function TableRow<TTableRowType extends TableRowType>({
     } else {
       // Render normally.
       if (cell === undefined) {
-        value = rowData[prop];
+        value = prop.split('.').reduce((a, b) => {
+          if (a) {
+            return a[b];
+          }
+          return undefined;
+        }, rowData);
       } else {
         value = cell(rowData);
       }
