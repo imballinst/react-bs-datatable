@@ -4,7 +4,6 @@ import {
   TableColumnType,
   TableRowType
 } from './types';
-import { el } from 'date-fns/locale';
 
 /**
  * @internal
@@ -54,7 +53,7 @@ export function sortData<TTableRowType extends TableRowType>(
   return sortedData;
 }
 
-export function extractValueFromObject(prop: string, rowData:any) {
+export function extractValueFromObject(prop: string, rowData: any) {
   return prop.split('.').reduce((a, b) => {
     if (a) {
       return a[b];
@@ -86,7 +85,7 @@ export function filterData<TTableRowType extends TableRowType>(
       const header = headers[key];
 
       if (header.isFilterable) {
-        let columnValue = extractValueFromObject(header.prop,element);
+        let columnValue = extractValueFromObject(header.prop, element);
 
         // Only process non-null values.
         if (columnValue !== null && columnValue !== undefined) {

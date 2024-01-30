@@ -1095,7 +1095,7 @@ describe('composed table rows', () => {
 
 describe('Nested object', () => {
   test('nested object table renders', () => {
-    const { getByRole,getByText } = render(<NestedObjectTable />);
+    const { getByRole, getByText } = render(<NestedObjectTable />);
 
     const tableElement = getByRole('table');
 
@@ -1143,15 +1143,10 @@ describe('Nested object', () => {
   });
 
   test('sorting nested object', () => {
-    const {
-      getByText,
-      getByRole
-    } = render(<NestedObjectTable />);
+    const { getByText, getByRole } = render(<NestedObjectTable />);
 
     const tableElement = getByRole('table');
-    let tableRows = tableElement
-      .querySelector('tbody')
-      ?.querySelectorAll('tr');
+    let tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
     expect(tableRows).toBeDefined();
 
     let nameTh = getByText('Rocket name', { selector: 'th' });
@@ -1164,15 +1159,15 @@ describe('Nested object', () => {
     expect(firstRowSecondColumn?.textContent).toBe('Ariane 5');
     expect(nameTh.getAttribute('data-sort-order')).toBe('asc');
 
-    firstRowSecondColumn = tableRows
-      ?.item(0)
-      .children.item(1) as HTMLElement;
+    firstRowSecondColumn = tableRows?.item(0).children.item(1) as HTMLElement;
 
     fireEvent.click(nameTh);
     expect(firstRowSecondColumn?.textContent).toBe('Saturn V');
     expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
 
-    let rocketEngineCompanyTh = getByText('Rocket engine company', { selector: 'th' });
+    let rocketEngineCompanyTh = getByText('Rocket engine company', {
+      selector: 'th'
+    });
     fireEvent.click(rocketEngineCompanyTh);
 
     let firstRowFourthColumn = tableRows
@@ -1185,25 +1180,17 @@ describe('Nested object', () => {
 
     fireEvent.click(rocketEngineCompanyTh);
 
-    firstRowFourthColumn = tableRows
-      ?.item(0)
-      .children.item(4) as HTMLElement;
+    firstRowFourthColumn = tableRows?.item(0).children.item(4) as HTMLElement;
 
     expect(firstRowFourthColumn?.textContent).toBe('Safran Aircraft Engines');
     expect(rocketEngineCompanyTh.getAttribute('data-sort-order')).toBe('desc');
-
   });
 
   test('filtering nested object', () => {
-    const {
-      getByRole,
-      getByPlaceholderText
-    } = render(<NestedObjectTable />);
+    const { getByRole, getByPlaceholderText } = render(<NestedObjectTable />);
 
     const tableElement = getByRole('table');
-    let tableRows = tableElement
-      .querySelector('tbody')
-      ?.querySelectorAll('tr');
+    let tableRows = tableElement.querySelector('tbody')?.querySelectorAll('tr');
     expect(tableRows).toBeDefined();
 
     let filterElement = getByPlaceholderText('Enter text...');
@@ -1221,9 +1208,7 @@ describe('Nested object', () => {
 
     fireEvent.change(filterElement, { target: { value: 'f-1' } });
 
-    firstRowSecondColumn = tableRows
-      ?.item(0)
-      .children.item(1) as HTMLElement;
+    firstRowSecondColumn = tableRows?.item(0).children.item(1) as HTMLElement;
     expect(firstRowSecondColumn?.textContent).toBe('Saturn V');
 
     fireEvent.change(filterElement, { target: { value: '' } });
