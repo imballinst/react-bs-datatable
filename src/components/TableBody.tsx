@@ -12,6 +12,7 @@ import {
   useControlledStateSetter,
   useCreateCheckboxHandlers
 } from '../helpers/hooks';
+import { extractValueFromObject } from '../helpers/data';
 
 const VALID_TAGS_FOR_ROW_ONCLICK = ['TD', 'TR'];
 
@@ -286,12 +287,7 @@ export function TableRow<TTableRowType extends TableRowType>({
     } else {
       // Render normally.
       if (cell === undefined) {
-        value = prop.split('.').reduce((a, b) => {
-          if (a) {
-            return a[b];
-          }
-          return undefined;
-        }, rowData);
+        value = extractValueFromObject(prop, rowData);
       } else {
         value = cell(rowData);
       }
