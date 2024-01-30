@@ -1095,9 +1095,13 @@ describe('composed table rows', () => {
 
 describe('Nested object', () => {
   test('nested object table renders', () => {
-    const { getByRole } = render(<NestedObjectTable />);
+    const { getByRole,getByText } = render(<NestedObjectTable />);
 
     const tableElement = getByRole('table');
+
+    let nameTh = getByText('Name', { selector: 'th' });
+    fireEvent.click(nameTh);
+    fireEvent.click(nameTh);
 
     const allTableRows = tableElement
       .querySelector('tbody')
@@ -1121,20 +1125,110 @@ describe('Nested object', () => {
     expect(firstRowFourthColumn.textContent).toBe('F-1');
 
     const lastRowFirstColumn = allTableRows
-      ?.item(1)
+      ?.item(2)
       .children.item(0) as HTMLElement;
     expect(lastRowFirstColumn.textContent).toBe('Wileen');
     const lastRowSecondColumn = allTableRows
-      ?.item(1)
+      ?.item(2)
       .children.item(1) as HTMLElement;
     expect(lastRowSecondColumn.textContent).toBe('');
     const lastRowThirdColumn = allTableRows
-      ?.item(1)
+      ?.item(2)
       .children.item(2) as HTMLElement;
     expect(lastRowThirdColumn.textContent).toBe('');
     const lastRowFourthColumn = allTableRows
-      ?.item(1)
+      ?.item(2)
       .children.item(3) as HTMLElement;
     expect(lastRowFourthColumn.textContent).toBe('');
+  });
+
+  test('sorting nested object', () => {
+    const {
+      getByText,
+      getByRole
+    } = render(<NestedObjectTable />);
+
+    const tableElement = getByRole('table');
+    let tableRows = tableElement
+      .querySelector('tbody')
+      ?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+
+    let nameTh = getByText('Rocket name', { selector: 'th' });
+    fireEvent.click(nameTh);
+
+    let firstRowSecondColumn = tableRows
+      ?.item(0)
+      .children.item(1) as HTMLElement;
+
+    expect(firstRowSecondColumn?.textContent).toBe('Ariane 5');
+    expect(nameTh.getAttribute('data-sort-order')).toBe('asc');
+
+    firstRowSecondColumn = tableRows
+      ?.item(0)
+      .children.item(1) as HTMLElement;
+
+    fireEvent.click(nameTh);
+    expect(firstRowSecondColumn?.textContent).toBe('Saturn V');
+    expect(nameTh.getAttribute('data-sort-order')).toBe('desc');
+
+    let rocketEngineCompanyTh = getByText('Rocket engine company', { selector: 'th' });
+    fireEvent.click(rocketEngineCompanyTh);
+
+    let firstRowFourthColumn = tableRows
+      ?.item(0)
+      .children.item(4) as HTMLElement;
+
+    expect(firstRowFourthColumn?.textContent).toBe('NASA');
+    expect(nameTh.getAttribute('data-sort-order')).toBe(null);
+    expect(rocketEngineCompanyTh.getAttribute('data-sort-order')).toBe('asc');
+
+    fireEvent.click(rocketEngineCompanyTh);
+
+    firstRowFourthColumn = tableRows
+      ?.item(0)
+      .children.item(4) as HTMLElement;
+
+    expect(firstRowFourthColumn?.textContent).toBe('Safran Aircraft Engines');
+    expect(rocketEngineCompanyTh.getAttribute('data-sort-order')).toBe('desc');
+
+  });
+
+  test('filtering nested object', () => {
+    const {
+      getByRole,
+      getByPlaceholderText
+    } = render(<NestedObjectTable />);
+
+    const tableElement = getByRole('table');
+    let tableRows = tableElement
+      .querySelector('tbody')
+      ?.querySelectorAll('tr');
+    expect(tableRows).toBeDefined();
+
+    let filterElement = getByPlaceholderText('Enter text...');
+    fireEvent.change(filterElement, { target: { value: 'vulcain' } });
+
+    let firstRowSecondColumn = tableRows
+      ?.item(0)
+      .children.item(1) as HTMLElement;
+
+    expect(
+      tableElement.querySelector('tbody')?.querySelectorAll('tr').length
+    ).toBe(1);
+
+    expect(firstRowSecondColumn?.textContent).toBe('Ariane 5');
+
+    fireEvent.change(filterElement, { target: { value: 'f-1' } });
+
+    firstRowSecondColumn = tableRows
+      ?.item(0)
+      .children.item(1) as HTMLElement;
+    expect(firstRowSecondColumn?.textContent).toBe('Saturn V');
+
+    fireEvent.change(filterElement, { target: { value: '' } });
+    expect(
+      tableElement.querySelector('tbody')?.querySelectorAll('tr').length
+    ).toBe(3);
   });
 });
