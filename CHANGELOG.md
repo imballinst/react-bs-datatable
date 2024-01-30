@@ -1,5 +1,11 @@
 # react-bs-datatable
 
+## 3.15.0
+
+### Minor Changes
+
+- dd15ba8: Add support for sorting and filtering in cunjunction with nested objects
+
 ## 3.14.0
 
 ### Minor Changes
