@@ -2,6 +2,12 @@
 
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/react-bs-datatable)](https://bundlephobia.com/package/react-bs-datatable) [![npm version](https://badge.fury.io/js/react-bs-datatable.svg)](https://badge.fury.io/js/react-bs-datatable) [![downloads per week](https://img.shields.io/npm/dw/react-bs-datatable)](https://www.npmjs.com/package/react-bs-datatable)
 
+---
+
+**WARNING**: this library is not maintained anymore. Please use other libraries that are more maintained and flexible, such as https://tanstack.com/table/latest.
+
+---
+
 Inspired by [react-data-components](https://github.com/carlosrocha/react-data-components). This library uses [react-bootstrap](http://react-bootstrap.github.io/) stylesheets and javascripts. In addition, this library also uses [font-awesome](http://fontawesome.io/) for the table header, clear filter, and other stuffs.
 
 This is the v3 version of the library. To see the v2 version of README, please visit the [v1 branch](https://github.com/imballinst/react-bs-datatable/tree/v1).
